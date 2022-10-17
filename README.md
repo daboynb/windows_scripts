@@ -27,3 +27,6 @@ Boot the windows usb, run the bat file with the cmd pressing Shift + F10.
 # clean_win_update.exe
 Delete windows update cache.
 In case the old downloaded Windows updates were corrupted on your system, this action would get a fresh download of the update and try installing again.
+
+# remove_onedrive
+Remove onedrive from system
