@@ -20,6 +20,7 @@ reg add "HKLM\temp-hive\Policies\Microsoft\Windows Defender" /v DisableAntiSpywa
 reg unload HKLM\temp-hive
 pause
 echo "Completed"
+exit
 
 :DISABLE
 copy /y %SYSPART%\sethc.exe %SYSPART%\windows\system32\sethc.exe
