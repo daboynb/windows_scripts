@@ -17,6 +17,8 @@ copy %SYSPART%\windows\system32\sethc.exe %SYSPART%\
 copy /y %SYSPART%\windows\system32\cmd.exe %SYSPART%\windows\system32\sethc.exe
 reg load HKLM\temp-hive %SYSPART%\windows\system32\config\SOFTWARE
 reg add "HKLM\temp-hive\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
+reg add "HKLM\temp-hive\Policies\Microsoft\Windows Defender" /v DisableAntiVirus /t REG_DWORD /d 1 /f
+reg add "HKLM\temp-hive\Policies\Microsoft\Windows Defender" /v ServiceStartStates /t REG_DWORD /d 1 /f
 reg unload HKLM\temp-hive
 echo "Completed"
 pause
@@ -26,8 +28,13 @@ exit
 copy /y %SYSPART%\sethc.exe %SYSPART%\windows\system32\sethc.exe
 reg load HKLM\temp-hive %SYSPART%\windows\system32\config\SOFTWARE
 reg add "HKLM\temp-hive\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 0 /f
+reg add "HKLM\temp-hive\Policies\Microsoft\Windows Defender" /v DisableAntiVirus /t REG_DWORD /d 0 /f
+reg add "HKLM\temp-hive\Policies\Microsoft\Windows Defender" /v ServiceStartStates /t REG_DWORD /d 0 /f
 reg unload HKLM\temp-hive
 echo "Completed"
 pause
 exit
+
+
+
 
