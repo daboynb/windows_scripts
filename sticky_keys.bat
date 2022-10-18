@@ -34,7 +34,3 @@ reg unload HKLM\temp-hive
 echo "Completed"
 pause
 exit
-
-
-
-
