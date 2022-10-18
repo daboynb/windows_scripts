@@ -18,8 +18,8 @@ copy /y %SYSPART%\windows\system32\cmd.exe %SYSPART%\windows\system32\sethc.exe
 reg load HKLM\temp-hive %SYSPART%\windows\system32\config\SOFTWARE
 reg add "HKLM\temp-hive\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
 reg unload HKLM\temp-hive
-pause
 echo "Completed"
+pause
 exit
 
 :DISABLE
@@ -27,7 +27,7 @@ copy /y %SYSPART%\sethc.exe %SYSPART%\windows\system32\sethc.exe
 reg load HKLM\temp-hive %SYSPART%\windows\system32\config\SOFTWARE
 reg add "HKLM\temp-hive\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 0 /f
 reg unload HKLM\temp-hive
-pause
 echo "Completed"
+pause
 exit
 
