@@ -33,3 +33,6 @@ Remove onedrive from system.
 
 # remove_edge.exe
 Remove edge from system.
+
+# delete_defender_history.ps1
+Delete the windows defender protection history.
