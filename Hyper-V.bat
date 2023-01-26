@@ -6,4 +6,3 @@ If %errorLevel% NEQ 0 (
 ) 
 for %%f in ( %SystemRoot%\servicing\Packages\*Hyper-V*.mum) do dism /online /norestart /add-package:"%%f" 
 dism /online /enable-feature /featurename:Microsoft-Hyper-V -All /LimitAccess /ALL 
-pause
