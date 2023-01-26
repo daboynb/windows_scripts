@@ -36,3 +36,6 @@ Remove edge from system.
 
 # delete_defender_history.ps1
 Delete the windows defender protection history.
+
+# Hyper-V.bat
+Add Hyper-V on windows 10 Home.
