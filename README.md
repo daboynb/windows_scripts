@@ -1,3 +1,10 @@
+!! WARNING !!
+
+Ps1 files were converted with ps2exe.
+Bat files were converted with Bat To Exe Converter (B2E).
+
+Some antivirus will flag those files as malicious.
+
 # remove_windows_apps.exe
 Remove all apps except calculator, photo and store
 
@@ -34,8 +41,8 @@ Remove onedrive from system.
 # remove_edge.exe
 Remove edge from system.
 
-# delete_defender_history.ps1
+# delete_defender_history.exe
 Delete the windows defender protection history.
 
-# Hyper-V.bat
+# Hyper-V.exe
 Add Hyper-V on windows 10 Home.
