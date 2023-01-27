@@ -45,4 +45,4 @@ Remove edge from system.
 Delete the windows defender protection history.
 
 # Hyper-V.exe
-Add Hyper-V on windows 10 Home.
+Add hyper-V on windows 10 Home.
