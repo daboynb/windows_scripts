@@ -47,3 +47,6 @@ Delete the windows defender protection history.
 
 # hyper-V.exe
 Add hyper-V on windows 10 Home.
+
+# kaspersky_trial_reset.exe
+Kaspersky trial reset tool. This has been made only for educational and research purposes.
