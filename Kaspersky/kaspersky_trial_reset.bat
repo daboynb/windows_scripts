@@ -11,6 +11,10 @@ echo "kaspersky internet security 21.3"
 echo "kaspersky total security 21.3"
 pause
 
+rem Check if kaspersky is off
+tasklist /fi "ImageName eq avp.exe" /fo csv 2>NUL | find /I "avp.exe">NUL
+if "%ERRORLEVEL%"=="0" echo "kaspersky is running, EXITING!" && pause && exit
+
 rem Check if Self Protection is on or off
 reg query HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\KasperskyLab\AVP21.3\settings /v EnableSelfProtection | find "0x1"
 IF %ERRORLEVEL% NEQ 0 Echo ""
