@@ -13,12 +13,13 @@ pause
 
 rem Check if kaspersky is off
 tasklist /fi "ImageName eq avp.exe" /fo csv 2>NUL | find /I "avp.exe">NUL
-if "%ERRORLEVEL%"=="0" echo "kaspersky is running, EXITING!" && pause && exit
+if "%ERRORLEVEL%"=="0" color 0C && echo "kaspersky is running, EXITING!" && pause && exit
+if "%ERRORLEVEL%"=="1" color 0A && echo "kaspersky is not running, OK!"
 
 rem Check if Self Protection is on or off
-reg query HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\KasperskyLab\AVP21.3\settings /v EnableSelfProtection | find "0x1"
-IF %ERRORLEVEL% NEQ 0 Echo ""
-IF %ERRORLEVEL% EQU 0 Echo "SelfProtection is ON, EXITING!" && pause && exit
+reg query HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\KasperskyLab\AVP21.3\settings /v EnableSelfProtection | find "0x1">NUL
+if "%ERRORLEVEL%"=="0" color 0C && echo "SelfProtection is ON, EXITING!" && pause && exit
+if "%ERRORLEVEL%"=="1" color 0A && echo "SelfProtection is OFF, OK!" 
 
 rem Delete files
 del /f "C:\ProgramData\Kaspersky Lab\AVP21.3\Data\stor*.bin"
