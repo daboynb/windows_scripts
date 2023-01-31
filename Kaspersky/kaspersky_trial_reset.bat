@@ -53,3 +53,4 @@ rem Ask to reboot the machine
 echo "You need to reboot to apply"
 choice /c yn /m "Reboot now?"
 if %errorlevel% equ 1 shutdown /r /t 00
+pause && exit
