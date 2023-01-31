@@ -11,6 +11,11 @@ echo "kaspersky internet security 21.3"
 echo "kaspersky total security 21.3"
 pause
 
+rem Check if system is 64 bit
+wmic os get osarchitecture 2>NUL | find "64-bit">NUL
+if "%ERRORLEVEL%"=="0" color 0A && echo "64 bit!" 
+if "%ERRORLEVEL%"=="1" color 0C && echo "Not a 64 bit system!" && pause && exit
+
 rem Check if kaspersky is off
 tasklist /fi "ImageName eq avp.exe" /fo csv 2>NUL | find /I "avp.exe">NUL
 if "%ERRORLEVEL%"=="0" color 0C && echo "kaspersky is running, EXITING!" && pause && exit
