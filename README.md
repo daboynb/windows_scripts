@@ -7,7 +7,13 @@ Bat files were converted with Bat To Exe Converter (B2E).
 Some antivirus will flag those files as malicious.
 
 # remove_windows_apps.exe
-Remove all apps except calculator, photo and store
+Remove all apps except calculator, photo and store.
+
+It works on 10 and 11.
+
+Why this is different from the others?
+
+Different windows builds have different pre-installed apps, this script will debloat the system automatically even if them will change. 
 
 # add_store_windows_10_ltsc_2021.exe
 Install Microsoft Store on Windows 10 LTSC 2021.
