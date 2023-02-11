@@ -59,4 +59,10 @@ Kaspersky trial reset tool. This has been made only for educational and research
 
 You need to disable the self protection and exit from kaspersky, otherwise it won't work.
 
-It works with :"kaspersky anti virus 21.3", "kaspersky internet security 21.3", "kaspersky total security 21.3".
+It works with :
+
+"kaspersky anti virus 21.3" -> 31 days
+
+"kaspersky internet security 21.3" -> 31 days
+
+"kaspersky total security 21.3" -> 62 days
