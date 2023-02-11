@@ -18,9 +18,13 @@ if "%ERRORLEVEL%"=="0" echo "64 bit!" && set "WOW6432=\WOW6432Node"
 wmic os get osarchitecture 2>NUL | find "32-bit">NUL
 if "%ERRORLEVEL%"=="0" echo "32 bit!" && set "WOW6432=" 
 
+:avp
+color 0C && echo "Kaspersky is still running... wait until it gets killed"
+timeout 10
+
 rem Check if kaspersky is off
 tasklist /nh /fi "imagename eq avp.exe" | find /i "avp.exe">NUL
-if "%ERRORLEVEL%"=="0" color 0C && echo "kaspersky is running, EXITING!" && pause && exit
+if "%ERRORLEVEL%"=="0" goto :avp
 if "%ERRORLEVEL%"=="1" color 0A && echo "kaspersky is not running, OK!"
 
 rem Check if Self Protection is on or off
