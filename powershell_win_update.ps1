@@ -3,7 +3,7 @@ Install-Module PSWindowsUpdate -Confirm:$False -Force | out-null
 
 $kb="(Get-WindowsUpdate).kb"
 
-if ( $kb-eq $null ) 
+if ( $kb -eq $null ) 
 {
     Write-Host "No updates" 
 }
