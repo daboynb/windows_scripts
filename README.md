@@ -66,3 +66,6 @@ It works with :
 "kaspersky internet security 21.3" -> 31 days
 
 "kaspersky total security 21.3" -> 62 days
+
+# powershell_win_update.ps1
+Update the system using windows update from powershell.
