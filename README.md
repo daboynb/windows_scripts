@@ -68,4 +68,6 @@ It works with :
 "kaspersky total security 21.3" -> 62 days
 
 # powershell_win_update.ps1
-Update the system using windows update from powershell.
+Update the system using windows update from powershell. 
+
+NOTE: the script will reboot automatically your machine if needed!
