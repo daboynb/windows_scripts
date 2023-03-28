@@ -71,3 +71,11 @@ It works with :
 Update the system using windows update from powershell. 
 
 NOTE: the script will reboot automatically your machine if needed!
+
+# unattend_auto.bat
+Script that integrates a custom unattend.xml file into an ISO. 
+
+Follow these steps:
+1) Install all programs inside the "req" folder
+2) Create a custom unattend.xml file and save it in the same folder where the "unattend_auto.bat" file is located
+3) Run the bat file
