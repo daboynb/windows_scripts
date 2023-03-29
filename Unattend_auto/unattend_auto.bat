@@ -23,6 +23,8 @@ dism /mount-wim /wimfile:"C:\ISO\Win11\sources\boot.wim" /index:%index% /mountdi
 rem copy unattended.xml
 copy unattend.xml "C:\ISO\Win11\sources\$OEM$\$$\Panther\unattend.xml"
 
+rem add the stuff that requires the image to be mounted
+
 rem unmount image
 dism /unmount-wim /mountdir:C:\mount\mount /commit
 
