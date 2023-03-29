@@ -16,8 +16,6 @@ echo ISO extraction complete!
 rem copy unattended.xml
 copy unattend.xml "C:\ISO\Win11\sources\$OEM$\$$\Panther\unattend.xml"
 
-rem add the stuff that requires the image to be mounted
-
 rem rebuild image
 cd "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\amd64\Oscdimg"
 oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win11\boot\etfsboot.com#pEF,e,bC:\ISO\Win11\efi\microsoft\boot\efisys.bin C:\ISO\Win11 C:\ISO\Windows11_edited.iso
