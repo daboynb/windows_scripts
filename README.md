@@ -74,6 +74,7 @@ NOTE: the script will reboot automatically your machine if needed!
 
 # unattend_auto.bat
 Script that integrates a custom unattend.xml file into an ISO. 
+You can edit more stuff because it also mounts the image.
 
 Follow these steps:
 1) Install all programs inside the "req" folder
