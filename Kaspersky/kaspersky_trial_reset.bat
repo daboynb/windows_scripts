@@ -25,7 +25,7 @@ if "%ERRORLEVEL%"=="0" color 0C && echo "Kaspersky is still running... wait unti
 if "%ERRORLEVEL%"=="1" color 0A && echo "kaspersky is not running, OK!"
 
 rem Check if Self Protection is on or off
-reg query HKEY_LOCAL_MACHINE\SOFTWARE%WOW6432%\KasperskyLab\AVP21.3\settings /v EnableSelfProtection | find "0x1">NUL
+reg query HKEY_LOCAL_MACHINE\SOFTWARE"%WOW6432%"\KasperskyLab\AVP21.3\settings /v EnableSelfProtection | find "0x1">NUL
 if "%ERRORLEVEL%"=="0" color 0C && echo "SelfProtection is ON, EXITING!" && pause && exit
 if "%ERRORLEVEL%"=="1" color 0A && echo "SelfProtection is OFF, OK!" 
 
@@ -35,22 +35,22 @@ del /f "C:\ProgramData\Kaspersky Lab\AVP21.3\Bases\Cache\cat_engine*"
 
 rem Delete registry keys
 reg delete HKLM\SOFTWARE\Microsoft\SystemCertificates\SPC /f 
-reg delete HKEY_LOCAL_MACHINE\SOFTWARE%WOW6432%\KasperskyLab\AVP21.3\Data\LicCache /f 
-reg delete HKEY_LOCAL_MACHINE\SOFTWARE%WOW6432%\KasperskyLab\AVP21.3\Data\LicensingActivationErrorStorageLogic /f 
-reg delete HKEY_LOCAL_MACHINE\SOFTWARE%WOW6432%\KasperskyLab\AVP21.3\Data\UPAO /f 
-reg delete HKEY_LOCAL_MACHINE\SOFTWARE%WOW6432%\KasperskyLab\LicStrg /f 
+reg delete HKEY_LOCAL_MACHINE\SOFTWARE"%WOW6432%"\KasperskyLab\AVP21.3\Data\LicCache /f 
+reg delete HKEY_LOCAL_MACHINE\SOFTWARE"%WOW6432%"\KasperskyLab\AVP21.3\Data\LicensingActivationErrorStorageLogic /f 
+reg delete HKEY_LOCAL_MACHINE\SOFTWARE"%WOW6432%"\KasperskyLab\AVP21.3\Data\UPAO /f 
+reg delete HKEY_LOCAL_MACHINE\SOFTWARE"%WOW6432%"\KasperskyLab\LicStrg /f 
 
 rem Add registry keys
-reg add HKEY_LOCAL_MACHINE\SOFTWARE%WOW6432%\KasperskyLab\AVP21.3\Data /v UseKSN /f /t REG_DWORD /d 1 
-reg add HKEY_LOCAL_MACHINE\SOFTWARE%WOW6432%\KasperskyLab\AVP21.3\environment /v ShowActivateTrialOption /f /t REG_SZ /d "1" 
-reg add HKEY_LOCAL_MACHINE\SOFTWARE%WOW6432%\KasperskyLab\AVP21.3\settings /v Ins_InitMode /f /t REG_DWORD /d 1 
-reg add HKEY_LOCAL_MACHINE\SOFTWARE%WOW6432%\KasperskyLab\AVP21.3\settings /v EnableSelfProtection /f /t REG_DWORD /d 1 
-reg add HKEY_LOCAL_MACHINE\SOFTWARE%WOW6432%\KasperskyLab\AVP21.3\environment /v ActivationCode_kfa /f /t REG_SZ /d "" 
-reg add HKEY_LOCAL_MACHINE\SOFTWARE%WOW6432%\KasperskyLab\AVP21.3\environment /v TrialActCode_kav /f /t REG_SZ /d "" 
-reg add HKEY_LOCAL_MACHINE\SOFTWARE%WOW6432%\KasperskyLab\AVP21.3\environment /v TrialActCode_kis /f /t REG_SZ /d "" 
-reg add HKEY_LOCAL_MACHINE\SOFTWARE%WOW6432%\KasperskyLab\AVP21.3\environment /v TrialActCode_pure /f /t REG_SZ /d "" 
-reg add HKEY_LOCAL_MACHINE\SOFTWARE%WOW6432%\KasperskyLab\AVP21.3\environment /v TrialActCode_saas /f /t REG_SZ /d "" 
-reg add HKEY_LOCAL_MACHINE\SOFTWARE%WOW6432%\KasperskyLab\AVP21.3\settings /v Kaspersky_ID /f /t REG_SZ /d "" 
+reg add HKEY_LOCAL_MACHINE\SOFTWARE"%WOW6432%"\KasperskyLab\AVP21.3\Data /v UseKSN /f /t REG_DWORD /d 1 
+reg add HKEY_LOCAL_MACHINE\SOFTWARE"%WOW6432%"\KasperskyLab\AVP21.3\environment /v ShowActivateTrialOption /f /t REG_SZ /d "1" 
+reg add HKEY_LOCAL_MACHINE\SOFTWARE"%WOW6432%"\KasperskyLab\AVP21.3\settings /v Ins_InitMode /f /t REG_DWORD /d 1 
+reg add HKEY_LOCAL_MACHINE\SOFTWARE"%WOW6432%"\KasperskyLab\AVP21.3\settings /v EnableSelfProtection /f /t REG_DWORD /d 1 
+reg add HKEY_LOCAL_MACHINE\SOFTWARE"%WOW6432%"\KasperskyLab\AVP21.3\environment /v ActivationCode_kfa /f /t REG_SZ /d "" 
+reg add HKEY_LOCAL_MACHINE\SOFTWARE"%WOW6432%"\KasperskyLab\AVP21.3\environment /v TrialActCode_kav /f /t REG_SZ /d "" 
+reg add HKEY_LOCAL_MACHINE\SOFTWARE"%WOW6432%"\KasperskyLab\AVP21.3\environment /v TrialActCode_kis /f /t REG_SZ /d "" 
+reg add HKEY_LOCAL_MACHINE\SOFTWARE"%WOW6432%"\KasperskyLab\AVP21.3\environment /v TrialActCode_pure /f /t REG_SZ /d "" 
+reg add HKEY_LOCAL_MACHINE\SOFTWARE"%WOW6432%"\KasperskyLab\AVP21.3\environment /v TrialActCode_saas /f /t REG_SZ /d "" 
+reg add HKEY_LOCAL_MACHINE\SOFTWARE"%WOW6432%"\KasperskyLab\AVP21.3\settings /v Kaspersky_ID /f /t REG_SZ /d "" 
 
 rem Ask to reboot the machine
 echo "You need to reboot to apply"
