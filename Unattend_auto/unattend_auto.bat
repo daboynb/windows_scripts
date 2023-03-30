@@ -13,8 +13,12 @@ echo Extracting ISO contents to C:\ISO\Win11...
 "C:\Program Files\WinRAR\WinRAR.exe" x "%iso_path%" "C:\ISO\Win11"
 echo ISO extraction complete!
 
+IF NOT EXIST "C:\ISO\Win11\sources\$OEM$\$$\Panther" (
+    mkdir "C:\ISO\Win11\sources\$OEM$\$$\Panther"
+)
+
 rem copy unattended.xml
-copy unattend.xml "C:\ISO\Win11\sources\$OEM$\$$\Panther\unattend.xml"
+copy unattend.xml C:\ISO\Win11\sources\$OEM$\$$\Panther
 
 rem rebuild image
 cd "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\amd64\Oscdimg"

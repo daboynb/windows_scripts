@@ -19,8 +19,12 @@ dism /Get-WimInfo /WimFile:C:\ISO\Win11\sources\boot.wim
 set /p index="Please enter thenumber of the index: "
 dism /mount-wim /wimfile:"C:\ISO\Win11\sources\boot.wim" /index:%index% /mountdir:C:\mount\mount
 
+IF NOT EXIST "C:\ISO\Win11\sources\$OEM$\$$\Panther" (
+    mkdir "C:\ISO\Win11\sources\$OEM$\$$\Panther"
+)
+
 rem copy unattended.xml
-copy unattend.xml "C:\ISO\Win11\sources\$OEM$\$$\Panther\unattend.xml"
+copy unattend.xml C:\ISO\Win11\sources\$OEM$\$$\Panther
 
 rem add the stuff that requires the image to be mounted
 
