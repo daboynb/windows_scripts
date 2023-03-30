@@ -67,6 +67,21 @@ It works with :
 
 "kaspersky total security 21.3" -> 62 days
 
+<details>
+  <summary>Guide</summary>
+  
+![1](https://user-images.githubusercontent.com/106079917/228910713-3e71d198-d273-4a89-8f31-1787965acc7c.PNG)
+![2](https://user-images.githubusercontent.com/106079917/228910715-21d23203-35eb-4552-b6bd-c48821218214.PNG)
+![3](https://user-images.githubusercontent.com/106079917/228910718-c39a3816-8e21-43ce-ae66-cce92cdbdda2.PNG)
+![4](https://user-images.githubusercontent.com/106079917/228910720-e707df3d-4dc5-476d-9689-b63e1ae3925a.PNG)
+![5](https://user-images.githubusercontent.com/106079917/228910722-25391b8d-3dd7-4042-ab0c-de12164778dd.PNG)
+![6](https://user-images.githubusercontent.com/106079917/228910725-57ef4f9b-d6e4-4302-b3ac-5860e8279e5f.PNG)
+![7](https://user-images.githubusercontent.com/106079917/228910727-6fca4891-8518-40e8-831f-f72b53beaecf.PNG)
+![8](https://user-images.githubusercontent.com/106079917/228910728-6c318701-2c1b-441d-abf3-f96e8d621a85.PNG)
+
+
+</details>
+
 # powershell_win_update.ps1
 Update the system using windows update from powershell. 
 
