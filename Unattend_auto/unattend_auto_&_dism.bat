@@ -29,7 +29,7 @@ copy unattend.xml C:\ISO\Win11\sources\$OEM$\$$\Panther
 rem add the stuff that requires the image to be mounted
 
 rem copy windows start layout, need to be tested 
-rem copy LayoutModification.json ""C:\mount\mount\Users\Default\AppData\Local\Microsoft\Windows\Shell"
+rem copy LayoutModification.json "C:\mount\mount\Users\Default\AppData\Local\Microsoft\Windows\Shell"
 
 rem unmount image
 dism /unmount-wim /mountdir:C:\mount\mount /commit
