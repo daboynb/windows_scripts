@@ -16,7 +16,7 @@ echo ISO extraction complete!
  
 rem mount image
 dism /Get-WimInfo /WimFile:C:\ISO\Win11\sources\boot.wim
-set /p index="Please enter thenumber of the index: "
+set /p index="Please enter the number of the index: "
 dism /mount-wim /wimfile:"C:\ISO\Win11\sources\boot.wim" /index:%index% /mountdir:C:\mount\mount
 
 IF NOT EXIST "C:\ISO\Win11\sources\$OEM$\$$\Panther" (
@@ -27,6 +27,9 @@ rem copy unattended.xml
 copy unattend.xml C:\ISO\Win11\sources\$OEM$\$$\Panther
 
 rem add the stuff that requires the image to be mounted
+
+rem copy windows start layout, need to be tested 
+rem copy LayoutModification.json ""C:\mount\mount\Users\Default\AppData\Local\Microsoft\Windows\Shell"
 
 rem unmount image
 dism /unmount-wim /mountdir:C:\mount\mount /commit
