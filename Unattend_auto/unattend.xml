@@ -60,6 +60,10 @@
         <Order>1</Order>
         <CommandLine>reg add HKLM\SYSTEM\Setup\MoSetup /v AllowUpgradesWithUnsupportedTPMOrCPU /t REG_DWORD /d 1 /f</CommandLine>
       </SynchronousCommand>
+      <SynchronousCommand wcm:action="add">
+        <Order>2</Order>
+        <CommandLine>reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v Start_TrackDocs /t REG_DWORD /d 0 /f</CommandLine>
+      </SynchronousCommand>
     </FirstLogonCommands> 
     </component>
     <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" language="neutral" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" publicKeyToken="31bf3856ad364e35" versionScope="nonSxS">
