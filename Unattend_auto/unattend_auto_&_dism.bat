@@ -5,7 +5,6 @@ set "params=%*"
 cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 
 rem create folders
-mkdir "C:\mount\mount" 
 mkdir "C:\ISO\Win11" 
 
 rem set iso path
@@ -13,11 +12,9 @@ set /p iso_path="Please enter the path to your ISO file: "
 echo Extracting ISO contents to C:\ISO\Win11...
 "C:\Program Files\WinRAR\WinRAR.exe" x "%iso_path%" "C:\ISO\Win11"
 echo ISO extraction complete!
- 
-rem mount image
-dism /Get-WimInfo /WimFile:C:\ISO\Win11\sources\install.wim
-set /p index="Please enter the number of the index: "
-dism /mount-wim /wimfile:"C:\ISO\Win11\sources\install.wim" /index:%index% /mountdir:C:\mount\mount
+
+rem delete all useless images
+dism /Export-Image /SourceImageFile:"C:\ISO\Win11\sources\install.wim" /SourceIndex:5 /DestinationImageFile:"C:\ISO\Win11\sources\install_pro.wim" /compress:max
 
 IF NOT EXIST "C:\ISO\Win11\sources\$OEM$\$$\Panther" (
     mkdir "C:\ISO\Win11\sources\$OEM$\$$\Panther"
@@ -26,10 +23,9 @@ IF NOT EXIST "C:\ISO\Win11\sources\$OEM$\$$\Panther" (
 rem copy unattended.xml
 copy unattend.xml C:\ISO\Win11\sources\$OEM$\$$\Panther
 
-rem add the stuff that requires the image to be mounted
-
-rem unmount image
-dism /unmount-wim /mountdir:C:\mount\mount /commit
+rem add the new wim file
+del "C:\ISO\Win11\sources\install.wim"
+move "C:\ISO\Win11\sources\install_pro.wim" "C:\ISO\Win11\sources\install.wim"
 
 rem rebuild image
 cd "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\amd64\Oscdimg"
