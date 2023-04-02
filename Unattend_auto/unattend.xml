@@ -46,6 +46,10 @@
           <Order>4</Order>
           <Path>reg add HKLM\SYSTEM\Setup\MoSetup /v AllowUpgradesWithUnsupportedTPMOrCPU /t REG_DWORD /d 1 /f</Path>
         </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>5</Order>
+          <Path>reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer /v NoRecentDocsHistory /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>        
     </component>
   </settings>
   <settings pass="oobeSystem">
@@ -74,10 +78,6 @@
       <SynchronousCommand wcm:action="add">
         <Order>2</Order>
         <CommandLine>reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Search /v BingSearchEnabled /t REG_DWORD /d 0 /f </CommandLine>
-      </SynchronousCommand>
-      <SynchronousCommand wcm:action="add">
-        <Order>1</Order>
-        <CommandLine>reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v Start_TrackDocs /t REG_DWORD /d 0 /f</CommandLine>
       </SynchronousCommand>
     </FirstLogonCommands> 
     </component>
