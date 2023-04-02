@@ -15,9 +15,9 @@ echo Extracting ISO contents to C:\ISO\Win11...
 echo ISO extraction complete!
  
 rem mount image
-dism /Get-WimInfo /WimFile:C:\ISO\Win11\sources\boot.wim
+dism /Get-WimInfo /WimFile:C:\ISO\Win11\sources\install.wim
 set /p index="Please enter the number of the index: "
-dism /mount-wim /wimfile:"C:\ISO\Win11\sources\boot.wim" /index:%index% /mountdir:C:\mount\mount
+dism /mount-wim /wimfile:"C:\ISO\Win11\sources\install.wim" /index:%index% /mountdir:C:\mount\mount
 
 IF NOT EXIST "C:\ISO\Win11\sources\$OEM$\$$\Panther" (
     mkdir "C:\ISO\Win11\sources\$OEM$\$$\Panther"
