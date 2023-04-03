@@ -91,6 +91,6 @@ NOTE: the script will reboot automatically your machine if needed!
 Script that integrates a custom unattend.xml file into an ISO. 
 
 Follow these steps:
-1) Install all programs inside the "req" folder
+1) Install all programs inside the "requirements" folder, on adksetup.exe select only the deployment tools
 2) Create a custom unattend.xml file and save it in the same folder where the "unattend_auto.bat" file is located
 3) Run the bat file
