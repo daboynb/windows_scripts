@@ -52,3 +52,10 @@ move "C:\ISO\Win11\sources\install_pro.wim" "C:\ISO\Win11\sources\install.wim"
 rem rebuild image
 cd "C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\amd64\Oscdimg"
 oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win11\boot\etfsboot.com#pEF,e,bC:\ISO\Win11\efi\microsoft\boot\efisys.bin C:\ISO\Win11 C:\ISO\Windows11_edited.iso
+
+rem copy the iso and clean
+copy "C:\ISO\Windows11_edited.iso" "C:\Users\%USERNAME%\Desktop"
+rmdir "C:\ISO" /s /q
+
+echo color 0A && echo "Process completed!" 
+timeout 04
