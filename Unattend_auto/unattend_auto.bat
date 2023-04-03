@@ -53,5 +53,6 @@ rem copy the iso and clean
 copy "C:\ISO\Windows11_edited.iso" "C:\Users\%USERNAME%\Desktop"
 rmdir "C:\ISO" /s /q
 
-echo color 0A && echo "Process completed!" 
-timeout
+color 0A
+echo "Process completed!"
+timeout 04
