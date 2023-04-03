@@ -78,7 +78,15 @@
       <SynchronousCommand wcm:action="add">
         <Order>2</Order>
         <CommandLine>reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Search /v BingSearchEnabled /t REG_DWORD /d 0 /f</CommandLine>
-      </SynchronousCommand>         
+      </SynchronousCommand>
+      <SynchronousCommand wcm:action="add">
+        <Order>3</Order>
+        <CommandLine>powershell -command "sc config DiagTrack start= disabled"</CommandLine>
+      </SynchronousCommand>
+      <SynchronousCommand wcm:action="add">
+        <Order>3</Order>
+        <CommandLine>powershell -command "sc config dmwappushservice start= disabled"</CommandLine>
+      </SynchronousCommand>            
     </FirstLogonCommands> 
     </component>
     <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" language="neutral" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" publicKeyToken="31bf3856ad364e35" versionScope="nonSxS">
