@@ -82,19 +82,19 @@
       </SynchronousCommand>
       <SynchronousCommand wcm:action="add">
         <Order>3</Order>
-        <CommandLine>powershell -command "sc config DiagTrack start= disabled"</CommandLine>
+        <CommandLine>sc config DiagTrack start= disabled</CommandLine>
       </SynchronousCommand>
       <SynchronousCommand wcm:action="add">
-        <Order>3</Order>
-        <CommandLine>powershell -command "sc config dmwappushservice start= disabled"</CommandLine>
+        <Order>4</Order>
+        <CommandLine>sc config dmwappushservice start= disabled</CommandLine>
       </SynchronousCommand>            
     </FirstLogonCommands> 
     </component>
     <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" language="neutral" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" publicKeyToken="31bf3856ad364e35" versionScope="nonSxS">
       <InputLocale>00000410</InputLocale>
-      <SystemLocale>en-US</SystemLocale>
-      <UserLocale>en-US</UserLocale>
-      <UILanguage>en-US</UILanguage>
+      <SystemLocale>it-IT</SystemLocale>
+      <UserLocale>it-IT</UserLocale>
+      <UILanguage>it-IT</UILanguage>
       <UILanguageFallback></UILanguageFallback>
     </component>
   </settings>
