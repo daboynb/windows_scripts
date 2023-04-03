@@ -49,7 +49,8 @@
         <RunSynchronousCommand wcm:action="add">
           <Order>5</Order>
           <Path>reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer /v NoRecentDocsHistory /t REG_DWORD /d 1 /f</Path>
-        </RunSynchronousCommand>        
+        </RunSynchronousCommand>  
+       </RunSynchronous>      
     </component>
   </settings>
   <settings pass="oobeSystem">
