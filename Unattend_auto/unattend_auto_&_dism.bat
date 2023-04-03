@@ -42,6 +42,9 @@ IF NOT EXIST "C:\ISO\Win11\sources\$OEM$\$$\Panther" (
     mkdir "C:\ISO\Win11\sources\$OEM$\$$\Panther"
 )
 
+rem delete all useless images
+dism /Export-Image /SourceImageFile:"C:\ISO\Win11\sources\install.wim" /SourceIndex:5 /DestinationImageFile:"C:\ISO\Win11\sources\install_pro.wim" /compress:max
+
 rem copy unattended.xml
 copy unattend.xml C:\ISO\Win11\sources\$OEM$\$$\Panther
 
