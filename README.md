@@ -88,9 +88,20 @@ Update the system using windows update from powershell.
 NOTE: the script will reboot automatically your machine if needed!
 
 # unattend_auto.bat
-Script that integrates a custom unattend.xml file into an ISO. 
+This script integrates a custom unattend.xml file into an ISO.
 
 Follow these steps:
-1) Install all programs inside the "requirements" folder, on adksetup.exe select only the deployment tools
-2) Create a custom unattend.xml file and save it in the same folder where the "unattend_auto.bat" file is located
-3) Run the bat file
+
+1) Install all programs inside the "requirements" folder. When running adksetup.exe, select only the deployment tools.
+2) Create a custom unattend.xml file and save it in the same folder where the "unattend_auto.bat" file is located.
+3) Run the bat file.
+
+The unattend.xml file in this repository:
+
+- Has no hardware requirements.
+- Includes a registry key to enable updates on unsupported hardware.
+- Removes all apps, including the sponsored one on the start menu.
+- Disables telemetry.
+- Disables the chat icon.
+- Disables recent docs.
+- Disables Bing search on start.
