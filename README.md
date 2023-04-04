@@ -43,7 +43,7 @@ Delete windows update cache.
 In case the old downloaded Windows updates were corrupted on your system, this action would get a fresh download of the update and try installing again.
 
 # remove_onedrive.exe
-Remove onedrive from system.
+Remove onedrive from system. (Win 10 only)
 
 # remove_edge.exe
 Remove edge from system.
