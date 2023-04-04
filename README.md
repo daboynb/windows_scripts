@@ -98,7 +98,7 @@ Follow these steps:
 
 The unattend.xml file in this repository:
 
--Bypass the hardware requirements.
+- Bypass the hardware requirements.
 - Includes a registry key to enable updates on unsupported hardware.
 - Removes all apps, including the sponsored one on the start menu.
 - Disables telemetry.
