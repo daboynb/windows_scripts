@@ -87,16 +87,8 @@ Update the system using windows update from powershell.
 
 NOTE: the script will reboot automatically your machine if needed!
 
-# unattend_auto.bat
+# win11_custom_iso.bat
 This script integrates a custom unattend.xml file into an ISO.
-
-Follow these steps:
-
-1) Install all programs inside the "requirements" folder. When running adksetup.exe, select only the deployment tools.
-2) Create a custom unattend.xml file and save it in the same folder where the "unattend_auto.bat" file is located.
-3) Run the bat file.
-
-The unattend.xml file in this repository:
 
 - Bypasses the hardware requirements.
 - Includes a registry key to enable updates on unsupported hardware.
