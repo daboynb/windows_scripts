@@ -52,8 +52,44 @@
         </RunSynchronousCommand>  
         <RunSynchronousCommand wcm:action="add">
           <Order>6</Order>
-          <Path>reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Chat" /v ChatIcon /t REG_DWORD /d 3 /f</Path>
+          <Path>reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Chat" /v ChatIcon /t REG_DWORD /d 3 /f</Path>
         </RunSynchronousCommand>        
+        <RunSynchronousCommand wcm:action="add">
+          <Order>7</Order>
+          <Path>reg add "HKLM\DEFAULT\Control Panel\UnsupportedHardwareNotificationCache" /v SV1 /t REG_DWORD /d 0 /f</Path>
+        </RunSynchronousCommand>   
+        <RunSynchronousCommand wcm:action="add">
+          <Order>8</Order>
+          <Path>reg add "HKLM\DEFAULT\Control Panel\UnsupportedHardwareNotificationCache" /v SV2 /t REG_DWORD /d 0 /f</Path>
+        </RunSynchronousCommand>   
+        <RunSynchronousCommand wcm:action="add">
+          <Order>9</Order>
+          <Path>reg add "HKLM\NTUSER\Control Panel\UnsupportedHardwareNotificationCache" /v SV1 /t REG_DWORD /d 0 /f</Path>
+        </RunSynchronousCommand>   
+        <RunSynchronousCommand wcm:action="add">
+          <Order>10</Order>
+          <Path>reg add "HKLM\NTUSER\Control Panel\UnsupportedHardwareNotificationCache" /v SV2 /t REG_DWORD /d 0 /f</Path>
+        </RunSynchronousCommand>   
+        <RunSynchronousCommand wcm:action="add">
+          <Order>11</Order>
+          <Path>reg add HKLM\NTUSER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager /v OemPreInstalledAppsEnabled /t REG_DWORD /d 0 /f</Path>
+        </RunSynchronousCommand>         
+        <RunSynchronousCommand wcm:action="add">
+          <Order>12</Order>
+          <Path>reg add HKLM\NTUSER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager /v PreInstalledAppsEnabled /t REG_DWORD /d 0 /f</Path>
+        </RunSynchronousCommand>      
+        <RunSynchronousCommand wcm:action="add">
+          <Order>13</Order>
+          <Path>reg add HKLM\NTUSER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager /v SilentInstalledAppsEnabled /t REG_DWORD /d 0 /f</Path>
+        </RunSynchronousCommand>      
+        <RunSynchronousCommand wcm:action="add">
+          <Order>14</Order>
+          <Path>reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent /v DisableWindowsConsumerFeatures /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>      
+        <RunSynchronousCommand wcm:action="add">
+          <Order>15</Order>
+          <Path>reg add HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Start /v ConfigureStartPins /t REG_SZ /d "{\"pinnedList\": [{}]}" /f</Path>
+        </RunSynchronousCommand>                              
       </RunSynchronous>      
     </component>
   </settings>
@@ -78,7 +114,7 @@
     <FirstLogonCommands>
       <SynchronousCommand wcm:action="add">
         <Order>3</Order>
-        <CommandLine>powershell -command "Write-Output "Starting tweaking, please wait until this window get closed"; Start-Sleep -Seconds 30; $ErrorActionPreference = 'SilentlyContinue'; Get-AppxPackage -AllUsers | Where-Object {$_.name -notmatch 'Microsoft.VP9VideoExtensions|Notepad|Microsoft.WebMediaExtensions|Microsoft.WebpImageExtension|Microsoft.Windows.ShellExperienceHost|Microsoft.VCLibs*|Microsoft.DesktopAppInstaller|Microsoft.StorePurchaseApp|Microsoft.Windows.Photos|Microsoft.WindowsStore|Microsoft.XboxIdentityProvider|Microsoft.WindowsCamera|Microsoft.WindowsCalculator|Microsoft.HEIFImageExtension|Microsoft.UI.Xaml*'} | Remove-AppxPackage; C:\Windows\System32\OneDriveSetup.exe /uninstall"</CommandLine>
+        <CommandLine>powershell -command "Write-Output "Starting tweaking, please wait until this window get closed"; Start-Sleep -Seconds 30; $ErrorActionPreference = 'SilentlyContinue'; Get-Process OneDrive -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue; Get-AppxPackage -AllUsers | Where-Object {$_.name -notmatch 'Microsoft.VP9VideoExtensions|Notepad|Microsoft.WebMediaExtensions|Microsoft.WebpImageExtension|Microsoft.Windows.ShellExperienceHost|Microsoft.VCLibs*|Microsoft.DesktopAppInstaller|Microsoft.StorePurchaseApp|Microsoft.Windows.Photos|Microsoft.WindowsStore|Microsoft.XboxIdentityProvider|Microsoft.WindowsCamera|Microsoft.WindowsCalculator|Microsoft.HEIFImageExtension|Microsoft.UI.Xaml*'} | Remove-AppxPackage; C:\Windows\System32\OneDriveSetup.exe /uninstall"</CommandLine>
       </SynchronousCommand>
       <SynchronousCommand wcm:action="add">
         <Order>4</Order>
