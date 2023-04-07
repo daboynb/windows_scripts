@@ -113,52 +113,52 @@
       </UserAccounts>
     <FirstLogonCommands>
       <SynchronousCommand wcm:action="add">
-        <Order>3</Order>
-        <CommandLine>powershell -command "Write-Output "Tweaking"; Start-Sleep -Seconds 30; $ErrorActionPreference = 'SilentlyContinue'; Get-Process OneDrive, Teams -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue; Get-AppxPackage -AllUsers | Where-Object {$_.name -notmatch 'Microsoft.VP9VideoExtensions|Notepad|Microsoft.WebMediaExtensions|Microsoft.WebpImageExtension|Microsoft.Windows.ShellExperienceHost|Microsoft.VCLibs*|Microsoft.DesktopAppInstaller|Microsoft.StorePurchaseApp|Microsoft.Windows.Photos|Microsoft.WindowsStore|Microsoft.XboxIdentityProvider|Microsoft.WindowsCamera|Microsoft.WindowsCalculator|Microsoft.HEIFImageExtension|Microsoft.UI.Xaml*'} | Remove-AppxPackage; C:\Windows\System32\OneDriveSetup.exe /uninstall"</CommandLine>
+        <Order>1</Order>
+        <CommandLine>powershell -command "Write-Output "Tweaking"; pause; $ErrorActionPreference = 'SilentlyContinue'; Get-Process OneDrive, Teams | Stop-Process -Force; Get-AppxPackage -AllUsers | Where-Object {$_.name -notmatch 'Microsoft.VP9VideoExtensions|Notepad|Microsoft.WebMediaExtensions|Microsoft.WebpImageExtension|Microsoft.Windows.ShellExperienceHost|Microsoft.VCLibs*|Microsoft.DesktopAppInstaller|Microsoft.StorePurchaseApp|Microsoft.Windows.Photos|Microsoft.WindowsStore|Microsoft.XboxIdentityProvider|Microsoft.WindowsCamera|Microsoft.WindowsCalculator|Microsoft.HEIFImageExtension|Microsoft.UI.Xaml*'} | Remove-AppxPackage; C:\Windows\System32\OneDriveSetup.exe /uninstall"</CommandLine>
       </SynchronousCommand>
       <SynchronousCommand wcm:action="add">
-        <Order>4</Order>
+        <Order>2</Order>
         <CommandLine>reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Search /v BingSearchEnabled /t REG_DWORD /d 0 /f</CommandLine>
       </SynchronousCommand>
       <SynchronousCommand wcm:action="add">
-        <Order>5</Order>
+        <Order>3</Order>
         <CommandLine>sc config DiagTrack start= disabled</CommandLine>
       </SynchronousCommand>
       <SynchronousCommand wcm:action="add">
-        <Order>6</Order>
+        <Order>4</Order>
         <CommandLine>sc config dmwappushservice start= disabled</CommandLine>
       </SynchronousCommand>     
       <SynchronousCommand wcm:action="add">
-        <Order>7</Order>
+        <Order>5</Order>
         <CommandLine>reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU /v NoAutoUpdate /t REG_DWORD /d 1 /f</CommandLine>
       </SynchronousCommand>                               
       <SynchronousCommand wcm:action="add">
-        <Order>8</Order>
+        <Order>6</Order>
         <CommandLine>reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize /v AppsUseLightTheme /t REG_DWORD /d 0 /f</CommandLine>
       </SynchronousCommand>                                
       <SynchronousCommand wcm:action="add">
-        <Order>9</Order>
+        <Order>7</Order>
         <CommandLine>reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize /v SystemUsesLightTheme /t REG_DWORD /d 0 /f</CommandLine>
       </SynchronousCommand>                                
       <SynchronousCommand wcm:action="add">
-        <Order>10</Order>
+        <Order>8</Order>
         <CommandLine>reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize /v EnableTransparency /t REG_DWORD /d 1 /f</CommandLine>
       </SynchronousCommand>                                
       <SynchronousCommand wcm:action="add">
-        <Order>11</Order>
+        <Order>9</Order>
         <CommandLine>reg add "HKCU\Control Panel\Colors" /v ImmersiveApplicationForeground /t REG_SZ /d "255 255 255" /f</CommandLine>
       </SynchronousCommand>                                
       <SynchronousCommand wcm:action="add">
-        <Order>12</Order>
+        <Order>10</Order>
         <CommandLine>reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer /v AllowOnlineTips /t REG_DWORD /d 0 /f</CommandLine>
       </SynchronousCommand>                                
       <SynchronousCommand wcm:action="add">
-        <Order>13</Order>
+        <Order>11</Order>
         <CommandLine>reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve</CommandLine>
       </SynchronousCommand>    
       <SynchronousCommand wcm:action="add">
-        <Order>14</Order>
-        <CommandLine>shutdown /r /t 00</CommandLine>
+        <Order>12</Order>
+        <CommandLine>powershell -command "Stop-Process -Name explorer -Force; Start-Process explorer"</CommandLine>
       </SynchronousCommand>                                  
     </FirstLogonCommands> 
     </component>
