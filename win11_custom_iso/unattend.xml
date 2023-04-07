@@ -114,7 +114,7 @@
     <FirstLogonCommands>
       <SynchronousCommand wcm:action="add">
         <Order>3</Order>
-        <CommandLine>powershell -command "Write-Output "Starting tweaking, please wait until this window get closed"; Start-Sleep -Seconds 30; $ErrorActionPreference = 'SilentlyContinue'; Get-Process OneDrive -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue; Get-AppxPackage -AllUsers | Where-Object {$_.name -notmatch 'Microsoft.VP9VideoExtensions|Notepad|Microsoft.WebMediaExtensions|Microsoft.WebpImageExtension|Microsoft.Windows.ShellExperienceHost|Microsoft.VCLibs*|Microsoft.DesktopAppInstaller|Microsoft.StorePurchaseApp|Microsoft.Windows.Photos|Microsoft.WindowsStore|Microsoft.XboxIdentityProvider|Microsoft.WindowsCamera|Microsoft.WindowsCalculator|Microsoft.HEIFImageExtension|Microsoft.UI.Xaml*'} | Remove-AppxPackage; C:\Windows\System32\OneDriveSetup.exe /uninstall"</CommandLine>
+        <CommandLine>powershell -command "Write-Output "Tweaking"; Start-Sleep -Seconds 30; $ErrorActionPreference = 'SilentlyContinue'; Get-Process OneDrive, Teams -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue; Get-AppxPackage -AllUsers | Where-Object {$_.name -notmatch 'Microsoft.VP9VideoExtensions|Notepad|Microsoft.WebMediaExtensions|Microsoft.WebpImageExtension|Microsoft.Windows.ShellExperienceHost|Microsoft.VCLibs*|Microsoft.DesktopAppInstaller|Microsoft.StorePurchaseApp|Microsoft.Windows.Photos|Microsoft.WindowsStore|Microsoft.XboxIdentityProvider|Microsoft.WindowsCamera|Microsoft.WindowsCalculator|Microsoft.HEIFImageExtension|Microsoft.UI.Xaml*'} | Remove-AppxPackage; C:\Windows\System32\OneDriveSetup.exe /uninstall"</CommandLine>
       </SynchronousCommand>
       <SynchronousCommand wcm:action="add">
         <Order>4</Order>
@@ -127,7 +127,39 @@
       <SynchronousCommand wcm:action="add">
         <Order>6</Order>
         <CommandLine>sc config dmwappushservice start= disabled</CommandLine>
-      </SynchronousCommand>                             
+      </SynchronousCommand>     
+      <SynchronousCommand wcm:action="add">
+        <Order>7</Order>
+        <CommandLine>reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU /v NoAutoUpdate /t REG_DWORD /d 1 /f</CommandLine>
+      </SynchronousCommand>                               
+      <SynchronousCommand wcm:action="add">
+        <Order>8</Order>
+        <CommandLine>reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize /v AppsUseLightTheme /t REG_DWORD /d 0 /f</CommandLine>
+      </SynchronousCommand>                                
+      <SynchronousCommand wcm:action="add">
+        <Order>9</Order>
+        <CommandLine>reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize /v SystemUsesLightTheme /t REG_DWORD /d 0 /f</CommandLine>
+      </SynchronousCommand>                                
+      <SynchronousCommand wcm:action="add">
+        <Order>10</Order>
+        <CommandLine>reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize /v EnableTransparency /t REG_DWORD /d 1 /f</CommandLine>
+      </SynchronousCommand>                                
+      <SynchronousCommand wcm:action="add">
+        <Order>11</Order>
+        <CommandLine>reg add "HKCU\Control Panel\Colors" /v ImmersiveApplicationForeground /t REG_SZ /d "255 255 255" /f</CommandLine>
+      </SynchronousCommand>                                
+      <SynchronousCommand wcm:action="add">
+        <Order>12</Order>
+        <CommandLine>reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer /v AllowOnlineTips /t REG_DWORD /d 0 /f</CommandLine>
+      </SynchronousCommand>                                
+      <SynchronousCommand wcm:action="add">
+        <Order>13</Order>
+        <CommandLine>reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve</CommandLine>
+      </SynchronousCommand>    
+      <SynchronousCommand wcm:action="add">
+        <Order>14</Order>
+        <CommandLine>shutdown /r /t 00</CommandLine>
+      </SynchronousCommand>                                  
     </FirstLogonCommands> 
     </component>
     <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" language="neutral" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" publicKeyToken="31bf3856ad364e35" versionScope="nonSxS">

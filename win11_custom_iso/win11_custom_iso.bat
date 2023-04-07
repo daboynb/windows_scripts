@@ -102,5 +102,5 @@ if %errorlevel% equ 0 (
   powershell write-host -fore Red "ERROR: Can't delete the working folder!" && exit /b 1
 )
 
-color 0A && echo "Process completed! Press any key to exit"
+powershell write-host -fore Green "Process completed! Press any key to exit"
 pause
