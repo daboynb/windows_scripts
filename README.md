@@ -99,3 +99,9 @@ This script creates a custom ISO of Windows 11 with the following features:
 - Telemetry is disabled.
 - Edge is removed.
 - Some other minor tweaks.
+
+How to use?
+
+- Download the windows 11 ISO from microsoft
+- Run the bat file and select when asked the ISO file
+- Wait... the edited ISO will be available on your desktop
