@@ -11,8 +11,8 @@ rem disable bing search on start
 reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Search /v BingSearchEnabled /t REG_DWORD /d 0 /f
 
 rem disable telemetry
-sc config DiagTrack start= disabled
-sc config dmwappushservice start= disabled
+sc config DiagTrack start=disabled
+sc config dmwappushservice start=disabled
 
 rem enable dark theme
 reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize /v AppsUseLightTheme /t REG_DWORD /d 0 /f
@@ -63,6 +63,9 @@ reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager /v
 reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager /v PreInstalledAppsEnabled /t REG_DWORD /d 0 /f
 reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager /v SilentInstalledAppsEnabled /t REG_DWORD /d 0 /f
 reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent /v DisableWindowsConsumerFeatures /t REG_DWORD /d 1 /f
+
+rem fix indexing was turned off
+sc config wsearch start=auto
 
 powershell write-host -fore Green "Done, rebooting in 5 seconds"
 timeout 10
