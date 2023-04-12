@@ -27,8 +27,10 @@ rem restore the old menu
 reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
 
 rem delete pinned on taskbar
+copy "%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\File Explorer.lnk" "C:\Users\%username%\Desktop"
 del /f /s /q /a "%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*"
 reg delete HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband /f
+move "C:\Users\%username%\Desktop\File Explorer.lnk" "%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\"
 
 rem remove search icon in taskbar
 reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Search /v SearchboxTaskbarMode /t REG_DWORD /d 0 /f
@@ -39,10 +41,10 @@ reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v Show
 rem delete edge icon on desktop
 del /s /q "C:\Users\%username%\Desktop\*.lnk" 
 
-rem remove track of opened docs
+rem disable track of opened docs
 reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v Start_TrackDocs /t REG_DWORD /d 0 /f
 
-rem disable recent added apps on start menu
+rem disable track of opened programs
 reg add HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer /v HideRecentlyAddedApps /t REG_DWORD /d 1 /f 
 
 rem hide recommended on start menu
