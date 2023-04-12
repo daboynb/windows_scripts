@@ -45,6 +45,9 @@ reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v Star
 rem disable recent added apps on start menu
 reg add HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer /v HideRecentlyAddedApps /t REG_DWORD /d 1 /f 
 
+rem hide recommended on start menu
+reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v Start_TrackProgs /t REG_DWORD /d 0 /f
+
 rem copy firefox installer to the desktop
 move "C:\firefox_installer.exe" "C:\Users\%username%\Desktop"
 
