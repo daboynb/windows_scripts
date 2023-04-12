@@ -92,12 +92,10 @@ Update the system using windows update from powershell.
 NOTE: the script will reboot automatically your machine if needed!
 
 # win11_custom_iso.bat
-This script integrates a custom unattend.xml file into an ISO.
+This script creates a custom ISO of Windows 11 with the following features:
 
-- Bypasses the hardware requirements.
-- Includes a registry key to enable updates on unsupported hardware.
-- Removes all apps, including the sponsored one on the start menu.
-- Disables telemetry.
-- Disables the chat icon.
-- Disables recent docs.
-- Disables Bing search on start.
+- The hardware requirements are bypassed.
+- All apps are removed, including the sponsored one on the start menu.
+- Telemetry is disabled.
+- Edge is removed.
+- Some other minor tweaks.
