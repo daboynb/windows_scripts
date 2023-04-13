@@ -33,19 +33,16 @@ reg delete HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband /f
 rem remove search icon in taskbar
 reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Search /v SearchboxTaskbarMode /t REG_DWORD /d 0 /f
 
-rem remove taskviwew icon on taskbar
-reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v ShowTaskViewButton /t REG_DWORD /d 0 /f
-
 rem delete edge icon on desktop
 del /s /q "C:\Users\%username%\Desktop\*.lnk" 
 
 rem disable track of opened docs
 reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v Start_TrackDocs /t REG_DWORD /d 0 /f
 
-rem disable track of opened programs
+rem disable recently added apps
 reg add HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer /v HideRecentlyAddedApps /t REG_DWORD /d 1 /f 
 
-rem hide recommended on start menu
+rem  disable track of opened progs
 reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v Start_TrackProgs /t REG_DWORD /d 0 /f
 
 rem copy firefox installer to the desktop
