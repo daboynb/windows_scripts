@@ -1,6 +1,6 @@
 @echo off
 
-rem debloat
+rem uninstall all useless apps
 powershell -command "Write-Host -fore Green 'Tweaking, press enter to start'; pause; $ErrorActionPreference = 'SilentlyContinue'; Get-AppxPackage -AllUsers | Where-Object {$_.name -notmatch 'Microsoft.VP9VideoExtensions|Notepad|Microsoft.WebMediaExtensions|Microsoft.WebpImageExtension|Microsoft.Windows.ShellExperienceHost|Microsoft.VCLibs*|Microsoft.DesktopAppInstaller|Microsoft.StorePurchaseApp|Microsoft.Windows.Photos|Microsoft.WindowsStore|Microsoft.XboxIdentityProvider|Microsoft.WindowsCamera|Microsoft.WindowsCalculator|Microsoft.HEIFImageExtension|Microsoft.UI.Xaml*'} | Remove-AppxPackage"
 
 rem uninstall onedrive
@@ -9,10 +9,6 @@ powershell -command "C:\Windows\System32\OneDriveSetup.exe /uninstall"
 
 rem disable bing search on start
 reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Search /v BingSearchEnabled /t REG_DWORD /d 0 /f
-
-rem disable telemetry
-sc config DiagTrack start=disabled
-sc config dmwappushservice start=disabled
 
 rem enable dark theme
 reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize /v AppsUseLightTheme /t REG_DWORD /d 0 /f
@@ -36,27 +32,16 @@ reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Search /v SearchboxTaskba
 rem delete edge icon on desktop
 del /s /q "C:\Users\%username%\Desktop\*.lnk" 
 
-rem disable track of opened docs
-reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v Start_TrackDocs /t REG_DWORD /d 0 /f
-
-rem disable recently added apps
-reg add HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer /v HideRecentlyAddedApps /t REG_DWORD /d 1 /f 
-
-rem  disable track of opened progs
-reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v Start_TrackProgs /t REG_DWORD /d 0 /f
-
 rem copy firefox installer to the desktop
 move "C:\firefox_installer.exe" "C:\Users\%username%\Desktop"
-
-rem add key to be able to upgrade
-reg add HKLM\SYSTEM\Setup\MoSetup /v AllowUpgradesWithUnsupportedTPMOrCPU /t REG_DWORD /d 1 /f
 
 rem disable chat icon
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Chat" /v ChatIcon /t REG_DWORD /d 3 /f
 
-rem disable requirements notification
+rem requirements bypass related
 reg add "HKCU\Control Panel\UnsupportedHardwareNotificationCache" /v SV1 /t REG_DWORD /d 0 /f
 reg add "HKCU\Control Panel\UnsupportedHardwareNotificationCache" /v SV2 /t REG_DWORD /d 0 /f
+reg add HKLM\SYSTEM\Setup\MoSetup /v AllowUpgradesWithUnsupportedTPMOrCPU /t REG_DWORD /d 1 /f
 
 rem disable contentdelivery
 reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager /v OemPreInstalledAppsEnabled /t REG_DWORD /d 0 /f
@@ -66,6 +51,10 @@ reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent /v DisableWindowsC
 
 rem fix indexing was turned off
 sc config wsearch start=auto
+
+rem disable telemetry
+sc config DiagTrack start=disabled
+sc config dmwappushservice start=disabled
 
 powershell write-host -fore Green "Done, rebooting in 5 seconds"
 timeout 10
