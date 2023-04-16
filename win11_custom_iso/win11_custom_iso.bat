@@ -125,6 +125,7 @@ set /p answer="Remove them ? (yes/no): "
 if /i "%answer%"=="yes" (
    rmdir "C:\mount\mount\Program Files (x86)\Microsoft\Edge" /s /q
    rmdir "C:\mount\mount\Program Files (x86)\Microsoft\EdgeUpdate" /s /q
+   copy "resources\firefox_installer.exe" "C:\mount\mount"
 ) else if /i "%answer%"=="no" (
     echo Skipping...
 ) else (
@@ -137,7 +138,6 @@ if %errorlevel% equ 0 (
 ) else (
   color 4 && echo "Can't delete Edge!" && pause && exit /b 1
 )
-
 
 :features
 powerShell -Command "Write-Host 'List of features that can be removed :' -ForegroundColor Green;
@@ -171,15 +171,6 @@ if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'tweaks.bat copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
   color 4 && echo "Can't copy tweaks.bat!" && pause && exit /b 1
-)
-
-rem copy firefox
-powerShell -Command "Write-Host 'Copying firefox' -ForegroundColor Green; exit"  
-copy "resources\firefox_installer.exe" "C:\mount\mount"
-if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Firefox copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
-  color 4 && echo "Can't copy firefox!" && pause && exit /b 1
 )
 
 rem unmount the image
