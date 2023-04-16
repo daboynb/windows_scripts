@@ -97,7 +97,7 @@ This script creates a custom ISO of Windows 11 with the following features:
 - The hardware requirements are bypassed.
 - All apps are removed, including the sponsored one on the start menu.
 - Telemetry is disabled.
-- Edge is removed.
+- Edge can be removed.
 - Some other minor tweaks.
 
 How to use?
