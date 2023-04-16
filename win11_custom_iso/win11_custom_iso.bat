@@ -118,19 +118,26 @@ dism /mount-image /imagefile:"C:\ISO\Win11\sources\install.wim" /index:1 /mountd
 cls
 
 rem delete edge
-powerShell -Command "Write-Host 'Deleting edge!' -ForegroundColor Green; exit"  
-rmdir "C:\mount\mount\Program Files (x86)\Microsoft\Edge" /s /q
+:edge
+powerShell -Command "Write-Host 'Do you want to remove edge?' -ForegroundColor Green;
+echo.
+set /p answer="Remove them ? (yes/no): "
+if /i "%answer%"=="yes" (
+   rmdir "C:\mount\mount\Program Files (x86)\Microsoft\Edge" /s /q
+   rmdir "C:\mount\mount\Program Files (x86)\Microsoft\EdgeUpdate" /s /q
+) else if /i "%answer%"=="no" (
+    echo Skipping...
+) else (
+    echo Invalid input. Please answer with 'yes' or 'no'.
+    goto :edge
+)
+
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Edge deleted successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
   color 4 && echo "Can't delete Edge!" && pause && exit /b 1
 )
-rmdir "C:\mount\mount\Program Files (x86)\Microsoft\EdgeUpdate" /s /q
-if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'EdgeUpdate deleted successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
-  color 4 && echo "Can't delete EdgeUpdate!" && pause && exit /b 1
-)
+
 
 :features
 powerShell -Command "Write-Host 'List of features that can be removed :' -ForegroundColor Green;
