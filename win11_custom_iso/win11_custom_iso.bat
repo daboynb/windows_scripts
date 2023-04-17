@@ -119,9 +119,7 @@ cls
 
 rem delete edge
 :edge
-powerShell -Command "Write-Host 'Do you want to remove edge?' -ForegroundColor Green;
-echo.
-set /p answer="Remove them ? (yes/no): "
+set /p answer="Do you want to remove Edge? (yes/no): "
 if /i "%answer%"=="yes" (
    rmdir "C:\mount\mount\Program Files (x86)\Microsoft\Edge" /s /q
    rmdir "C:\mount\mount\Program Files (x86)\Microsoft\EdgeUpdate" /s /q
