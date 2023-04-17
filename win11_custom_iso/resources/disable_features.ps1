@@ -1,3 +1,10 @@
+# Check if running as administrator
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    # Relaunch as administrator
+    Start-Process powershell.exe "-File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
+
 $packages = Get-WindowsPackage -Path "C:\mount\mount" | Where-Object {
     $_.PackageName -like "Microsoft-Windows-InternetExplorer-Optional-Package*" -or
     $_.PackageName -like "Microsoft-Windows-Kernel-LA57-FoD*" -or
