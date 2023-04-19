@@ -107,4 +107,4 @@ How to use?
 - Wait... the edited ISO will be available on your desktop
 
 # section_manager.bat
-This script uses the ExplorerPatcher dll to remove the recommended section on windows 11 without installing the whole software.
+This script uses the ExplorerPatcher DLL to remove the recommended section in Windows 11 without installing the entire software.
