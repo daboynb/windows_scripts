@@ -105,3 +105,6 @@ How to use?
 - Download the windows 11 ISO from microsoft
 - Run the bat file and select when asked the ISO file
 - Wait... the edited ISO will be available on your desktop
+
+# section_manager.bat
+This script uses the ExplorerPatcher dll to remove the recommended section on windows 11 without installing the whole software.
