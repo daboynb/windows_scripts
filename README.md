@@ -109,8 +109,8 @@ How to use?
 # section_manager.bat
 This script uses the ExplorerPatcher DLL to remove the recommended section in Windows 11 without installing the entire software.
 
-# win11_custom_iso.bat
-This script creates a custom ISO of Windows 11 with the following features:
+# win10_custom_iso.bat
+This script creates a custom ISO of Windows 10 with the following features:
 
 - All apps are removed, including the sponsored one on the start menu.
 - Telemetry is disabled.
