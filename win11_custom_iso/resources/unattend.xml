@@ -70,7 +70,7 @@
     <FirstLogonCommands>
       <SynchronousCommand wcm:action="add">
         <Order>1</Order>
-        <CommandLine>C:\tweaks.bat</CommandLine>
+        <CommandLine>C:\Windows\tweaks.bat</CommandLine>
       </SynchronousCommand>
     </FirstLogonCommands> 
     </component>
