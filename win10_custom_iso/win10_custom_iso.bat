@@ -325,7 +325,6 @@ if %errorlevel% equ 0 (
   color 4 && echo "Can't copy tweaks.bat!" && pause && exit /b 1
 )
 
-:skipping_features
 rem copy debloater
 cls
 powerShell -Command "Write-Host 'Copying debloater' -ForegroundColor Green; exit"
