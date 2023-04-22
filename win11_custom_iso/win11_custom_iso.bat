@@ -72,14 +72,38 @@ IF NOT EXIST "C:\ISO\Win11\sources\$OEM$\$$\Panther" (
     mkdir "C:\ISO\Win11\sources\$OEM$\$$\Panther"
 )
 
+rem edit unattend.xml
+powershell -command "Write-Host 'Inserisci il nome del tuo account utente' -ForegroundColor Green; $newName = Read-Host ':'; (Get-Content -path resources\unattend.xml -Raw) -replace 'nomeutente',$newName | Set-Content -Path resources\unattend_edited.xml"
+
 rem copy unattended.xml
-copy "resources\unattend.xml" "C:\ISO\Win11\sources\$OEM$\$$\Panther"
+copy "resources\unattend_edited.xml" "C:\ISO\Win11\sources\$OEM$\$$\Panther\unattend.xml"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'unattend.xml successfully copied!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
   color 4 && echo "ERROR: Can't copy unattend.xml!" && pause && exit /b 1
 )
 
+rem check if wim or esd
+IF EXIST "C:\ISO\Win11\sources\install.wim" (
+    goto :wim
+)
+
+IF EXIST "C:\ISO\Win11\sources\install.esd" (
+    goto :esd
+)
+
+:esd
+dism /Get-WimInfo /WimFile::C:\ISO\Win11\sources\install.esd
+echo.
+powerShell -Command "Write-Host 'Select the windows version you want to use' -ForegroundColor Green; exit"
+echo.
+set /p index="Please enter the number of the index: "
+cls
+powerShell -Command "Write-Host 'Exporting' -ForegroundColor Green; exit"
+dism /export-image /SourceImageFile:C:\ISO\Win11\sources\install.esd /SourceIndex:%index% /DestinationImageFile:C:\ISO\Win11\sources\install.wim /Compress:max /CheckIntegrity
+goto :copy_wim
+
+:wim
 rem export windows edition
 dism /Get-WimInfo /WimFile:C:\ISO\Win11\sources\install.wim
 echo.
@@ -95,6 +119,7 @@ if %errorlevel% equ 0 (
   color 4 && echo "ERROR: Can't export the image!" && pause && exit /b 1
 )
 
+:copy_wim
 rem copy the new install.wim
 del "C:\ISO\Win11\sources\install.wim"
 if %errorlevel% equ 0 (
@@ -121,15 +146,37 @@ rem delete edge
 :edge
 set /p answer="Do you want to remove Edge? (yes/no): "
 if /i "%answer%"=="yes" (
-   rmdir "C:\mount\mount\Program Files (x86)\Microsoft\Edge" /s /q
-   rmdir "C:\mount\mount\Program Files (x86)\Microsoft\EdgeUpdate" /s /q
-   copy "resources\firefox_installer.exe" "C:\mount\mount"
-   powershell -Command "Write-Host 'Done!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+    goto :edge_first_step
 ) else if /i "%answer%"=="no" (
     echo Skipping...
+    goto :features
 ) else (
     echo Invalid input. Please answer with 'yes' or 'no'.
     goto :edge
+)
+
+:edge_first_step
+rmdir "C:\mount\mount\Program Files (x86)\Microsoft\Edge" /s /q
+if %errorlevel% equ 0 (
+  powerShell -Command "Write-Host 'Edge removed!' -ForegroundColor Green; exit" && timeout 04 >nul && cls && goto :edge_second_step
+) else (
+  color 4 && echo "ERROR: Can't remove Edge!" && pause && exit /b 1
+)
+
+:edge_second_step
+rmdir "C:\mount\mount\Program Files (x86)\Microsoft\EdgeUpdate" /s /q
+if %errorlevel% equ 0 (
+  powerShell -Command "Write-Host 'EdgeUpdate removed!' -ForegroundColor Green; exit" && timeout 04 >nul && cls && goto :edge_third_step
+) else (
+  color 4 && echo "ERROR: Can't remove EdgeUpdate!" && pause && exit /b 1
+)
+
+:edge_third_step
+copy "resources\firefox_installer.exe" "C:\mount\mount"
+if %errorlevel% equ 0 (
+  powerShell -Command "Write-Host 'Firefox copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+) else (
+  color 4 && echo "ERROR: Can't copy firefox!" && pause && exit /b 1
 )
 
 :features
@@ -271,11 +318,29 @@ powershell -Command "Write-Host 'Done!' -ForegroundColor Green; exit"
 rem copy batch file
 cls
 powerShell -Command "Write-Host 'Copying bat' -ForegroundColor Green; exit"
-copy "resources\tweaks.bat" "C:\mount\mount"
+copy "resources\tweaks.bat" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'tweaks.bat copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
   color 4 && echo "Can't copy tweaks.bat!" && pause && exit /b 1
+)
+
+:skipping_features
+rem copy debloater
+cls
+powerShell -Command "Write-Host 'Copying debloater' -ForegroundColor Green; exit"
+copy "resources\debloat3.0.ps1" "C:\mount\mount\Windows"
+if %errorlevel% equ 0 (
+  powerShell -Command "Write-Host 'Debloat.ps1 copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+) else (
+  color 4 && echo "Can't copy Debloat.ps1!" && pause && exit /b 1
+)
+
+copy "resources\debloat.bat" "C:\mount\mount\Windows"
+if %errorlevel% equ 0 (
+  powerShell -Command "Write-Host 'Debloat.bat copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+) else (
+  color 4 && echo "Can't copy Debloat.bat!" && pause && exit /b 1
 )
 
 rem unmount the image
@@ -301,6 +366,7 @@ if %errorlevel% equ 0 (
 ) else (
   color 4 && echo "ERROR: Can't copy the ISO to the desktop!" && pause && exit /b 1
 )
+
 rmdir "C:\ISO" /s /q
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Working folder successfully deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
@@ -313,6 +379,24 @@ if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Working folder successfully deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
   color 4 && echo "ERROR: Can't delete the working folder!" && pause && exit /b 1
+)
+
+del "resources\unattend_edited.xml" /q
+if %errorlevel% equ 0 (
+  powerShell -Command "Write-Host 'Unattend successfully deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+) else (
+  color 4 && echo "ERROR: Can't delete unattend!" && pause && exit /b 1
+)
+
+:delete_iso
+set /p answer="Remove the original iso file? (yes/no): "
+if /i "%answer%"=="yes" (
+del "%filepath%" /q
+) else if /i "%answer%"=="no" (
+    echo Skipping...
+) else (
+    echo Invalid input. Please answer with 'yes' or 'no'.
+    goto :delete_iso
 )
 
 powerShell -Command "Write-Host 'Process completed! Press any key to exit' -ForegroundColor Green; exit"  
