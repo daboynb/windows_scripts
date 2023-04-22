@@ -57,5 +57,5 @@ sc config DiagTrack start=disabled
 sc config dmwappushservice start=disabled
 
 powershell write-host -fore Green "Done, rebooting in 5 seconds"
-timeout 10
+timeout 5
 shutdown /r /t 00
