@@ -124,6 +124,8 @@ How to use?
 - Wait... the edited ISO will be available on your desktop
 
 Note: This tool is intended for use by Italians, so please edit the following lines inside the unattend.xml file to match your language and keyboard layout:
+
+
       <SystemLocale>it-IT</SystemLocale>
       <UserLocale>it-IT</UserLocale>
       <UILanguage>it-IT</UILanguage>  
