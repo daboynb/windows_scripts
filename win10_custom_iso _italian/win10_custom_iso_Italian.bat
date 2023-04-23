@@ -158,7 +158,7 @@ if /i "%answer%"=="yes" (
 :edge_first_step
 rmdir "C:\mount\mount\Program Files (x86)\Microsoft\Edge" /s /q
 if %errorlevel% equ 0 (
-  copy "resources\firefox_installer.exe"
+  copy "resources\firefox_installer.exe" "C:\mount\mount"
 ) else (
   color 4 && echo "ERROR: Can't copy firefox installer!" && pause && exit /b 1
 )
