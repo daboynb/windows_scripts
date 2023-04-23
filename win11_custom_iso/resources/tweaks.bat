@@ -7,6 +7,9 @@ rem uninstall onedrive
 powershell -command "Get-Process OneDrive | Stop-Process -Force"
 powershell -command "C:\Windows\System32\OneDriveSetup.exe /uninstall"
 
+rem show file extensions
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t REG_DWORD /d 0 /f
+
 rem disable bing search on start
 reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Search /v BingSearchEnabled /t REG_DWORD /d 0 /f
 
