@@ -73,9 +73,6 @@ rem disable telemetry
 sc config DiagTrack start=disabled
 sc config dmwappushservice start=disabled
 
-rem disable reserved storage
-reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager /v ShippedWithReserves /t REG_DWORD /d 0 /f
-
 powershell write-host -fore Green "Done, rebooting in 5 seconds"
 timeout 5
 shutdown /r /t 00
