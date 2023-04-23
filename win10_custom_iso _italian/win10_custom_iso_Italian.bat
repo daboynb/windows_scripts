@@ -159,9 +159,9 @@ if /i "%answer%"=="yes" (
 rmdir "C:\mount\mount\Program Files (x86)\Microsoft\EdgeUpdate" /s /q
 rmdir "C:\mount\mount\Program Files (x86)\Microsoft\Edge" /s /q
 if %errorlevel% equ 0 (
-  copy "resources\firefox_installer.exe" "C:\mount\mount"
+  powerShell -Command "Write-Host 'Edge folders removed!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERROR: Can't copy firefox installer!" && pause && exit /b 1
+  color 4 && echo "ERROR: Can't copy Edge folders!" && pause && exit /b 1
 )
 
 :edge_second_step
