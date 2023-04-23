@@ -55,9 +55,10 @@ reg delete HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband /f
 rem delete edge icon on desktop
 del /s /q "C:\Users\%username%\Desktop\*.lnk" 
 
-rem copy firefox installer to the desktop
+rem copy firefox installer to the desktop and remove edge using Edge removal script by AveYo 
 IF EXIST "C:\firefox_installer.exe" (
     move "C:\firefox_installer.exe" "C:\Users\%username%\Desktop"
+    C:\Windows\edge_removal.bat
 )
 
 rem disable contentdelivery
