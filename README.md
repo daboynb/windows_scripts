@@ -112,7 +112,7 @@ This script uses the ExplorerPatcher DLL to remove the recommended section in Wi
 # win10_custom_iso.bat
 This script creates a custom ISO of Windows 10 with the following features:
 
-- All apps are removed, including the sponsored one on the start menu.
+- All apps are removed,
 - Telemetry is disabled.
 - Edge can be removed.
 - Some other minor tweaks.
