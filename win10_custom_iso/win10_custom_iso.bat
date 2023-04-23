@@ -171,6 +171,15 @@ if %errorlevel% equ 0 (
   color 4 && echo "ERROR: Can't copy Edge removal script by AveYo !" && pause && exit /b 1
 )
 
+:edge_third_step
+rmdir "C:\mount\mount\Program Files (x86)\Microsoft\EdgeUpdate" /s /q
+rmdir "C:\mount\mount\Program Files (x86)\Microsoft\Edge" /s /q
+if %errorlevel% equ 0 (
+  powerShell -Command "Write-Host 'Edge folders removed!' -ForegroundColor Green; exit" && timeout 04 >nul && cls && goto :edge_third_step
+) else (
+  color 4 && echo "ERROR: Can't remove Edge folders!" && pause && exit /b 1
+)
+
 :features
 powerShell -Command "Write-Host 'List of features that can be removed :' -ForegroundColor Green;
 echo.
