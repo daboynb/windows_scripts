@@ -60,9 +60,6 @@ IF EXIST "C:\firefox_installer.exe" (
     move "C:\firefox_installer.exe" "C:\Users\%username%\Desktop"
 )
 
-rem copy debloater shortcut
-copy "C:\Windows\debloat.bat" "C:\Users\%username%\Desktop\Debloat_Windows_Italia.bat"
-
 rem disable contentdelivery
 reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager /v OemPreInstalledAppsEnabled /t REG_DWORD /d 0 /f
 reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager /v PreInstalledAppsEnabled /t REG_DWORD /d 0 /f

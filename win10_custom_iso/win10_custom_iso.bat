@@ -325,23 +325,6 @@ if %errorlevel% equ 0 (
   color 4 && echo "Can't copy tweaks.bat!" && pause && exit /b 1
 )
 
-rem copy debloater
-cls
-powerShell -Command "Write-Host 'Copying debloater' -ForegroundColor Green; exit"
-copy "resources\debloat3.0.ps1" "C:\mount\mount\Windows"
-if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Debloat.ps1 copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
-  color 4 && echo "Can't copy Debloat.ps1!" && pause && exit /b 1
-)
-
-copy "resources\debloat.bat" "C:\mount\mount\Windows"
-if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Debloat.bat copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
-  color 4 && echo "Can't copy Debloat.bat!" && pause && exit /b 1
-)
-
 rem unmount the image
 powerShell -Command "Write-Host 'Unmounting image' -ForegroundColor Green; exit"  
 dism /unmount-image /mountdir:"C:\mount\mount" /commit
