@@ -55,12 +55,6 @@ reg delete HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband /f
 rem delete edge icon on desktop
 del /s /q "C:\Users\%username%\Desktop\*.lnk" 
 
-rem copy firefox installer to the desktop and remove edge using Edge removal script by AveYo 
-IF EXIST "C:\firefox_installer.exe" (
-    move "C:\firefox_installer.exe" "C:\Users\%username%\Desktop"
-    C:\Windows\edge_removal.bat
-)
-
 rem copy debloater shortcut
 copy "C:\Windows\debloat_Windows_Italia.lnk" "C:\Users\%username%\Desktop"
 
@@ -77,6 +71,8 @@ rem disable telemetry
 sc config DiagTrack start=disabled
 sc config dmwappushservice start=disabled
 
-powershell write-host -fore Green "Done, rebooting in 5 seconds"
-timeout 5
-shutdown /r /t 00
+rem copy firefox installer to the desktop and remove edge using Edge removal script by AveYo 
+IF EXIST "C:\firefox_installer.exe" (
+    move "C:\firefox_installer.exe" "C:\Users\%username%\Desktop"
+    C:\Windows\edge_removal.bat
+)

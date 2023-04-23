@@ -150,6 +150,9 @@ function global:getfirefox {
 }
 $getfirefox = "$([char]27)[38;2;255;165;0m getfirefox "
 write-host -nonew -fore green -back black "`n EDGE REMOVED! NEED ANOTHER BROWSER? ENTER:"; write-host -back black "$getfirefox"
+powershell write-host -fore Green "Done, rebooting in 5 seconds"
+timeout 5
+shutdown /r /t 00
 
 ## ask to run script as admin
 '@.replace("$@","'@").replace("@$","@'") -force -ea 0;
