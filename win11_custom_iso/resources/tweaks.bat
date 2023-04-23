@@ -32,8 +32,11 @@ reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Search /v SearchboxTaskba
 rem delete edge icon on desktop
 del /s /q "C:\Users\%username%\Desktop\*.lnk" 
 
-rem copy firefox installer to the desktop
-move "C:\firefox_installer.exe" "C:\Users\%username%\Desktop"
+rem copy firefox installer to the desktop and remove edge using Edge removal script by AveYo 
+IF EXIST "C:\firefox_installer.exe" (
+    move "C:\firefox_installer.exe" "C:\Users\%username%\Desktop"
+    C:\Windows\edge_removal.bat
+)
 
 rem disable chat icon
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Chat" /v ChatIcon /t REG_DWORD /d 3 /f

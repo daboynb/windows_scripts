@@ -163,7 +163,7 @@ if %errorlevel% equ 0 (
   color 4 && echo "ERROR: Can't copy firefox installer!" && pause && exit /b 1
 )
 
-:edge_third_step
+:edge_second_step
 copy "resources\edge_removal.bat" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Edge removal script by AveYo copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls

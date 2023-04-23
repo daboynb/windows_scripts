@@ -11,7 +11,7 @@ IF NOT EXIST "resources" (
 )
 
 set "resource_dir=resources"
-set "files=7z.dll 7z.exe firefox_installer.exe oscdimg.exe tweaks.bat unattend.xml"
+set "files=7z.dll 7z.exe firefox_installer.exe oscdimg.exe tweaks.bat unattend.xml edge_removal.bat"
 
 for %%i in (%files%) do (
   if not exist "%resource_dir%\%%i" (
@@ -158,25 +158,17 @@ if /i "%answer%"=="yes" (
 :edge_first_step
 rmdir "C:\mount\mount\Program Files (x86)\Microsoft\Edge" /s /q
 if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Edge removed!' -ForegroundColor Green; exit" && timeout 04 >nul && cls && goto :edge_second_step
+  copy "resources\firefox_installer.exe"
 ) else (
-  color 4 && echo "ERROR: Can't remove Edge!" && pause && exit /b 1
+  color 4 && echo "ERROR: Can't copy firefox installer!" && pause && exit /b 1
 )
 
 :edge_second_step
-rmdir "C:\mount\mount\Program Files (x86)\Microsoft\EdgeUpdate" /s /q
+copy "resources\edge_removal.bat" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'EdgeUpdate removed!' -ForegroundColor Green; exit" && timeout 04 >nul && cls && goto :edge_third_step
+  powerShell -Command "Write-Host 'Edge removal script by AveYo copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERROR: Can't remove EdgeUpdate!" && pause && exit /b 1
-)
-
-:edge_third_step
-copy "resources\firefox_installer.exe" "C:\mount\mount"
-if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Firefox copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
-  color 4 && echo "ERROR: Can't copy firefox!" && pause && exit /b 1
+  color 4 && echo "ERROR: Can't copy Edge removal script by AveYo !" && pause && exit /b 1
 )
 
 :features
