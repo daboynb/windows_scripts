@@ -73,7 +73,7 @@ IF NOT EXIST "C:\ISO\Win10\sources\$OEM$\$$\Panther" (
 )
 
 rem edit unattend.xml
-powershell -command "Write-Host 'Insert you username for windows' -ForegroundColor Green; $newName = Read-Host ':'; (Get-Content -path resources\unattend.xml -Raw) -replace 'nomeutente',$newName | Set-Content -Path resources\unattend_edited.xml"
+powershell -command "Write-Host 'Insert your username for windows' -ForegroundColor Green; $newName = Read-Host ':'; (Get-Content -path resources\unattend.xml -Raw) -replace 'nomeutente',$newName | Set-Content -Path resources\unattend_edited.xml"
 
 rem copy unattended.xml
 copy "resources\unattend_edited.xml" "C:\ISO\Win10\sources\$OEM$\$$\Panther\unattend.xml"
