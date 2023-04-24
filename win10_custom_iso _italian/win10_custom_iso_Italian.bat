@@ -144,7 +144,7 @@ cls
 
 rem delete edge
 :edge
-set /p answer="Do you want to remove Edge? (yes/no): "
+set /p answer="Do you want to remove Edge? (yes/no) Consigliato (yes) : "
 if /i "%answer%"=="yes" (
     goto :edge_first_step
 ) else if /i "%answer%"=="no" (
