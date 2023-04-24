@@ -75,7 +75,7 @@ rem unpin from start the tiles
 powerShell -ExecutionPolicy Bypass -File "C:\Windows\unpin_start_tiles.ps1"
 
 rem stuff from paki
-bcdedit /set {current} bootmenupolicy Legacy
+powerShell -ExecutionPolicy Bypass -File "C:\Windows\paki.ps1"
 
 rem copy firefox installer to the desktop and remove edge using Edge removal script by AveYo 
 IF EXIST "C:\firefox_installer.exe" (
