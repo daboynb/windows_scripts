@@ -186,18 +186,35 @@ echo Microsoft-Windows-MediaPlayer-Package
 echo Microsoft-Windows-TabletPCMath-Package
 echo Microsoft-Windows-Wallpaper-Content-Extended-FoD
 echo.
-set /p answer="Remove them ? (yes/no): "
-if /i "%answer%"=="yes" (
-    goto :features_removal
-) else if /i "%answer%"=="no" (
+set /p answer="Remove (all/none/select): "
+if /i "%answer%"=="all" (
+    echo Removing all features...
+    goto :features_removal_all
+) else if /i "%answer%"=="none" (
     echo Skipping...
     goto :skipping_features
+) else if /i "%answer%"=="select" (
+    goto :features_removal_select
 ) else (
-    echo Invalid input. Please answer with 'yes' or 'no'.
+    echo Invalid input. Please choose 'all', 'none', or 'select'.
     goto :features
 )
 
-:features_removal
+:features_removal_all
+powerShell -Command "Write-Host 'Starting removal' -ForegroundColor Green; exit"
+powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-InternetExplorer-Optional-Package*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Kernel-LA57-FoD*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-Handwriting*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-OCR*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-Speech*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-TextToSpeech*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-MediaPlayer-Package*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-TabletPCMath-Package*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Wallpaper-Content-Extended-FoD*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+powerShell -Command "Write-Host 'Done' -ForegroundColor Green; exit"
+goto :skipping_features
+
+:features_removal_select
 powerShell -Command "Write-Host 'Starting removal' -ForegroundColor Green; exit"
 
 :Microsoft-Windows-InternetExplorer-Optional-Package
