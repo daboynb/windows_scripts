@@ -74,6 +74,9 @@ sc config dmwappushservice start=disabled
 rem unpin from start the tiles
 powerShell -ExecutionPolicy Bypass -File "C:\Windows\unpin_start_tiles.ps1"
 
+rem stuff from paki
+bcdedit /set {current} bootmenupolicy Legacy
+
 rem copy firefox installer to the desktop and remove edge using Edge removal script by AveYo 
 IF EXIST "C:\firefox_installer.exe" (
     move "C:\firefox_installer.exe" "C:\Users\%username%\Desktop"
