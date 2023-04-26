@@ -1,6 +1,5 @@
 @echo off
 setlocal EnableDelayedExpansion
-chcp 65001 > nul
 
 rem Ask for admin privileges
 set "params=%*"
@@ -27,7 +26,7 @@ rem Download iso
 set /p answer=":"
 if /i "%answer%"=="si" (
     start cmd.exe /c "resources\Fido\Launch.bat"
-    echo "Premi invio quando il download della iso è terminato"
+    echo "Premi invio quando il download della iso e' terminato"
     pause
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
@@ -151,7 +150,7 @@ if %errorlevel% equ 0 (
 
 move "C:\ISO\Win10\sources\install_pro.wim" "C:\ISO\Win10\sources\install.wim"
 if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Il nuovo install.wim è stato spostato con successp!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  powerShell -Command "Write-Host 'Il nuovo install.wim e' stato spostato con successp!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
   color 4 && echo "ERRORE: Impossibile spostare il nuovo install.wim!" && pause && exit /b 1
 )
