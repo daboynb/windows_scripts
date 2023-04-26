@@ -331,7 +331,6 @@ powershell -Command "Write-Host 'Done!' -ForegroundColor Green; exit"
 :skipping_features
 rem copy batch file
 cls
-powerShell -Command "Write-Host 'Copying bat' -ForegroundColor Green; exit"
 copy "resources\tweaks.bat" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'tweaks.bat copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
