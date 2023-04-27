@@ -150,7 +150,7 @@ if %errorlevel% equ 0 (
 
 move "C:\ISO\Win10\sources\install_pro.wim" "C:\ISO\Win10\sources\install.wim"
 if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Il nuovo install.wim e' stato spostato con successp!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  powerShell -Command "Write-Host 'Il nuovo install.wim e'' stato spostato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
   color 4 && echo "ERRORE: Impossibile spostare il nuovo install.wim!" && pause && exit /b 1
 )
