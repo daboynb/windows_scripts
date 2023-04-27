@@ -386,7 +386,7 @@ rem ############################################################################
 
 rem rebuild image 
 powerShell -Command "Write-Host 'Creando la ISO' -ForegroundColor Green; exit"  
-resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win11\boot\etfsboot.com#pEF,e,bC:\ISO\Win11\efi\microsoft\boot\efisys.bin C:\ISO\Win11 C:\ISO\Windows10_edited.iso
+resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win11\boot\etfsboot.com#pEF,e,bC:\ISO\Win11\efi\microsoft\boot\efisys.bin C:\ISO\Win11 C:\ISO\Windows11_edited.iso
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO creata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
@@ -394,7 +394,7 @@ if %errorlevel% equ 0 (
 )
 
 rem copy the iso and clean
-copy "C:\ISO\Windows10_edited.iso" "C:\Users\%USERNAME%\Desktop"
+copy "C:\ISO\Windows11_edited.iso" "C:\Users\%USERNAME%\Desktop"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO copied con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
