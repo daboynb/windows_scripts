@@ -20,12 +20,16 @@ for %%i in (%files%) do (
   )
 )
 
+:winfolder
 IF EXIST "C:\ISO\Win10" (
-    color 4 && echo "ERROR: C:\ISO\Win10 already exist, please delete that folder" && pause && exit /b 1
+    color 4 && echo "ERROR: C:\ISO\Win10 already exist, please delete that folder"
+    goto :winfolder
 )
 
+:mountfolder
 IF EXIST "C:\mount\mount" (
-    color 4 && echo "ERROR: C:\mount\mount already exist, please delete that folder" && pause && exit /b 1
+    color 4 && echo "ERROR: C:\mount\mount already exist, please delete that folder" 
+    goto :mountfolder
 )
 
 rem create folder
@@ -65,7 +69,8 @@ resources\7z.exe x -y -o"C:\ISO\Win10" "%filepath%" > nul
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO extraction completed!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERROR: Extraction failed!" && pause && exit /b 1
+  color 4 && echo "ERROR: Extraction failed!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
+ && exit /b 1
 )
 
 IF NOT EXIST "C:\ISO\Win10\sources\$OEM$\$$\Panther" (
@@ -83,7 +88,8 @@ copy "resources\unattend_edited.xml" "C:\ISO\Win10\sources\$OEM$\$$\Panther\unat
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'unattend.xml successfully copied!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERROR: Can't copy unattend.xml!" && pause && exit /b 1
+  color 4 && echo "ERROR: Can't copy unattend.xml!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
+ && exit /b 1
 )
 
 rem check if wim or esd
@@ -119,7 +125,8 @@ dism /Export-Image /SourceImageFile:"C:\ISO\Win10\sources\install.wim" /SourceIn
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Image exported successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERROR: Can't export the image!" && pause && exit /b 1
+  color 4 && echo "ERROR: Can't export the image!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
+ && exit /b 1
 )
 
 :copy_wim
@@ -128,14 +135,16 @@ del "C:\ISO\Win10\sources\install.wim"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Old install.wim deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERROR: Can't delete the old install.wim!" && pause && exit /b 1
+  color 4 && echo "ERROR: Can't delete the old install.wim!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
+ && exit /b 1
 )
 
 move "C:\ISO\Win10\sources\install_pro.wim" "C:\ISO\Win10\sources\install.wim"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'The new install.wim is now inside the ISO!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERROR: Can't move the new install.wim!" && pause && exit /b 1
+  color 4 && echo "ERROR: Can't move the new install.wim!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
+ && exit /b 1
 )
 
 rem ######################################################################################## 
@@ -164,7 +173,8 @@ rmdir "C:\mount\mount\Program Files (x86)\Microsoft\Edge" /s /q
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Edge folders removed!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERROR: Can't copy Edge folders!" && pause && exit /b 1
+  color 4 && echo "ERROR: Can't copy Edge folders!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
+ && exit /b 1
 )
 
 :edge_second_step
@@ -173,7 +183,8 @@ copy "resources\firefox_installer.exe" "C:\mount\mount"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Edge removal script by AveYo and firefox copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERROR: Can't copy Edge removal script by AveYo and firefox!" && pause && exit /b 1
+  color 4 && echo "ERROR: Can't copy Edge removal script by AveYo and firefox!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
+ && exit /b 1
 )
 
 :features
@@ -335,14 +346,16 @@ copy "resources\tweaks.bat" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'tweaks.bat copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "Can't copy tweaks.bat!" && pause && exit /b 1
+  color 4 && echo "Can't copy tweaks.bat!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
+ && exit /b 1
 )
 rem copy unpin_start_tiles.ps1
 copy "resources\unpin_start_tiles.ps1" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Unpin_start_tiles.ps1 copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "Can't copy Unpin_start_tiles.ps1!" && pause && exit /b 1
+  color 4 && echo "Can't copy Unpin_start_tiles.ps1!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
+ && exit /b 1
 )
 
 rem unmount the image
@@ -358,7 +371,8 @@ resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win10\boot\etfsboot.com#pEF
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO builded successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERROR: Can't build the ISO!" && pause && exit /b 1
+  color 4 && echo "ERROR: Can't build the ISO!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
+ && exit /b 1
 )
 
 rem copy the iso and clean
@@ -366,28 +380,32 @@ copy "C:\ISO\Windows10_edited.iso" "C:\Users\%USERNAME%\Desktop"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO copied on the desktop!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERROR: Can't copy the ISO to the desktop!" && pause && exit /b 1
+  color 4 && echo "ERROR: Can't copy the ISO to the desktop!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
+ && exit /b 1
 )
 
 rmdir "C:\ISO" /s /q
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Working folder successfully deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERROR: Can't delete the working folder!" && pause && exit /b 1
+  color 4 && echo "ERROR: Can't delete the working folder!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
+ && exit /b 1
 )
 
 rmdir "C:\mount" /s /q
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Working folder successfully deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERROR: Can't delete the working folder!" && pause && exit /b 1
+  color 4 && echo "ERROR: Can't delete the working folder!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
+ && exit /b 1
 )
 
 del "resources\unattend_edited.xml" /q
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Unattend successfully deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERROR: Can't delete unattend!" && pause && exit /b 1
+  color 4 && echo "ERROR: Can't delete unattend!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
+ && exit /b 1
 )
 
 :delete_iso
