@@ -102,6 +102,8 @@ This script creates a custom ISO of Windows 11 with the following features:
 
 How to use?
 
+irm -Uri "https://raw.githubusercontent.com/daboynb/windows_scripts/main/win11_custom_iso/Downloader.ps1" | iex 
+
 - Download the windows 11 ISO from microsoft
 - Run the bat file and select when asked the ISO file
 - Wait... the edited ISO will be available on your desktop
@@ -118,6 +120,8 @@ This script creates a custom ISO of Windows 10 with the following features:
 - Some other minor tweaks.
 
 How to use?
+
+irm -Uri "https://raw.githubusercontent.com/daboynb/windows_scripts/main/win10_custom_iso/Downloader.ps1" | iex 
 
 - Download the windows 10 ISO from microsoft
 - Run the bat file and select when asked the ISO file
