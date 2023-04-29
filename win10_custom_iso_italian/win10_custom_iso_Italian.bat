@@ -406,7 +406,7 @@ if %errorlevel% equ 0 (
 rem copy the iso and clean
 copy "C:\ISO\Windows10_edited.iso" "C:\Users\%USERNAME%\Desktop"
 if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'ISO copied con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  powerShell -Command "Write-Host 'ISO copiata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
   color 4 && echo "ERRORE: Impossibile copiare la ISO sul desktop!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
