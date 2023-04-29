@@ -37,14 +37,12 @@ if /i "%answer%"=="si" (
 
 :winfolder
 IF EXIST "C:\ISO\Win11" (
-    color 4 && echo "ERRORE: C:\ISO\Win11 esiste già, elimina la cartella prima di procedere" 
-    goto :winfolder
+    echo "ERRORE: C:\ISO\Win11 esiste già, elimina la cartella prima di procedere" && timeout 04 >nul && goto :winfolder && cls
 )
 
 :mountfolder
 IF EXIST "C:\mount\mount" (
-    color 4 && echo "ERRORE: C:\mount\mount esiste già, elimina la cartella prima di procedere" 
-    goto :mountfolder
+    echo "ERRORE: C:\mount\mount esiste già, elimina la cartella prima di procedere" && timeout 04 >nul && goto :mountfolder && cls
 )
 
 rem create folder

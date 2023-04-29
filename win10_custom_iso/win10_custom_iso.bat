@@ -22,14 +22,12 @@ for %%i in (%files%) do (
 
 :winfolder
 IF EXIST "C:\ISO\Win10" (
-    color 4 && echo "ERROR: C:\ISO\Win10 already exist, please delete that folder"
-    goto :winfolder
+    echo "ERROR: C:\ISO\Win10 already exist, please delete that folder" && timeout 04 >nul && goto :winfolder && cls
 )
 
 :mountfolder
 IF EXIST "C:\mount\mount" (
-    color 4 && echo "ERROR: C:\mount\mount already exist, please delete that folder" 
-    goto :mountfolder
+    echo "ERROR: C:\mount\mount already exist, please delete that folder" && timeout 04 >nul && goto :mountfolder && cls
 )
 
 rem create folder
