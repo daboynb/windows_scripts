@@ -84,8 +84,7 @@ resources\7z.exe x -y -o"C:\ISO\Win11" "%filepath%" > nul
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Estrazione della ISO completata!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERRORE: Estrazione fallita!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
- && exit /b 1
+  color 4 && echo "ERRORE: Estrazione fallita!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 IF NOT EXIST "C:\ISO\Win11\sources\$OEM$\$$\Panther" (
@@ -100,8 +99,7 @@ copy "resources\unattend_edited.xml" "C:\ISO\Win11\sources\$OEM$\$$\Panther\unat
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'unattend.xml copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERRORE: Impossibile copiare unattend.xml!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
- && exit /b 1
+  color 4 && echo "ERRORE: Impossibile copiare unattend.xml!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem check if wim or esd
@@ -125,8 +123,7 @@ dism /export-image /SourceImageFile:C:\ISO\Win11\sources\install.esd /SourceInde
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Immagine esportata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERRORE: Impossibile esportare l''immagine!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
- && exit /b 1
+  color 4 && echo "ERRORE: Impossibile esportare l''immagine!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 goto :copy_wim
 
@@ -143,8 +140,7 @@ dism /Export-Image /SourceImageFile:"C:\ISO\Win11\sources\install.wim" /SourceIn
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Immagine esportata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERRORE: Impossibile esportare l''immagine!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
- && exit /b 1
+  color 4 && echo "ERRORE: Impossibile esportare l''immagine!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 :copy_wim
@@ -153,16 +149,14 @@ del "C:\ISO\Win11\sources\install.wim"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Old install.wim eliminato!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERRORE: Impossibile eliminare old install.wim!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
- && exit /b 1
+  color 4 && echo "ERRORE: Impossibile eliminare old install.wim!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 move "C:\ISO\Win11\sources\install_pro.wim" "C:\ISO\Win11\sources\install.wim"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Il nuovo install.wim e'' stato spostato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERRORE: Impossibile spostare il nuovo install.wim!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
- && exit /b 1
+  color 4 && echo "ERRORE: Impossibile spostare il nuovo install.wim!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem ######################################################################################## 
@@ -191,8 +185,7 @@ rmdir "C:\mount\mount\Program Files (x86)\Microsoft\Edge" /s /q
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Edge rimosso!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERRORE: Impossibile rimuovere edge!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
- && exit /b 1
+  color 4 && echo "ERRORE: Impossibile rimuovere edge!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 :edge_second_step
@@ -201,8 +194,7 @@ copy "resources\firefox_installer.exe" "C:\mount\mount"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Lo script per la rimozione completa di edge e l''installer di firefox sono stati copiati con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERRORE: Impossibile copiare lo script per la rimozione completa di edge e l''installer di firefox!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
- && exit /b 1
+  color 4 && echo "ERRORE: Impossibile copiare lo script per la rimozione completa di edge e l''installer di firefox!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 :features
@@ -363,8 +355,7 @@ copy "resources\tweaks.bat" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'tweaks.bat ccopiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "Impossibile copiare tweaks.bat!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
- && exit /b 1
+  color 4 && echo "Impossibile copiare tweaks.bat!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem copy debloater
@@ -373,24 +364,21 @@ copy "resources\debloat3.0.ps1" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Debloat.ps1 copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "Impossibile copiare Debloat.ps1!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
- && exit /b 1
+  color 4 && echo "Impossibile copiare Debloat.ps1!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 copy "resources\debloat.bat" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Debloat.bat ccopiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "Impossibile copiare Debloat.bat!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
- && exit /b 1
+  color 4 && echo "Impossibile copiare Debloat.bat!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 copy "resources\debloat_Windows_Italia.lnk" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Debloat.ink ccopiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "Impossibile copiare Debloat.ink!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
- && exit /b 1
+  color 4 && echo "Impossibile copiare Debloat.ink!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem unmount the image
@@ -406,8 +394,7 @@ resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win11\boot\etfsboot.com#pEF
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO creata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERRORE: Impossibile creare la ISO!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
- && exit /b 1
+  color 4 && echo "ERRORE: Impossibile creare la ISO!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem copy the iso and clean
@@ -415,32 +402,28 @@ copy "C:\ISO\Windows11_edited.iso" "C:\Users\%USERNAME%\Desktop"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO copied con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERRORE: Impossibile copiare la ISO sul desktop!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
- && exit /b 1
+  color 4 && echo "ERRORE: Impossibile copiare la ISO sul desktop!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rmdir "C:\ISO" /s /q
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Le directory usate per la creazione della ISO sono state eliminate con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERRORE: Impossibile eliminare le directory usate per la creazione della ISO!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
- && exit /b 1
+  color 4 && echo "ERRORE: Impossibile eliminare le directory usate per la creazione della ISO!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rmdir "C:\mount" /s /q
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Le directory usate per la creazione della ISO sono state eliminate con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERRORE: Impossibile eliminare le directory usate per la creazione della ISO!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
- && exit /b 1
+  color 4 && echo "ERRORE: Impossibile eliminare le directory usate per la creazione della ISO!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 del "resources\unattend_edited.xml" /q
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Unattend eliminato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERRORE: Impossibile eliminare unattend!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q
- && exit /b 1
+  color 4 && echo "ERRORE: Impossibile eliminare unattend!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 :delete_iso
