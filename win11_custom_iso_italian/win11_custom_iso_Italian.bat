@@ -22,10 +22,10 @@ for %%i in (%files%) do (
 
 rem Download iso
 :iso
- powerShell -Command "Write-Host 'Vuoi scaricare la iso di windows? Useremo Fido di pbatard (si/no)' -ForegroundColor Green; exit"
+powerShell -Command "Write-Host 'Vuoi scaricare la iso di windows? (si/no)' -ForegroundColor Green; exit"
 set /p answer=":"
 if /i "%answer%"=="si" (
-    start cmd.exe /c "resources\Fido\Launch.bat"
+    start "" "https://drive.google.com/uc?id=1Z1gtOANi23KywO8g4t6x70gFCqhLR04n&export=download&confirm=t"
     echo "Premi invio quando il download della iso e' terminato"
     pause
 ) else if /i "%answer%"=="no" (
