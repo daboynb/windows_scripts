@@ -26,13 +26,23 @@ powerShell -Command "Write-Host 'Vuoi scaricare la iso di windows? (si/no)' -For
 set /p answer=":"
 if /i "%answer%"=="si" (
     start "" "https://drive.google.com/uc?id=1Z1gtOANi23KywO8g4t6x70gFCqhLR04n&export=download&confirm=t"
-    echo "Premi invio quando il download della iso e' terminato"
-    pause
+    goto :iso_scaricata
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
+    goto :winfolder
 ) else (
     echo I valori accettati sono solamente si e no.
     goto :iso
+)
+
+:iso_scaricata
+powerShell -Command "Write-Host 'Digita terminato al termine del download per proseguire' -ForegroundColor Green; exit"
+set /p answer=":"
+if /i "%answer%"=="terminato" (
+  echo Proseguiamo
+) else (
+    echo Valore non accettato.
+    goto :iso_scaricata
 )
 
 :winfolder
