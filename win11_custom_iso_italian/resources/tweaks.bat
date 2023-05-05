@@ -62,6 +62,9 @@ copy "C:\Windows\debloat_Windows_Italia.lnk" "C:\Users\%username%\Desktop"
 rem stuff from paki
 bcdedit /set {current} bootmenupolicy Legacy
 
+rem disable widgets
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v TaskbarDa /t REG_DWORD /d 0 /f
+
 rem copy firefox installer to the desktop and remove edge using Edge removal script by AveYo 
 IF EXIST "C:\firefox_installer.exe" (
     move "C:\firefox_installer.exe" "C:\Users\%username%\Desktop"
