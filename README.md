@@ -126,3 +126,9 @@ How to use?
 - Download the windows 10 ISO from microsoft
 - Run the bat file and select when asked the ISO file
 - Wait... the edited ISO will be available on your desktop
+
+# defender.bat
+
+This script disables Windows Defender and related security components with the help of PowerRun (tool created by Sordum).
+
+Note that this tool will permanently disable Windows Defender and other security components. I need to figure out how to re-enable them. Use with caution!
