@@ -64,7 +64,8 @@ IF EXIST "C:\firefox_installer.exe" (
     move "C:\firefox_installer.exe" "C:\Users\%username%\Desktop"
     C:\Windows\edge_removal.bat
 )
-ELSE (
+
+IF NOT EXIST "C:\Windows\edge_removal.bat" (
     powershell write-host -fore Green "Done, rebooting in 5 seconds"
     timeout 5
     shutdown /r /t 00 
