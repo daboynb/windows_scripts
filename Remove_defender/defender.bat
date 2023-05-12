@@ -3,37 +3,20 @@ setlocal EnableDelayedExpansion
 
 rem Ask for admin privileges
 set "params=%*"
-cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
+cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul 2>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 
 rem ####################################################################################### 
 
-IF EXIST "C:\Windows\backup_defender_services.reg" (
-    goto :skip_backup
-)
-
-set backupFile=C:\Windows\backup_defender_services.reg
-
-reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc %backupFile% /y
-reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisDrv %backupFile% /y
-reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc %backupFile% /y
-reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdBoot %backupFile% /y
-reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService %backupFile% /y
-reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SgrmAgent %backupFile% /y
-reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SgrmBroker %backupFile% /y
-reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend %backupFile% /y
-
-:skip_backup
-
-taskkill /f /im explorer.exe >nul
-taskkill /f /im smartscreen.exe >nul
-taskkill /f /im SecurityHealthSystray.exe >nul
-taskkill /f /im SecurityHealthHost.exe >nul
-taskkill /f /im SecurityHealthService.exe >nul
-taskkill /f /im SecurityHealthHost.exe >nul
-taskkill /f /im DWWIN.EXE >nul
-taskkill /f /im CompatTelRunner.exe >nul
-taskkill /f /im GameBarPresenceWriter.exe >nul
-taskkill /f /im DeviceCensus.exe >nul
+taskkill /f /im explorer.exe >nul 2>nul
+taskkill /f /im smartscreen.exe >nul 2>nul
+taskkill /f /im SecurityHealthSystray.exe >nul 2>nul
+taskkill /f /im SecurityHealthHost.exe >nul 2>nul
+taskkill /f /im SecurityHealthService.exe >nul 2>nul
+taskkill /f /im SecurityHealthHost.exe >nul 2>nul
+taskkill /f /im DWWIN.EXE >nul 2>nul
+taskkill /f /im CompatTelRunner.exe >nul 2>nul
+taskkill /f /im GameBarPresenceWriter.exe >nul 2>nul
+taskkill /f /im DeviceCensus.exe >nul 2>nul
 
 PowerRun.exe cmd.exe /c "reg delete HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc /f"
 PowerRun.exe cmd.exe /c "reg delete HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisDrv /f"
