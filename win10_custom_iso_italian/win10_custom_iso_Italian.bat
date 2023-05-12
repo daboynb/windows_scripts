@@ -206,7 +206,7 @@ if %errorlevel% equ 0 (
 )
 
 :features
-powerShell -Command "Write-Host 'Lista delle funzionalità che possono essere rimosse :' -ForegroundColor Green;
+powerShell -Command "Write-Host 'Lista delle funzionalita'' che possono essere rimosse :' -ForegroundColor Green;
 echo.
 echo Microsoft-Windows-InternetExplorer-Optional-Package
 echo Microsoft-Windows-Kernel-LA57-FoD
@@ -361,7 +361,7 @@ rem copy batch file
 cls
 copy "resources\tweaks.bat" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'tweaks.bat ccopiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  powerShell -Command "Write-Host 'tweaks.bat copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
   color 4 && echo "Impossibile copiare tweaks.bat!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
@@ -377,14 +377,14 @@ if %errorlevel% equ 0 (
 
 copy "resources\debloat.bat" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Debloat.bat ccopiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  powerShell -Command "Write-Host 'Debloat.bat copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
   color 4 && echo "Impossibile copiare Debloat.bat!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 copy "resources\debloat_Windows_Italia.lnk" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Debloat.ink ccopiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  powerShell -Command "Write-Host 'Debloat.ink copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
   color 4 && echo "Impossibile copiare Debloat.ink!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
@@ -392,7 +392,7 @@ if %errorlevel% equ 0 (
 rem copy unpin_start_tiles.ps1
 copy "resources\unpin_start_tiles.ps1" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Unpin_start_tiles.ps1 ccopiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  powerShell -Command "Write-Host 'Unpin_start_tiles.ps1 copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
   color 4 && echo "Impossibile copiare Unpin_start_tiles.ps1!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
