@@ -129,6 +129,6 @@ How to use?
 
 # defender.bat
 
-This script disables Windows Defender and related security components with the help of PowerRun (tool created by Sordum).
+This script disables Windows Defender and related security components with the help of PowerRun (tool created by Sordum). With the help of (jbara2002/windows-defender-remover).
 
 Note that this tool will permanently disable Windows Defender and other security components. I need to figure out how to re-enable them. Use with caution!
