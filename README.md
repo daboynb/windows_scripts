@@ -128,6 +128,6 @@ How to use?
 - Wait... the edited ISO will be available on your desktop
 
 # defender.bat
-This script removes Windows Defender and related security components using PowerRun, a tool created by Sordum. It was made by following the jbara2002 project
+This script removes Windows Defender and related security components using PowerRun, a tool created by Sordum. It was made by following the jbara2002 project.
 
 Note that this tool will permanently remove Windows Defender and other security components. You won't be able to  re-enable them. Use with caution!
