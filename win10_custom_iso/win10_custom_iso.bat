@@ -339,6 +339,7 @@ if %errorlevel% equ 0 (
 ) else (
   color 4 && echo "Can't copy tweaks.bat!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
+
 rem copy unpin_start_tiles.ps1
 copy "resources\unpin_start_tiles.ps1" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
@@ -350,9 +351,9 @@ if %errorlevel% equ 0 (
 rem copy start.ps1
 copy "resources\start.ps1" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'start.ps1 copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  powerShell -Command "Write-Host 'start.ps1 copied successfull!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "Impossibile copiare start.ps1!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "Can't copy start.ps1!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem unmount the image
