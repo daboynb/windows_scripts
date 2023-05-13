@@ -11,7 +11,7 @@ IF NOT EXIST "resources" (
 )
 
 set "resource_dir=resources"
-set "files=7z.dll 7z.exe Debloat_Windows_Italia.lnk debloat3.0.ps1 firefox_installer.exe oscdimg.exe tweaks.bat unattend.xml edge_removal.bat unpin_start_tiles.ps1"
+set "files=7z.dll 7z.exe Debloat_Windows_Italia.lnk debloat3.0.ps1 firefox_installer.exe oscdimg.exe tweaks.bat unattend.xml edge_removal.bat unpin_start_tiles.ps1 start.ps1"
 
 for %%i in (%files%) do (
   if not exist "%resource_dir%\%%i" (
@@ -395,6 +395,14 @@ if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Unpin_start_tiles.ps1 copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
   color 4 && echo "Impossibile copiare Unpin_start_tiles.ps1!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+)
+
+rem copy start.ps1
+copy "resources\start.ps1" "C:\mount\mount\Windows"
+if %errorlevel% equ 0 (
+  powerShell -Command "Write-Host 'start.ps1 copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+) else (
+  color 4 && echo "Impossibile copiare start.ps1!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem unmount the image

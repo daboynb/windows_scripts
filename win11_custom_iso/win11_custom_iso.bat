@@ -11,7 +11,7 @@ IF NOT EXIST "resources" (
 )
 
 set "resource_dir=resources"
-set "files=7z.dll 7z.exe firefox_installer.exe oscdimg.exe tweaks.bat unattend.xml edge_removal.bat"
+set "files=7z.dll 7z.exe firefox_installer.exe oscdimg.exe tweaks.bat unattend.xml edge_removal.bat start.ps1"
 
 for %%i in (%files%) do (
   if not exist "%resource_dir%\%%i" (
@@ -22,7 +22,7 @@ for %%i in (%files%) do (
 
 :winfolder
 IF EXIST "C:\ISO\Win11" (
-    echo "ERROR: C:\ISO\Win11 already exist, please delete that folder" && timeout 04 >nul && && cls goto :winfolder 
+    echo "ERROR: C:\ISO\Win11 already exist, please delete that folder" && timeout 04 >nul && cls goto :winfolder 
 )
 
 :mountfolder
@@ -340,6 +340,14 @@ if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'tweaks.bat copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
   color 4 && echo "Can't copy tweaks.bat!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+)
+
+rem copy start.ps1
+copy "resources\start.ps1" "C:\mount\mount\Windows"
+if %errorlevel% equ 0 (
+  powerShell -Command "Write-Host 'start.ps1 copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+) else (
+  color 4 && echo "Impossibile copiare start.ps1!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem unmount the image

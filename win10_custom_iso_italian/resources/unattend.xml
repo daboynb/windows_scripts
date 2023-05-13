@@ -56,7 +56,7 @@
     <FirstLogonCommands>
       <SynchronousCommand wcm:action="add">
         <Order>1</Order>
-        <CommandLine>C:\Windows\tweaks.bat</CommandLine>
+        <CommandLine>powerShell -ExecutionPolicy Bypass -File C:\Windows\start.ps1</CommandLine>
       </SynchronousCommand>
     </FirstLogonCommands> 
     </component>
