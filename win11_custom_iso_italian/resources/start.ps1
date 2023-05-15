@@ -13,17 +13,17 @@ function Disable-UserInput {
 }
 
 Write-Host -fore Green 'Il mouse e la tastiera verranno disabilitati fino al completamento delle operazioni'
-Write-Host -fore Green 'Attendi'
+Write-Host -fore Green 'Inizio'
 
 while ($true) {
-    $process1 = Get-Process -Name SecurityHealthSystray -ErrorAction SilentlyContinue
-    $process2 = Get-Process -Name OneDrive -ErrorAction SilentlyContinue
+    $process = Get-Process -Name SecurityHealthSystray -ErrorAction SilentlyContinue
 
-    if ($process1 -and $process2) {
-        break
+    if ($process) {
+        Write-Host "SecurityHealthSystray is running."
+        break  # Exit the loop
     }
-
-    Start-Sleep -Seconds 3
+    
+    Start-Sleep -Seconds 3  # Wait for 1 second before checking again
 }
 
 # Disabilita l'input dell'utente

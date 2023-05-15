@@ -15,14 +15,14 @@ function Disable-UserInput {
 Write-Host -fore Green 'Press Enter to complete the installation, mouse and keyboard won''t be available until the process is finished'
 
 while ($true) {
-    $process1 = Get-Process -Name SecurityHealthSystray -ErrorAction SilentlyContinue
-    $process2 = Get-Process -Name OneDrive -ErrorAction SilentlyContinue
+    $process = Get-Process -Name SecurityHealthSystray -ErrorAction SilentlyContinue
 
-    if ($process1 -and $process2) {
-        break
+    if ($process) {
+        Write-Host "SecurityHealthSystray is running."
+        break  # Exit the loop
     }
-
-    Start-Sleep -Seconds 3
+    
+    Start-Sleep -Seconds 3  # Wait for 1 second before checking again
 }
 
 # Disabilita l'input dell'utente
