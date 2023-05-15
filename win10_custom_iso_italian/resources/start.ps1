@@ -12,11 +12,22 @@ function Disable-UserInput {
     $userInput::BlockInput($true)
 }
 
-Write-Host -fore Green 'Premi invio per terminare la configurazione di windows, il mouse e la tastiera verranno disabilitati fino al completamento delle operazioni'
-pause
+Write-Host -fore Green 'Il mouse e la tastiera verranno disabilitati fino al completamento delle operazioni'
+Write-Host -fore Green 'Attendi'
 
 # Disabilita l'input dell'utente
 Disable-UserInput
+
+while ($true) {
+    $process1 = Get-Process -Name SecurityHealthSystray -ErrorAction SilentlyContinue
+    $process2 = Get-Process -Name OneDrive -ErrorAction SilentlyContinue
+
+    if ($process1 -and $process2) {
+        break
+    }
+
+    Start-Sleep -Seconds 3
+}
 
 # Avvia il tuo batch file
 Start-Process -FilePath "C:\Windows\tweaks.bat" -Wait

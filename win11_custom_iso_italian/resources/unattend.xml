@@ -49,7 +49,11 @@
         <RunSynchronousCommand wcm:action="add">
           <Order>4</Order>
           <Path>reg add HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Start /v ConfigureStartPins /t REG_SZ /d "{\"pinnedList\": [{}]}" /f</Path>
-        </RunSynchronousCommand>                              
+        </RunSynchronousCommand>     
+        <RunSynchronousCommand wcm:action="add">
+          <Order>5</Order>
+          <Path>reg add HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System /v EnableFirstLogonAnimation /t REG_DWORD /d 0 /f</Path>
+        </RunSynchronousCommand>                         
       </RunSynchronous>      
     </component>
   </settings>
