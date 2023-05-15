@@ -128,4 +128,4 @@ How to use?
 - Wait... the edited ISO will be available on your desktop
 
 # defender.bat
-This tool allows you to enable or disable Windows Defender and related components using PowerRun, a tool created by Sordum.
+This script allows you to enable or disable Windows Defender and related components using PowerRun, a tool created by Sordum.
