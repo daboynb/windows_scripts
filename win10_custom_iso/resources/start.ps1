@@ -12,7 +12,7 @@ function Disable-UserInput {
     $userInput::BlockInput($true)
 }
 
-Write-Host -fore Green 'Press Enter to complete the installation, mouse and keyboard won''t be available until the process is finished'
+Write-Host -fore Green 'Please wait,, mouse and keyboard won''t be available until the process is finished'
 
 while ($true) {
     $process = Get-Process -Name SecurityHealthSystray -ErrorAction SilentlyContinue
