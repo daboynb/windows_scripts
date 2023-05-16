@@ -29,16 +29,15 @@ IF EXIST "C:\Windows\backup_reg" (
 )
 
 mkdir C:\Windows\backup_reg
-set backupFolder=C:\Windows\backup_reg
 
-reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc %backupFolder%\wscsvc.reg /y>NUL
-reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisDrv %backupFolder%\WdNisDrv.reg /y>NUL
-reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc %backupFolder%\WdNisSvc.reg /y>NUL
-reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdBoot %backupFolder%\WdBoot.reg /y>NUL
-reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService %backupFolder%\SecurityHealthService.reg /y>NUL
-reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SgrmAgent %backupFolder%\SgrmAgent.reg /y>NUL
-reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SgrmBroker %backupFolder%\SgrmBroker.reg /y>NUL
-reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend %backupFolder%\WinDefend.reg /y>NUL
+reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc C:\Windows\backup_reg\wscsvc.reg /y>NUL
+reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisDrv C:\Windows\backup_reg\WdNisDrv.reg /y>NUL
+reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc C:\Windows\backup_reg\WdNisSvc.reg /y>NUL
+reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdBoot C:\Windows\backup_reg\WdBoot.reg /y>NUL
+reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService C:\Windows\backup_reg\SecurityHealthService.reg /y>NUL
+reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SgrmAgent C:\Windows\backup_reg\SgrmAgent.reg /y>NUL
+reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SgrmBroker C:\Windows\backup_reg\SgrmBroker.reg /y>NUL
+reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend C:\Windows\backup_reg\WinDefend.reg /y>NUL
 
 :skip_backup
 
