@@ -36,7 +36,7 @@ if /i "%answer%"=="si" (
 )
 
 :iso_scaricata
-powerShell -Command "Write-Host 'Digita terminato al termine del download per proseguire' -ForegroundColor Green; exit"
+powerShell -Command "Write-Host 'Digita terminato al termine del download per proseguire' -ForegroundColor Yellow; exit"
 set /p answer=":"
 if /i "%answer%"=="terminato" (
   echo Proseguiamo
