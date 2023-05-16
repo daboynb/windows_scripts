@@ -65,6 +65,44 @@ bcdedit /set {current} bootmenupolicy Legacy
 rem disable widgets
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v TaskbarDa /t REG_DWORD /d 0 /f
 
+rem disable defender 
+IF EXIST "C:\Windows\PowerRun.exe" (
+        mkdir C:\Windows\backup_reg
+        set backupFolder=C:\Windows\backup_reg
+
+        reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc %backupFolder%\wscsvc.reg /y>NUL
+        reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisDrv %backupFolder%\WdNisDrv.reg /y>NUL
+        reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc %backupFolder%\WdNisSvc.reg /y>NUL
+        reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdBoot %backupFolder%\WdBoot.reg /y>NUL
+        reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService %backupFolder%\SecurityHealthService.reg /y>NUL
+        reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SgrmAgent %backupFolder%\SgrmAgent.reg /y>NUL
+        reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SgrmBroker %backupFolder%\SgrmBroker.reg /y>NUL
+        reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend %backupFolder%\WinDefend.reg /y>NUL
+
+        taskkill /f /im explorer.exe >nul 2>nul
+        taskkill /f /im smartscreen.exe >nul 2>nul
+        taskkill /f /im SecurityHealthSystray.exe >nul 2>nul
+        taskkill /f /im SecurityHealthHost.exe >nul 2>nul
+        taskkill /f /im SecurityHealthService.exe >nul 2>nul
+        taskkill /f /im SecurityHealthHost.exe >nul 2>nul
+        taskkill /f /im DWWIN.EXE >nul 2>nul
+        taskkill /f /im CompatTelRunner.exe >nul 2>nul
+        taskkill /f /im GameBarPresenceWriter.exe >nul 2>nul
+        taskkill /f /im DeviceCensus.exe >nul 2>nul
+
+        C:\Windows\PowerRun.exe cmd.exe /c "reg delete HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc /f">NUL
+        C:\Windows\PowerRun.exe cmd.exe /c "reg delete HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisDrv /f">NUL
+        C:\Windows\PowerRun.exe cmd.exe /c "reg delete HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc /f">NUL
+        C:\Windows\PowerRun.exe cmd.exe /c "reg delete HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdBoot /f">NUL
+        C:\Windows\PowerRun.exe cmd.exe /c "reg delete HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService /f">NUL
+        C:\Windows\PowerRun.exe cmd.exe /c "reg delete HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SgrmAgent /f">NUL
+        C:\Windows\PowerRun.exe cmd.exe /c "reg delete HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SgrmBroker /f">NUL
+        C:\Windows\PowerRun.exe cmd.exe /c "reg delete HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend /f">NUL
+
+        C:\Windows\PowerRun.exe cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
+        start explorer.exe
+)
+
 rem copy firefox installer to the desktop and remove edge using Edge removal script by AveYo 
 IF EXIST "C:\firefox_installer.exe" (
     move "C:\firefox_installer.exe" "C:\Users\%username%\Desktop"

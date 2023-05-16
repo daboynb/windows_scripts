@@ -11,7 +11,7 @@ IF NOT EXIST "resources" (
 )
 
 set "resource_dir=resources"
-set "files=7z.dll 7z.exe Debloat_Windows_Italia.lnk debloat3.0.ps1 firefox_installer.exe oscdimg.exe tweaks.bat unattend.xml edge_removal.bat unpin_start_tiles.ps1 start.ps1"
+set "files=7z.dll 7z.exe Debloat_Windows_Italia.lnk debloat3.0.ps1 firefox_installer.exe oscdimg.exe tweaks.bat unattend.xml edge_removal.bat unpin_start_tiles.ps1 start.ps1 PowerRun.exe"
 
 for %%i in (%files%) do (
   if not exist "%resource_dir%\%%i" (
@@ -405,6 +405,29 @@ if %errorlevel% equ 0 (
   color 4 && echo "Impossibile copiare start.ps1!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
+rem disable defender
+:defender
+set /p answer="Vuoi rimuovere defender? (si/no) : "
+if /i "%answer%"=="si" (
+    goto :power
+) else if /i "%answer%"=="no" (
+    echo "Saltiamo questo passaggio..."
+    goto :unmount
+) else (
+    echo I valori accettati sono solamente si e no.
+    goto :defender
+)
+
+:power
+rem copy PowerRun.exe
+copy "resources\PowerRun.exe" "C:\mount\mount\Windows"
+if %errorlevel% equ 0 (
+  powerShell -Command "Write-Host 'PowerRun.exe copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+) else (
+  color 4 && echo "Impossibile copiare PowerRun.exe!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+)
+
+:unmount
 rem unmount the image
 powerShell -Command "Write-Host 'Smontando l''immagine' -ForegroundColor Green; exit"  
 dism /unmount-image /mountdir:"C:\mount\mount" /commit

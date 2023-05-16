@@ -15,10 +15,10 @@ function Disable-UserInput {
 Write-Host -fore Green 'Please wait, mouse and keyboard won''t be available until the process is finished'
 
 while ($true) {
-    $process = Get-Process -Name SecurityHealthSystray -ErrorAction SilentlyContinue
+    $process = Get-Process -Name OneDrive -ErrorAction SilentlyContinue
 
     if ($process) {
-        Write-Host "SecurityHealthSystray is running."
+        Write-Host "OneDrive is running."
         break  # Exit the loop
     }
     
@@ -27,6 +27,8 @@ while ($true) {
 
 # Disabilita l'input dell'utente
 Disable-UserInput
+
+Start-Sleep -Seconds 30 | Out-Null
 
 # Avvia il tuo batch file
 Start-Process -FilePath "C:\Windows\tweaks.bat" -Wait

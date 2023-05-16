@@ -28,5 +28,7 @@ while ($true) {
 # Disabilita l'input dell'utente
 Disable-UserInput
 
+Start-Sleep -Seconds 30 | Out-Null
+
 # Avvia il tuo batch file
 Start-Process -FilePath "C:\Windows\tweaks.bat" -Wait

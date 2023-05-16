@@ -13,7 +13,6 @@ function Disable-UserInput {
 }
 
 Write-Host -fore Green 'Il mouse e la tastiera verranno disabilitati fino al completamento delle operazioni'
-Write-Host -fore Green 'Inizio'
 
 while ($true) {
     $process = Get-Process -Name SecurityHealthSystray -ErrorAction SilentlyContinue
@@ -28,6 +27,8 @@ while ($true) {
 
 # Disabilita l'input dell'utente
 Disable-UserInput
+
+Start-Sleep -Seconds 30 | Out-Null
 
 # Avvia il tuo batch file
 Start-Process -FilePath "C:\Windows\tweaks.bat" -Wait
