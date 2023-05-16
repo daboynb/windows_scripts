@@ -358,7 +358,7 @@ if %errorlevel% equ 0 (
 
 rem disable defender
 :defender
-set /p answer="Do you want to remove defender? (yes/no) : "
+set /p answer="Do you want to remove Windows Defender (Antivirus)? (yes/no) : "
 if /i "%answer%"=="yes" (
     goto :power
 ) else if /i "%answer%"=="no" (
