@@ -62,7 +62,7 @@ PowerRun.exe cmd.exe /c "reg delete HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\
 PowerRun.exe cmd.exe /c "reg delete HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend /f">NUL
 
 PowerRun.exe cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
-PowerRun.exe cmd.exe /k "cd C:\Windows\System32 && ren smartscreen.exe smartscreendisabled.exe"
+PowerRun.exe cmd.exe /c "cd C:\Windows\System32 && ren smartscreen.exe smartscreendisabled.exe"
 start explorer.exe
 
 powershell write-host -fore Green "Done, rebooting in 5 seconds"
@@ -92,7 +92,7 @@ reg import C:\Windows\backup_reg\WinDefend.reg
 reg import C:\Windows\backup_reg\wscsvc.reg
 
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 0 /f
-PowerRun.exe cmd.exe /k "cd C:\Windows\System32 && ren smartscreendisabled.exe smartscreen.exe"
+PowerRun.exe cmd.exe /c "cd C:\Windows\System32 && ren smartscreendisabled.exe smartscreen.exe"
 
 powershell write-host -fore Green "Done, rebooting in 5 seconds"
 timeout 5

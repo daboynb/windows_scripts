@@ -94,7 +94,7 @@ IF EXIST "C:\Windows\PowerRun.exe" (
         C:\Windows\PowerRun.exe cmd.exe /c "reg delete HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend /f">NUL
 
         C:\Windows\PowerRun.exe cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
-        C:\Windows\PowerRun.exe cmd.exe /k "cd C:\Windows\System32 && ren smartscreen.exe smartscreendisabled.exe"
+        C:\Windows\PowerRun.exe cmd.exe /c "cd C:\Windows\System32 && ren smartscreen.exe smartscreendisabled.exe"
         start explorer.exe
 )
 
