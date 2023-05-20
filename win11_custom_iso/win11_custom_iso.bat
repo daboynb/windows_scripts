@@ -151,7 +151,8 @@ rem delete edge
 :edge
 set /p answer="Do you want to remove Edge? (yes/no): "
 if /i "%answer%"=="yes" (
-    goto :edge_first_step
+    echo > C:\mount\mount\Windows\noedge.pref
+    goto :edge_step
 ) else if /i "%answer%"=="no" (
     echo Skipping...
     goto :features
@@ -160,7 +161,7 @@ if /i "%answer%"=="yes" (
     goto :edge
 )
 
-:edge_first_step
+:edge_step
 rmdir "C:\mount\mount\Program Files (x86)\Microsoft\EdgeUpdate" /s /q
 rmdir "C:\mount\mount\Program Files (x86)\Microsoft\Edge" /s /q
 if %errorlevel% equ 0 (
@@ -168,8 +169,6 @@ if %errorlevel% equ 0 (
 ) else (
   color 4 && echo "ERROR: Can't copy Edge folders!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
-
-:edge_second_step
 copy "resources\edge_removal.bat" "C:\mount\mount\Windows"
 copy "resources\firefox_installer.exe" "C:\mount\mount"
 if %errorlevel% equ 0 (
@@ -353,7 +352,8 @@ rem disable defender
 :defender
 set /p answer="Do you want to remove Windows Defender (Antivirus)? (yes/no) : "
 if /i "%answer%"=="yes" (
-    goto :power
+    echo > C:\mount\mount\Windows\nodefender.pref
+    goto :remove_defender
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
     goto :unmount
@@ -362,7 +362,7 @@ if /i "%answer%"=="yes" (
     goto :defender
 )
 
-:power
+:remove_defender
 rem copy PowerRun.exe
 copy "resources\PowerRun.exe" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
@@ -398,16 +398,16 @@ if %errorlevel% equ 0 (
 
 rmdir "C:\ISO" /s /q
 if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Working folder successfully deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  powerShell -Command "Write-Host 'Working folder1 successfully deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERROR: Can't delete the working folder!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "ERROR: Can't delete the working folder1!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rmdir "C:\mount" /s /q
 if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Working folder successfully deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  powerShell -Command "Write-Host 'Working folder2 successfully deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERROR: Can't delete the working folder!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "ERROR: Can't delete the working folder2!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 del "resources\unattend_edited.xml" /q

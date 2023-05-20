@@ -73,7 +73,7 @@ rem unpin from start the tiles
 powerShell -ExecutionPolicy Bypass -File "C:\Windows\unpin_start_tiles.ps1"
 
 rem disable defender 
-IF EXIST "C:\Windows\PowerRun.exe" (
+IF EXIST "C:\Windows\nodefender.pref" (
         mkdir C:\Windows\backup_reg
 
         reg export HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc C:\Windows\backup_reg\wscsvc.reg /y>NUL
@@ -111,12 +111,12 @@ IF EXIST "C:\Windows\PowerRun.exe" (
 )
 
 rem copy firefox installer to the desktop and remove edge using Edge removal script by AveYo 
-IF EXIST "C:\firefox_installer.exe" (
+IF EXIST "C:\Windows\noedge.pref" (
     move "C:\firefox_installer.exe" "C:\Users\%username%\Desktop"
     C:\Windows\edge_removal.bat
 )
 
-IF NOT EXIST "C:\Windows\edge_removal.bat" (
+IF NOT EXIST "C:\Windows\noedge.pref" (
     powershell write-host -fore Green "Done, rebooting in 5 seconds"
     timeout 5
     shutdown /r /t 00 

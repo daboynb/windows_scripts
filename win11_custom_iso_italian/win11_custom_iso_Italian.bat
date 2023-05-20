@@ -178,7 +178,8 @@ rem delete edge
 :edge
 set /p answer="Vuoi rimuovere edge? (si/no) Consigliato (si) : "
 if /i "%answer%"=="si" (
-    goto :edge_first_step
+    echo > C:\mount\mount\Windows\noedge.pref
+    goto :edge_step
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
     goto :features
@@ -187,7 +188,7 @@ if /i "%answer%"=="si" (
     goto :edge
 )
 
-:edge_first_step
+:edge_step
 rmdir "C:\mount\mount\Program Files (x86)\Microsoft\EdgeUpdate" /s /q
 rmdir "C:\mount\mount\Program Files (x86)\Microsoft\Edge" /s /q
 if %errorlevel% equ 0 (
@@ -195,8 +196,6 @@ if %errorlevel% equ 0 (
 ) else (
   color 4 && echo "ERRORE: Impossibile rimuovere edge!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
-
-:edge_second_step
 copy "resources\edge_removal.bat" "C:\mount\mount\Windows"
 copy "resources\firefox_installer.exe" "C:\mount\mount"
 if %errorlevel% equ 0 (
@@ -399,9 +398,10 @@ if %errorlevel% equ 0 (
 
 rem disable defender
 :defender
-set /p answer="Vuoi rimuovere defender Windows Defender (Antivirus)? (si/no) : "
+set /p answer="Vuoi rimuovere Windows Defender (Antivirus)? (si/no) : "
 if /i "%answer%"=="si" (
-    goto :power
+    echo > C:\mount\mount\Windows\nodefender.pref
+    goto :remove_defender
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
     goto :unmount
@@ -410,7 +410,7 @@ if /i "%answer%"=="si" (
     goto :defender
 )
 
-:power
+:remove_defender
 rem copy PowerRun.exe
 copy "resources\PowerRun.exe" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
@@ -446,16 +446,16 @@ if %errorlevel% equ 0 (
 
 rmdir "C:\ISO" /s /q
 if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Le directory usate per la creazione della ISO sono state eliminate con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  powerShell -Command "Write-Host 'La directory1 usata per la creazione della ISO e'' stata eliminata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERRORE: Impossibile eliminare le directory usate per la creazione della ISO!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "ERRORE: Impossibile eliminare la directory1 usata per la creazione della ISO!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rmdir "C:\mount" /s /q
 if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Le directory usate per la creazione della ISO sono state eliminate con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  powerShell -Command "Write-Host 'La directory2 usata per la creazione della ISO e'' stata eliminata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
-  color 4 && echo "ERRORE: Impossibile eliminare le directory usate per la creazione della ISO!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "ERRORE: Impossibile eliminare la directory2 usatq per la creazione della ISO!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 del "resources\unattend_edited.xml" /q
