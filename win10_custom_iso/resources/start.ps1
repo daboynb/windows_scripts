@@ -1,18 +1,34 @@
-# Richiede l'esecuzione con privilegi elevati
+# Ask for admin privileges
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
 
-$code = @"
-    [DllImport("user32.dll")]
-    public static extern bool BlockInput(bool fBlockIt);
-"@
+########################################################
 
-$userInput = Add-Type -MemberDefinition $code -Name UserInput -Namespace UserInput -PassThru
+# Disable quick edit mode
+Add-Type -MemberDefinition @"
+[DllImport("kernel32.dll", SetLastError=true)]
+public static extern bool SetConsoleMode(IntPtr hConsoleHandle, int mode);
+[DllImport("kernel32.dll", SetLastError=true)]
+public static extern IntPtr GetStdHandle(int handle);
+"@ -Namespace Win32 -Name NativeMethods
 
-function Disable-UserInput {
-    $userInput::BlockInput($true)
+$Handle = [Win32.NativeMethods]::GetStdHandle(-10)
+$success = $false
+
+while (-not $success) {
+    $success = [Win32.NativeMethods]::SetConsoleMode($Handle, 0x0080)
+
+    if ($success) {
+        Write-Host "Quick Edit mode has been disabled."
+    } else {
+        Write-Host "Failed to disable Quick Edit mode. Retrying..."
+        Start-Sleep -Seconds 3
+    }
 }
 
-Write-Host -fore Green 'Please wait, mouse and keyboard won''t be available until the process is finished'
+########################################################
+
+# check for process
+Write-Host -fore Green 'The debloat process will start shortly, the mouse and keyboard will be disabled until the operations are completed'
 
 while ($true) {
     $process = Get-Process -Name OneDrive -ErrorAction SilentlyContinue
@@ -25,10 +41,24 @@ while ($true) {
     Start-Sleep -Seconds 3  # Wait for 1 second before checking again
 }
 
-# Disabilita l'input dell'utente
+########################################################
+
+# Block user input
+$code = @"
+    [DllImport("user32.dll")]
+    public static extern bool BlockInput(bool fBlockIt);
+"@
+
+$userInput = Add-Type -MemberDefinition $code -Name UserInput -Namespace UserInput -PassThru
+
+function Disable-UserInput {
+    $userInput::BlockInput($true)
+}
+
+# Disable user Input
 Disable-UserInput
 
 Start-Sleep -Seconds 30 | Out-Null
 
-# Avvia il tuo batch file
+# Start bat
 Start-Process -FilePath "C:\Windows\tweaks.bat" -Wait
