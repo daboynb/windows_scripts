@@ -54,7 +54,7 @@ $inputXML = @"
             <Button Content=" Taskbar" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FF1A2733" Foreground="#ffffff" BorderThickness="0,0,0,0" FontWeight="Bold" Height="20" Width="100" Margin="30,291,0,0" x:Name="Tab11A"/>
             <TextBlock TextWrapping="Wrap" Text="SETTINGS" Foreground="#FF777777" Margin="31,328,0,55" HorizontalAlignment="Left" FontFamily="Segoe UI" Width="76" FontSize="14"/>
             <Button Content="   Repair PC" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FF1A2733" Foreground="#ffffff" BorderThickness="0,0,0,0" FontWeight="Bold" Height="20" Width="100" Margin="30,349,0,0" Name="Tab12A"/>
-            <TextBlock HorizontalAlignment="Left" Margin="48,391,0,0" TextWrapping="NoWrap" Text="v 3.0.0 by @Paki94x" VerticalAlignment="Top" Foreground="#FF6A6A6A" Height="18" Width="70" FontStyle="Normal" FontWeight="Light" FontStretch="Expanded" TextTrimming="CharacterEllipsis" FontSize="8"/>
+            <TextBlock HorizontalAlignment="Left" Margin="48,391,0,0" TextWrapping="NoWrap" Text="v 3.1.0 by @Paki94x" VerticalAlignment="Top" Foreground="#FF6A6A6A" Height="18" Width="70" FontStyle="Normal" FontWeight="Light" FontStretch="Expanded" TextTrimming="CharacterEllipsis" FontSize="8"/>
             <TextBlock HorizontalAlignment="Left" Margin="31,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="7" Foreground="#FF777777"><Run FontStyle="Italic" Text="Seguici su Telegram @windowsitaly"/></TextBlock>
             <Image Height="18" Width="18" Name="Privacy" SnapsToDevicePixels="True" Source="https://raw.githubusercontent.com/Iblis94/debloat3.0/main/Privacy.png" Margin="32,152,780,232"/>
             <Image Height="18" Width="18" Name="Utility" SnapsToDevicePixels="True" Source="https://raw.githubusercontent.com/Iblis94/debloat3.0/main/Utility.png" Margin="32,172,780,212"/>
@@ -70,13 +70,13 @@ $inputXML = @"
                 <TabItem Header="EzMode" Visibility="Collapsed" Name="Tab1">
                     <Grid Background="#FF1F272E">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="440"/>
                             <ColumnDefinition Width="200"/>
                             <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="250"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Margin="38,49,0,0" Grid.Column="0">
-                            <TextBlock TextWrapping="Wrap" Text="Cliccando Qui Avrai una lista dei Software che potrai installare semplicemente selezionandoli" Foreground="White" FontWeight="Bold" Margin="0,0,0,0" FontSize="16" TextAlignment="Center"/>
-                            <Button Content="Clicca Qui Per Software" Width="300" Height="50" Margin="0,18,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Name="Tab1P1">
+                        <StackPanel Margin="0,25,0,0" Grid.Column="3">
+                            <TextBlock TextWrapping="Wrap" Text="Sei Indeciso su quali opzioni scegliere per ogni menu' del Debloat? Questi Tasti hanno preset pensati apposta per te" Foreground="White" TextAlignment="Center" FontSize="12" FontWeight="Bold" Margin="0,0,0,0" Width="250"/>
+                            <Button Content="Clicca Qui Per Installare i Tuoi Software" Width="250" Height="50" Margin="0,15,0,25" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Name="Tab1P1">
                                 <Button.Background>
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                         <GradientStop Color="#FF10171E" Offset="1"/>
@@ -84,9 +84,9 @@ $inputXML = @"
                                     </LinearGradientBrush>
                                 </Button.Background>
                             </Button>
-                            <TextBlock TextWrapping="Wrap" Text="Sei Indeciso su quali opzioni scegliere per ogni menu' del Debloat? Puoi Cliccare su questi tasti con preset selezionati per te. Testati affinche' il tuo PC continui a funzionare al meglio e migliorare la tua esperienza con Windows" Foreground="White" TextAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,31,0,0" Width="400"/>
-                            <TextBlock TextWrapping="Wrap" Text="Per qualunque problema non esitare a contattarci sul nostro gruppo Telegram" Foreground="#FF777777" FontSize="9" Margin="57,0,0,0" FontStyle="Italic"/>
-                        <Button Content="Fast Startup ON" Margin= "-130,15,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Height="30" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Width="130" Name="Tab1P11">
+                            
+                            
+                        <Button Content="Fast Startup ON" Margin= "0,0,0,7" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Height="30" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Width="200" Name="Tab1P11">
                             <Button.Background>
                                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                     <GradientStop Color="#FF10171E" Offset="1"/>
@@ -97,7 +97,33 @@ $inputXML = @"
                                 <Style/>
                             </Button.Style>
                         </Button>
-                        <Button Content="Fast Startup OFF" Margin= "160,-30,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Height="30" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Width="130" Name="Tab1P12">
+                        <Button Content="Fast Startup OFF" Margin= "0,0,0,7" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Height="30" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Width="200" Name="Tab1P12">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF10171E" Offset="1"/>
+                                    <GradientStop Color="#FF1A2733" Offset="0.257"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                            <Button.Style>
+                                <Style/>
+                            </Button.Style>
+                        </Button>
+
+                    <TextBlock TextWrapping="Wrap" Text="Qui per scaricare il tool per creare la tua ISO di Windows Custom" Foreground="White" FontWeight="Bold" Margin="0,15,0,7" FontSize="15" TextAlignment="Center"/>
+
+                        <Button Content="Custom ISO Windows 10" Margin= "0,5,0,7" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Height="30" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Width="200" Name="Tab1P22">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF10171E" Offset="1"/>
+                                    <GradientStop Color="#FF1A2733" Offset="0.257"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                            <Button.Style>
+                                <Style/>
+                            </Button.Style>
+                        </Button>
+
+                        <Button Content="Custom ISO Windows 11" Margin= "0,0,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Height="30" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Width="200" Name="Tab1P23">
                             <Button.Background>
                                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                     <GradientStop Color="#FF10171E" Offset="1"/>
@@ -111,7 +137,8 @@ $inputXML = @"
 
 
                         </StackPanel>
-                        <StackPanel Margin="0,25,0,0" Grid.Column="1">
+                        <StackPanel Margin="0,25,0,0" Grid.Column="0">
+                        <TextBlock TextWrapping="Wrap" Text="Windows 10" Foreground="White" FontWeight="Bold" Margin="0,0,0,7" FontSize="15" TextAlignment="Center"/>
                             <Button Content="Bloatware" Width="150" Height="30" Margin="0,7,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Name="Tab1P2">
                                 <Button.Background>
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -186,6 +213,81 @@ $inputXML = @"
                             </Button>
                         </StackPanel>
 
+                    <StackPanel Margin="0,25,0,0" Grid.Column="1">
+                        <TextBlock TextWrapping="Wrap" Text="Windows 11" Foreground="White" FontWeight="Bold" Margin="0,0,0,7" FontSize="15" TextAlignment="Center"/>
+                            <Button Content="Bloatware" Width="150" Height="30" Margin="0,7,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Name="Tab1P13">
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF10171E" Offset="1"/>
+                                        <GradientStop Color="#FF1A2733" Offset="0.257"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            <Button Content="Privacy" Width="150" Height="30" Margin="0,7,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Name="Tab1P14">
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF10171E" Offset="1"/>
+                                        <GradientStop Color="#FF1A2733" Offset="0.257"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            <Button Content="Utility" Width="150" Height="30" Margin="0,7,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Name="Tab1P15">
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF10171E" Offset="1"/>
+                                        <GradientStop Color="#FF1A2733" Offset="0.257"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            <Button Content="Defender" Width="150" Height="30" Margin="0,7,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Name="Tab1P16">
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF10171E" Offset="1"/>
+                                        <GradientStop Color="#FF1A2733" Offset="0.257"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            <Button Content="Update" Width="150" Height="30" Margin="0,7,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Name="Tab1P17">
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF10171E" Offset="1"/>
+                                        <GradientStop Color="#FF1A2733" Offset="0.257"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            <Button Content="Application" Width="150" Height="30" Margin="0,7,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Name="Tab1P18">
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF10171E" Offset="1"/>
+                                        <GradientStop Color="#FF1A2733" Offset="0.257"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            <Button Content="System" Width="150" Height="30" Margin="0,7,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Name="Tab1P19">
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF10171E" Offset="1"/>
+                                        <GradientStop Color="#FF1A2733" Offset="0.257"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            <Button Content="Explorer" Width="150" Height="30" Margin="0,7,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Name="Tab1P20">
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF10171E" Offset="1"/>
+                                        <GradientStop Color="#FF1A2733" Offset="0.257"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            <Button Content="Taskbar" Width="150" Height="30" Margin="0,7,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Name="Tab1P21">
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF10171E" Offset="1"/>
+                                        <GradientStop Color="#FF1A2733" Offset="0.257"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                        </StackPanel>
 
                     </Grid>
                 </TabItem>
@@ -508,7 +610,7 @@ $inputXML = @"
                                     <Style/>
                                 </Button.Style>
                             </Button>
-                            <Button Content="Remove Selected" Margin="10,50,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Height="40" Name="Tab3P2">
+                            <Button Content="Remove Selected" Margin="10,20,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Height="40" Name="Tab3P2">
                                 <Button.Background>
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                         <GradientStop Color="#FF10171E" Offset="1"/>
@@ -519,7 +621,18 @@ $inputXML = @"
                                     <Style/>
                                 </Button.Style>
                             </Button>
-                            <Button Content="Reinstall ALL" Margin="10,50,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Height="40" Name="Tab3P3">
+                            <Button Content="Advanced Menu" Margin="10,20,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Height="40" Name="Tab3P4">
+                                <Button.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF10171E" Offset="1"/>
+                                        <GradientStop Color="#FF1A2733" Offset="0.257"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                                <Button.Style>
+                                    <Style/>
+                                </Button.Style>
+                            </Button>
+                            <Button Content="Reinstall ALL" Margin="10,20,0,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Height="40" Name="Tab3P3">
                                 <Button.Background>
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                         <GradientStop Color="#FF10171E" Offset="1"/>
@@ -1152,7 +1265,9 @@ $inputXML = @"
                             <CheckBox Name="t21" Content="Disable Autorun for All Drives" Margin="5,0,0,0" Foreground="White" Background="#FF0CBF5B"/>
                             <CheckBox Name="t22" Content="Disable Sticky Keys Prompt" Margin="5,0,0,0" Foreground="White" Background="#FF0CBF5B"/>
                             <CheckBox Name="t23" Content="Disable Paint3D" Margin="5,0,0,0" Foreground="White" Background="#FF0CBF5B"/>
-                            <CheckBox Name="t20" Content="Treat As Internal Port" Margin="5,0,0,0" Foreground="White" Background="#FF0CBF5B"/>
+                            <CheckBox Name="t46" Content="Disable 3d Object" Margin="5,0,0,0" Foreground="White" Background="#FF0CBF5B"/>
+                            <CheckBox Name="t48" Content="Disable News and Interest" Margin="5,0,0,0" Foreground="White" Background="#FF0CBF5B"/>
+
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <Label Content="" Margin="0,0,0,0" FontWeight="Bold" Background="#00000000" Foreground="White"/>
@@ -1177,6 +1292,9 @@ $inputXML = @"
                             <CheckBox Name="t42" Content="Enable Autoplay" Margin="5,0,0,0" Foreground="White" Background="#FFBF0C0C"/>
                             <CheckBox Name="t44" Content="Enable Autorun for All Drives" Margin="5,0,0,0" Foreground="White" Background="#FFBF0C0C"/>
                             <CheckBox Name="t45" Content="Enable Sticky Keys Prompt" Margin="5,0,0,0" Foreground="White" Background="#FFBF0C0C"/>
+                            <CheckBox Name="t20" Content="Treat As Internal Port" Margin="5,0,0,0" Foreground="White" Background="#FFBF0C0C"/>
+                            <CheckBox Name="t47" Content="Enable 3d Object" Margin="5,0,0,0" Foreground="White" Background="#FFBF0C0C"/>
+                            <CheckBox Name="t49" Content="Enable News and Interest" Margin="5,0,0,0" Foreground="White" Background="#FFBF0C0C"/>
                         </StackPanel>
                         <Button Content="Suggested Choices" Margin= "300,255,-234,0" Foreground="White" BorderBrush="#FF777777" FontWeight="Bold" Height="30" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Width="130" Name="Tab11P1">
                             <Button.Background>
@@ -1829,74 +1947,247 @@ $WPFTab1P1.Add_Click({
 })
 
 $WPFTab1P2.Add_Click({
-    Get-AppxPackage -allusers Microsoft.WindowsCalculator | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.Windows.Photos | Remove-AppxPackage
-    Get-AppxPackage -allusers CanonicalGroupLimited.UbuntuonWindows | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.Xbox.TCUI | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.XboxApp | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.XboxGameOverlay | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.XboxGamingOverlay | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.XboxSpeechToTextOverlay | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.MicrosoftStickyNotes | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.MSPaint | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.WindowsCamera | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.HEIFImageExtension | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.ScreenSketch | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.VP9VideoExtensions | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.WebMediaExtensions | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.WebpImageExtension | Remove-AppxPackage
-    Get-AppxPackage -allusers WindSynthBerry | Remove-AppxPackage
-    Get-AppxPackage -allusers MIDIBerry | Remove-AppxPackage
-    Get-AppxPackage -allusers Slack | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.MixedReality.Portal | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.PPIProjection | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.BingNews | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.GetHelp | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.Getstarted | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.Messaging | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.Microsoft3DViewer | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.MicrosoftOfficeHub | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.MicrosoftSolitaireCollection | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.NetworkSpeedTest | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.News | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.Office.Lens | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.Office.OneNote | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.Office.Sway | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.OneConnect | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.People | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.Print3D | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.RemoteDesktop | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.SkypeApp | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.Office.Todo.List | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.Whiteboard | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.WindowsAlarms | Remove-AppxPackage
-    Get-AppxPackage -allusers microsoft.windowscommunicationsapps | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.WindowsFeedbackHub | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.WindowsMaps | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.WindowsSoundRecorder | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.ZuneMusic | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.ZuneVideo | Remove-AppxPackage
-    Get-AppxPackage -allusers EclipseManager | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.LanguageExperiencePackit-IT | Remove-AppxPackage
-    Get-AppxPackage -allusers AdobeSystemsIncorporated.AdobePhotoshopExpress | Remove-AppxPackage
-    Get-AppxPackage -allusers Duolingo-LearnLanguagesforFree | Remove-AppxPackage
-    Get-AppxPackage -allusers PandoraMediaInc | Remove-AppxPackage
-    Get-AppxPackage -allusers CandyCrush | Remove-AppxPackage
-    Get-AppxPackage -allusers BubbleWitch3Saga | Remove-AppxPackage
-    Get-AppxPackage -allusers Wunderlist | Remove-AppxPackage
-    Get-AppxPackage -allusers Flipboard | Remove-AppxPackage
-    Get-AppxPackage -allusers Twitter | Remove-AppxPackage
-    Get-AppxPackage -allusers Facebook | Remove-AppxPackage
-    Get-AppxPackage -allusers Spotify | Remove-AppxPackage
-    Get-AppxPackage -allusers Minecraft | Remove-AppxPackage
-    Get-AppxPackage -allusers Royal Revolt | Remove-AppxPackage
-    Get-AppxPackage -allusers Sway | Remove-AppxPackage
-    Get-AppxPackage -allusers Dolby | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.Advertising.Xaml | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.Wallet | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.YourPhone | Remove-AppxPackage
-    Get-AppxPackage -allusers Microsoft.MicrosoftEdge.Stable | Remove-AppxPackage
-    Write-Host "Completed"
+
+    $global:Bloatware = @(
+    "Microsoft.Windows.Photos"
+    "CanonicalGroupLimited.UbuntuonWindows"
+    "Microsoft.Xbox.TCUI"
+    "Microsoft.XboxApp"
+    "Microsoft.XboxGameOverlay"
+    "Microsoft.XboxGamingOverlay"
+    "Microsoft.XboxSpeechToTextOverlay"
+    "Microsoft.MicrosoftStickyNotes"
+    "Microsoft.MSPaint"
+    "Microsoft.WindowsCamera"
+    "Microsoft.HEIFImageExtension"
+    "Microsoft.ScreenSketch"
+    "Microsoft.VP9VideoExtensions"
+    "Microsoft.WebMediaExtensions"
+    "Microsoft.WebpImageExtension"
+    "WindSynthBerry"
+    "MIDIBerry"
+    "Slack"
+    "Microsoft.MixedReality.Portal"
+    "Microsoft.PPIProjection"
+    "Microsoft.BingNews"
+    "Microsoft.GetHelp"
+    "Microsoft.Getstarted"
+    "Microsoft.Messaging"
+    "Microsoft.Microsoft3DViewer"
+    "Microsoft.MicrosoftOfficeHub"
+    "Microsoft.MicrosoftSolitaireCollection"
+    "Microsoft.NetworkSpeedTest"
+    "Microsoft.News"
+    "Microsoft.Office.Lens"
+    "Microsoft.Office.OneNote"
+    "Microsoft.Office.Sway"
+    "Microsoft.OneConnect"
+    "Microsoft.People"
+    "Microsoft.Print3D"
+    "Microsoft.RemoteDesktop"
+    "Microsoft.SkypeApp"
+    "Microsoft.Office.Todo.List"
+    "Microsoft.Whiteboard"
+    "Microsoft.WindowsAlarms"
+    "microsoft.windowscommunicationsapps"
+    "Microsoft.WindowsFeedbackHub"
+    "Microsoft.WindowsMaps"
+    "Microsoft.WindowsSoundRecorder"
+    "Microsoft.Xbox.TCUI"
+    "Microsoft.XboxApp"
+    "Microsoft.XboxGameOverlay"
+    "Microsoft.XboxGamingOverlay"
+    "Microsoft.XboxSpeechToTextOverlay"
+    "Microsoft.ZuneMusic"
+    "Microsoft.ZuneVideo"
+    "EclipseManager"
+    "ActiproSoftwareLLC"
+    "AdobeSystemsIncorporated.AdobePhotoshopExpress"
+    "Duolingo-LearnLanguagesforFree"
+    "PandoraMediaInc"
+    "CandyCrush"
+    "BubbleWitch3Saga"
+    "Wunderlist"
+    "Flipboard"
+    "Twitter"
+    "Facebook"
+    "Spotify"
+    "Minecraft"
+    "Royal Revolt"
+    "Sway"
+    "Dolby"
+    "Microsoft.Advertising.Xaml"
+    "Microsoft.Wallet"
+    "Microsoft.YourPhone"
+    "Microsoft.LanguageExperiencePackit-IT"
+    "Microsoft.MicrosoftEdge.Stable"
+    "MicrosoftCorporationII.QuickAssist"
+    "MicrosoftWindows.Client.WebExperience"
+    "Clipchamp.Clipchamp"
+    "Microsoft.HEVCVideoExtension"
+    "Microsoft.RawImageExtension"
+    "Microsoft.Todos"
+    "Microsoft.PowerAutomateDesktop"
+)
+
+$global:WhiteListedApps = @(
+    "Microsoft.Services.Store.Engagement"
+    "Microsoft.Services.Store.Engagement"
+    "Microsoft.StorePurchaseApp"
+    "Microsoft.WindowsStore"
+    "NVIDIACorp.NVIDIAControlPanel"
+    "\.NET"
+    "Microsoft.DesktopAppInstaller"
+    "Microsoft.Windows.ShellExperienceHost"
+    "Microsoft.VCLibs*"
+    "Microsoft.XboxIdentityProvider"
+    "Microsoft.WindowsCalculator"
+    "PythonSoftwareFoundation.Python.3.10"
+    "5319275A.WhatsAppDesktop"
+    "Microsoft.DesktopAppInstaller"
+    "Microsoft.Windows.ShellExperienceHost"
+    "Microsoft.UI.Xaml.2.8"
+    "Microsoft.UI.Xaml.2.8"
+    "Microsoft.UI.Xaml.2.4"
+    "Microsoft.UI.Xaml.2.4"
+    "Microsoft.UI.Xaml.2.0"
+    "Microsoft.UI.Xaml.2.7"
+    "Microsoft.UI.Xaml.2.7"
+    "Microsoft.WindowsAppRuntime.1.2"
+    "Microsoft.WindowsAppRuntime.1.2"
+    "Microsoft.WindowsAppRuntime.1.3-preview1"
+    "Microsoft.WindowsAppRuntime.1.3-preview1"
+    "Microsoft.Advertising.Xaml"
+    "Microsoft.LanguageExperiencePackit-IT"
+    )
+
+#NonRemovable Apps that where getting attempted and the system would reject the uninstall, speeds up debloat and prevents 'initalizing' overlay when removing apps
+$NonRemovables = Get-AppxPackage -AllUsers | Where-Object { $_.NonRemovable -eq $true } | ForEach { $_.Name }
+$NonRemovables += Get-AppxPackage | Where-Object { $_.NonRemovable -eq $true } | ForEach { $_.Name }
+$NonRemovables += Get-AppxProvisionedPackage -Online | Where-Object { $_.NonRemovable -eq $true } | ForEach { $_.DisplayName }
+$NonRemovables = $NonRemovables | Sort-Object -Unique
+
+if ($NonRemovables -eq $null ) {
+    # the .NonRemovable property doesn't exist until version 18xx. Use a hard-coded list instead.
+    #WARNING: only use exact names here - no short names or wildcards
+    $NonRemovables = @(
+        "1527c705-839a-4832-9118-54d4Bd6a0c89"
+        "c5e2524a-ea46-4f67-841f-6a9465d9d515"
+        "E2A4F912-2574-4A75-9BB0-0D023378592B"
+        "F46D4000-FD22-4DB4-AC8E-4E1DDDE828FE"
+        "InputApp"
+        "Microsoft.AAD.BrokerPlugin"
+        "Microsoft.AccountsControl"
+        "Microsoft.BioEnrollment"
+        "Microsoft.CredDialogHost"
+        "Microsoft.ECApp"
+        "Microsoft.LockApp"
+        "Microsoft.MicrosoftEdgeDevToolsClient"
+        "Microsoft.MicrosoftEdge"
+        "Microsoft.PPIProjection"
+        "Microsoft.Win32WebViewHost"
+        "Microsoft.Windows.Apprep.ChxApp"
+        "Microsoft.Windows.AssignedAccessLockApp"
+        "Microsoft.Windows.CapturePicker"
+        "Microsoft.Windows.CloudExperienceHost"
+        "Microsoft.Windows.ContentDeliveryManager"
+        "Microsoft.Windows.Cortana"
+        "Microsoft.Windows.HolographicFirstRun"
+        "Microsoft.Windows.NarratorQuickStart"
+        "Microsoft.Windows.OOBENetworkCaptivePortal"
+        "Microsoft.Windows.OOBENetworkConnectionFlow"
+        "Microsoft.Windows.ParentalControls"
+        "Microsoft.Windows.PeopleExperienceHost"
+        "Microsoft.Windows.PinningConfirmationDialog"
+        "Microsoft.Windows.SecHealthUI"
+        "Microsoft.Windows.SecondaryTileExperience"
+        "Microsoft.Windows.SecureAssessmentBrowser"
+        "Microsoft.Windows.ShellExperienceHost"
+        "Microsoft.Windows.XGpuEjectDialog"
+        "Microsoft.XboxGameCallableUI"
+        "Windows.CBSPreview"
+        "windows.immersivecontrolpanel"
+        "Windows.PrintDialog"
+        "Microsoft.Services.Store.Engagement"
+        "Nvidia"
+        "Microsoft.WindowsStore"
+        "Microsoft.StorePurchaseApp"
+        "NVIDIACorp.NVIDIAControlPanel"
+        "40459File-New-Project.EarTrumpet"
+	    "/.NET"
+	    "Microsoft.Services.Store.Engagement"
+        "Microsoft.DesktopAppInstaller"
+        "Microsoft.Windows.ShellExperienceHost"
+        "Microsoft.UI.Xaml.2.8"
+        "Microsoft.UI.Xaml.2.8"
+        "Microsoft.UI.Xaml.2.4"
+        "Microsoft.UI.Xaml.2.4"
+        "Microsoft.UI.Xaml.2.0"
+        "Microsoft.UI.Xaml.2.7"
+        "Microsoft.UI.Xaml.2.7"
+        "Microsoft.WindowsAppRuntime.1.2"
+        "Microsoft.WindowsAppRuntime.1.2"
+        "Microsoft.WindowsAppRuntime.1.3-preview1"
+        "Microsoft.WindowsAppRuntime.1.3-preview1"
+
+    )
+}
+
+# import library code - located relative to this script
+Function dotInclude() {
+    Param(
+        [Parameter(Mandatory)]
+        [string]$includeFile
+    )
+    # Look for the file in the same directory as this script
+    $scriptPath = $PSScriptRoot
+    if ( $PSScriptRoot -eq $null -and $psISE) {
+        $scriptPath = (Split-Path -Path $psISE.CurrentFile.FullPath)
+    }
+    if ( test-path $scriptPath\$includeFile ) {
+        # import and immediately execute the requested file
+        . $scriptPath\$includeFile
+    }
+}
+
+# Override built-in blacklist/whitelist with user defined lists
+dotInclude 'custom-lists.ps1'
+
+#convert to regular expression to allow for the super-useful -match operator
+$global:BloatwareRegex = $global:Bloatware -join '|'
+$global:WhiteListedAppsRegex = $global:WhiteListedApps -join '|'
+
+            $ErrorActionPreference = 'SilentlyContinue'
+            Function DebloatBlacklist {
+                Write-Host "Removing Bloatware"
+                Get-AppxPackage | Where-Object Name -cmatch $global:BloatwareRegex | Remove-AppxPackage
+                Get-AppxProvisionedPackage -Online | Where-Object DisplayName -cmatch $global:BloatwareRegex | Remove-AppxProvisionedPackage -Online
+                Get-AppxPackage -AllUsers | Where-Object Name -cmatch $global:BloatwareRegex | Remove-AppxPackage
+            }
+            DebloatBlacklist
+                Function CheckDMWService {
+            
+                Param([switch]$Debloat)
+            
+                If (Get-Service dmwappushservice | Where-Object { $_.StartType -eq "Disabled" }) {
+                    Set-Service dmwappushservice -StartupType Automatic
+                }
+            
+                If (Get-Service dmwappushservice | Where-Object { $_.Status -eq "Stopped" }) {
+                    Start-Service dmwappushservice
+                } 
+            }
+            
+            Function CheckInstallService {
+            
+                If (Get-Service InstallService | Where-Object { $_.Status -eq "Stopped" }) {  
+                    Start-Service InstallService
+                    Set-Service InstallService -StartupType Automatic 
+                }
+            }
+Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage
+Get-AppxPackage -allusers Microsoft.BingWeather | Remove-AppxPackage
+            Write-Host "Done"
     $WPFResult.ToArray()
     $WPFResult | % { $_ } | Out-Host
     $ButtonType = [System.Windows.MessageBoxButton]::OK
@@ -2356,10 +2647,7 @@ $WPFTab1P7.Add_Click({
     
     Disable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart -WarningAction SilentlyContinue | Out-Null
     Write-Host "Disabled Windows Media Player"
-    
-    Disable-WindowsOptionalFeature -Online -FeatureName "Internet-Explorer-Optional-$env:PROCESSOR_ARCHITECTURE" -NoRestart -WarningAction SilentlyContinue | Out-Null
-    Write-Host "Disabled Internet Explorer"
-    
+      
     Disable-WindowsOptionalFeature -Online -FeatureName "WorkFolders-Client" -NoRestart -WarningAction SilentlyContinue | Out-Null
     Write-Host "Disabled Work Folders"
     
@@ -2483,17 +2771,7 @@ $WPFTab1P7.Add_Click({
     Set-ItemProperty -Path "HKLM:\Software\Policies\Google\Chrome" -Name "ChromeCleanupReportingEnabled" -Type "String" -Value 0 -Force
     Set-ItemProperty -Path "HKLM:\Software\Policies\Google\Chrome" -Name "MetricsReportingEnabled" -Type "String" -Value 0 -Force
     Write-Host "Disabled Chrome Telemetry"
-    
-    Enable-WindowsOptionalFeature -Online -FeatureName "ServicesForNFS-ClientOnly" -All
-    Enable-WindowsOptionalFeature -Online -FeatureName "ClientForNFS-Infrastructure" -All
-    Enable-WindowsOptionalFeature -Online -FeatureName "NFS-Administration" -All
-	nfsadmin client stop
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default" -Name "AnonymousUID" -Type DWord -Value 0
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default" -Name "AnonymousGID" -Type DWord -Value 0
-    nfsadmin client start
-    nfsadmin client localhost config fileaccess=755 SecFlavors=+sys -krb5 -krb5i
-    Write-Host "Enabled NFS"
-    
+       
     Write-Host "Completed"
     $WPFResult.ToArray()
     $WPFResult | % { $_ } | Out-Host
@@ -2638,7 +2916,7 @@ $WPFTab1P10.Add_Click({
 
         Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "UseOLEDTaskbarTransparency" -Type dword -Value 1
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\Dwm" -Name "ForceEffectMode" -Type dword -Value 1
-    Write-Host "Set Transparent Taskbar"
+    Write-Host "Set Taskbar Transparent"
 
         If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings")) {
     New-Item -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Force | Out-Null
@@ -2728,8 +3006,24 @@ $WPFTab1P10.Add_Click({
     }
     Write-Host "Disabled Paint3D"
 
+        Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" -Recurse -ErrorAction SilentlyContinue
+ If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag")) {
+            New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag" -Force | Out-Null
+        }
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag" -Name "ThisPCPolicy" -Type String -Value "Hide"
+        If (!(Test-Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag")) {
+            New-Item -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag" -Force | Out-Null
+        }
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag" -Name "ThisPCPolicy" -Type String -Value "Hide"
+    
+    Write-Host "Disabled 3D Object"
+
         Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "AppsUseLightTheme" -Type DWord -Value 0
     Write-Host "Set Dark Theme"
+Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds" -Name "ShellFeedsTaskbarViewMode" -Value 2
+    Write-Host "Disabled News and Interest"
+
+    Write-Host "Removed Pinned Icon on Taskbar"
     Write-Host "Completed"
     $WPFResult.ToArray()
     $WPFResult | % { $_ } | Out-Host
@@ -2773,6 +3067,1096 @@ $WPFTab1P12.Add_Click({
     $Messageboxbody = "Completed"
     $MessageIcon = [System.Windows.MessageBoxImage]::Information
     [System.Windows.MessageBox]::Show($Messageboxbody,$MessageboxTitle,$ButtonType,$MessageIcon)
+})
+
+$WPFTab1P13.Add_Click({
+
+    $global:Bloatware = @(
+    "Microsoft.Windows.Photos"
+    "CanonicalGroupLimited.UbuntuonWindows"
+    "Microsoft.Xbox.TCUI"
+    "Microsoft.XboxApp"
+    "Microsoft.XboxGameOverlay"
+    "Microsoft.XboxGamingOverlay"
+    "Microsoft.XboxSpeechToTextOverlay"
+    "Microsoft.MicrosoftStickyNotes"
+    "Microsoft.MSPaint"
+    "Microsoft.WindowsCamera"
+    "Microsoft.HEIFImageExtension"
+    "Microsoft.ScreenSketch"
+    "Microsoft.VP9VideoExtensions"
+    "Microsoft.WebMediaExtensions"
+    "Microsoft.WebpImageExtension"
+    "WindSynthBerry"
+    "MIDIBerry"
+    "Slack"
+    "Microsoft.MixedReality.Portal"
+    "Microsoft.PPIProjection"
+    "Microsoft.BingNews"
+    "Microsoft.GetHelp"
+    "Microsoft.Getstarted"
+    "Microsoft.Messaging"
+    "Microsoft.Microsoft3DViewer"
+    "Microsoft.MicrosoftOfficeHub"
+    "Microsoft.MicrosoftSolitaireCollection"
+    "Microsoft.NetworkSpeedTest"
+    "Microsoft.News"
+    "Microsoft.Office.Lens"
+    "Microsoft.Office.OneNote"
+    "Microsoft.Office.Sway"
+    "Microsoft.OneConnect"
+    "Microsoft.People"
+    "Microsoft.Print3D"
+    "Microsoft.RemoteDesktop"
+    "Microsoft.SkypeApp"
+    "Microsoft.Office.Todo.List"
+    "Microsoft.Whiteboard"
+    "Microsoft.WindowsAlarms"
+    "microsoft.windowscommunicationsapps"
+    "Microsoft.WindowsFeedbackHub"
+    "Microsoft.WindowsMaps"
+    "Microsoft.WindowsSoundRecorder"
+    "Microsoft.Xbox.TCUI"
+    "Microsoft.XboxApp"
+    "Microsoft.XboxGameOverlay"
+    "Microsoft.XboxGamingOverlay"
+    "Microsoft.XboxSpeechToTextOverlay"
+    "Microsoft.ZuneMusic"
+    "Microsoft.ZuneVideo"
+    "EclipseManager"
+    "ActiproSoftwareLLC"
+    "AdobeSystemsIncorporated.AdobePhotoshopExpress"
+    "Duolingo-LearnLanguagesforFree"
+    "PandoraMediaInc"
+    "CandyCrush"
+    "BubbleWitch3Saga"
+    "Wunderlist"
+    "Flipboard"
+    "Twitter"
+    "Facebook"
+    "Spotify"
+    "Minecraft"
+    "Royal Revolt"
+    "Sway"
+    "Dolby"
+    "Microsoft.Advertising.Xaml"
+    "Microsoft.Wallet"
+    "Microsoft.YourPhone"
+    "Microsoft.LanguageExperiencePackit-IT"
+    "Microsoft.MicrosoftEdge.Stable"
+    "MicrosoftCorporationII.QuickAssist"
+    "MicrosoftWindows.Client.WebExperience"
+    "Clipchamp.Clipchamp"
+    "Microsoft.HEVCVideoExtension"
+    "Microsoft.RawImageExtension"
+    "Microsoft.Todos"
+    "Microsoft.PowerAutomateDesktop"
+)
+
+$global:WhiteListedApps = @(
+    "Microsoft.Services.Store.Engagement"
+    "Microsoft.Services.Store.Engagement"
+    "Microsoft.StorePurchaseApp"
+    "Microsoft.WindowsStore"
+    "NVIDIACorp.NVIDIAControlPanel"
+    "\.NET"
+    "Microsoft.DesktopAppInstaller"
+    "Microsoft.Windows.ShellExperienceHost"
+    "Microsoft.VCLibs*"
+    "Microsoft.XboxIdentityProvider"
+    "Microsoft.WindowsCalculator"
+    "PythonSoftwareFoundation.Python.3.10"
+    "5319275A.WhatsAppDesktop"
+    "Microsoft.DesktopAppInstaller"
+    "Microsoft.Windows.ShellExperienceHost"
+    "Microsoft.UI.Xaml.2.8"
+    "Microsoft.UI.Xaml.2.8"
+    "Microsoft.UI.Xaml.2.4"
+    "Microsoft.UI.Xaml.2.4"
+    "Microsoft.UI.Xaml.2.0"
+    "Microsoft.UI.Xaml.2.7"
+    "Microsoft.UI.Xaml.2.7"
+    "Microsoft.WindowsAppRuntime.1.2"
+    "Microsoft.WindowsAppRuntime.1.2"
+    "Microsoft.WindowsAppRuntime.1.3-preview1"
+    "Microsoft.WindowsAppRuntime.1.3-preview1"
+    "Microsoft.Advertising.Xaml"
+    "Microsoft.LanguageExperiencePackit-IT"
+    )
+
+#NonRemovable Apps that where getting attempted and the system would reject the uninstall, speeds up debloat and prevents 'initalizing' overlay when removing apps
+$NonRemovables = Get-AppxPackage -AllUsers | Where-Object { $_.NonRemovable -eq $true } | ForEach { $_.Name }
+$NonRemovables += Get-AppxPackage | Where-Object { $_.NonRemovable -eq $true } | ForEach { $_.Name }
+$NonRemovables += Get-AppxProvisionedPackage -Online | Where-Object { $_.NonRemovable -eq $true } | ForEach { $_.DisplayName }
+$NonRemovables = $NonRemovables | Sort-Object -Unique
+
+if ($NonRemovables -eq $null ) {
+    # the .NonRemovable property doesn't exist until version 18xx. Use a hard-coded list instead.
+    #WARNING: only use exact names here - no short names or wildcards
+    $NonRemovables = @(
+        "1527c705-839a-4832-9118-54d4Bd6a0c89"
+        "c5e2524a-ea46-4f67-841f-6a9465d9d515"
+        "E2A4F912-2574-4A75-9BB0-0D023378592B"
+        "F46D4000-FD22-4DB4-AC8E-4E1DDDE828FE"
+        "InputApp"
+        "Microsoft.AAD.BrokerPlugin"
+        "Microsoft.AccountsControl"
+        "Microsoft.BioEnrollment"
+        "Microsoft.CredDialogHost"
+        "Microsoft.ECApp"
+        "Microsoft.LockApp"
+        "Microsoft.MicrosoftEdgeDevToolsClient"
+        "Microsoft.MicrosoftEdge"
+        "Microsoft.PPIProjection"
+        "Microsoft.Win32WebViewHost"
+        "Microsoft.Windows.Apprep.ChxApp"
+        "Microsoft.Windows.AssignedAccessLockApp"
+        "Microsoft.Windows.CapturePicker"
+        "Microsoft.Windows.CloudExperienceHost"
+        "Microsoft.Windows.ContentDeliveryManager"
+        "Microsoft.Windows.Cortana"
+        "Microsoft.Windows.HolographicFirstRun"
+        "Microsoft.Windows.NarratorQuickStart"
+        "Microsoft.Windows.OOBENetworkCaptivePortal"
+        "Microsoft.Windows.OOBENetworkConnectionFlow"
+        "Microsoft.Windows.ParentalControls"
+        "Microsoft.Windows.PeopleExperienceHost"
+        "Microsoft.Windows.PinningConfirmationDialog"
+        "Microsoft.Windows.SecHealthUI"
+        "Microsoft.Windows.SecondaryTileExperience"
+        "Microsoft.Windows.SecureAssessmentBrowser"
+        "Microsoft.Windows.ShellExperienceHost"
+        "Microsoft.Windows.XGpuEjectDialog"
+        "Microsoft.XboxGameCallableUI"
+        "Windows.CBSPreview"
+        "windows.immersivecontrolpanel"
+        "Windows.PrintDialog"
+        "Microsoft.Services.Store.Engagement"
+        "Nvidia"
+        "Microsoft.WindowsStore"
+        "Microsoft.StorePurchaseApp"
+        "NVIDIACorp.NVIDIAControlPanel"
+        "40459File-New-Project.EarTrumpet"
+	    "/.NET"
+	    "Microsoft.Services.Store.Engagement"
+        "Microsoft.DesktopAppInstaller"
+        "Microsoft.Windows.ShellExperienceHost"
+        "Microsoft.UI.Xaml.2.8"
+        "Microsoft.UI.Xaml.2.8"
+        "Microsoft.UI.Xaml.2.4"
+        "Microsoft.UI.Xaml.2.4"
+        "Microsoft.UI.Xaml.2.0"
+        "Microsoft.UI.Xaml.2.7"
+        "Microsoft.UI.Xaml.2.7"
+        "Microsoft.WindowsAppRuntime.1.2"
+        "Microsoft.WindowsAppRuntime.1.2"
+        "Microsoft.WindowsAppRuntime.1.3-preview1"
+        "Microsoft.WindowsAppRuntime.1.3-preview1"
+
+    )
+}
+
+# import library code - located relative to this script
+Function dotInclude() {
+    Param(
+        [Parameter(Mandatory)]
+        [string]$includeFile
+    )
+    # Look for the file in the same directory as this script
+    $scriptPath = $PSScriptRoot
+    if ( $PSScriptRoot -eq $null -and $psISE) {
+        $scriptPath = (Split-Path -Path $psISE.CurrentFile.FullPath)
+    }
+    if ( test-path $scriptPath\$includeFile ) {
+        # import and immediately execute the requested file
+        . $scriptPath\$includeFile
+    }
+}
+
+# Override built-in blacklist/whitelist with user defined lists
+dotInclude 'custom-lists.ps1'
+
+#convert to regular expression to allow for the super-useful -match operator
+$global:BloatwareRegex = $global:Bloatware -join '|'
+$global:WhiteListedAppsRegex = $global:WhiteListedApps -join '|'
+
+            $ErrorActionPreference = 'SilentlyContinue'
+            Function DebloatBlacklist {
+                Write-Host "Removing Bloatware"
+                Get-AppxPackage | Where-Object Name -cmatch $global:BloatwareRegex | Remove-AppxPackage
+                Get-AppxProvisionedPackage -Online | Where-Object DisplayName -cmatch $global:BloatwareRegex | Remove-AppxProvisionedPackage -Online
+                Get-AppxPackage -AllUsers | Where-Object Name -cmatch $global:BloatwareRegex | Remove-AppxPackage
+            }
+            DebloatBlacklist
+                Function CheckDMWService {
+            
+                Param([switch]$Debloat)
+            
+                If (Get-Service dmwappushservice | Where-Object { $_.StartType -eq "Disabled" }) {
+                    Set-Service dmwappushservice -StartupType Automatic
+                }
+            
+                If (Get-Service dmwappushservice | Where-Object { $_.Status -eq "Stopped" }) {
+                    Start-Service dmwappushservice
+                } 
+            }
+            
+            Function CheckInstallService {
+            
+                If (Get-Service InstallService | Where-Object { $_.Status -eq "Stopped" }) {  
+                    Start-Service InstallService
+                    Set-Service InstallService -StartupType Automatic 
+                }
+            }
+Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage
+Get-AppxPackage -allusers Microsoft.BingWeather | Remove-AppxPackage
+            Write-Host "Done"
+    $WPFResult.ToArray()
+    $WPFResult | % { $_ } | Out-Host
+    $ButtonType = [System.Windows.MessageBoxButton]::OK
+    $MessageboxTitle = "Result"
+    $Messageboxbody = "Completed"
+    $MessageIcon = [System.Windows.MessageBoxImage]::Information
+    [System.Windows.MessageBox]::Show($Messageboxbody,$MessageboxTitle,$ButtonType,$MessageIcon)
+})
+
+$WPFTab1P14.Add_Click({
+    Import-Module BitsTransfer
+    Start-BitsTransfer -Source "https://raw.githubusercontent.com/Iblis94/debloat3.0/main/OO.cfg" -Destination ooshutup10.cfg
+    Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe
+    ./OOSU10.exe ooshutup10.cfg /quiet
+    Write-Host "Executed O&O Shutup with Recommended Settings"
+
+    Set-ItemProperty -Path "HKCU:\Control Panel\International\User Profile" -Name "HttpAcceptLanguageOptOut" -Type DWord -Value 1 
+    Write-Host "Disabled Language Options"
+
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Name "DisableThirdPartySuggestions" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Name "DisableWindowsConsumerFeatures" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" -Name "PreventDeviceMetadataFromNetwork" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\MRT" -Name "DontOfferThroughWUAU" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\SQMClient\Windows" -Name "CEIPEnable" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat" -Name "AITEnable" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat" -Name "DisableUAR" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\AutoLogger-Diagtrack-Listener" -Name "Start" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\SQMLogger" -Name "Start" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SilentInstalledAppsEnabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SystemPaneSuggestionsEnabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SoftLandingEnabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-310093Enabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-314559Enabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338393Enabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-353694Enabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-353698Enabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SystemPaneSuggestionsEnabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "ContentDeliveryAllowed" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "OemPreInstalledAppsEnabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "PreInstalledAppsEnabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "PreInstalledAppsEverEnabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SilentInstalledAppsEnabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338387Enabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338388Enabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338389Enabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-353698Enabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SystemPaneSuggestionsEnabled" -Type DWord -Value 0
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent")) {
+        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Name "DisableWindowsConsumerFeatures" -Type DWord -Value 1
+    Write-Host "Disabled Suggested Apps"
+
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
+    Disable-ScheduledTask -TaskName "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" | Out-Null
+    Disable-ScheduledTask -TaskName "Microsoft\Windows\Application Experience\ProgramDataUpdater" | Out-Null
+    Disable-ScheduledTask -TaskName "Microsoft\Windows\Autochk\Proxy" | Out-Null
+    Disable-ScheduledTask -TaskName "Microsoft\Windows\Customer Experience Improvement Program\Consolidator" | Out-Null
+    Disable-ScheduledTask -TaskName "Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" | Out-Null
+    Disable-ScheduledTask -TaskName "Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" | Out-Null
+    Write-Host "Disabled Telemetry"
+
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableActivityFeed" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "PublishUserActivities" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "UploadUserActivities" -Type DWord -Value 0
+    Write-host "Disabled Activity History"
+
+    If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location")) {
+        New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Name "Value" -Type String -Value "Deny"
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" -Name "SensorPermissionState" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration" -Name "Status" -Type DWord -Value 0
+    Write-host "Disabled Location Tracking"
+
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\Windows Error Reporting" -Name "Disabled" -Type DWord -Value 1
+    Disable-ScheduledTask -TaskName "Microsoft\Windows\Windows Error Reporting\QueueReporting" | Out-Null
+    Write-host "Disabled Error Reporting"
+
+    Stop-Service "DiagTrack" -WarningAction SilentlyContinue
+    Set-Service "DiagTrack" -StartupType Disabled
+    Write-host "Disabled Diagnostic Tracking"
+
+    Stop-Service "dmwappushservice" -WarningAction SilentlyContinue
+    Set-Service "dmwappushservice" -StartupType Disabled
+    Write-host "Disabled WAP Push Service"
+
+    Stop-Service "HomeGroupListener" -WarningAction SilentlyContinue
+    Set-Service "HomeGroupListener" -StartupType Disabled
+    Stop-Service "HomeGroupProvider" -WarningAction SilentlyContinue
+    Set-Service "HomeGroupProvider" -StartupType Disabled
+    Write-host "Disabled Home Group Services"
+
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Remote Assistance" -Name "fAllowToGetHelp" -Type DWord -Value 0
+    Write-host "Disabled Remote Assistance"
+
+    Remove-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy" -Recurse -ErrorAction SilentlyContinue
+    Write-host "Disabled Storage Check" 
+
+    Stop-Service "SysMain" -WarningAction SilentlyContinue
+    Set-Service "SysMain" -StartupType Disabled
+    Write-host "Disabled Superfetch" 
+
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance" -Name "MaintenanceDisabled" -Type dword -Value 1
+    Write-host "Disabled Auto Manteinance" 
+
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager" -Name "ShippedWithReserves" -Type dword -Value 0
+    Write-host "Disabled Reserved Storage" 
+
+    Disable-ScheduledTask -TaskName "Microsoft\Windows\Defrag\ScheduledDefrag" | Out-Null
+    Write-host "Disabled Scheduled Defrag" 
+
+    $ErrorActionPreference = 'SilentlyContinue'
+    $Bandwidth = "HKLM:\SOFTWARE\Policies\Microsoft\Psched"
+    New-Item -Path $Bandwidth -ItemType Directory -Force
+    Set-ItemProperty -Path $Bandwidth -Name "NonBestEffortLimit" -Type DWord -Value 0
+    Write-host "Enabled All Bandwidth" 
+
+    Set-ItemProperty -Path "HKLM:\System\GameConfigStore" -Name "GameDVR_DXGIHonorFSEWindowsCompatible" -Type Hex -Value 00000000
+    Set-ItemProperty -Path "HKLM:\System\GameConfigStore" -Name "GameDVR_HonorUserFSEBehaviorMode" -Type Hex -Value 00000000
+    Set-ItemProperty -Path "HKLM:\System\GameConfigStore" -Name "GameDVR_EFSEFeatureFlags" -Type Hex -Value 00000000
+    Set-ItemProperty -Path "HKLM:\System\GameConfigStore" -Name "GameDVR_Enabled" -Type DWord -Value 00000000
+    Write-host "Enabled Tweaks GameDVR" 
+
+    Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_DXGIHonorFSEWindowsCompatible" -Type DWord -Value 0
+    Remove-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_FSEBehavior" -ErrorAction SilentlyContinue
+    Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_FSEBehaviorMode" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_HonorUserFSEBehaviorMode" -Type DWord -Value 0
+    Write-host "Enabled Optimization Fullscreen" 
+
+    Write-Host "Completed"
+            $WPFResult.ToArray()
+    $WPFResult | % { $_ } | Out-Host
+    $ButtonType = [System.Windows.MessageBoxButton]::OK
+    $MessageboxTitle = "Result"
+    $Messageboxbody = "Completed"
+    $MessageIcon = [System.Windows.MessageBoxImage]::Information
+
+    [System.Windows.MessageBox]::Show($Messageboxbody,$MessageboxTitle,$ButtonType,$MessageIcon)
+})
+
+$WPFTab1P15.Add_Click({
+
+    Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
+        Set-ItemProperty -Path $_.PsPath -Name "Disabled" -Type DWord -Value 1
+        Set-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -Type DWord -Value 1
+    }
+    Write-host "Disabled Background App Access" 
+            
+    Set-ItemProperty -Path "HKLM:\SYSTEM\Maps" -Name "AutoUpdateEnabled" -Type DWord -Value 0
+    Write-host "Disabled Automatic Maps Updates" 
+            
+    If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Siuf\Rules")) {
+        New-Item -Path "HKCU:\SOFTWARE\Microsoft\Siuf\Rules" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Siuf\Rules" -Name "NumberOfSIUFInPeriod" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "DoNotShowFeedbackNotifications" -Type DWord -Value 1
+    Disable-ScheduledTask -TaskName "Microsoft\Windows\Feedback\Siuf\DmClient" -ErrorAction SilentlyContinue | Out-Null
+    Disable-ScheduledTask -TaskName "Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload" -ErrorAction SilentlyContinue | Out-Null
+    Write-host "Disabled Feedback" 
+            
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableCdp" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableMmx" -Type DWord -Value 0
+    If (!(Test-Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CloudContent")) {
+        New-Item -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Name "DisableTailoredExperiencesWithDiagnosticData" -Type DWord -Value 1
+    Write-host "Disabled Tailored Experiences" 
+            
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo")) {
+        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" -Name "DisabledByGroupPolicy" -Type DWord -Value 1
+    Write-host "Disabled Advertising ID" 
+            
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableSmartScreen" -Type DWord -Value 0
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter")) {
+        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter" -Name "EnabledV9" -Type DWord -Value 0
+    Write-host "Disabled Smartscreen Filter" 
+            
+    If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting")) {
+        New-Item -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" -Name "Value" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" -Name "Value" -Type DWord -Value 0
+    If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config")) {
+        New-Item -Path "HKLM:\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config" -Name "AutoConnectAllowedOEM" -Type Dword -Value 0
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config" -Name "WiFISenseAllowed" -Type Dword -Value 0
+    Write-host "Disabled WiFi-Sense" 
+            
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer")) {
+        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer" -Name "DisableFlashInIE" -Type DWord -Value 1
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Addons")) {
+        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Addons" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Addons" -Name "FlashPlayerEnabled" -Type DWord -Value 0
+    Write-host "Disabled Adobe Flash" 
+            
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Main")) {
+        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Main" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Main" -Name "DisableFirstRunCustomize" -Type DWord -Value 1
+    Write-host "Disabled IE First Access" 
+            
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Type DWord -Value 1
+    Write-host "NTFS >260 Characters" 
+            
+    $CloudStore = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CloudStore'
+    If (Test-Path $CloudStore) {
+        Stop-Process Explorer.exe -Force
+        Remove-Item $CloudStore -Recurse -Force
+        Start-Process Explorer.exe -Wait
+    }
+    Write-host "Disabled Cloudstore" 
+            
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1
+    Write-host "Set BIOS UTC Time" 
+            
+    $NoPDF = "HKCR:\.pdf"
+    $NoProgids = "HKCR:\.pdf\OpenWithProgids"
+    $NoWithList = "HKCR:\.pdf\OpenWithList" 
+    If (!(Get-ItemProperty $NoPDF  NoOpenWith)) {
+        New-ItemProperty $NoPDF NoOpenWith 
+    }        
+    If (!(Get-ItemProperty $NoPDF  NoStaticDefaultVerb)) {
+        New-ItemProperty $NoPDF  NoStaticDefaultVerb 
+    }        
+    If (!(Get-ItemProperty $NoProgids  NoOpenWith)) {
+        New-ItemProperty $NoProgids  NoOpenWith 
+    }        
+    If (!(Get-ItemProperty $NoProgids  NoStaticDefaultVerb)) {
+        New-ItemProperty $NoProgids  NoStaticDefaultVerb 
+    }        
+    If (!(Get-ItemProperty $NoWithList  NoOpenWith)) {
+        New-ItemProperty $NoWithList  NoOpenWith
+    }        
+    If (!(Get-ItemProperty $NoWithList  NoStaticDefaultVerb)) {
+        New-ItemProperty $NoWithList  NoStaticDefaultVerb 
+    }
+        
+    #Appends an underscore '_' to the Registry key for Edge
+    $Edge = "HKCR:\AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_"
+    If (Test-Path $Edge) {
+        Set-Item $Edge AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723_ 
+    } 
+    Write-host "Disabled PDF Control in Edge" 
+            
+    powercfg -duplicatescheme a1841308-3541-4fab-bc81-f71556f20b4a
+    powercfg -duplicatescheme 381b4222-f694-41f0-9685-ff5bb260df2e
+    powercfg -duplicatescheme 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+    powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
+    Write-host "Custom Powerplan Installed" 
+            
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "IRPStackSize" -Type DWord -Value 20
+    Write-host "Set IRP Stack Size to 20" 
+            
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" -Name "SvcHostSplitThresholdInKB" -Type DWord -Value 4194304
+    Write-host "Set SVChost Tweak" 
+            
+    fsutil behavior set DisableLastAccess 1
+    fsutil behavior set EncryptPagingFile 0
+    Write-host "Set Better SSD Use" 
+                 
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "UserAuthentication" -Type DWord -Value 1
+    Disable-NetFirewallRule -Name "RemoteDesktop*"
+    Write-host "Disabled Remote Desktop" 
+            
+    $obj = Get-WmiObject -Class Win32_Volume -Filter "DriveLetter='$Drive'"
+    $indexing = $obj.IndexingEnabled
+    if("$indexing" -eq $True){
+        write-host "Disabling indexing of drive $Drive"
+        $obj | Set-WmiInstance -Arguments @{IndexingEnabled=$False} | Out-Null
+    }
+    Write-host "Disabled Indexing" 
+        
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" -Name "EnableFeeds" -Type DWord -Value 0
+    Write-host "Disabled News and Interests" 
+            
+	If (!(Test-Path "HKU:")) {
+		New-PSDrive -Name "HKU" -PSProvider "Registry" -Root "HKEY_USERS" | Out-Null
+	}
+	Set-ItemProperty -Path "HKU:\.DEFAULT\Control Panel\Keyboard" -Name "InitialKeyboardIndicators" -Type DWord -Value 2147483650
+	Add-Type -AssemblyName System.Windows.Forms
+	If (!([System.Windows.Forms.Control]::IsKeyLocked('NumLock'))) {
+		$wsh = New-Object -ComObject WScript.Shell
+		$wsh.SendKeys('{NUMLOCK}')
+	}
+    Write-host "Enabled NumLock after Startup" 
+    Write-Host "Completed"
+    $WPFResult.ToArray()
+    $WPFResult | % { $_ } | Out-Host
+    $ButtonType = [System.Windows.MessageBoxButton]::OK
+    $MessageboxTitle = "Result"
+    $Messageboxbody = "Completed"
+    $MessageIcon = [System.Windows.MessageBoxImage]::Information
+    [System.Windows.MessageBox]::Show($Messageboxbody,$MessageboxTitle,$ButtonType,$MessageIcon)
+})
+
+$WPFTab1P16.Add_Click({
+
+    Remove-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" -Name "Enabled" -ErrorAction SilentlyContinue
+    Write-Host "Disabled Core Isolation Memory Integrity"
+
+    If (!(Test-Path "HKCU:\Software\Microsoft\Windows Security Health\State")) {
+    New-Item -Path "HKCU:\Software\Microsoft\Windows Security Health\State" -Force | Out-Null
+    }
+    Set-ItemProperty "HKCU:\Software\Microsoft\Windows Security Health\State" -Name "AccountProtection_MicrosoftAccount_Disconnected" -Type DWord -Value 1
+    Write-Host "Hided Account Protection Warning"
+
+    If (!(Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments")) {
+    New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments" | Out-Null
+    }
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments" -Name "SaveZoneInformation" -Type DWord -Value 1
+    Write-Host "Disabled Block of Downloaded Files"
+
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows Script Host\Settings" -Name "Enabled" -Type DWord -Value 0
+    Write-Host "Disabled Windows Script Host"
+
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319" -Name "SchUseStrongCrypto" -ErrorAction SilentlyContinue
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v4.0.30319" -Name "SchUseStrongCrypto" -ErrorAction SilentlyContinue
+    Write-Host "Disabled .NET Strong Cryptography"
+
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Type DWord -Value 0
+    Write-Host "Minimum UAC Level"
+
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "EnableLinkedConnections" -ErrorAction SilentlyContinue
+    Write-Host "Disabled Share Mapped Drives Between Users"
+
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -Name "AutoShareWks" -Type DWord -Value 0
+    Write-Host "Disabled Implicit Administrative Shares"
+
+    Set-NetConnectionProfile -NetworkCategory Private
+    Write-Host "Set Current Network Profile to Private"
+
+    bcdedit /set `{current`} bootmenupolicy Legacy | Out-Null
+    Write-Host "Enabled F8 Boot Menu Options"
+    Write-Host "Completed"
+    $WPFResult.ToArray()
+    $WPFResult | % { $_ } | Out-Host
+    $ButtonType = [System.Windows.MessageBoxButton]::OK
+    $MessageboxTitle = "Result"
+    $Messageboxbody = "Completed"
+    $MessageIcon = [System.Windows.MessageBoxImage]::Information
+    [System.Windows.MessageBox]::Show($Messageboxbody,$MessageboxTitle,$ButtonType,$MessageIcon)
+})
+
+$WPFTab1P17.Add_Click({
+If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance" -Name "WakeUp" -Type DWord -Value 0
+    Write-Host "Disabled Nightly Wake-Up for Automatic Maintenance"
+
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Force | Out-Null
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUOptions" -Type DWord -Value 2
+    }
+    Write-Host "Disabled Windows Update Automatic Downloads"
+
+    If ([System.Environment]::OSVersion.Version.Build -eq 10240) {
+    # Method used in 1507
+    If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config")) {
+    New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" -Name "DODownloadMode" -Type DWord -Value 1
+    } ElseIf ([System.Environment]::OSVersion.Version.Build -le 14393) {
+    # Method used in 1511 and 1607
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" -Name "DODownloadMode" -Type DWord -Value 1
+    } Else {
+    # Method used since 1703
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" -Name "DODownloadMode" -ErrorAction SilentlyContinue
+    }
+    Write-Host "Restrict Windows Update P2P Optimization to Local Network"
+
+    If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MusNotification.exe")) {
+    New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MusNotification.exe" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\MusNotification.exe" -Name "Debugger" -Type String -Value "cmd.exe"
+    Write-Host "Disabled Windows Update Automatic Restart"
+
+    takeown /F "$env:WinDIR\System32\MusNotification.exe"
+    icacls "$env:WinDIR\System32\MusNotification.exe" /deny "$($EveryOne):(X)"
+    takeown /F "$env:WinDIR\System32\MusNotificationUx.exe"
+    icacls "$env:WinDIR\System32\MusNotificationUx.exe" /deny "$($EveryOne):(X)"
+    Write-Host "Disabled Update Notifications"
+
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Device Metadata" -Name "PreventDeviceMetadataFromNetwork" -Type DWord -Value 1
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontPromptForWindowsUpdate" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DontSearchWindowsUpdate" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DriverSearching" -Name "DriverUpdateWizardWuSearchEnabled" -Type DWord -Value 0
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" -Name "ExcludeWUDriversInQualityUpdate" -Type DWord -Value 1
+    Write-Host "Disabling Windows Update automatic restart..."
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "NoAutoRebootWithLoggedOnUsers" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name "AUPowerManagement" -Type DWord -Value 0
+    Write-Host "Only Security Update"
+
+    Write-Host "Completed"
+    $WPFResult.ToArray()
+    $WPFResult | % { $_ } | Out-Host
+    $ButtonType = [System.Windows.MessageBoxButton]::OK
+    $MessageboxTitle = "Result"
+    $Messageboxbody = "Completed"
+    $MessageIcon = [System.Windows.MessageBoxImage]::Information
+    [System.Windows.MessageBox]::Show($Messageboxbody,$MessageboxTitle,$ButtonType,$MessageIcon)
+})
+
+$WPFTab1P18.Add_Click({
+ If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -Type DWord -Value 1
+    Stop-Process -Name "OneDrive" -ErrorAction SilentlyContinue
+    Start-Sleep -s 2
+    $onedrive = "$env:SYSTEMROOT\SysWOW64\OneDriveSetup.exe"
+    If (!(Test-Path $onedrive)) {
+    $onedrive = "$env:SYSTEMROOT\System32\OneDriveSetup.exe"
+    }
+    Start-Process $onedrive "/uninstall" -NoNewWindow -Wait
+    Start-Sleep -s 2
+    Remove-Item -Path "$env:USERPROFILE\OneDrive" -Force -Recurse -ErrorAction SilentlyContinue
+    Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\OneDrive" -Force -Recurse -ErrorAction SilentlyContinue
+    Remove-Item -Path "$env:PROGRAMDATA\Microsoft OneDrive" -Force -Recurse -ErrorAction SilentlyContinue
+    Remove-Item -Path "$env:SYSTEMDRIVE\OneDriveTemp" -Force -Recurse -ErrorAction SilentlyContinue
+    If (!(Test-Path "HKCR:")) {
+    New-PSDrive -Name HKCR -PSProvider Registry -Root HKEY_CLASSES_ROOT | Out-Null
+    }
+    Remove-Item -Path "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
+    Remove-Item -Path "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
+    Write-Host "Remove OneDrive"
+    
+    Disable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart -WarningAction SilentlyContinue | Out-Null
+    Write-Host "Disabled Windows Media Player"
+      
+    Disable-WindowsOptionalFeature -Online -FeatureName "WorkFolders-Client" -NoRestart -WarningAction SilentlyContinue | Out-Null
+    Write-Host "Disabled Work Folders"
+    
+    If ((Get-WmiObject -Class "Win32_OperatingSystem").Caption -like "*Server*") {
+    Uninstall-WindowsFeature -Name "Hyper-V" -IncludeManagementTools -WarningAction SilentlyContinue | Out-Null
+    } Else {
+    Disable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-All" -NoRestart -WarningAction SilentlyContinue | Out-Null
+    }
+    Write-Host "Disabled Hyper-V"
+    
+    Disable-WindowsOptionalFeature -Online -FeatureName "Printing-PrintToPDFServices-Features" -NoRestart -WarningAction SilentlyContinue | Out-Null
+    Write-Host "Remove Microsoft Print to PDF"
+    
+    Disable-WindowsOptionalFeature -Online -FeatureName "Printing-XPSServices-Features" -NoRestart -WarningAction SilentlyContinue | Out-Null
+    Write-Host "Remove Microsoft XPS Document Writer"
+    
+    Remove-Printer -Name "Fax" -ErrorAction SilentlyContinue
+    Write-Host "Remove Fax Printer"
+    
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" -Name "AllowDevelopmentWithoutDevLicense" -ErrorAction SilentlyContinue
+    Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" -Name "AllowAllTrustedApps" -ErrorAction SilentlyContinue
+    Write-Host "Remove Developer Mode"
+    
+    Get-WindowsCapability -Online | Where-Object { $_.Name -like "MathRecognizer*" } | Remove-WindowsCapability -Online | Out-Null
+    Write-Host "Remove Math Recognizer"
+    
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync" "BackupPolicy" 0x3c
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync" "DeviceMetadataUploaded" 0
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync" "PriorLogons" 1
+    $groups = @(
+    "Accessibility"
+    "AppSync"
+    "BrowserSettings"
+    "Credentials"
+    "DesktopTheme"
+    "Language"
+    "PackageState"
+    "Personalization"
+    "StartLayout"
+    "Windows"
+    )
+    foreach ($group in $groups) {
+    New-FolderForced -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\$group"
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\$group" "Enabled" 0
+    }     
+    Write-Host "Disabled Setting Sync"
+    
+    Stop-Process -Force -Force -Name  ccleaner.exe
+    Stop-Process -Force -Force -Name  ccleaner64.exe
+    Set-ItemProperty -Path "HKCU:\Software\Piriform\CCleaner" -Name "HomeScreen" -Type "String" -Value 2 -Force
+    Stop-Process -Force -Force -Name "IMAGENAME eq CCleaner*"
+    schtasks /Change /TN "CCleaner Update" /Disable
+    Get-ScheduledTask -TaskName "CCleaner Update" | Disable-ScheduledTask
+    Set-ItemProperty -Path "HKCU:\Software\Piriform\CCleaner" -Name "Monitoring" -Type "DWORD" -Value 0 -Force
+    Set-ItemProperty -Path "HKCU:\Software\Piriform\CCleaner" -Name "HelpImproveCCleaner" -Type "DWORD" -Value 0 -Force
+    Set-ItemProperty -Path "HKCU:\Software\Piriform\CCleaner" -Name "SystemMonitoring" -Type "DWORD" -Value 0 -Force
+    Set-ItemProperty -Path "HKCU:\Software\Piriform\CCleaner" -Name "UpdateAuto" -Type "DWORD" -Value 0 -Force
+    Set-ItemProperty -Path "HKCU:\Software\Piriform\CCleaner" -Name "UpdateCheck" -Type "DWORD" -Value 0 -Force
+    Set-ItemProperty -Path "HKCU:\Software\Piriform\CCleaner" -Name "CheckTrialOffer" -Type "DWORD" -Value 0 -Force
+    Set-ItemProperty -Path "HKLM:\Software\Piriform\CCleaner" -Name "(Cfg)HealthCheck" -Type "DWORD" -Value 0 -Force
+    Set-ItemProperty -Path "HKLM:\Software\Piriform\CCleaner" -Name "(Cfg)QuickClean" -Type "DWORD" -Value 0 -Force
+    Set-ItemProperty -Path "HKLM:\Software\Piriform\CCleaner" -Name "(Cfg)QuickCleanIpm" -Type "DWORD" -Value 0 -Force
+    Set-ItemProperty -Path "HKLM:\Software\Piriform\CCleaner" -Name "(Cfg)GetIpmForTrial" -Type "DWORD" -Value 0 -Force
+    Set-ItemProperty -Path "HKLM:\Software\Piriform\CCleaner" -Name "(Cfg)SoftwareUpdater" -Type "DWORD" -Value 0 -Force
+    Set-ItemProperty -Path "HKLM:\Software\Piriform\CCleaner" -Name "(Cfg)SoftwareUpdaterIpm" -Type "DWORD" -Value 0 -Force
+    Write-Host "Disabled CCleaner Telemetry"
+    
+    New-Item -Path "HKCU:\SOFTWARE\Microsoft\Office\Common\ClientTelemetry" -Force
+    New-Item -Path "HKCU:\SOFTWARE\Microsoft\Office\16.0\Common\ClientTelemetry" -Force
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Office\Common\ClientTelemetry" -Name "DisableTelemetry" -Type "DWORD" -Value 1 -Force
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Office\16.0\Common\ClientTelemetry" -Name "DisableTelemetry" -Type "DWORD" -Value 1 -Force
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Office\Common\ClientTelemetry" -Name "VerboseLogging" -Type "DWORD" -Value 0 -Force
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Office\16.0\Common\ClientTelemetry" -Name "VerboseLogging" -Type "DWORD" -Value 0 -Force
+    New-Item -Path "HKCU:\SOFTWARE\Microsoft\Office\15.0\Outlook\Options\Mail" -Force
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Office\15.0\Outlook\Options\Mail" -Name "EnableLogging" -Type "DWORD" -Value 0 -Force
+    New-Item -Path "HKCU:\SOFTWARE\Microsoft\Office\16.0\Outlook\Options\Mail" -Force
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Office\16.0\Outlook\Options\Mail" -Name "EnableLogging" -Type "DWORD" -Value 0 -Force
+    New-Item -Path "HKCU:\SOFTWARE\Microsoft\Office\15.0\Outlook\Options\Calendar" -Force
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Office\15.0\Outlook\Options\Calendar" -Name "EnableCalendarLogging" -Type "DWORD" -Value 0 -Force
+    New-Item -Path "HKCU:\SOFTWARE\Microsoft\Office\16.0\Outlook\Options\Calendar" -Force
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Office\16.0\Outlook\Options\Calendar" -Name "EnableCalendarLogging" -Type "DWORD" -Value 0 -Force
+    New-Item -Path "HKCU:\SOFTWARE\Microsoft\Office\15.0\Word\Options" -Force
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Office\15.0\Word\Options" -Name "EnableLogging" -Type "DWORD" -Value 0 -Force
+    New-Item -Path "HKCU:\SOFTWARE\Microsoft\Office\16.0\Word\Options" -Force
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Office\16.0\Word\Options" -Name "EnableLogging" -Type "DWORD" -Value 0 -Force
+    New-Item -Path "HKCU:\SOFTWARE\Policies\Microsoft\Office\15.0\OSM" -Force
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Office\15.0\OSM" -Name "EnableLogging" -Type "DWORD" -Value 0 -Force
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Office\15.0\OSM" -Name "EnableUpload" -Type "DWORD" -Value 0 -Force
+    New-Item -Path "HKCU:\SOFTWARE\Policies\Microsoft\Office\16.0\OSM" -Force
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Office\16.0\OSM" -Name "EnableLogging" -Value 0 -Force
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Office\16.0\OSM" -Name "EnableUpload" -Type "DWORD" -Value 0 -Force
+    schtasks /change /TN "Microsoft\Office\OfficeTelemetryAgentFallBack" /DISABLE
+    schtasks /change /TN "Microsoft\Office\OfficeTelemetryAgentFallBack2016" /DISABLE
+    schtasks /change /TN "Microsoft\Office\OfficeTelemetryAgentLogOn" /DISABLE
+    schtasks /change /TN "Microsoft\Office\OfficeTelemetryAgentLogOn2016" /DISABLE
+    schtasks /change /TN "Microsoft\Office\Office 15 Subscription Heartbeat" /DISABLE
+    schtasks /change /TN "Microsoft\Office\Office 16 Subscription Heartbeat" /DISABLE
+    New-Item -Path "HKCU:\SOFTWARE\Microsoft\Office\15.0\Common\Feedback" -Force
+    New-Item -Path "HKCU:\SOFTWARE\Microsoft\Office\16.0\Common\Feedback" -Force
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Office\15.0\Common\Feedback" -Name "Enabled" -Type "DWORD" -Value 0 -Force
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Office\16.0\Common\Feedback" -Name "Enabled" -Type "DWORD" -Value 0 -Force
+    New-Item -Path "HKCU:\SOFTWARE\Microsoft\Office\15.0\Common" -Force
+    New-Item -Path "HKCU:\SOFTWARE\Microsoft\Office\16.0\Common" -Force
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Office\15.0\Common" -Name "QMEnable" -Type "DWORD" -Value 0 -Force
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Office\16.0\Common" -Name "QMEnable" -Type "DWORD" -Value 0 -Force
+    Write-Host "Disabled Office Telemetry"
+    
+    Get-ScheduledTask -TaskName "GoogleUpdateTaskMachineCore" | Disable-ScheduledTask
+    Get-ScheduledTask -TaskName "GoogleUpdateTaskMachineUA" | Disable-ScheduledTask
+    #schtasks /Change /TN "GoogleUpdateTaskMachineCore" /Disable
+    #schtasks /Change /TN "GoogleUpdateTaskMachineUA" /Disable
+    Write-Host "Disabled Google Update Service"
+    
+    New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "ChromeCleanupEnabled" -Type "String" -Value 0 -Force
+    New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "ChromeCleanupReportingEnabled" -Type "String" -Value 0 -Force
+    New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "MetricsReportingEnabled" -Type "String" -Value 0 -Force
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "DisallowRun" -Type "DWORD" -Value 1 -Force
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" -Name "1" -Type "String" -Value "software_reporter_tool.exe" /f
+    Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\software_reporter_tool.exe" -Name Debugger -Type "String" -Value "%windir%\System32\taskkill.exe" -Force
+    Set-ItemProperty -Path "HKLM:\Software\Policies\Google\Chrome" -Name "ChromeCleanupEnabled" -Type "String" -Value 0 -Force
+    Set-ItemProperty -Path "HKLM:\Software\Policies\Google\Chrome" -Name "ChromeCleanupReportingEnabled" -Type "String" -Value 0 -Force
+    Set-ItemProperty -Path "HKLM:\Software\Policies\Google\Chrome" -Name "MetricsReportingEnabled" -Type "String" -Value 0 -Force
+    Write-Host "Disabled Chrome Telemetry"
+       
+    Write-Host "Completed"
+    $WPFResult.ToArray()
+    $WPFResult | % { $_ } | Out-Host
+    $ButtonType = [System.Windows.MessageBoxButton]::OK
+    $MessageboxTitle = "Result"
+    $Messageboxbody = "Completed"
+    $MessageIcon = [System.Windows.MessageBoxImage]::Information
+    [System.Windows.MessageBox]::Show($Messageboxbody,$MessageboxTitle,$ButtonType,$MessageIcon)
+})
+
+$WPFTab1P19.Add_Click({
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Type DWord -Value 0       
+    Write-Host "Showed known File Extensions"
+
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "Hidden" -Type DWord -Value 1
+    Write-Host "Showed Hidden Files"
+
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideMergeConflicts" -Type DWord -Value 0
+    Write-Host "Showed Folder Merge Conflicts"
+
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "PersistBrowsers" -Type DWord -Value 1
+    Write-Host "Enabled Restoring Previous Folder at Logon"
+
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowSyncProviderNotifications" -Type DWord -Value 1
+    Write-Host "Showed Sync Provider Notifications"
+
+    Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu" -Name "{645FF040-5081-101B-9F08-00AA002F954E}" -ErrorAction SilentlyContinue
+    Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" -Name "{645FF040-5081-101B-9F08-00AA002F954E}" -ErrorAction SilentlyContinue
+    Write-Host "Showed Recycle Bin Shorcut on Desktop"
+
+    If (!(Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu")) {
+    New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu" -Name "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" -Type DWord -Value 0
+    If (!(Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel")) {
+    New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" -Name "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" -Type DWord -Value 0
+    Write-Host "Showed This PC Shorcut on Desktop"
+
+    Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "NavPaneExpandToCurrentFolder" -ErrorAction SilentlyContinue
+    Write-Host "Disabled Navigation Panel Expand to Current Folder"
+
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "SharingWizardOn" -Type DWord -Value 0
+    Write-Host "Disabled Sharing Wizard"
+
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "AutoCheckSelect" -Type DWord -Value 0
+    Write-Host "Hided Checkbox"
+
+    If (!(Test-Path "HKCR:")) {
+    New-PSDrive -Name "HKCR" -PSProvider "Registry" -Root "HKEY_CLASSES_ROOT" | Out-Null
+    }
+    Remove-Item -Path "HKCR:\Folder\ShellEx\ContextMenuHandlers\Library Location" -ErrorAction SilentlyContinue    
+    Write-Host "Hided 'Include in Library"
+
+    If (!(Test-Path "HKCR:")) {
+    New-PSDrive -Name "HKCR" -PSProvider "Registry" -Root "HKEY_CLASSES_ROOT" | Out-Null
+    }
+    Remove-Item -LiteralPath "HKCR:\*\shellex\ContextMenuHandlers\Sharing" -ErrorAction SilentlyContinue
+    Remove-Item -Path "HKCR:\Directory\Background\shellex\ContextMenuHandlers\Sharing" -ErrorAction SilentlyContinue
+    Remove-Item -Path "HKCR:\Directory\shellex\ContextMenuHandlers\Sharing" -ErrorAction SilentlyContinue
+    Remove-Item -Path "HKCR:\Drive\shellex\ContextMenuHandlers\Sharing" -ErrorAction SilentlyContinue    
+    Write-Host "Hided 'Give Access to' in Context Menu"
+
+    If (!(Test-Path "HKCR:")) {
+    New-PSDrive -Name "HKCR" -PSProvider "Registry" -Root "HKEY_CLASSES_ROOT" | Out-Null
+    }
+    Remove-Item -LiteralPath "HKCR:\*\shellex\ContextMenuHandlers\ModernSharing" -ErrorAction SilentlyContinue   
+    Write-Host "Hided 'Share' in Context Menu"
+    Write-Host "Completed"
+    $WPFResult.ToArray()
+    $WPFResult | % { $_ } | Out-Host
+    $ButtonType = [System.Windows.MessageBoxButton]::OK
+    $MessageboxTitle = "Result"
+    $Messageboxbody = "Completed"
+    $MessageIcon = [System.Windows.MessageBoxImage]::Information
+    [System.Windows.MessageBox]::Show($Messageboxbody,$MessageboxTitle,$ButtonType,$MessageIcon)
+})
+
+$WPFTab1P20.Add_Click({
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideIcons" -Value 0
+    Write-Host "Showed All Icon on Desktop"
+
+    If (!(Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState")) {
+    New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState" -Name "FullPath" -Type DWord -Value 1
+    Write-Host "Showed Full Directory Path in Explorer"
+
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 1
+    Write-Host "Change Default Explorer view to This PC"
+
+    Remove-ItemProperty -Path "HKCU:\Software\Classes\CLSID\{031E4825-7B94-4dc3-B131-E946B44C8DD5}" -Name "System.IsPinnedToNameSpaceTree" -ErrorAction SilentlyContinue
+    Write-Host "Hided Libraries Icon in Explorer Namespace"
+    Write-Host "Completed"
+    $WPFResult.ToArray()
+    $WPFResult | % { $_ } | Out-Host
+    $ButtonType = [System.Windows.MessageBoxButton]::OK
+    $MessageboxTitle = "Result"
+    $Messageboxbody = "Completed"
+    $MessageIcon = [System.Windows.MessageBoxImage]::Information
+    [System.Windows.MessageBox]::Show($Messageboxbody,$MessageboxTitle,$ButtonType,$MessageIcon)
+})
+
+$WPFTab1P21.Add_Click({
+ If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "HideRecentlyAddedApps" -Type DWord -Value 1
+    Write-Host "Disabled 'Recent Elements' in Start Menu"
+
+        If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer")) {
+    New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoStartMenuMFUprogramsList" -Type DWord -Value 1
+    Write-Host "Disabled 'Most Used' in Start Menu"
+
+        Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds" -Name ShellFeedsTaskbarViewMode -Type DWord -Value 2
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "HideSCAMeetNow" -Type DWord -Value 1 -ErrorAction SilentlyContinue
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "HideSCAMeetNow" -Type DWord -Value 1    
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowCortanaButton" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaConsent" -Type DWord -Value 0
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "DisableWebSearch" -Type DWord -Value 1
+    Stop-Service "WSearch" -WarningAction SilentlyContinue
+    Set-Service "WSearch" -StartupType Disabled
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 0
+    Write-Host "Disabled Windows Search in Start Menu"
+
+        Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -Type DWord -Value 0
+    Write-Host "Hided Task Icon in Taskbar"
+
+        If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People")) {
+    New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" | Out-Null
+    }
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name "PeopleBand" -Type DWord -Value 0
+    Write-Host "Hided People Icon in Taskbar"
+
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "UseOLEDTaskbarTransparency" -Type dword -Value 1
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\Dwm" -Name "ForceEffectMode" -Type dword -Value 1
+    Write-Host "Set Taskbar Transparent"
+
+        If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager")) {
+    New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" | Out-Null
+    }
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" -Name "EnthusiastMode" -Type DWord -Value 1
+    Write-Host "Set Show Details Operation Files"
+
+        If (!(Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel")) {
+    New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel" | Out-Null
+    }
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel" -Name "StartupPage" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel" -Name "AllItemsIconView" -Type DWord -Value 0
+    Write-Host "Set Control Panel Icon View"
+
+        If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "NoUseStoreOpenWith" -Type DWord -Value 1
+    Write-Host "Disabled Search for App in Store for Unknown Extensions"
+
+        If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer")) {
+    New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoRecentDocsHistory" -Type DWord -Value 1
+    Write-Host "Disabled Recent Files Lists"
+
+        Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers" -Name "DisableAutoplay" -Type DWord -Value 1
+    Write-Host "Disabled Autoplay"
+
+        If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer")) {
+    New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "NoDriveTypeAutoRun" -Type DWord -Value 255
+    Write-Host "Disabled Autorun for All Drives"
+
+        Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility\StickyKeys" -Name "Flags" -Type String -Value "506"
+    Write-Host "Disabled Sticky Keys Prompt"
+
+        $Paint3Dstuff = @(
+    "HKCR:\SystemFileAssociations\.3mf\Shell\3D Edit"
+    "HKCR:\SystemFileAssociations\.bmp\Shell\3D Edit"
+    "HKCR:\SystemFileAssociations\.fbx\Shell\3D Edit"
+    "HKCR:\SystemFileAssociations\.gif\Shell\3D Edit"
+    "HKCR:\SystemFileAssociations\.jfif\Shell\3D Edit"
+    "HKCR:\SystemFileAssociations\.jpe\Shell\3D Edit"
+    "HKCR:\SystemFileAssociations\.jpeg\Shell\3D Edit"
+    "HKCR:\SystemFileAssociations\.jpg\Shell\3D Edit"
+    "HKCR:\SystemFileAssociations\.png\Shell\3D Edit"
+    "HKCR:\SystemFileAssociations\.tif\Shell\3D Edit"
+    "HKCR:\SystemFileAssociations\.tiff\Shell\3D Edit"
+    )
+    #Rename reg key to remove it, so it's revertible
+    foreach ($Paint3D in $Paint3Dstuff) {
+    If (Test-Path $Paint3D) {
+    $rmPaint3D = $Paint3D + "_"
+    Set-Item $Paint3D $rmPaint3D
+    }
+    }
+    Write-Host "Disabled Paint3D"
+
+        Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" -Recurse -ErrorAction SilentlyContinue
+ If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag")) {
+            New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag" -Force | Out-Null
+        }
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag" -Name "ThisPCPolicy" -Type String -Value "Hide"
+        If (!(Test-Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag")) {
+            New-Item -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag" -Force | Out-Null
+        }
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag" -Name "ThisPCPolicy" -Type String -Value "Hide"
+    
+    Write-Host "Disabled 3D Object"
+
+
+        If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings")) {
+    New-Item -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Name "AcceptedPrivacyPolicy" -Type DWord -Value 0
+    If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization")) {
+    New-Item -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Name "RestrictImplicitTextCollection" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization" -Name "RestrictImplicitInkCollection" -Type DWord -Value 1
+    If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore")) {
+    New-Item -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" -Name "HarvestContacts" -Type DWord -Value 0
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -Type DWord -Value 0
+    Write-Host "Disabled Cortana"
+
+        Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "AppsUseLightTheme" -Type DWord -Value 0
+    Write-Host "Set Dark Theme"
+Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds" -Name "ShellFeedsTaskbarViewMode" -Value 2
+    Write-Host "Disabled News and Interest"
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Chat")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Chat" -Force | Out-Null
+    }
+
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Chat" -Name "ChatIcon" -Type DWord -Value 3
+    Write-Host "Removed Pinned Icon on Taskbar"
+    Write-Host "Completed"
+    $WPFResult.ToArray()
+    $WPFResult | % { $_ } | Out-Host
+    $ButtonType = [System.Windows.MessageBoxButton]::OK
+    $MessageboxTitle = "Result"
+    $Messageboxbody = "Completed"
+    $MessageIcon = [System.Windows.MessageBoxImage]::Information
+    [System.Windows.MessageBox]::Show($Messageboxbody,$MessageboxTitle,$ButtonType,$MessageIcon)
+})
+
+$WPFTab1P22.Add_Click({
+Start-Process powershell.exe -Verb RunAs -ArgumentList "irm -Uri 'https://bit.ly/3AuBfDE' | iex  | Out-Host" -Wait -WindowStyle Maximized
+})
+
+$WPFTab1P23.Add_Click({
+Start-Process powershell.exe -Verb RunAs -ArgumentList "irm -Uri 'https://bit.ly/3LieF6x' | iex  | Out-Host" -Wait -WindowStyle Maximized
 })
 
 ##########################################
@@ -3664,6 +5048,446 @@ $WPFTab3P2.Add_Click({
     $Messageboxbody = "Completed"
     $MessageIcon = [System.Windows.MessageBoxImage]::Information
     [System.Windows.MessageBox]::Show($Messageboxbody,$MessageboxTitle,$ButtonType,$MessageIcon)
+})
+
+$WPFTab3P4.Add_Click({
+
+    #This will self elevate the script so with a UAC prompt since this script needs to be run as an Administrator in order to function properly.
+
+$ErrorActionPreference = 'SilentlyContinue'
+
+$Button = [System.Windows.MessageBoxButton]::YesNoCancel
+$ErrorIco = [System.Windows.MessageBoxImage]::Error
+$Ask = 'Do you want to run this as an Administrator?
+
+        Select "Yes" to Run as an Administrator
+
+        Select "No" to not run this as an Administrator
+        
+        Select "Cancel" to stop the script.'
+
+If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
+    $Prompt = [System.Windows.MessageBox]::Show($Ask, "Run as an Administrator or not?", $Button, $ErrorIco) 
+    Switch ($Prompt) {
+        #This will debloat Windows 10
+        Yes {
+            Write-Host "You didn't run this script as an Administrator. This script will self elevate to run as an Administrator and continue."
+            Start-Process PowerShell.exe -ArgumentList ("-NoProfile -ExecutionPolicy Bypass -File `"{0}`"" -f $PSCommandPath) -Verb RunAs
+            Exit
+        }
+        No {
+            Break
+        }
+    }
+}
+
+$global:Bloatware = @(
+    "Microsoft.Windows.Photos"
+    "CanonicalGroupLimited.UbuntuonWindows"
+    "Microsoft.Xbox.TCUI"
+    "Microsoft.XboxApp"
+    "Microsoft.XboxGameOverlay"
+    "Microsoft.XboxGamingOverlay"
+    "Microsoft.XboxSpeechToTextOverlay"
+    "Microsoft.MicrosoftStickyNotes"
+    "Microsoft.MSPaint"
+    "Microsoft.WindowsCamera"
+    "Microsoft.HEIFImageExtension"
+    "Microsoft.ScreenSketch"
+    "Microsoft.VP9VideoExtensions"
+    "Microsoft.WebMediaExtensions"
+    "Microsoft.WebpImageExtension"
+    "WindSynthBerry"
+    "MIDIBerry"
+    "Slack"
+    "Microsoft.MixedReality.Portal"
+    "Microsoft.PPIProjection"
+    "Microsoft.BingNews"
+    "Microsoft.GetHelp"
+    "Microsoft.Getstarted"
+    "Microsoft.Messaging"
+    "Microsoft.Microsoft3DViewer"
+    "Microsoft.MicrosoftOfficeHub"
+    "Microsoft.MicrosoftSolitaireCollection"
+    "Microsoft.NetworkSpeedTest"
+    "Microsoft.News"
+    "Microsoft.Office.Lens"
+    "Microsoft.Office.OneNote"
+    "Microsoft.Office.Sway"
+    "Microsoft.OneConnect"
+    "Microsoft.People"
+    "Microsoft.Print3D"
+    "Microsoft.RemoteDesktop"
+    "Microsoft.SkypeApp"
+    "Microsoft.Office.Todo.List"
+    "Microsoft.Whiteboard"
+    "Microsoft.WindowsAlarms"
+    "microsoft.windowscommunicationsapps"
+    "Microsoft.WindowsFeedbackHub"
+    "Microsoft.WindowsMaps"
+    "Microsoft.WindowsSoundRecorder"
+    "Microsoft.Xbox.TCUI"
+    "Microsoft.XboxApp"
+    "Microsoft.XboxGameOverlay"
+    "Microsoft.XboxGamingOverlay"
+    "Microsoft.XboxSpeechToTextOverlay"
+    "Microsoft.ZuneMusic"
+    "Microsoft.ZuneVideo"
+    "EclipseManager"
+    "ActiproSoftwareLLC"
+    "AdobeSystemsIncorporated.AdobePhotoshopExpress"
+    "Duolingo-LearnLanguagesforFree"
+    "PandoraMediaInc"
+    "CandyCrush"
+    "BubbleWitch3Saga"
+    "Wunderlist"
+    "Flipboard"
+    "Twitter"
+    "Facebook"
+    "Spotify"
+    "Minecraft"
+    "Royal Revolt"
+    "Sway"
+    "Dolby"
+    "Microsoft.Advertising.Xaml"
+    "Microsoft.Wallet"
+    "Microsoft.YourPhone"
+    "Microsoft.LanguageExperiencePackit-IT"
+    "Microsoft.MicrosoftEdge.Stable"
+    "MicrosoftCorporationII.QuickAssist"
+    "MicrosoftWindows.Client.WebExperience"
+    "Clipchamp.Clipchamp"
+    "Microsoft.HEVCVideoExtension"
+    "Microsoft.RawImageExtension"
+    "Microsoft.Todos"
+    "Microsoft.PowerAutomateDesktop"
+)
+
+$global:WhiteListedApps = @(
+    "Microsoft.Services.Store.Engagement"
+    "Microsoft.Services.Store.Engagement"
+    "Microsoft.StorePurchaseApp"
+    "Microsoft.WindowsStore"
+    "NVIDIACorp.NVIDIAControlPanel"
+    "\.NET"
+    "Microsoft.DesktopAppInstaller"
+    "Microsoft.Windows.ShellExperienceHost"
+    "Microsoft.VCLibs*"
+    "Microsoft.XboxIdentityProvider"
+    "Microsoft.WindowsCalculator"
+    "PythonSoftwareFoundation.Python.3.10"
+    "5319275A.WhatsAppDesktop"
+    "Microsoft.DesktopAppInstaller"
+    "Microsoft.Windows.ShellExperienceHost"
+    "Microsoft.UI.Xaml.2.8"
+    "Microsoft.UI.Xaml.2.8"
+    "Microsoft.UI.Xaml.2.4"
+    "Microsoft.UI.Xaml.2.4"
+    "Microsoft.UI.Xaml.2.0"
+    "Microsoft.UI.Xaml.2.7"
+    "Microsoft.UI.Xaml.2.7"
+    "Microsoft.WindowsAppRuntime.1.2"
+    "Microsoft.WindowsAppRuntime.1.2"
+    "Microsoft.WindowsAppRuntime.1.3-preview1"
+    "Microsoft.WindowsAppRuntime.1.3-preview1"
+    "Microsoft.Advertising.Xaml"
+    "Microsoft.LanguageExperiencePackit-IT"
+    )
+
+#NonRemovable Apps that where getting attempted and the system would reject the uninstall, speeds up debloat and prevents 'initalizing' overlay when removing apps
+$NonRemovables = Get-AppxPackage -AllUsers | Where-Object { $_.NonRemovable -eq $true } | ForEach { $_.Name }
+$NonRemovables += Get-AppxPackage | Where-Object { $_.NonRemovable -eq $true } | ForEach { $_.Name }
+$NonRemovables += Get-AppxProvisionedPackage -Online | Where-Object { $_.NonRemovable -eq $true } | ForEach { $_.DisplayName }
+$NonRemovables = $NonRemovables | Sort-Object -Unique
+
+if ($NonRemovables -eq $null ) {
+    # the .NonRemovable property doesn't exist until version 18xx. Use a hard-coded list instead.
+    #WARNING: only use exact names here - no short names or wildcards
+    $NonRemovables = @(
+        "1527c705-839a-4832-9118-54d4Bd6a0c89"
+        "c5e2524a-ea46-4f67-841f-6a9465d9d515"
+        "E2A4F912-2574-4A75-9BB0-0D023378592B"
+        "F46D4000-FD22-4DB4-AC8E-4E1DDDE828FE"
+        "InputApp"
+        "Microsoft.AAD.BrokerPlugin"
+        "Microsoft.AccountsControl"
+        "Microsoft.BioEnrollment"
+        "Microsoft.CredDialogHost"
+        "Microsoft.ECApp"
+        "Microsoft.LockApp"
+        "Microsoft.MicrosoftEdgeDevToolsClient"
+        "Microsoft.MicrosoftEdge"
+        "Microsoft.PPIProjection"
+        "Microsoft.Win32WebViewHost"
+        "Microsoft.Windows.Apprep.ChxApp"
+        "Microsoft.Windows.AssignedAccessLockApp"
+        "Microsoft.Windows.CapturePicker"
+        "Microsoft.Windows.CloudExperienceHost"
+        "Microsoft.Windows.ContentDeliveryManager"
+        "Microsoft.Windows.Cortana"
+        "Microsoft.Windows.HolographicFirstRun"
+        "Microsoft.Windows.NarratorQuickStart"
+        "Microsoft.Windows.OOBENetworkCaptivePortal"
+        "Microsoft.Windows.OOBENetworkConnectionFlow"
+        "Microsoft.Windows.ParentalControls"
+        "Microsoft.Windows.PeopleExperienceHost"
+        "Microsoft.Windows.PinningConfirmationDialog"
+        "Microsoft.Windows.SecHealthUI"
+        "Microsoft.Windows.SecondaryTileExperience"
+        "Microsoft.Windows.SecureAssessmentBrowser"
+        "Microsoft.Windows.ShellExperienceHost"
+        "Microsoft.Windows.XGpuEjectDialog"
+        "Microsoft.XboxGameCallableUI"
+        "Windows.CBSPreview"
+        "windows.immersivecontrolpanel"
+        "Windows.PrintDialog"
+        "Microsoft.Services.Store.Engagement"
+        "Nvidia"
+        "Microsoft.WindowsStore"
+        "Microsoft.StorePurchaseApp"
+        "NVIDIACorp.NVIDIAControlPanel"
+        "40459File-New-Project.EarTrumpet"
+	    "/.NET"
+	    "Microsoft.Services.Store.Engagement"
+        "Microsoft.DesktopAppInstaller"
+        "Microsoft.Windows.ShellExperienceHost"
+        "Microsoft.UI.Xaml.2.8"
+        "Microsoft.UI.Xaml.2.8"
+        "Microsoft.UI.Xaml.2.4"
+        "Microsoft.UI.Xaml.2.4"
+        "Microsoft.UI.Xaml.2.0"
+        "Microsoft.UI.Xaml.2.7"
+        "Microsoft.UI.Xaml.2.7"
+        "Microsoft.WindowsAppRuntime.1.2"
+        "Microsoft.WindowsAppRuntime.1.2"
+        "Microsoft.WindowsAppRuntime.1.3-preview1"
+        "Microsoft.WindowsAppRuntime.1.3-preview1"
+
+    )
+}
+
+# import library code - located relative to this script
+Function dotInclude() {
+    Param(
+        [Parameter(Mandatory)]
+        [string]$includeFile
+    )
+    # Look for the file in the same directory as this script
+    $scriptPath = $PSScriptRoot
+    if ( $PSScriptRoot -eq $null -and $psISE) {
+        $scriptPath = (Split-Path -Path $psISE.CurrentFile.FullPath)
+    }
+    if ( test-path $scriptPath\$includeFile ) {
+        # import and immediately execute the requested file
+        . $scriptPath\$includeFile
+    }
+}
+
+# Override built-in blacklist/whitelist with user defined lists
+dotInclude 'custom-lists.ps1'
+
+#convert to regular expression to allow for the super-useful -match operator
+$global:BloatwareRegex = $global:Bloatware -join '|'
+$global:WhiteListedAppsRegex = $global:WhiteListedApps -join '|'
+
+
+    $1CustomizeForm                  = New-Object System.Windows.Forms.Form
+    $1CustomizeForm.ClientSize       = New-Object System.Drawing.Point(800,1000)
+    $1CustomizeForm.StartPosition    = 'CenterScreen'
+    $1CustomizeForm.FormBorderStyle  = 'FixedSingle'
+    $1CustomizeForm.MinimizeBox      = $false
+    $1CustomizeForm.MaximizeBox      = $true
+    $1CustomizeForm.ShowIcon         = $false
+    $1CustomizeForm.Text             = "Rimozione Bloatware"
+    $1CustomizeForm.TopMost          = $false
+    $1CustomizeForm.AutoScroll       = $true
+    $1CustomizeForm.BackColor        = [System.Drawing.ColorTranslator]::FromHtml("#FF1A2733")
+
+    $ListPanel                     = New-Object system.Windows.Forms.Panel
+    $ListPanel.height              = 900
+    $ListPanel.width               = 790
+    $ListPanel.Anchor              = 'top,right,left'
+    $ListPanel.location            = New-Object System.Drawing.Point(15,15)
+    $ListPanel.AutoScroll          = $true
+    $ListPanel.BackColor           = [System.Drawing.ColorTranslator]::FromHtml("#FF1F272E")
+
+    $1Button1                       = New-Object System.Windows.Forms.Button
+    $1Button1.FlatStyle             = 'Flat'
+    $1Button1.Text                  = "Save Your Choices"
+    $1Button1.width                 = 285
+    $1Button1.height                = 50
+    $1Button1.Location              = New-Object System.Drawing.Point(10, 935)
+    $1Button1.Font                  = New-Object System.Drawing.Font('Consolas',9)
+    $1Button1.ForeColor             = [System.Drawing.ColorTranslator]::FromHtml("#7f9ebb")
+
+    $1Button2                       = New-Object System.Windows.Forms.Button
+    $1Button2.FlatStyle             = 'Flat'
+    $1Button2.Text                  = "Remove Selected Bloatware"
+    $1Button2.width                 = 285
+    $1Button2.height                = 50
+    $1Button2.Location              = New-Object System.Drawing.Point(505, 935)
+    $1Button2.Font                  = New-Object System.Drawing.Font('Consolas',9)
+    $1Button2.ForeColor             = [System.Drawing.ColorTranslator]::FromHtml("#7f9ebb")
+
+    $1CustomizeForm.controls.AddRange(@($1Button1,$1Button2,$ListPanel))
+
+    $1Button1.Add_Click( {
+           # $ErrorActionPreference = 'SilentlyContinue'
+
+            '$global:WhiteListedApps = @(' | Out-File -FilePath $PSScriptRoot\custom-lists.ps1 -Encoding utf8
+            @($ListPanel.controls) | ForEach {
+                if ($_ -is [System.Windows.Forms.CheckBox] -and $_.Enabled -and !$_.Checked) {
+                    "    ""$( $_.Text )""" | Out-File -FilePath $PSScriptRoot\custom-lists.ps1 -Append -Encoding utf8
+                }
+            }
+            ')' | Out-File -FilePath $PSScriptRoot\custom-lists.ps1 -Append -Encoding utf8
+
+            '$global:Bloatware = @(' | Out-File -FilePath $PSScriptRoot\custom-lists.ps1 -Append -Encoding utf8
+            @($ListPanel.controls) | ForEach {
+                if ($_ -is [System.Windows.Forms.CheckBox] -and $_.Enabled -and $_.Checked) {
+                    "    ""$($_.Text)""" | Out-File -FilePath $PSScriptRoot\custom-lists.ps1 -Append -Encoding utf8
+                }
+            }
+            ')' | Out-File -FilePath $PSScriptRoot\custom-lists.ps1 -Append -Encoding utf8
+
+            #Over-ride the white/blacklist with the newly saved custom list
+            dotInclude custom-lists.ps1
+
+            #convert to regular expression to allow for the super-useful -match operator
+            $global:BloatwareRegex = $global:Bloatware -join '|'
+            $global:WhiteListedAppsRegex = $global:WhiteListedApps -join '|'
+        })
+
+        $1Button2.Add_Click({ 
+            $ErrorActionPreference = 'SilentlyContinue'
+            Function DebloatBlacklist {
+                Write-Host "Removing Bloatware"
+                Get-AppxPackage | Where-Object Name -cmatch $global:BloatwareRegex | Remove-AppxPackage
+                Get-AppxProvisionedPackage -Online | Where-Object DisplayName -cmatch $global:BloatwareRegex | Remove-AppxProvisionedPackage -Online
+                Get-AppxPackage -AllUsers | Where-Object Name -cmatch $global:BloatwareRegex | Remove-AppxPackage
+            }
+            DebloatBlacklist
+                Function CheckDMWService {
+            
+                Param([switch]$Debloat)
+            
+                If (Get-Service dmwappushservice | Where-Object { $_.StartType -eq "Disabled" }) {
+                    Set-Service dmwappushservice -StartupType Automatic
+                }
+            
+                If (Get-Service dmwappushservice | Where-Object { $_.Status -eq "Stopped" }) {
+                    Start-Service dmwappushservice
+                } 
+            }
+            
+            Function CheckInstallService {
+            
+                If (Get-Service InstallService | Where-Object { $_.Status -eq "Stopped" }) {  
+                    Start-Service InstallService
+                    Set-Service InstallService -StartupType Automatic 
+                }
+            }
+            Write-Host "Done"
+            })
+    
+
+    Function AddAppToCustomizeForm() {
+        Param(
+            [Parameter(Mandatory)]
+            [int] $position,
+            [Parameter(Mandatory)]
+            [string] $appName,
+            [Parameter(Mandatory)]
+            [bool] $enabled,
+            [Parameter(Mandatory)]
+            [bool] $checked,
+            [Parameter(Mandatory)]
+            [bool] $autocheck,
+
+            [string] $notes
+        )
+
+        $label = New-Object System.Windows.Forms.Label
+        $label.Location = New-Object System.Drawing.Point(-10, (2 + $position * 25))
+        $label.Text = $notes
+        $label.Font = New-Object System.Drawing.Font('Consolas',8)
+        $label.Width = 260
+        $label.Height = 27
+        $Label.TextAlign = [System.Drawing.ContentAlignment]::TopRight
+        $label.ForeColor = [System.Drawing.ColorTranslator]::FromHtml("#888888")
+        $ListPanel.controls.AddRange(@($label))
+
+        $Checkbox = New-Object System.Windows.Forms.CheckBox
+        $Checkbox.Text = $appName
+        $CheckBox.Font = New-Object System.Drawing.Font('Consolas',8)
+        $CheckBox.FlatStyle = 'Flat'
+        $CheckBox.ForeColor = [System.Drawing.ColorTranslator]::FromHtml("#eeeeee")
+        $Checkbox.Location = New-Object System.Drawing.Point(268, (0 + $position * 25))
+        $Checkbox.Autosize = 1;
+        $Checkbox.Checked = $checked
+        $Checkbox.Enabled = $enabled
+        $CheckBox.AutoCheck = $autocheck
+        $ListPanel.controls.AddRange(@($CheckBox))
+    }
+
+
+    $Installed = @( (Get-AppxPackage).Name )
+    $Online = @( (Get-AppxProvisionedPackage -Online).DisplayName )
+    $AllUsers = @( (Get-AppxPackage -AllUsers).Name )
+    [int]$checkboxCounter = 0
+    
+    ForEach ( $item in $global:WhiteListedApps ) {
+        $string = ""
+        if ( $null -notmatch $NonRemovables -and $NonRemovables -cmatch $item ) { $string += " NonRemovables " }
+        if ( $null -notmatch $global:BloatwareRegex -and $item -cmatch $global:BloatwareRegex ) { $string += " Blacklist " }
+        if ( $null -notmatch $Installed -and $Installed -cmatch $item) { $string += "Installed" }
+        if ( $null -notmatch $AllUsers -and $AllUsers -cmatch $item) { $string += "" }
+        if ( $null -notmatch $Online -and $Online -cmatch $item) { $string += "" }
+        AddAppToCustomizeForm $checkboxCounter $item $true $false $true $string
+        ++$checkboxCounter
+    }
+    ForEach ( $item in $global:Bloatware ) {
+        $string = ""
+        if ( $null -notmatch $NonRemovables -and $NonRemovables -cmatch $item ) { $string += " NonRemovables " }
+        if ( $null -notmatch $global:WhiteListedAppsRegex -and $item -cmatch $global:WhiteListedAppsRegex ) { $string += "Whitelist " }
+        if ( $null -notmatch $Installed -and $Installed -cmatch $item) { $string += "Installed" }
+        if ( $null -notmatch $AllUsers -and $AllUsers -cmatch $item) { $string += "" }
+        if ( $null -notmatch $Online -and $Online -cmatch $item) { $string += "" }
+        AddAppToCustomizeForm $checkboxCounter $item $true $true $true $string
+        ++$checkboxCounter
+    }
+    ForEach ( $item in $AllUsers ) {
+        $string = ""
+        if ( $null -notmatch $NonRemovables -and $NonRemovables -cmatch $item ) { continue }
+        if ( $null -notmatch $global:WhiteListedAppsRegex -and $item -cmatch $global:WhiteListedAppsRegex ) { continue }
+        if ( $null -notmatch $global:BloatwareRegex -and $item -cmatch $global:BloatwareRegex ) { continue }
+        if ( $null -notmatch $Installed -and $Installed -cmatch $item) { $string += " Installed" }
+        if ( $null -notmatch $Online -and $Online -cmatch $item) { $string += "" }
+        AddAppToCustomizeForm $checkboxCounter $item $true $true $true $string
+        ++$checkboxCounter
+    }
+    ForEach ( $item in $Installed ) {
+        $string = "Installed"
+        if ( $null -notmatch $NonRemovables -and $NonRemovables -cmatch $item ) { continue }
+        if ( $null -notmatch $global:WhiteListedAppsRegex -and $item -cmatch $global:WhiteListedAppsRegex ) { continue }
+        if ( $null -notmatch $global:BloatwareRegex -and $item -cmatch $global:BloatwareRegex ) { continue }
+        if ( $null -notmatch $AllUsers -and $AllUsers -cmatch $item) { continue }
+        if ( $null -notmatch $Online -and $Online -cmatch $item) { $string += "" }
+        AddAppToCustomizeForm $checkboxCounter $item $true $true $true $string
+        ++$checkboxCounter
+    }
+    ForEach ( $item in $Online ) {
+        $string = ""
+        if ( $null -notmatch $NonRemovables -and $NonRemovables -cmatch $item ) { continue }
+        if ( $null -notmatch $global:WhiteListedAppsRegex -and $item -cmatch $global:WhiteListedAppsRegex ) { continue }
+        if ( $null -notmatch $global:BloatwareRegex -and $item -cmatch $global:BloatwareRegex ) { continue }
+        if ( $null -notmatch $Installed -and $Installed -cmatch $item) { continue }
+        if ( $null -notmatch $AllUsers -and $AllUsers -cmatch $item) { continue }
+        AddAppToCustomizeForm $checkboxCounter $item $true $true $true $string
+        ++$checkboxCounter
+    }
+    [void]$1CustomizeForm.ShowDialog()
+
 })
 
 $WPFTab3P3.Add_Click({
@@ -5292,6 +7116,13 @@ $WPFTab6P3.Add_Click({
     } ElseIf ([System.Environment]::OSVersion.Version.Build -ge 15063) {
     Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" -Name "SecurityHealth" -ErrorAction SilentlyContinue
     }
+    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defende\Real-Time Protectionr")) {
+    New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" -Force | Out-Null
+    }
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" -Name "DisableRealtimeMonitoring" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" -Name "DisableBehaviorMonitoring" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" -Name "DisableOnAccessProtection" -Type DWord -Value 1
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" -Name "DisableScanOnRealtimeEnable" -Type DWord -Value 1
     Write-Host "Disabled Windows Defender"
     $WPFd18.IsChecked = $false
     }
@@ -5804,7 +7635,7 @@ $WPFTab8P1.Add_Click({
     $WPFa33.IsChecked = $false
     $WPFa34.IsChecked = $false
     $WPFa35.IsChecked = $false
-    $WPFa36.IsChecked = $true
+    $WPFa36.IsChecked = $false
     $WPFa37.IsChecked = $false
 
 })
@@ -6967,7 +8798,9 @@ $WPFTab11P1.Add_Click({
     $WPFt42.IsChecked = $false
     $WPFt44.IsChecked = $false
     $WPFt45.IsChecked = $false
-
+    $WPFt46.IsChecked = $true
+    $WPFt47.IsChecked = $false
+    $WPFt48.IsChecked = $true
 })
 
 $WPFTab11P2.Add_Click({
@@ -7302,6 +9135,42 @@ $WPFTab11P2.Add_Click({
     Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility\StickyKeys" -Name "Flags" -Type String -Value "510"
     Write-Host "Enable Sticky Keys Prompt"
     $WPFt45.IsChecked = $false
+    }
+        If ( $WPFt46.IsChecked -eq $true ) {
+    Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" -Recurse -ErrorAction SilentlyContinue
+ If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag")) {
+            New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag" -Force | Out-Null
+        }
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag" -Name "ThisPCPolicy" -Type String -Value "Hide"
+        If (!(Test-Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag")) {
+            New-Item -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag" -Force | Out-Null
+        }
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag" -Name "ThisPCPolicy" -Type String -Value "Hide"
+    
+    Write-Host "Disabled 3D Object"
+    $WPFt46.IsChecked = $false
+    }
+        If ( $WPFt47.IsChecked -eq $true ) {
+If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}")) {
+            New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" | Out-Null
+        }
+        Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag" -Name "ThisPCPolicy" -ErrorAction SilentlyContinue
+        Remove-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag" -Name "ThisPCPolicy" -ErrorAction SilentlyContinue
+    
+    Write-Host "Enabled 3D Object"
+    $WPFt47.IsChecked = $false
+    }
+
+        If ( $WPFt48.IsChecked -eq $true ) {
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds" -Name "ShellFeedsTaskbarViewMode" -Value 2
+    Write-Host "Disabled News and Interest"
+    $WPFt48.IsChecked = $false
+    }
+
+            If ( $WPFt49.IsChecked -eq $true ) {
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds" -Name "ShellFeedsTaskbarViewMode" -Value 0
+    Write-Host "Enabled News and Interest"
+    $WPFt49.IsChecked = $false
     }
 
     Write-Host "All Selected Tweaks are activated successfully"
