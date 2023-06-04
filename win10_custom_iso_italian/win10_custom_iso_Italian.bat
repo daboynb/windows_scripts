@@ -25,7 +25,7 @@ rem Download iso
 powerShell -Command "Write-Host 'Vuoi scaricare la iso di windows? (si/no)' -ForegroundColor Green; exit"
 set /p answer=":"
 if /i "%answer%"=="si" (
-    start "" "https://drive.google.com/uc?id=1zAbQBsJeU4ctHl7A7ZBSrajkMEZsyHKJ&export=download&confirm=t"
+    start "" "https://drive.google.com/u/0/uc?id=1bXljcpnpemzsh1ao9B0lsonGt4DNSfya&export=download"
     goto :iso_scaricata
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
