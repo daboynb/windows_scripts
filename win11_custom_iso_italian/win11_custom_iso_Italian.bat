@@ -11,7 +11,7 @@ IF NOT EXIST "resources" (
 )
 
 set "resource_dir=resources"
-set "files=7z.dll 7z.exe Debloat_Windows_Italia.lnk debloat3.0.ps1 firefox_installer.exe oscdimg.exe tweaks.bat unattend.xml edge_removal.bat start.ps1 PowerRun.exe"
+set "files=7z.dll 7z.exe Debloat_Windows_Italia.lnk debloat3.1.ps1 firefox_installer.exe oscdimg.exe tweaks.bat unattend.xml edge_removal.bat start.ps1 PowerRun.exe"
 
 for %%i in (%files%) do (
   if not exist "%resource_dir%\%%i" (
@@ -367,7 +367,7 @@ if %errorlevel% equ 0 (
 
 rem copy debloater
 cls
-copy "resources\debloat3.0.ps1" "C:\mount\mount\Windows"
+copy "resources\debloat3.1.ps1" "C:\mount\mount\Windows"
 if %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Debloat.ps1 copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) else (
