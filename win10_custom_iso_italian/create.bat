@@ -484,5 +484,8 @@ del "%filepath%" /q
     goto :delete_iso
 )
 
+:: Enable QuickEdit Mode
+reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
+
 powerShell -Command "Write-Host 'Processo completato! Press any key to exit' -ForegroundColor Green; exit"  
 pause
