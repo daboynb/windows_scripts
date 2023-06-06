@@ -66,6 +66,7 @@ bcdedit /set {current} bootmenupolicy Legacy
 rem disable widgets
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v TaskbarDa /t REG_DWORD /d 0 /f
 
+rem disable defender 
 IF EXIST "C:\Windows\nodefender.pref" (
 
     taskkill /f /im explorer.exe >nul 2>nul

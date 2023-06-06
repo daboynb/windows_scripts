@@ -78,6 +78,7 @@ powerShell -ExecutionPolicy Bypass -File "C:\Windows\unpin_start_tiles.ps1"
 rem stuff from paki
 bcdedit /set {current} bootmenupolicy Legacy
 
+rem disable defender 
 IF EXIST "C:\Windows\nodefender.pref" (
 
     taskkill /f /im explorer.exe >nul 2>nul
