@@ -17,4 +17,4 @@ Remove-Item -Path "windows_scripts-main" -Recurse -Force
 Remove-Item -Path "windows_script_daboynb.zip" -Force
 
 # Run the script
-Start-Process -FilePath ".\win10_custom_iso\win10_custom_iso.bat"
+Start-Process -FilePath ".\win10_custom_iso\create.bat"
