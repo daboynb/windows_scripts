@@ -17,4 +17,4 @@ Remove-Item -Path "windows_scripts-main" -Recurse -Force
 Remove-Item -Path "windows_script_daboynb.zip" -Force
 
 # Run the script
-Start-Process -FilePath ".\win11_custom_iso_italian\create.bat"
+Start-Process -FilePath ".\win11_custom_iso_italian\Runme.bat"
