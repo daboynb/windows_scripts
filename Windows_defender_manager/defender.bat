@@ -109,6 +109,8 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v Dis
 PowerRun.exe cmd.exe /c "cd C:\Windows\System32 && ren smartscreendisabled.exe smartscreen.exe"
 start explorer.exe
 
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v SecurityHealth /d "%windir%\system32\SecurityHealthSystray.exe" /t REG_SZ /f
+
 powershell write-host -fore Green "Done, rebooting in 5 seconds"
 timeout 5
 shutdown /r /t 00 
