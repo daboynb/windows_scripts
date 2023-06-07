@@ -398,7 +398,7 @@ if %errorlevel% equ 0 (
 
 rem disable defender
 :defender
-set /p answer="Vuoi rimuovere Windows Defender (Antivirus)? (si/no) : "
+set /p answer="Vuoi disattivare Windows Defender (Antivirus)? (si/no) : "
 if /i "%answer%"=="si" (
     echo > C:\mount\mount\Windows\nodefender.pref
     goto :remove_defender
