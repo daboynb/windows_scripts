@@ -66,7 +66,7 @@ PowerRun.exe cmd.exe /c "reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows D
 rem Disable Windows Defender antispyware and smartscreen
 PowerRun.exe cmd.exe /c "cd C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.23050.3-0 && ren MsMpEng.exe MsMpEng.exe.bak"
 PowerRun.exe cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
-PowerRun.exe cmd.exe /c "cd C:\Windows\System32 && ren smartscreen.exe smartscreendisabled.exe"
+PowerRun.exe cmd.exe /c "cd C:\Windows\System32 && ren smartscreen.exe smartscreen.exe.bak"
 start explorer.exe
 
 powershell write-host -fore Green "Done, rebooting in 5 seconds"
@@ -116,7 +116,7 @@ PowerRun.exe cmd.exe /c "reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows D
 rem Enable Windows Defender antispyware and smartscreen
 PowerRun.exe cmd.exe /c "cd C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.23050.3-0 && ren MsMpEng.exe.bak MsMpEng.exe"
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 0 /f
-PowerRun.exe cmd.exe /c "cd C:\Windows\System32 && ren smartscreendisabled.exe smartscreen.exe"
+PowerRun.exe cmd.exe /c "cd C:\Windows\System32 && ren smartscreen.exe.bak smartscreen.exe"
 start explorer.exe
 
 powershell write-host -fore Green "Done, rebooting in 5 seconds"
