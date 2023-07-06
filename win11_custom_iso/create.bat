@@ -98,7 +98,7 @@ IF EXIST "C:\ISO\Win11\sources\install.esd" (
 )
 
 :esd
-dism /Get-WimInfo /WimFile::C:\ISO\Win11\sources\install.esd
+dism /Get-WimInfo /WimFile:C:\ISO\Win11\sources\install.esd
 echo.
 powerShell -Command "Write-Host 'Select the windows version you want to use' -ForegroundColor Green; exit"
 echo.

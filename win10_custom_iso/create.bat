@@ -98,7 +98,7 @@ IF EXIST "C:\ISO\Win10\sources\install.esd" (
 )
 
 :esd
-dism /Get-WimInfo /WimFile::C:\ISO\Win10\sources\install.esd
+dism /Get-WimInfo /WimFile:C:\ISO\Win10\sources\install.esd
 echo.
 powerShell -Command "Write-Host 'Select the windows version you want to use' -ForegroundColor Green; exit"
 echo.
