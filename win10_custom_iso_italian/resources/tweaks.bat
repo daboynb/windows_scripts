@@ -23,10 +23,10 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "H
 
 rem Check the system architecture
 wmic os get osarchitecture 2>NUL | find "64-bit">NUL
-if "%ERRORLEVEL%"=="0" echo "64 bit!" && goto :64bit
+IF "%ERRORLEVEL%"=="0" echo "64 bit!" && goto :64bit
 
 wmic os get osarchitecture 2>NUL | find "32-bit">NUL
-if "%ERRORLEVEL%"=="0" echo "32 bit!" && goto :32bit
+IF "%ERRORLEVEL%"=="0" echo "32 bit!" && goto :32bit
 
 :64bit
 rem uninstall onedrive 64 bit
@@ -80,7 +80,12 @@ bcdedit /set {current} bootmenupolicy Legacy
 
 rem disable defender 
 IF EXIST "C:\Windows\nodefender.pref" (
+    goto :disable_def
+) ELSE (
+    goto :skip_disable_def
+)
 
+:disable_def
 taskkill /f /im explorer.exe >nul 2>nul
 taskkill /f /im smartscreen.exe >nul 2>nul
 taskkill /f /im SecurityHealthSystray.exe >nul 2>nul
@@ -126,16 +131,69 @@ PowerRun.exe cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\
 PowerRun.exe cmd.exe /c "cd C:\Windows\System32 && ren smartscreen.exe smartscreen.exe.bak"
 start explorer.exe
 
-)
-
-rem copy firefox installer to the desktop and remove edge using Edge removal script by AveYo 
+:skip_disable_def
+rem copy firefox installer to the desktop and remove edge
 IF EXIST "C:\Windows\noedge.pref" (
-    move "C:\firefox_installer.exe" "C:\Users\%username%\Desktop"
-    C:\Windows\edge_removal.bat
+move "C:\firefox_installer.exe" "C:\Users\%username%\Desktop"
+goto :edge
+) ELSE (
+    goto :skip_edge
 )
 
-IF NOT EXIST "C:\Windows\noedge.pref" (
-    powershell write-host -fore Green "Done, rebooting in 5 seconds"
-    timeout 5
-    shutdown /r /t 00 
+:edge
+echo.
+echo Killing Microsoft Edge...
+echo.
+taskkill /F /IM msedge.exe 2>nul
+
+echo.
+echo removing Microsoft Edge...
+echo.
+PowerRun.exe cmd.exe /c "rmdir "C:\Program Files (x86)\Microsoft\EdgeUpdate" /s /q" 1>nul 2>nul
+PowerRun.exe cmd.exe /c "rmdir "C:\Program Files (x86)\Microsoft\Edge" /s /q" 1>nul 2>nul
+PowerRun.exe powershell.exe -Command "Get-AppxPackage *MicrosoftEdge* | Remove-AppxPackage; $filePath = 'C:\Windows\edge1.txt'; $textContent = 'Removal completed successfully.'; Set-Content -Path $filePath -Value $textContent" 1>nul 2>nul
+
+echo.
+echo Finding the installed version of Microsoft Edge Legacy/UWP
+echo.
+for /f "tokens=8 delims=\" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages" ^| findstr "Microsoft-Windows-Internet-Browser-Package" ^| findstr "~~"') do (
+    set "edge_legacy_package_version=%%i"
 )
+
+echo.
+echo Deleting the owners of the Edge Legacy package in the registry
+echo.
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%edge_legacy_package_version%\Owners" /va /f 1>nul 2>nul
+
+echo.
+echo Removing the Edge Legacy package using DISM
+echo.
+dism /online /Remove-Package /PackageName:%edge_legacy_package_version% 1>nul 2>nul
+
+echo.
+echo Adding registry key to prevent Edge updates
+echo.
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdgeWithChromium" /t REG_DWORD /d 1 1>nul 2>nul
+
+echo.
+del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk" 1>nul 2>nul
+
+rem disable bing search on start
+reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Search /v BingSearchEnabled /t REG_DWORD /d 0 /f 1>nul 2>nul
+
+:check
+IF EXIST "C:\Windows\edge1.txt" (
+    powershell write-host -fore Green "Done"
+) ELSE (
+    goto :check
+)
+
+
+powershell write-host -fore Green "Done, rebooting in 5 seconds"
+timeout 5
+shutdown /r /t 00 
+
+:skip_edge
+powershell write-host -fore Green "Done, rebooting in 5 seconds"
+timeout 5
+shutdown /r /t 00 

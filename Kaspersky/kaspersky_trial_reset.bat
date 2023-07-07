@@ -13,21 +13,21 @@ pause
 
 rem Check the system architecture
 wmic os get osarchitecture 2>NUL | find "64-bit">NUL
-if "%ERRORLEVEL%"=="0" echo "64 bit!" && set "WOW6432=\WOW6432Node"
+IF "%ERRORLEVEL%"=="0" echo "64 bit!" && set "WOW6432=\WOW6432Node"
 
 wmic os get osarchitecture 2>NUL | find "32-bit">NUL
-if "%ERRORLEVEL%"=="0" echo "32 bit!" && set "WOW6432=" 
+IF "%ERRORLEVEL%"=="0" echo "32 bit!" && set "WOW6432=" 
 
 rem Check if kaspersky is off
 :avp 
 tasklist /nh /fi "imagename eq avp.exe" | find /i "avp.exe">NUL
-if "%ERRORLEVEL%"=="0" color 0C && echo "Kaspersky is still running... wait until it gets killed" && timeout 10 && goto :avp
-if "%ERRORLEVEL%"=="1" color 0A && echo "kaspersky is not running, OK!"
+IF "%ERRORLEVEL%"=="0" color 0C && echo "Kaspersky is still running... wait until it gets killed" && timeout 10 && goto :avp
+IF "%ERRORLEVEL%"=="1" color 0A && echo "kaspersky is not running, OK!"
 
 rem Check if Self Protection is on or off
 reg query HKEY_LOCAL_MACHINE\SOFTWARE"%WOW6432%"\KasperskyLab\AVP21.3\settings /v EnableSelfProtection | find "0x1">NUL
-if "%ERRORLEVEL%"=="0" color 0C && echo "SelfProtection is ON, EXITING!" && pause && exit
-if "%ERRORLEVEL%"=="1" color 0A && echo "SelfProtection is OFF, OK!" 
+IF "%ERRORLEVEL%"=="0" color 0C && echo "SelfProtection is ON, EXITING!" && pause && exit
+IF "%ERRORLEVEL%"=="1" color 0A && echo "SelfProtection is OFF, OK!" 
 
 rem Delete files
 del /f "C:\ProgramData\Kaspersky Lab\AVP21.3\Data\stor*.bin"
@@ -55,5 +55,5 @@ reg add HKEY_LOCAL_MACHINE\SOFTWARE"%WOW6432%"\KasperskyLab\AVP21.3\settings /v 
 rem Ask to reboot the machine
 echo "You need to reboot to apply"
 choice /c yn /m "Reboot now?"
-if %errorlevel% equ 1 shutdown /r /t 00
+IF %errorlevel% equ 1 shutdown /r /t 00
 pause && exit

@@ -11,7 +11,7 @@ IF NOT EXIST "resources" (
 )
 
 set "resource_dir=resources"
-set "files=7z.dll 7z.exe Debloat_Windows_Italia.lnk debloat3.1.ps1 firefox_installer.exe oscdimg.exe tweaks.bat unattend.xml edge_removal.bat unpin_start_tiles.ps1 start.ps1 PowerRun.exe"
+set "files=7z.dll 7z.exe Debloat_Windows_Italia.lnk debloat3.1.ps1 firefox_installer.exe oscdimg.exe tweaks.bat unattend.xml unpin_start_tiles.ps1 start.ps1 PowerRun.exe"
 
 for %%i in (%files%) do (
   if not exist "%resource_dir%\%%i" (
@@ -30,7 +30,7 @@ if /i "%answer%"=="si" (
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
     goto :winfolder
-) else (
+) ELSE (
     echo I valori accettati sono solamente si e no.
     goto :iso
 )
@@ -40,7 +40,7 @@ powerShell -Command "Write-Host 'Digita terminato al termine del download per pr
 set /p answer=":"
 if /i "%answer%"=="terminato" (
   echo Proseguiamo
-) else (
+) ELSE (
     echo Valore non accettato.
     goto :iso_scaricata
 )
@@ -57,16 +57,16 @@ IF EXIST "C:\mount\mount" (
 
 rem create folder
 mkdir "C:\ISO\Win10" 2>nul
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'C:\ISO\Win10 creata correttamente!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "ERRORE: Impossibile creare C:\ISO\Win10!" && pause && exit /b 1
 )
 
 mkdir "C:\mount\mount" 2>nul
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'C:\mount\mount creata correttamente!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "ERRORE: Impossibile creare C:\mount\mount!" && pause && exit /b 1
 )
 
@@ -82,16 +82,16 @@ for /f "usebackq delims=" %%f in (`powershell -Command "& {Add-Type -AssemblyNam
 if defined filepath (
   powerShell -Command "Write-Host 'Hai selezionato %filepath%' -ForegroundColor Green; exit"  
   cls
-) else (
+) ELSE (
   echo Nessun file selezionato
   goto :select_file
 )
 
 powerShell -Command "Write-Host 'Sto estraendo la iso in C:\ISO\Win10... Attendi!' -ForegroundColor Green; exit"  
 resources\7z.exe x -y -o"C:\ISO\Win10" "%filepath%" > nul
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Estrazione della ISO completata!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "ERRORE: Estrazione fallita!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
@@ -104,9 +104,9 @@ powershell -command "Write-Host 'Inserisci il nome che desideri per l''utente di
 
 rem copy unattended.xml
 copy "resources\unattend_edited.xml" "C:\ISO\Win10\sources\$OEM$\$$\Panther\unattend.xml"
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'unattend.xml copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "ERRORE: Impossibile copiare unattend.xml!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
@@ -128,9 +128,9 @@ set /p index="Inserisci il numero corrispondente: "
 cls
 powerShell -Command "Write-Host 'Attendi' -ForegroundColor Green; exit"
 dism /export-image /SourceImageFile:C:\ISO\Win10\sources\install.esd /SourceIndex:%index% /DestinationImageFile:C:\ISO\Win10\sources\install.wim /Compress:max /CheckIntegrity
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Immagine esportata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "ERRORE: Impossibile esportare l''immagine!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 goto :copy_wim
@@ -145,25 +145,25 @@ set /p index="Inserisci il numero corrispondente: "
 cls
 powerShell -Command "Write-Host 'Attendi' -ForegroundColor Green; exit"  
 dism /Export-Image /SourceImageFile:"C:\ISO\Win10\sources\install.wim" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win10\sources\install_pro.wim" /compress:max
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Immagine esportata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "ERRORE: Impossibile esportare l''immagine!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 :copy_wim
 rem copy the new install.wim
 del "C:\ISO\Win10\sources\install.wim"
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Old install.wim eliminato!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "ERRORE: Impossibile eliminare old install.wim!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 move "C:\ISO\Win10\sources\install_pro.wim" "C:\ISO\Win10\sources\install.wim"
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Il nuovo install.wim e'' stato spostato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "ERRORE: Impossibile spostare il nuovo install.wim!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
@@ -176,32 +176,24 @@ cls
 
 rem delete edge
 :edge
-set /p answer="Vuoi rimuovere edge? (si/no) Consigliato (si) : "
+set /p answer="Vuoi rimuovere edge? (si/no) "
 if /i "%answer%"=="si" (
     echo > C:\mount\mount\Windows\noedge.pref
     goto :edge_step
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
     goto :features
-) else (
+) ELSE (
     echo I valori accettati sono solamente si e no.
     goto :edge
 )
 
 :edge_step
-rmdir "C:\mount\mount\Program Files (x86)\Microsoft\EdgeUpdate" /s /q
-rmdir "C:\mount\mount\Program Files (x86)\Microsoft\Edge" /s /q
-if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Edge rimosso!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
-  color 4 && echo "ERRORE: Impossibile rimuovere edge!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
-)
-copy "resources\edge_removal.bat" "C:\mount\mount\Windows"
 copy "resources\firefox_installer.exe" "C:\mount\mount"
-if %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Lo script per la rimozione completa di edge e l''installer di firefox sono stati copiati con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
-  color 4 && echo "ERRORE: Impossibile copiare lo script per la rimozione completa di edge e l''installer di firefox!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+IF %errorlevel% equ 0 (
+  powerShell -Command "Write-Host 'L''installer di firefox e'' stato copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+) ELSE (
+  color 4 && echo "ERRORE: Impossibile copiare l''installer di firefox!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 :features
@@ -225,7 +217,7 @@ if /i "%answer%"=="tutte" (
     goto :skipping_features
 ) else if /i "%answer%"=="seleziona" (
     goto :features_removal_select
-) else (
+) ELSE (
     echo I valori accettati sono solamente 'tutte', 'nessuna', o 'seleziona'.
     goto :features
 )
@@ -254,7 +246,7 @@ if /i "%answer%"=="si" (
     powershell -Command "Write-Host 'Completato!' -ForegroundColor Green; exit"  
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
-) else (
+) ELSE (
     echo I valori accettati sono solamente si e no.
     goto :Microsoft-Windows-InternetExplorer-Optional-Package
 )
@@ -266,7 +258,7 @@ if /i "%answer%"=="si" (
   powershell -Command "Write-Host 'Completato!' -ForegroundColor Green; exit"  
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
-) else (
+) ELSE (
     echo I valori accettati sono solamente si e no.
     goto :Microsoft-Windows-Kernel-LA57-FoD
 )
@@ -278,7 +270,7 @@ powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$
 powershell -Command "Write-Host 'Completato!' -ForegroundColor Green; exit"  
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
-) else (
+) ELSE (
     echo I valori accettati sono solamente si e no.
     goto :Microsoft-Windows-LanguageFeatures-Handwriting
 )
@@ -290,7 +282,7 @@ powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$
 powershell -Command "Write-Host 'Completato!' -ForegroundColor Green; exit"  
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
-) else (
+) ELSE (
     echo I valori accettati sono solamente si e no.
     goto :Microsoft-Windows-LanguageFeatures-OCR
 )
@@ -302,7 +294,7 @@ powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$
 powershell -Command "Write-Host 'Completato!' -ForegroundColor Green; exit"  
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
-) else (
+) ELSE (
     echo I valori accettati sono solamente si e no.
     goto :Microsoft-Windows-LanguageFeatures-Speech
 )
@@ -314,7 +306,7 @@ powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$
 powershell -Command "Write-Host 'Completato!' -ForegroundColor Green; exit"  
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
-) else (
+) ELSE (
     echo I valori accettati sono solamente si e no.
     goto :Microsoft-Windows-LanguageFeatures-TextToSpeech
 )
@@ -326,7 +318,7 @@ powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$
 powershell -Command "Write-Host 'Completato!' -ForegroundColor Green; exit"  
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
-) else (
+) ELSE (
     echo I valori accettati sono solamente si e no.
     goto :Microsoft-Windows-MediaPlayer-Package
 )
@@ -338,7 +330,7 @@ powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$
 powershell -Command "Write-Host 'Completato!' -ForegroundColor Green; exit"  
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
-) else (
+) ELSE (
     echo I valori accettati sono solamente si e no.
     goto :Microsoft-Windows-TabletPCMath-Package
 )
@@ -350,7 +342,7 @@ powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$
 powershell -Command "Write-Host 'Completato!' -ForegroundColor Green; exit"  
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
-) else (
+) ELSE (
     echo I valori accettati sono solamente si e no.
     goto :Microsoft-Windows-Wallpaper-Content-Extended-FoD
 )
@@ -359,48 +351,48 @@ powershell -Command "Write-Host 'Completato!' -ForegroundColor Green; exit"
 rem copy batch file
 cls
 copy "resources\tweaks.bat" "C:\mount\mount\Windows"
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'tweaks.bat copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "Impossibile copiare tweaks.bat!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem copy debloater
 cls
 copy "resources\debloat3.1.ps1" "C:\mount\mount\Windows"
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Debloat.ps1 copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "Impossibile copiare Debloat.ps1!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 copy "resources\debloat.bat" "C:\mount\mount\Windows"
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Debloat.bat copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "Impossibile copiare Debloat.bat!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 copy "resources\debloat_Windows_Italia.lnk" "C:\mount\mount\Windows"
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Debloat.ink copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "Impossibile copiare Debloat.ink!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem copy unpin_start_tiles.ps1
 copy "resources\unpin_start_tiles.ps1" "C:\mount\mount\Windows"
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Unpin_start_tiles.ps1 copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "Impossibile copiare Unpin_start_tiles.ps1!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem copy start.ps1
 copy "resources\start.ps1" "C:\mount\mount\Windows"
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'start.ps1 copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "Impossibile copiare start.ps1!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
@@ -409,25 +401,21 @@ rem disable defender
 set /p answer="Vuoi disattivare Windows Defender (Antivirus)? (si/no) : "
 if /i "%answer%"=="si" (
     echo > C:\mount\mount\Windows\nodefender.pref
-    goto :remove_defender
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
-    goto :unmount
-) else (
+) ELSE (
     echo I valori accettati sono solamente si e no.
     goto :defender
 )
 
-:remove_defender
 rem copy PowerRun.exe
 copy "resources\PowerRun.exe" "C:\mount\mount\Windows"
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'PowerRun.exe copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "Impossibile copiare PowerRun.exe!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
-:unmount
 rem unmount the image
 powerShell -Command "Write-Host 'Smontando l''immagine' -ForegroundColor Green; exit"  
 dism /unmount-image /mountdir:"C:\mount\mount" /commit
@@ -438,38 +426,38 @@ rem ############################################################################
 rem rebuild image 
 powerShell -Command "Write-Host 'Creando la ISO' -ForegroundColor Green; exit"  
 resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win10\boot\etfsboot.com#pEF,e,bC:\ISO\Win10\efi\microsoft\boot\efisys.bin C:\ISO\Win10 C:\ISO\Windows10_edited.iso
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO creata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "ERRORE: Impossibile creare la ISO!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem copy the iso and clean
 copy "C:\ISO\Windows10_edited.iso" "C:\Users\%USERNAME%\Desktop"
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO copiata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "ERRORE: Impossibile copiare la ISO sul desktop!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rmdir "C:\ISO" /s /q
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'La directory1 usata per la creazione della ISO e'' stata eliminata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "ERRORE: Impossibile eliminare le directory1 usata per la creazione della ISO!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rmdir "C:\mount" /s /q
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'La directory2 usata per la creazione della ISO e'' stata eliminata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "ERRORE: Impossibile eliminare la directory2 usata per la creazione della ISO!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 del "resources\unattend_edited.xml" /q
-if %errorlevel% equ 0 (
+IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Unattend eliminato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) else (
+) ELSE (
   color 4 && echo "ERRORE: Impossibile eliminare unattend!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
@@ -479,7 +467,7 @@ if /i "%answer%"=="si" (
 del "%filepath%" /q
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
-) else (
+) ELSE (
     echo I valori accettati sono solamente si e no.
     goto :delete_iso
 )
