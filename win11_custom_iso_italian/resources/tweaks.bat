@@ -176,7 +176,6 @@ IF EXIST "C:\Windows\edge1.txt" (
     goto :check
 )
 
-
 powershell write-host -fore Green "Done, rebooting in 5 seconds"
 timeout 5
 shutdown /r /t 00 
