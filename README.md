@@ -42,7 +42,7 @@ In case the old downloaded Windows updates were corrupted on your system, this a
 Remove onedrive from system.
 
 # remove_edge.bat
-Remove edge from system, windows 10 only.
+Remove edge from system.
 
 # delete_defender_history.bat
 Delete the windows defender protection history.
