@@ -178,9 +178,6 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdge
 echo.
 del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk" 1>nul 2>nul
 
-rem disable bing search on start
-reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Search /v BingSearchEnabled /t REG_DWORD /d 0 /f 1>nul 2>nul
-
 :check
 IF EXIST "C:\Windows\edge1.txt" (
     powershell write-host -fore Green "Done"
