@@ -25,7 +25,7 @@ rem Download iso
 powerShell -Command "Write-Host 'Vuoi scaricare la iso di windows? (si/no)' -ForegroundColor Green; exit"
 set /p answer=":"
 if /i "%answer%"=="si" (
-    start "" "https://drive.google.com/u/0/uc?id=1LpuKcl2B3Vx9i2JGMFhfSkgGuewJTrkp&export=download"
+    start "" "https://onedrive.live.com/?authkey=%21AP24oPyBwZAQ0VQ&id=FAE869A1D69A7846%212063&cid=FAE869A1D69A7846&parId=root&parQt=sharedby&o=OneUp"
     goto :iso_scaricata
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
