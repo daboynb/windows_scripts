@@ -121,3 +121,6 @@ How to use?
 
 # defender.bat
 This script allows you to enable or disable Windows Defender using PowerRun, a tool created by Sordum.
+
+# adb_fastboot.bat
+This script installs adb and fastboot on your pc.
