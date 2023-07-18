@@ -173,7 +173,7 @@ dism /online /Remove-Package /PackageName:%edge_legacy_package_version% 1>nul 2>
 echo.
 echo Adding registry key to prevent Edge updates
 echo.
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdgeWithChromium" /t REG_DWORD /d 1 1>nul 2>nul
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdgeWithChromium" /t REG_DWORD /d 1 /f 1>nul 2>nul
 
 echo.
 del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk" 1>nul 2>nul
