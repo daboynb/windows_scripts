@@ -8,7 +8,7 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 IF exist PowerRun.exe (
     echo ok
 ) ELSE (
-    echo powerrun not present!
+    echo powerrun not present! && pause && exit /b 1
 )
 
 echo.

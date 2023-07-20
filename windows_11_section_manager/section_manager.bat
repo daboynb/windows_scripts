@@ -10,13 +10,13 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 IF exist dxgi.dll (
     echo ok
 ) ELSE (
-    echo dxgi.dll not present!
+    echo dxgi.dll not present! && pause && exit /b 1
 )
 
 IF exist files_detect.ps1 (
     echo ok
 ) ELSE (
-    echo files_detect.ps1 not present!
+    echo files_detect.ps1 not present! && pause && exit /b 1
 )
 
 :MAINMENU
