@@ -20,7 +20,7 @@ ECHO [1] Disable defender
 ECHO [2] enable defender
 ECHO [0] EXIT
 echo.
-SET /P MENU=Type 1, 2, 3, or 0 then press ENTER :
+SET /P MENU=Type 1, 2 or 0 then press ENTER :
 IF /I '%MENU%'=='1' GOTO :disable
 IF /I '%MENU%'=='2' GOTO :enable
 IF /I '%MENU%'=='0' GOTO :EXIT
