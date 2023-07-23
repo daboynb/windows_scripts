@@ -191,7 +191,7 @@ if /i "%answer%"=="si" (
 :edge_step
 copy "resources\firefox_installer.exe" "C:\mount\mount"
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'L''installer di firefox e' stato copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  powerShell -Command "Write-Host 'L''installer di firefox e'' stato copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
   color 4 && echo "ERRORE: Impossibile copiare l''installer di firefox!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
