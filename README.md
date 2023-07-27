@@ -11,11 +11,11 @@ Why this is different from the others?
 
 Different windows builds have different pre-installed apps, this script will debloat the system automatically even if them will change. 
 
-# add_store_windows_10_ltsc_2021.bat
-Install Microsoft Store on Windows 10 LTSC 2021.
+# add_store_windows_10_11.bat
+Install Microsoft Store on Windows 10 and 11.
 
-# remove_store_windows_10_ltsc_2021.bat
-Remove Microsoft Store on Windows 10 LTSC 2021.
+# remove_store_windows_10_11.bat
+Remove Microsoft Store on Windows 10 and 11.
 
 # win11_bypass_from_usb.bat
 Bypass windows 11 requirements.
