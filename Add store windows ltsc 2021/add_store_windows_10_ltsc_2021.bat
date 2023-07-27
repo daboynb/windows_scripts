@@ -9,3 +9,4 @@ WSReset -i 1>nul 2>nul
 TimeOut 20 
 WSReset -i 1>nul 2>nul
 echo Store is downloading... it will be installed soon
+timeout 04
