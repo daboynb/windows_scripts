@@ -120,14 +120,14 @@ IF EXIST "C:\ISO\Win10\sources\install.esd" (
 )
 
 :esd
-dism /Get-WimInfo /WimFile:C:\ISO\Win10\sources\install.esd
+dism /Get-WimInfo /WimFile:"C:\ISO\Win10\sources\install.esd"
 echo.
 powerShell -Command "Write-Host 'Seleziona la versione di windows da usare' -ForegroundColor Green; exit"
 echo.
 set /p index="Inserisci il numero corrispondente: "
 cls
 powerShell -Command "Write-Host 'Attendi' -ForegroundColor Green; exit"
-dism /export-image /SourceImageFile:C:\ISO\Win10\sources\install.esd /SourceIndex:%index% /DestinationImageFile:C:\ISO\Win10\sources\install.wim /Compress:max /CheckIntegrity
+dism /export-image /SourceImageFile:"C:\ISO\Win10\sources\install.esd" /SourceIndex:%index% /DestinationImageFile:C:\ISO\Win10\sources\install.wim /Compress:max /CheckIntegrity
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Immagine esportata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -166,6 +166,7 @@ IF %errorlevel% equ 0 (
 ) ELSE (
   color 4 && echo "ERRORE: Impossibile spostare il nuovo install.wim!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
+goto :mountstep
 
 :copy_esd
 rem del esd
@@ -178,6 +179,7 @@ IF %errorlevel% equ 0 (
 
 rem ######################################################################################## 
 
+:mountstep
 rem mount the image with dism
 powerShell -Command "Write-Host 'Sto montando l''immagine' -ForegroundColor Green; exit"  
 dism /mount-image /imagefile:"C:\ISO\Win10\sources\install.wim" /index:1 /mountdir:"C:\mount\mount"

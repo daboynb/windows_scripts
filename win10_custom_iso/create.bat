@@ -98,14 +98,14 @@ IF EXIST "C:\ISO\Win10\sources\install.esd" (
 )
 
 :esd
-dism /Get-WimInfo /WimFile:C:\ISO\Win10\sources\install.esd
+dism /Get-WimInfo /WimFile:"C:\ISO\Win10\sources\install.esd"
 echo.
 powerShell -Command "Write-Host 'Select the windows version you want to use' -ForegroundColor Green; exit"
 echo.
 set /p index="Please enter the number of the index: "
 cls
 powerShell -Command "Write-Host 'Exporting' -ForegroundColor Green; exit"
-dism /export-image /SourceImageFile:C:\ISO\Win10\sources\install.esd /SourceIndex:%index% /DestinationImageFile:C:\ISO\Win10\sources\install.wim /Compress:max /CheckIntegrity
+dism /export-image /SourceImageFile:"C:\ISO\Win10\sources\install.esd" /SourceIndex:%index% /DestinationImageFile:C:\ISO\Win10\sources\install.wim /Compress:max /CheckIntegrity
 goto :copy_esd
 
 :wim
@@ -139,6 +139,7 @@ IF %errorlevel% equ 0 (
 ) ELSE (
   color 4 && echo "ERROR: Can't move the new install.wim!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
+goto :mountstep
 
 :copy_esd
 rem del esd
@@ -146,11 +147,12 @@ del "C:\ISO\Win10\sources\install.esd"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Old install.esd deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
-  color 4 && echo "ERRORE: Can't remove the old install.esd!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "ERRORE: Can''t delete old install.esd!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem ######################################################################################## 
 
+:mountstep
 rem mount the image with dism
 powerShell -Command "Write-Host 'Mounting image' -ForegroundColor Green; exit"  
 dism /mount-image /imagefile:"C:\ISO\Win10\sources\install.wim" /index:1 /mountdir:"C:\mount\mount"
