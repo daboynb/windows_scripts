@@ -144,9 +144,9 @@ IF %errorlevel% equ 0 (
 rem del esd
 del "C:\ISO\Win11\sources\install.esd"
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Old install.esd eliminato!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  powerShell -Command "Write-Host 'Old install.esd deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
-  color 4 && echo "ERRORE: Impossibile eliminare old install.esd!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "ERRORE: Can't remove the old install.esd!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem ######################################################################################## 
