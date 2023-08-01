@@ -133,7 +133,7 @@ IF %errorlevel% equ 0 (
 ) ELSE (
   color 4 && echo "ERRORE: Impossibile esportare l''immagine!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
-goto :copy_wim
+goto :copy_esd
 
 :wim
 rem export windows edition
@@ -166,6 +166,8 @@ IF %errorlevel% equ 0 (
 ) ELSE (
   color 4 && echo "ERRORE: Impossibile spostare il nuovo install.wim!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
+
+:copy_esd
 
 rem ######################################################################################## 
 

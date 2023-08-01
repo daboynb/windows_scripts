@@ -106,7 +106,7 @@ set /p index="Please enter the number of the index: "
 cls
 powerShell -Command "Write-Host 'Exporting' -ForegroundColor Green; exit"
 dism /export-image /SourceImageFile:C:\ISO\Win10\sources\install.esd /SourceIndex:%index% /DestinationImageFile:C:\ISO\Win10\sources\install.wim /Compress:max /CheckIntegrity
-goto :copy_wim
+goto :copy_esd
 
 :wim
 rem export windows edition
@@ -139,6 +139,8 @@ IF %errorlevel% equ 0 (
 ) ELSE (
   color 4 && echo "ERROR: Can't move the new install.wim!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
+
+:copy_esd
 
 rem ######################################################################################## 
 
