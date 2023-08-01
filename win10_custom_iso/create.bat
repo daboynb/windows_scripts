@@ -141,6 +141,13 @@ IF %errorlevel% equ 0 (
 )
 
 :copy_esd
+rem del esd
+del "C:\ISO\Win10\sources\install.esd"
+IF %errorlevel% equ 0 (
+  powerShell -Command "Write-Host 'Old install.esd eliminato!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+) ELSE (
+  color 4 && echo "ERRORE: Impossibile eliminare old install.esd!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+)
 
 rem ######################################################################################## 
 
