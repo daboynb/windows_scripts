@@ -22,10 +22,11 @@ for %%i in (%files%) do (
 
 rem Download iso
 :iso
-powerShell -Command "Write-Host 'Vuoi scaricare la iso di windows? (si/no)' -ForegroundColor Green; exit"
+powerShell -Command "Write-Host 'Le iso stock di windows 10 e 11 sono necessarie per questo script, scaricarle (si/no)' -ForegroundColor Green; exit"
 set /p answer=":"
 if /i "%answer%"=="si" (
     start "" "https://onedrive.live.com/?authkey=%21AP24oPyBwZAQ0VQ&id=FAE869A1D69A7846%212063&cid=FAE869A1D69A7846&parId=root&parQt=sharedby&o=OneUp"
+    start "" "https://onedrive.live.com/?authkey=%21ANcjojTuUiXQBJE&cid=FAE869A1D69A7846&id=FAE869A1D69A7846%212064&parId=FAE869A1D69A7846%212062&o=OneUp"
     goto :iso_scaricata
 ) else if /i "%answer%"=="no" (
     echo "Saltiamo questo passaggio..."
@@ -63,6 +64,14 @@ IF %errorlevel% equ 0 (
   color 4 && echo "ERRORE: Impossibile creare C:\ISO\Win11!" && pause && exit /b 1
 )
 
+rem create folder
+mkdir "C:\ISO\Win10" 2>nul
+IF %errorlevel% equ 0 (
+  powerShell -Command "Write-Host 'C:\ISO\Win10 creata correttamente!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+) ELSE (
+  color 4 && echo "ERRORE: Impossibile creare C:\ISO\Win10!" && pause && exit /b 1
+)
+
 mkdir "C:\mount\mount" 2>nul
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'C:\mount\mount creata correttamente!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
@@ -76,7 +85,7 @@ set "dialogTitle=seleziona il file iso"
 
 rem Open file dialog to select file
 :select_file
-powerShell -Command "Write-Host 'Seleziona il file iso' -ForegroundColor Green; exit"  
+powerShell -Command "Write-Host 'Seleziona il file iso di windows 11' -ForegroundColor Green; exit"  
 for /f "usebackq delims=" %%f in (`powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; $openFileDialog = New-Object System.Windows.Forms.OpenFileDialog; $openFileDialog.InitialDirectory = [Environment]::GetFolderPath('Desktop'); $openFileDialog.Title = '%dialogTitle%'; $openFileDialog.Filter = 'ISO files (*.iso)|*.iso'; $openFileDialog.FilterIndex = 1; $openFileDialog.Multiselect = $false; $openFileDialog.ShowDialog() | Out-Null; $openFileDialog.FileName}"`) do set "filepath=%%f"
 
 if defined filepath (
@@ -95,15 +104,36 @@ IF %errorlevel% equ 0 (
   color 4 && echo "ERRORE: Estrazione fallita!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
-IF NOT EXIST "C:\ISO\Win11\sources\$OEM$\$$\Panther" (
-    mkdir "C:\ISO\Win11\sources\$OEM$\$$\Panther"
+rem Open file dialog to select file
+:select_file
+powerShell -Command "Write-Host 'Seleziona il file iso di win 10' -ForegroundColor Green; exit"  
+for /f "usebackq delims=" %%f in (`powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; $openFileDialog = New-Object System.Windows.Forms.OpenFileDialog; $openFileDialog.InitialDirectory = [Environment]::GetFolderPath('Desktop'); $openFileDialog.Title = '%dialogTitle%'; $openFileDialog.Filter = 'ISO files (*.iso)|*.iso'; $openFileDialog.FilterIndex = 1; $openFileDialog.Multiselect = $false; $openFileDialog.ShowDialog() | Out-Null; $openFileDialog.FileName}"`) do set "filepath=%%f"
+
+if defined filepath (
+  powerShell -Command "Write-Host 'Hai selezionato %filepath%' -ForegroundColor Green; exit"  
+  cls
+) ELSE (
+  echo Nessun file selezionato
+  goto :select_file
+)
+
+powerShell -Command "Write-Host 'Sto estraendo la iso in C:\ISO\Win10... Attendi!' -ForegroundColor Green; exit"  
+resources\7z.exe x -y -o"C:\ISO\Win10" "%filepath%" > nul
+IF %errorlevel% equ 0 (
+  powerShell -Command "Write-Host 'Estrazione della ISO completata!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+) ELSE (
+  color 4 && echo "ERRORE: Estrazione fallita!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+)
+
+IF NOT EXIST "C:\ISO\Win10\sources\$OEM$\$$\Panther" (
+    mkdir "C:\ISO\Win10\sources\$OEM$\$$\Panther"
 )
 
 rem edit unattend.xml
 powershell -command "Write-Host 'Inserisci il nome che desideri per l''utente di windows' -ForegroundColor Green; $newName = Read-Host ':'; (Get-Content -path resources\unattend.xml -Raw) -replace 'nomeutente',$newName | Set-Content -Path resources\unattend_edited.xml"
 
 rem copy unattended.xml
-copy "resources\unattend_edited.xml" "C:\ISO\Win11\sources\$OEM$\$$\Panther\unattend.xml"
+copy "resources\unattend_edited.xml" "C:\ISO\Win10\sources\$OEM$\$$\Panther\unattend.xml"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'unattend.xml copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -424,11 +454,21 @@ powerShell -Command "Write-Host 'Smontando l''immagine' -ForegroundColor Green; 
 dism /unmount-image /mountdir:"C:\mount\mount" /commit
 cls
 
+) ELSE (
+  color 4 && echo "ERRORE: Impossibile eliminare install.wim !" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+)
+copy "C:\ISO\Win11\sources\install.wim" "C:\ISO\Win10\sources" 
+IF %errorlevel% equ 0 (
+  powerShell -Command "Write-Host 'install.wim copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+) ELSE (
+  color 4 && echo "ERRORE: Impossibile copiare install.wim !" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+)
+
 rem ######################################################################################## 
 
 rem rebuild image 
 powerShell -Command "Write-Host 'Creando la ISO' -ForegroundColor Green; exit"  
-resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win11\boot\etfsboot.com#pEF,e,bC:\ISO\Win11\efi\microsoft\boot\efisys.bin C:\ISO\Win11 C:\ISO\Windows11_edited.iso
+resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win10\boot\etfsboot.com#pEF,e,bC:\ISO\Win10\efi\microsoft\boot\efisys.bin C:\ISO\Win10 C:\ISO\Windows11_edited.iso
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO creata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
