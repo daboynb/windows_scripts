@@ -454,6 +454,11 @@ powerShell -Command "Write-Host 'Smontando l''immagine' -ForegroundColor Green; 
 dism /unmount-image /mountdir:"C:\mount\mount" /commit
 cls
 
+rem ########################################################################################
+
+del "C:\ISO\Win10\sources\install.wim"
+IF %errorlevel% equ 0 (
+  powerShell -Command "Write-Host 'install.wim eliminato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
   color 4 && echo "ERRORE: Impossibile eliminare install.wim !" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
