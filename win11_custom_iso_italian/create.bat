@@ -22,7 +22,7 @@ for %%i in (%files%) do (
 
 rem Download iso
 :iso
-powerShell -Command "Write-Host 'Le iso stock di windows 10 e 11 sono necessarie per questo script, scaricarle (si/no)' -ForegroundColor Green; exit"
+powerShell -Command "Write-Host 'Le iso stock di windows 10 e 11 sono necessarie per questo script, scaricarle (si/no) ? ' -ForegroundColor Green; exit"
 set /p answer=":"
 if /i "%answer%"=="si" (
     start "" "https://onedrive.live.com/?authkey=%21AP24oPyBwZAQ0VQ&id=FAE869A1D69A7846%212063&cid=FAE869A1D69A7846&parId=root&parQt=sharedby&o=OneUp"
