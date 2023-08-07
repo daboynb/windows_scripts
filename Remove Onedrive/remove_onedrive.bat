@@ -15,7 +15,6 @@ IF "%ERRORLEVEL%"=="0" echo "32 bit!" && goto :32bit
 rem uninstall onedrive 64 bit
 powershell -command "Get-Process OneDrive | Stop-Process -Force"
 powershell -command "C:\Windows\SysWOW64\OneDriveSetup.exe /uninstall"
-goto :bing
 
 :32bit
 rem uninstall onedrive 32 bit
