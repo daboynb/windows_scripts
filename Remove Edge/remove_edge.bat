@@ -1,4 +1,4 @@
-8@echo off
+@echo off
 setlocal EnableDelayedExpansion
 
 rem Ask for admin privileges
