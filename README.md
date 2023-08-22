@@ -79,7 +79,7 @@ It works with :
 </details>
 
 # windows_update_cli.bat
-Update the system using windows update from powershell. 
+Update the system using windows update from powershell. The script will reboot the system if needed.
 
 # win11_custom_iso.bat
 This script creates a custom ISO of Windows 11 with the following features:
