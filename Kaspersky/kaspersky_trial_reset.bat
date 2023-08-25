@@ -14,10 +14,16 @@ pause
 
 rem Check the system architecture
 wmic os get osarchitecture 2>NUL | find "64-bit">NUL
-IF "%ERRORLEVEL%"=="0" echo "64 bit!" && set "WOW6432=\WOW6432Node"
-
-wmic os get osarchitecture 2>NUL | find "32-bit">NUL
-IF "%ERRORLEVEL%"=="0" echo "32 bit!" && set "WOW6432=" 
+if "%ERRORLEVEL%"=="0" (
+    echo 64 bit!
+    set "WOW6432=\WOW6432Node"
+) else (
+    wmic os get osarchitecture 2>NUL | find "32-bit">NUL
+    if "%ERRORLEVEL%"=="0" (
+        echo 32 bit!
+        set "WOW6432="
+    )
+)
 
 rem Check if kaspersky is off
 :avp 
@@ -58,3 +64,5 @@ echo "You need to reboot to apply"
 choice /c yn /m "Reboot now?"
 IF %errorlevel% equ 1 shutdown /r /t 00
 pause && exit
+
+endlocal
