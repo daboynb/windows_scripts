@@ -1,4 +1,5 @@
 @echo off
+setlocal enabledelayedexpansion
 
 rem Ask for admin privileges
 set "params=%*"
