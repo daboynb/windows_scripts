@@ -192,9 +192,16 @@ dism /mount-image /imagefile:"C:\ISO\Win11\sources\install.wim" /index:1 /mountd
 cls
 
 echo "Applying KB5029263"
-powershell -Command "$wc = New-Object net.webclient; $msu_url = 'https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/8834f721-cadd-4cf9-9c3e-299e94d04c83/public/windows11.0-kb5029263-x64_4f5fe19bbec786f5e445d3e71bcdf234fe2cbbec.msu'; $local_msu_url = \"$env:USERPROFILE\\Desktop\\up.msu\"; $wc.Downloadfile($msu_url, $local_msu_url)"
-dism /Image:"C:\mount\mount" /Add-Package /PackagePath="%USERPROFILE%\Desktop\up.msu"
-pause
+powershell -Command "$wc = New-Object net.webclient; $msu_url = 'https://catalog.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/8834f721-cadd-4cf9-9c3e-299e94d04c83/public/windows11.0-kb5029263-x64_4f5fe19bbec786f5e445d3e71bcdf234fe2cbbec.msu'; $local_msu_url = \"$env:USERPROFILE\\Desktop\\KB5029263.msu\"; $wc.Downloadfile($msu_url, $local_msu_url)"
+dism /Image:"C:\mount\mount" /Add-Package /PackagePath="%USERPROFILE%\Desktop\KB5029263.msu"
+cls
+
+del "%USERPROFILE%\Desktop\KB5029263.msu"
+IF %errorlevel% equ 0 (
+  powerShell -Command "Write-Host 'KB5029263 deleted successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+) ELSE (
+  color 4 && echo "ERROR: Can't delete KB5029263!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+)
 cls
 
 rem delete edge
