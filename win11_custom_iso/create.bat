@@ -82,6 +82,8 @@ IF %errorlevel% equ 0 (
   color 4 && echo "ERROR: Extraction failed!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
+set "iso11=%filepath%"
+
 rem Open file dialog to select file
 :select_file
 powerShell -Command "Write-Host 'Select win10 ISO file' -ForegroundColor Green; exit"  
@@ -479,9 +481,10 @@ IF %errorlevel% equ 0 (
 )
 
 :delete_iso
-set /p answer="Remove the original iso file? (yes/no): "
+set /p answer="Remove the original ISOs files? (yes/no): "
 if /i "%answer%"=="yes" (
 del "%filepath%" /q
+del "%iso11%" /q
 ) else if /i "%answer%"=="no" (
     echo Skipping...
 ) ELSE (
