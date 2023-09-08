@@ -229,34 +229,7 @@ IF %errorlevel% equ 0 (
 )
 
 :features
-powerShell -Command "Write-Host 'List of features that can be removed :' -ForegroundColor Green;
-echo.
-echo Microsoft-Windows-InternetExplorer-Optional-Package
-echo Microsoft-Windows-Kernel-LA57-FoD
-echo Microsoft-Windows-LanguageFeatures-Handwriting
-echo Microsoft-Windows-LanguageFeatures-OCR
-echo Microsoft-Windows-LanguageFeatures-Speech
-echo Microsoft-Windows-LanguageFeatures-TextToSpeech
-echo Microsoft-Windows-MediaPlayer-Package
-echo Microsoft-Windows-TabletPCMath-Package
-echo Microsoft-Windows-Wallpaper-Content-Extended-FoD
-echo.
-set /p answer="Remove (all/none/select): "
-if /i "%answer%"=="all" (
-    echo Removing all features...
-    goto :features_removal_all
-) else if /i "%answer%"=="none" (
-    echo Skipping...
-    goto :skipping_features
-) else if /i "%answer%"=="select" (
-    goto :features_removal_select
-) ELSE (
-    echo Invalid input. Please choose 'all', 'none', or 'select'.
-    goto :features
-)
-
-:features_removal_all
-powerShell -Command "Write-Host 'Starting removal' -ForegroundColor Green; exit"
+powerShell -Command "Write-Host 'Starting features removal' -ForegroundColor Green; exit"
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-InternetExplorer-Optional-Package*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Kernel-LA57-FoD*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-Handwriting*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
@@ -267,120 +240,7 @@ powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-TabletPCMath-Package*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Wallpaper-Content-Extended-FoD*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
 powerShell -Command "Write-Host 'Done' -ForegroundColor Green; exit"
-goto :skipping_features
 
-:features_removal_select
-powerShell -Command "Write-Host 'Starting removal' -ForegroundColor Green; exit"
-
-:Microsoft-Windows-InternetExplorer-Optional-Package
-set /p answer="Remove Microsoft-Windows-InternetExplorer-Optional-Package ? (yes/no): "
-if /i "%answer%"=="yes" (
-    powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-InternetExplorer-Optional-Package*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-    powershell -Command "Write-Host 'Done!' -ForegroundColor Green; exit"  
-) else if /i "%answer%"=="no" (
-    echo Skipping...
-) ELSE (
-    echo Invalid input. Please answer with 'yes' or 'no'.
-    goto :Microsoft-Windows-InternetExplorer-Optional-Package
-)
-
-:Microsoft-Windows-Kernel-LA57-FoD
-set /p answer="Remove Microsoft-Windows-Kernel-LA57-FoD ? (yes/no): "
-if /i "%answer%"=="yes" (
-  powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Kernel-LA57-FoD*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-  powershell -Command "Write-Host 'Done!' -ForegroundColor Green; exit"  
-) else if /i "%answer%"=="no" (
-    echo Skipping...
-) ELSE (
-    echo Invalid input. Please answer with 'yes' or 'no'.
-    goto :Microsoft-Windows-Kernel-LA57-FoD
-)
-
-:Microsoft-Windows-LanguageFeatures-Handwriting
-set /p answer="Remove Microsoft-Windows-LanguageFeatures-Handwriting ? (yes/no): "
-if /i "%answer%"=="yes" (
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-Handwriting*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Write-Host 'Done!' -ForegroundColor Green; exit"  
-) else if /i "%answer%"=="no" (
-    echo Skipping...
-) ELSE (
-    echo Invalid input. Please answer with 'yes' or 'no'.
-    goto :Microsoft-Windows-LanguageFeatures-Handwriting
-)
-
-:Microsoft-Windows-LanguageFeatures-OCR
-set /p answer="Remove Microsoft-Windows-LanguageFeatures-OCR ? (yes/no): "
-if /i "%answer%"=="yes" (
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-OCR*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Write-Host 'Done!' -ForegroundColor Green; exit"  
-) else if /i "%answer%"=="no" (
-    echo Skipping...
-) ELSE (
-    echo Invalid input. Please answer with 'yes' or 'no'.
-    goto :Microsoft-Windows-LanguageFeatures-OCR
-)
-
-:Microsoft-Windows-LanguageFeatures-Speech
-set /p answer="Remove Microsoft-Windows-LanguageFeatures-Speech ? (yes/no): "
-if /i "%answer%"=="yes" (
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-Speech*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Write-Host 'Done!' -ForegroundColor Green; exit"  
-) else if /i "%answer%"=="no" (
-    echo Skipping...
-) ELSE (
-    echo Invalid input. Please answer with 'yes' or 'no'.
-    goto :Microsoft-Windows-LanguageFeatures-Speech
-)
-
-:Microsoft-Windows-LanguageFeatures-TextToSpeech
-set /p answer="Remove Microsoft-Windows-LanguageFeatures-TextToSpeech ? (yes/no): "
-if /i "%answer%"=="yes" (
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-TextToSpeech*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Write-Host 'Done!' -ForegroundColor Green; exit"  
-) else if /i "%answer%"=="no" (
-    echo Skipping...
-) ELSE (
-    echo Invalid input. Please answer with 'yes' or 'no'.
-    goto :Microsoft-Windows-LanguageFeatures-TextToSpeech
-)
-
-:Microsoft-Windows-MediaPlayer-Package
-set /p answer="Remove Microsoft-Windows-MediaPlayer-Package ? (yes/no): "
-if /i "%answer%"=="yes" (
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-MediaPlayer-Package*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Write-Host 'Done!' -ForegroundColor Green; exit"  
-) else if /i "%answer%"=="no" (
-    echo Skipping...
-) ELSE (
-    echo Invalid input. Please answer with 'yes' or 'no'.
-    goto :Microsoft-Windows-MediaPlayer-Package
-)
-
-:Microsoft-Windows-TabletPCMath-Package
-set /p answer="Remove Microsoft-Windows-TabletPCMath-Package ? (yes/no): "
-if /i "%answer%"=="yes" (
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-TabletPCMath-Package*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Write-Host 'Done!' -ForegroundColor Green; exit"  
-) else if /i "%answer%"=="no" (
-    echo Skipping...
-) ELSE (
-    echo Invalid input. Please answer with 'yes' or 'no'.
-    goto :Microsoft-Windows-TabletPCMath-Package
-)
-
-:Microsoft-Windows-Wallpaper-Content-Extended-FoD
-set /p answer="Remove Microsoft-Windows-Wallpaper-Content-Extended-FoD ? (yes/no): "
-if /i "%answer%"=="yes" (
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Wallpaper-Content-Extended-FoD*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Write-Host 'Done!' -ForegroundColor Green; exit"  
-) else if /i "%answer%"=="no" (
-    echo Skipping...
-) ELSE (
-    echo Invalid input. Please answer with 'yes' or 'no'.
-    goto :Microsoft-Windows-Wallpaper-Content-Extended-FoD
-)
-
-:skipping_features
 rem copy batch file
 cls
 powerShell -Command "Write-Host 'Copying bat' -ForegroundColor Green; exit"
