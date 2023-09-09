@@ -333,17 +333,6 @@ IF %errorlevel% equ 0 (
   color 4 && echo "ERRORE: Impossibile eliminare unattend!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
-:delete_iso
-set /p answer="Rimuovere la ISO originale di microsoft ? (si/no): "
-if /i "%answer%"=="si" (
-del "%filepath%" /q
-) else if /i "%answer%"=="no" (
-    echo "Saltiamo questo passaggio..."
-) ELSE (
-    echo I valori accettati sono solamente si e no.
-    goto :delete_iso
-)
-
 :: Enable QuickEdit Mode
 reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 

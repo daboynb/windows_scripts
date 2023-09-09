@@ -283,17 +283,6 @@ IF %errorlevel% equ 0 (
   color 4 && echo "ERROR: Can't delete unattend!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
-:delete_iso
-set /p answer="Remove the original iso file? (yes/no): "
-if /i "%answer%"=="yes" (
-del "%filepath%" /q
-) else if /i "%answer%"=="no" (
-    echo Skipping...
-) ELSE (
-    echo Invalid input. Please answer with 'yes' or 'no'.
-    goto :delete_iso
-)
-
 :: Enable QuickEdit Mode
 reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 
