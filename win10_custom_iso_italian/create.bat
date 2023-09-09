@@ -127,7 +127,7 @@ echo.
 set /p index="Inserisci il numero corrispondente: "
 cls
 powerShell -Command "Write-Host 'Attendi' -ForegroundColor Green; exit"
-dism /export-image /SourceImageFile:"C:\ISO\Win10\sources\install.esd" /SourceIndex:%index% /DestinationImageFile:C:\ISO\Win10\sources\install.wim /Compress:max /CheckIntegrity
+dism /export-image /SourceImageFile:"C:\ISO\Win10\sources\install.esd" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win10\sources\install.wim" /Compress:max /CheckIntegrity
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Immagine esportata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (

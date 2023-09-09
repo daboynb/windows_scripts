@@ -105,7 +105,7 @@ echo.
 set /p index="Please enter the number of the index: "
 cls
 powerShell -Command "Write-Host 'Exporting' -ForegroundColor Green; exit"
-dism /export-image /SourceImageFile:"C:\ISO\Win10\sources\install.esd" /SourceIndex:%index% /DestinationImageFile:C:\ISO\Win10\sources\install.wim /Compress:max /CheckIntegrity
+dism /export-image /SourceImageFile:"C:\ISO\Win10\sources\install.esd" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win10\sources\install.wim" /Compress:max /CheckIntegrity
 goto :copy_esd
 
 :wim
