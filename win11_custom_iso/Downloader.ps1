@@ -8,7 +8,7 @@ Invoke-WebRequest -Uri "https://github.com/daboynb/windows_scripts/archive/refs/
 Expand-Archive -Path "windows_script_daboynb.zip" -DestinationPath "." -Force
 
 # Move the "win11_custom_iso" folder to the current directory
-Move-Item -Path "windows_scripts-main\win11_custom_iso" -Destination "win11_custom_iso_italian" -Force
+Move-Item -Path "windows_scripts-main\win11_custom_iso" -Destination "win11_custom_iso" -Force
 
 # Remove the "windows_scripts-main" directory 
 Remove-Item -Path "windows_scripts-main" -Recurse -Force
