@@ -43,12 +43,12 @@ echo.
 echo [0] EXIT
 echo.
 SET /P MENU=Type 1, 2, 3, 4, 5 ,6 or 0 then press ENTER :
-IF /I '%MENU%'=='1' GOTO :win11uefiita
-IF /I '%MENU%'=='2' GOTO :win11uefien
-IF /I '%MENU%'=='3' GOTO :win11legacyita
-IF /I '%MENU%'=='4' GOTO :win11legacyen
-IF /I '%MENU%'=='5' GOTO :win10ita
-IF /I '%MENU%'=='6' GOTO :win10en
+IF /I '%MENU%'=='1' GOTO :win_11_uefi_ita
+IF /I '%MENU%'=='2' GOTO :win_11_uefi_en
+IF /I '%MENU%'=='3' GOTO :win_11_legacy_ita
+IF /I '%MENU%'=='4' GOTO :win_11_legacy_en
+IF /I '%MENU%'=='5' GOTO :win_10_it
+IF /I '%MENU%'=='6' GOTO :win_10_en
 IF /I '%MENU%'=='0' GOTO :EXIT
 GOTO :MAINMENU
 
@@ -62,7 +62,14 @@ rem                                                                             
 rem //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// rem
 
 
-:win11legacyita
+
+
+
+
+
+
+
+:win_11_legacy_ita
 rem //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// rem
 rem                                                                                                                      rem
 rem                          WINDOWS 11 CUSTOM ISO ITA LEGACY                                                            rem
@@ -456,7 +463,15 @@ powerShell -Command "Write-Host 'Processo completato! Press any key to exit' -Fo
 pause
 
 
-:win11uefiita
+
+
+
+
+
+
+
+
+:win_11_uefi_ita
 rem //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// rem
 rem                                                                                                                      rem
 rem                          WINDOWS 11 CUSTOM ISO ITA UEFI                                                              rem
@@ -806,7 +821,15 @@ reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 powerShell -Command "Write-Host 'Processo completato! Press any key to exit' -ForegroundColor Green; exit"  
 pause
 
-:win10ita
+
+
+
+
+
+
+
+
+:win_10_it
 rem //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// rem
 rem                                                                                                                      rem
 rem                          WINDOWS 10 CUSTOM ISO ITA                                                                    rem
@@ -1170,7 +1193,15 @@ rem                          ENGLISH                                            
 rem                                                                                                                      rem
 rem //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// rem
 
-:win11legacyen
+
+
+
+
+
+
+
+
+:win_11_legacy_en
 rem //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// rem
 rem                                                                                                                      rem
 rem                          WINDOWS 11 CUSTOM ISO EN LEGACY                                                             rem
@@ -1518,7 +1549,15 @@ reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 powerShell -Command "Write-Host 'Process completed! Press any key to exit' -ForegroundColor Green; exit"  
 pause
 
-:win11uefien
+
+
+
+
+
+
+
+
+:win_11_uefi_en
 rem //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// rem
 rem                                                                                                                      rem
 rem                          WINDOWS 11 CUSTOM ISO EN UEFI                                                               rem
@@ -1820,7 +1859,15 @@ reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 powerShell -Command "Write-Host 'Process completed! Press any key to exit' -ForegroundColor Green; exit"  
 pause
 
-:win10en
+
+
+
+
+
+
+
+
+:win_10_en
 rem //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// rem
 rem                                                                                                                      rem
 rem                          WINDOWS 10 CUSTOM ISO EN                                                                    rem
@@ -2112,4 +2159,3 @@ reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 
 powerShell -Command "Write-Host 'Process completed! Press any key to exit' -ForegroundColor Green; exit"  
 pause
-
