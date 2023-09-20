@@ -1802,7 +1802,7 @@ if /i "%answer%"=="yes" (
 )
 
 rem copy PowerRun.exe
-copy "rwin11en\esources\PowerRun.exe" "C:\mount\mount\Windows"
+copy "win11en\resources\PowerRun.exe" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'PowerRun.exe copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
