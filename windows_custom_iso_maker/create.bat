@@ -62,7 +62,6 @@ rem                                                                             
 rem //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// rem
 
 rem sub ok
-
 rem check if the resources folder exist
 IF NOT EXIST "win11ita\resources" (
     color 4 && echo "ERRORE: Impossibile trovare la cartella resources" && pause && exit /b 1
@@ -529,7 +528,7 @@ if defined filepath (
 )
 
 powerShell -Command "Write-Host 'Extracting ISO to C:\ISO\Win11... Please wait!' -ForegroundColor Green; exit"  
-resources\7z.exe x -y -o"C:\ISO\Win11" "%filepath%" > nul
+win11itaresources\7z.exe x -y -o"C:\ISO\Win11" "%filepath%" > nul
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO extraction completed!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -552,7 +551,7 @@ if defined filepath (
 )
 
 powerShell -Command "Write-Host 'Extracting ISO to C:\ISO\Win10... Please wait!' -ForegroundColor Green; exit"  
-resources\7z.exe x -y -o"C:\ISO\Win10" "%filepath%" > nul
+win11en\resources\7z.exe x -y -o"C:\ISO\Win10" "%filepath%" > nul
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO extraction completed!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -894,7 +893,7 @@ if defined filepath (
 )
 
 powerShell -Command "Write-Host 'Sto estraendo la iso in C:\ISO\Win11... Attendi!' -ForegroundColor Green; exit"  
-resources\7z.exe x -y -o"C:\ISO\Win11" "%filepath%" > nul
+win11ita\resources\7z.exe x -y -o"C:\ISO\Win11" "%filepath%" > nul
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Estrazione della ISO completata!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -1218,7 +1217,7 @@ if defined filepath (
 )
 
 powerShell -Command "Write-Host 'Extracting ISO to C:\ISO\Win11... Please wait!' -ForegroundColor Green; exit"  
-resources\7z.exe x -y -o"C:\ISO\Win11" "%filepath%" > nul
+win11en\resources\7z.exe x -y -o"C:\ISO\Win11" "%filepath%" > nul
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO extraction completed!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -1452,10 +1451,10 @@ reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 powerShell -Command "Write-Host 'Process completed! Press any key to exit' -ForegroundColor Green; exit"  
 pause
 
-:win10ita
+:win10en
 rem //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// rem
 rem                                                                                                                      rem
-rem                          WINDOWS 10 CUSTOM ISO ITA                                                                   rem
+rem                          WINDOWS 10 CUSTOM ISO EN                                                                    rem
 rem                                                                                                                      rem
 rem //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// rem
 
@@ -1519,7 +1518,7 @@ if defined filepath (
 )
 
 powerShell -Command "Write-Host 'Extracting ISO to C:\ISO\Win10... Please wait!' -ForegroundColor Green; exit"  
-resources\7z.exe x -y -o"C:\ISO\Win10" "%filepath%" > nul
+win10en\resources\7z.exe x -y -o"C:\ISO\Win10" "%filepath%" > nul
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO extraction completed!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -1745,10 +1744,10 @@ reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 powerShell -Command "Write-Host 'Process completed! Press any key to exit' -ForegroundColor Green; exit"  
 pause
 
-:win10en
+:win10ita
 rem //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// rem
 rem                                                                                                                      rem
-rem                          WINDOWS 10 CUSTOM ISO en                                                                    rem
+rem                          WINDOWS 10 CUSTOM ISO ITA                                                                    rem
 rem                                                                                                                      rem
 rem //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// rem
 
@@ -1837,7 +1836,7 @@ if defined filepath (
 )
 
 powerShell -Command "Write-Host 'Sto estraendo la iso in C:\ISO\Win10... Attendi!' -ForegroundColor Green; exit"  
-resources\7z.exe x -y -o"C:\ISO\Win10" "%filepath%" > nul
+win10ita\resources\7z.exe x -y -o"C:\ISO\Win10" "%filepath%" > nul
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Estrazione della ISO completata!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
