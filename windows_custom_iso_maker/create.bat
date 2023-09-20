@@ -163,14 +163,12 @@ if defined filepath (
 )
 
 powerShell -Command "Write-Host 'Sto estraendo la iso in C:\ISO\Win11... Attendi!' -ForegroundColor Green; exit"  
-resources\7z.exe x -y -o"C:\ISO\Win11" "%filepath%" > nul
+win11ita\resources\7z.exe x -y -o"C:\ISO\Win11" "%filepath%" > nul
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Estrazione della ISO completata!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
   color 4 && echo "ERRORE: Estrazione fallita!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
-
-set "iso11=%filepath%"
 
 rem Open file dialog to select file
 :select_file
@@ -186,7 +184,7 @@ if defined filepath (
 )
 
 powerShell -Command "Write-Host 'Sto estraendo la iso in C:\ISO\Win10... Attendi!' -ForegroundColor Green; exit"  
-resources\7z.exe x -y -o"C:\ISO\Win10" "%filepath%" > nul
+win11ita\resources\7z.exe x -y -o"C:\ISO\Win10" "%filepath%" > nul
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Estrazione della ISO completata!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -311,7 +309,7 @@ if /i "%answer%"=="si" (
 )
 
 :edge_step
-copy "resources\firefox_installer.exe" "C:\mount\mount"
+copy "win11ita\resources\firefox_installer.exe" "C:\mount\mount"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'L''installer di firefox e'' stato copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -333,7 +331,7 @@ powerShell -Command "Write-Host 'Completato' -ForegroundColor Green; exit"
 
 rem copy batch file
 cls
-copy "resources\tweaks.bat" "C:\mount\mount\Windows"
+copy "win11ita\resources\tweaks.bat" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'tweaks.bat copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -342,21 +340,21 @@ IF %errorlevel% equ 0 (
 
 rem copy debloater
 cls
-copy "resources\debloat3.1.ps1" "C:\mount\mount\Windows"
+copy "win11ita\resources\debloat3.1.ps1" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Debloat.ps1 copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
   color 4 && echo "Impossibile copiare Debloat.ps1!" && pause && del "win11ita\resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
-copy "resources\debloat.bat" "C:\mount\mount\Windows"
+copy "win11ita\resources\debloat.bat" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Debloat.bat copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
   color 4 && echo "Impossibile copiare Debloat.bat!" && pause && del "win11ita\resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
-copy "resources\debloat_Windows_Italia.lnk" "C:\mount\mount\Windows"
+copy "win11ita\resources\debloat_Windows_Italia.lnk" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Debloat.ink copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -364,7 +362,7 @@ IF %errorlevel% equ 0 (
 )
 
 rem copy start.ps1
-copy "resources\start.ps1" "C:\mount\mount\Windows"
+copy "win11ita\resources\start.ps1" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'start.ps1 copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -384,7 +382,7 @@ if /i "%answer%"=="si" (
 )
 
 rem copy PowerRun.exe
-copy "resources\PowerRun.exe" "C:\mount\mount\Windows"
+copy "win11ita\resources\PowerRun.exe" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'PowerRun.exe copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -415,7 +413,7 @@ rem ############################################################################
 
 rem rebuild image 
 powerShell -Command "Write-Host 'Creando la ISO' -ForegroundColor Green; exit"  
-resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win10\boot\etfsboot.com#pEF,e,bC:\ISO\Win10\efi\microsoft\boot\efisys.bin C:\ISO\Win10 C:\ISO\Windows11_edited.iso
+win11ita\resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win10\boot\etfsboot.com#pEF,e,bC:\ISO\Win10\efi\microsoft\boot\efisys.bin C:\ISO\Win10 C:\ISO\Windows11_edited.iso
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO creata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -677,7 +675,7 @@ if /i "%answer%"=="si" (
 )
 
 :edge_step
-copy "resources\firefox_installer.exe" "C:\mount\mount"
+copy "win11ita\resources\firefox_installer.exe" "C:\mount\mount"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'L''installer di firefox e'' stato copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -699,7 +697,7 @@ powerShell -Command "Write-Host 'Completato' -ForegroundColor Green; exit"
 
 rem copy batch file
 cls
-copy "resources\tweaks.bat" "C:\mount\mount\Windows"
+copy "win11ita\resources\tweaks.bat" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'tweaks.bat copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -708,21 +706,21 @@ IF %errorlevel% equ 0 (
 
 rem copy debloater
 cls
-copy "resources\debloat3.1.ps1" "C:\mount\mount\Windows"
+copy "win11ita\resources\debloat3.1.ps1" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Debloat.ps1 copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
   color 4 && echo "Impossibile copiare Debloat.ps1!" && pause && del "win11ita\resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
-copy "resources\debloat.bat" "C:\mount\mount\Windows"
+copy "win11ita\resources\debloat.bat" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Debloat.bat copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
   color 4 && echo "Impossibile copiare Debloat.bat!" && pause && del "win11ita\resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
-copy "resources\debloat_Windows_Italia.lnk" "C:\mount\mount\Windows"
+copy "win11ita\resources\debloat_Windows_Italia.lnk" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Debloat.ink copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -730,7 +728,7 @@ IF %errorlevel% equ 0 (
 )
 
 rem copy start.ps1
-copy "resources\start.ps1" "C:\mount\mount\Windows"
+copy "win11ita\resources\start.ps1" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'start.ps1 copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -750,7 +748,7 @@ if /i "%answer%"=="si" (
 )
 
 rem copy PowerRun.exe
-copy "resources\PowerRun.exe" "C:\mount\mount\Windows"
+copy "win11ita\resources\PowerRun.exe" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'PowerRun.exe copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -766,7 +764,7 @@ rem ############################################################################
 
 rem rebuild image 
 powerShell -Command "Write-Host 'Creando la ISO' -ForegroundColor Green; exit"  
-resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win11\boot\etfsboot.com#pEF,e,bC:\ISO\Win11\efi\microsoft\boot\efisys.bin C:\ISO\Win11 C:\ISO\Windows11_edited.iso
+win11ita\resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win11\boot\etfsboot.com#pEF,e,bC:\ISO\Win11\efi\microsoft\boot\efisys.bin C:\ISO\Win11 C:\ISO\Windows11_edited.iso
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO creata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -1012,7 +1010,7 @@ if /i "%answer%"=="si" (
 )
 
 :edge_step
-copy "resources\firefox_installer.exe" "C:\mount\mount"
+copy "win10ita\resources\firefox_installer.exe" "C:\mount\mount"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'L''installer di firefox e'' stato copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -1034,7 +1032,7 @@ powerShell -Command "Write-Host 'Completato' -ForegroundColor Green; exit"
 
 rem copy batch file
 cls
-copy "resources\tweaks.bat" "C:\mount\mount\Windows"
+copy "win10ita\resources\tweaks.bat" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'tweaks.bat copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -1043,21 +1041,21 @@ IF %errorlevel% equ 0 (
 
 rem copy debloater
 cls
-copy "resources\debloat3.1.ps1" "C:\mount\mount\Windows"
+copy "win10ita\resources\debloat3.1.ps1" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Debloat.ps1 copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
   color 4 && echo "Impossibile copiare Debloat.ps1!" && pause && del "win10ita\resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
-copy "resources\debloat.bat" "C:\mount\mount\Windows"
+copy "win10ita\resources\debloat.bat" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Debloat.bat copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
   color 4 && echo "Impossibile copiare Debloat.bat!" && pause && del "win10ita\resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
-copy "resources\debloat_Windows_Italia.lnk" "C:\mount\mount\Windows"
+copy "win10ita\resources\debloat_Windows_Italia.lnk" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Debloat.ink copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -1073,7 +1071,7 @@ IF %errorlevel% equ 0 (
 )
 
 rem copy start.ps1
-copy "resources\start.ps1" "C:\mount\mount\Windows"
+copy "win10ita\resources\start.ps1" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'start.ps1 copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -1109,7 +1107,7 @@ rem ############################################################################
 
 rem rebuild image 
 powerShell -Command "Write-Host 'Creando la ISO' -ForegroundColor Green; exit"  
-resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win10\boot\etfsboot.com#pEF,e,bC:\ISO\Win10\efi\microsoft\boot\efisys.bin C:\ISO\Win10 C:\ISO\Windows10_edited.iso
+win10ita\resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win10\boot\etfsboot.com#pEF,e,bC:\ISO\Win10\efi\microsoft\boot\efisys.bin C:\ISO\Win10 C:\ISO\Windows10_edited.iso
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO creata con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -1258,8 +1256,6 @@ IF %errorlevel% equ 0 (
   color 4 && echo "ERROR: Extraction failed!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
-set "iso11=%filepath%"
-
 rem Open file dialog to select file
 :select_file
 powerShell -Command "Write-Host 'Select win10 ISO file' -ForegroundColor Green; exit"  
@@ -1397,7 +1393,7 @@ if /i "%answer%"=="yes" (
 )
 
 :edge_step
-copy "resources\firefox_installer.exe" "C:\mount\mount"
+copy ""win11en\resources\firefox_installer.exe" "C:\mount\mount"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Firefox setup copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -1420,7 +1416,7 @@ powerShell -Command "Write-Host 'Done' -ForegroundColor Green; exit"
 rem copy batch file
 cls
 powerShell -Command "Write-Host 'Copying bat' -ForegroundColor Green; exit"
-copy "resources\tweaks.bat" "C:\mount\mount\Windows"
+copy "win11en\resources\tweaks.bat" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'tweaks.bat copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -1428,7 +1424,7 @@ IF %errorlevel% equ 0 (
 )
 
 rem copy start.ps1
-copy "resources\start.ps1" "C:\mount\mount\Windows"
+copy "win11en\resources\start.ps1" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'start.ps1 copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -1448,7 +1444,7 @@ if /i "%answer%"=="yes" (
 )
 
 rem copy PowerRun.exe
-copy "resources\PowerRun.exe" "C:\mount\mount\Windows"
+copy "win11en\resources\PowerRun.exe" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'PowerRun.exe copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -1480,7 +1476,7 @@ rem ############################################################################
 
 rem rebuild image 
 powerShell -Command "Write-Host 'Building the ISO' -ForegroundColor Green; exit"  
-resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win10\boot\etfsboot.com#pEF,e,bC:\ISO\Win10\efi\microsoft\boot\efisys.bin C:\ISO\Win10 C:\ISO\Windows11_edited.iso
+win11en\resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win10\boot\etfsboot.com#pEF,e,bC:\ISO\Win10\efi\microsoft\boot\efisys.bin C:\ISO\Win10 C:\ISO\Windows11_edited.iso
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO builded successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -1714,7 +1710,7 @@ if /i "%answer%"=="yes" (
 )
 
 :edge_step
-copy "resources\firefox_installer.exe" "C:\mount\mount"
+copy "win11en\resources\firefox_installer.exe" "C:\mount\mount"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Firefox setup copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -1737,7 +1733,7 @@ powerShell -Command "Write-Host 'Done' -ForegroundColor Green; exit"
 rem copy batch file
 cls
 powerShell -Command "Write-Host 'Copying bat' -ForegroundColor Green; exit"
-copy "resources\tweaks.bat" "C:\mount\mount\Windows"
+copy "win11en\resources\tweaks.bat" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'tweaks.bat copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -1745,7 +1741,7 @@ IF %errorlevel% equ 0 (
 )
 
 rem copy start.ps1
-copy "resources\start.ps1" "C:\mount\mount\Windows"
+copy "win11en\resources\start.ps1" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'start.ps1 copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -1765,7 +1761,7 @@ if /i "%answer%"=="yes" (
 )
 
 rem copy PowerRun.exe
-copy "resources\PowerRun.exe" "C:\mount\mount\Windows"
+copy "rwin11en\esources\PowerRun.exe" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'PowerRun.exe copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -1782,7 +1778,7 @@ rem ############################################################################
 
 rem rebuild image 
 powerShell -Command "Write-Host 'Building the ISO' -ForegroundColor Green; exit"  
-resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win11\boot\etfsboot.com#pEF,e,bC:\ISO\Win11\efi\microsoft\boot\efisys.bin C:\ISO\Win11 C:\ISO\Windows11_edited.iso
+win11en\resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win11\boot\etfsboot.com#pEF,e,bC:\ISO\Win11\efi\microsoft\boot\efisys.bin C:\ISO\Win11 C:\ISO\Windows11_edited.iso
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO builded successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -2001,7 +1997,7 @@ if /i "%answer%"=="yes" (
 )
 
 :edge_step
-copy "resources\firefox_installer.exe" "C:\mount\mount"
+copy "win10en\resources\firefox_installer.exe" "C:\mount\mount"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Firefox setup copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -2023,7 +2019,7 @@ powerShell -Command "Write-Host 'Done' -ForegroundColor Green; exit"
 
 rem copy batch file
 cls
-copy "resources\tweaks.bat" "C:\mount\mount\Windows"
+copy "win10en\resources\tweaks.bat" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'tweaks.bat copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -2039,7 +2035,7 @@ IF %errorlevel% equ 0 (
 )
 
 rem copy start.ps1
-copy "resources\start.ps1" "C:\mount\mount\Windows"
+copy win10en\"resources\start.ps1" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'start.ps1 copied successfull!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -2059,7 +2055,7 @@ if /i "%answer%"=="yes" (
 )
 
 rem copy PowerRun.exe
-copy "resources\PowerRun.exe" "C:\mount\mount\Windows"
+copy "win10en\resources\PowerRun.exe" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'PowerRun.exe copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -2075,7 +2071,7 @@ rem ############################################################################
 
 rem rebuild image 
 powerShell -Command "Write-Host 'Building the ISO' -ForegroundColor Green; exit"  
-resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win10\boot\etfsboot.com#pEF,e,bC:\ISO\Win10\efi\microsoft\boot\efisys.bin C:\ISO\Win10 C:\ISO\Windows10_edited.iso
+win10en\resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win10\boot\etfsboot.com#pEF,e,bC:\ISO\Win10\efi\microsoft\boot\efisys.bin C:\ISO\Win10 C:\ISO\Windows10_edited.iso
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO builded successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
