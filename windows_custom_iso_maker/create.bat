@@ -1251,7 +1251,7 @@ if defined filepath (
 )
 
 powerShell -Command "Write-Host 'Extracting ISO to C:\ISO\Win11... Please wait!' -ForegroundColor Green; exit"  
-win11itaresources\7z.exe x -y -o"C:\ISO\Win11" "%filepath%" > nul
+win11en\resources\7z.exe x -y -o"C:\ISO\Win11" "%filepath%" > nul
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO extraction completed!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
