@@ -7,8 +7,8 @@ Invoke-WebRequest -Uri "https://github.com/daboynb/windows_scripts/archive/refs/
 # Extract all from "windows_script_daboynb.zip"
 Expand-Archive -Path "windows_script_daboynb.zip" -DestinationPath "." -Force
 
-# Move the "win11_custom_iso" folder to the current directory
-Move-Item -Path "windows_scripts-main\win11_custom_iso" -Destination "windows_custom_iso_maker" -Force
+# Move the "windows_custom_iso_maker" folder to the current directory
+Move-Item -Path "windows_scripts-main\windows_custom_iso_maker" -Destination "windows_custom_iso_maker" -Force
 
 # Remove the "windows_scripts-main" directory 
 Remove-Item -Path "windows_scripts-main" -Recurse -Force
@@ -17,4 +17,4 @@ Remove-Item -Path "windows_scripts-main" -Recurse -Force
 Remove-Item -Path "windows_script_daboynb.zip" -Force
 
 # Run the script
-Start-Process -FilePath ".\win11_custom_iso\Runme.bat"
+Start-Process -FilePath ".\windows_custom_iso_maker\Runme.bat"
