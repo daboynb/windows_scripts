@@ -122,3 +122,6 @@ This script allows you to enable or disable Windows Defender using PowerRun, a t
 
 # adb_fastboot.bat
 This script installs adb and fastboot on your pc.
+
+# windows_custom_iso_maker
+THIS IS A BETA! DO NOT USE, TESTING PURPOSE ONLY FOR NOW
