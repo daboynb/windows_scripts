@@ -2,7 +2,11 @@
 cd "$env:USERPROFILE\Desktop"
 
 # Download the script from GitHub
-Invoke-WebRequest -Uri "https://github.com/daboynb/windows_scripts/archive/refs/heads/main.zip" -OutFile "windows_script_daboynb.zip"
+$url = "https://github.com/daboynb/windows_scripts/archive/refs/heads/main.zip"
+$outputFile = "windows_script_daboynb.zip"
+
+$webClient = New-Object System.Net.WebClient
+$webClient.DownloadFile($url, $outputFile)
 
 # Extract all from "windows_script_daboynb.zip"
 Expand-Archive -Path "windows_script_daboynb.zip" -DestinationPath "." -Force
