@@ -48,6 +48,7 @@ IF %errorlevel% equ 0 (
 powerShell -Command "Write-Host 'You need the stock win11 ISO to continue' -ForegroundColor Green; exit" && timeout 04 >nul 
 powerShell -Command "Write-Host 'Press enter when you have downloaded it' -ForegroundColor Green; exit" && timeout 04 >nul 
 pause
+cls
 
 rem set iso path
 set "filepath="
