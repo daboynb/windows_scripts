@@ -12,13 +12,11 @@ echo *   WINDOWS CUSTOM ISO MAKER  *
 echo *******************************
 echo.
 echo [1] WINDOWS 11 UEFI ITALIAN
-echo    (Crea un'ISO di Windows 11 debloated in modalita' UEFI.
-echo     Non include il bypass della RAM minima di 4 GB,
+echo    (Crea un'ISO di Windows 11 debloated in modalita' UEFI. Non include il bypass della RAM minima di 4 GB,
 echo     tutti gli altri requisiti sono bypassati: CPU, TPM e SECUREBOOT)
 echo.
 echo [2] WINDOWS 11 UEFI ENGLISH
-echo    (Create a debloated Windows 11 ISO in legacy mode.
-echo     This does not include the 4 GB minimum RAM bypass,
+echo    (Create a debloated Windows 11 ISO in legacy mode. This does not include the 4 GB minimum RAM bypass,
 echo     all the other requisites are bypassed: CPU, TPM, and SECUREBOOT)
 echo.
 echo [3] WINDOWS 11 LEGACY ITALIAN
@@ -37,7 +35,8 @@ echo    (Create a debloated Windows 10 ISO)
 echo.
 echo [0] EXIT
 echo.
-SET /P MENU=Type 1, 2, 3, 4, 5 ,6 or 0 then press ENTER :
+echo *******************************
+SET /P MENU=Type 1, 2, 3, 4, 5 ,6 or 0 then press ENTER : 
 IF /I '%MENU%'=='1' GOTO :win_11_uefi_ita
 IF /I '%MENU%'=='2' GOTO :win_11_uefi_en
 IF /I '%MENU%'=='3' GOTO :win_11_legacy_ita
