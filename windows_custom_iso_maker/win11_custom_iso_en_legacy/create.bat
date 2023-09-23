@@ -5,6 +5,9 @@ rem Ask for admin privileges
 set "params=%*"
 cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 
+echo win11_custom_iso_en_legacy
+timeout 2
+
 rem check if the resources folder exist
 IF NOT EXIST "resources" (
     color 4 && echo "ERROR: Can't find the resources folder" && pause && exit /b 1
