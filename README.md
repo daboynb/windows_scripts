@@ -104,6 +104,6 @@ How to use?
 
        irm -Uri "https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_custom_iso_maker/Downloader.ps1" | iex
 
-- Download the windows 11 ISO from microsoft
+- Download the windows ISO from microsoft
 - Run the bat file and select when asked the ISO file
 - Wait... the edited ISO will be available on your desktop
