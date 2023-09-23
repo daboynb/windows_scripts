@@ -112,7 +112,7 @@ echo *   WINDOWS CUSTOM ISO MAKER  *
 echo *******************************
 echo.
 echo [1] WINDOWS 11 UEFI ENGLISH
-echo    (Create a debloated Windows 11 ISO in legacy mode. This does not include the 4 GB minimum RAM bypass,
+echo    (Create a debloated Windows 11 ISO in UEFI mode. This does not include the 4 GB minimum RAM bypass,
 echo     all the other requisites are bypassed: CPU, TPM, and SECUREBOOT)
 echo.
 echo [2] WINDOWS 11 LEGACY ENGLISH (you need the stock ISO's of win10 and win11)
