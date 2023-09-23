@@ -65,7 +65,7 @@ echo [2] WINDOWS 11 LEGACY ITALIANO (necessita di due iso stock di windows, 10 e
 echo    (Crea un'ISO di Windows 11 debloated in modalita' legacy.
 echo     Tutti i requisiti sono bypassati, compreso il bypass della RAM minima di 4 GB)
 echo.
-echo [2] WINDOWS 11 LEGACY ITALIANO (iso ibrida da scaricare obbligatoriamente)
+echo [3] WINDOWS 11 LEGACY ITALIANO (iso ibrida da scaricare obbligatoriamente)
 echo    (Crea un'ISO di Windows 11 debloated in modalita' legacy.
 echo     Tutti i requisiti sono bypassati, compreso il bypass della RAM minima di 4 GB)
 echo.
@@ -75,6 +75,7 @@ echo *******************************
 SET /P MENU=Type 1, 2 or 0 then press ENTER : 
 IF /I '%MENU%'=='1' GOTO :win_11_uefi_ita
 IF /I '%MENU%'=='2' GOTO :win_11_legacy_ita
+IF /I '%MENU%'=='3' GOTO :win_11_legacy_ita_hybrid
 IF /I '%MENU%'=='0' GOTO :EXIT
 GOTO :ITA_11
 
@@ -138,6 +139,9 @@ win11_custom_iso_en_uefi\Runme.bat
 :win_11_legacy_ita
 win11_custom_iso_italian_legacy\Runme.bat
 
+
+:win_11_legacy_ita_hybrid
+win11_custom_iso_italian_legacy_hybrid\Runme.bat
 
 :win_11_legacy_en
 win11_custom_iso_en_legacy\Runme.bat
