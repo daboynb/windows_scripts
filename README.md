@@ -81,41 +81,8 @@ It works with :
 # windows_update_cli.bat
 Update the system using windows update from powershell. The script will reboot the system if needed.
 
-# win11_custom_iso.bat
-This script creates a custom ISO of Windows 11 with the following features:
-
-- The hardware requirements are bypassed.
-- All apps are removed, including the sponsored one on the start menu.
-- Telemetry is disabled.
-- Edge can be removed.
-- Some other minor tweaks.
-
-How to use?
-
-      irm -Uri "https://raw.githubusercontent.com/daboynb/windows_scripts/main/win11_custom_iso/Downloader.ps1" | iex 
-
-- Download the windows 11 ISO from microsoft
-- Run the bat file and select when asked the ISO file
-- Wait... the edited ISO will be available on your desktop
-
 # section_manager.bat
 This script uses the ExplorerPatcher DLL to remove the recommended section in Windows 11 without installing the entire software.
-
-# win10_custom_iso.bat
-This script creates a custom ISO of Windows 10 with the following features:
-
-- All apps are removed,
-- Telemetry is disabled.
-- Edge can be removed.
-- Some other minor tweaks.
-
-How to use?
-
-      irm -Uri "https://raw.githubusercontent.com/daboynb/windows_scripts/main/win10_custom_iso/Downloader.ps1" | iex 
-
-- Download the windows 10 ISO from microsoft
-- Run the bat file and select when asked the ISO file
-- Wait... the edited ISO will be available on your desktop
 
 # defender.bat
 This script allows you to enable or disable Windows Defender using PowerRun, a tool created by Sordum.
@@ -124,4 +91,19 @@ This script allows you to enable or disable Windows Defender using PowerRun, a t
 This script installs adb and fastboot on your pc.
 
 # windows_custom_iso_maker
-THIS IS A BETA! DO NOT USE, TESTING PURPOSE ONLY FOR NOW
+This script creates a custom ISO's of Windows 10 and 11 with the following features:
+
+- The hardware requirements are bypassed.
+- All apps are removed, including the sponsored one on the start menu.
+- Telemetry is disabled.
+- Edge can be removed.
+- Defender can be removed.
+- Some other minor tweaks.
+
+How to use?
+
+       irm -Uri "https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_custom_iso_maker/Downloader.ps1" | iex
+
+- Download the windows 11 ISO from microsoft
+- Run the bat file and select when asked the ISO file
+- Wait... the edited ISO will be available on your desktop
