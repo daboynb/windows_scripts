@@ -26,18 +26,8 @@ for %%i in (%files%) do (
 rem Download iso
 :iso
 powerShell -Command "Write-Host 'Scarica la iso di windows ibrida' -ForegroundColor Green; exit"
-set /p answer=":"
-if /i "%answer%"=="si" (
-  timeout /t 1 >nul
-    start "" "https://shorturl.at/egCHL"
-    goto :iso_scaricata
-) else if /i "%answer%"=="no" (
-    echo "Saltiamo questo passaggio..."
-    goto :winfolder
-) ELSE (
-    echo I valori accettati sono solamente si e no.
-    goto :iso
-)
+timeout /t 2 >nul
+start "" "https://shorturl.at/egCHL"
 
 :iso_scaricata
 powerShell -Command "Write-Host 'Digita terminato al termine del download per proseguire' -ForegroundColor Yellow; exit"
