@@ -105,8 +105,6 @@ IF %errorlevel% equ 0 (
   color 4 && echo "ERRORE: Estrazione fallita!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
-set "iso11=%filepath%"
-
 rem Open file dialog to select file
 :select_file
 powerShell -Command "Write-Host 'Seleziona il file iso di win 10' -ForegroundColor Green; exit"  

@@ -24,8 +24,6 @@ IF /I '%MENU%'=='2' GOTO :EN_MENU
 IF /I '%MENU%'=='0' GOTO :EXIT
 GOTO :LANGMENU
 
-
-
 :ITA_MENU
 CLS
 color 0A
@@ -78,7 +76,6 @@ IF /I '%MENU%'=='2' GOTO :win_11_legacy_ita
 IF /I '%MENU%'=='3' GOTO :win_11_legacy_ita_hybrid
 IF /I '%MENU%'=='0' GOTO :EXIT
 GOTO :ITA_11
-
 
 :EN_MENU
 CLS
