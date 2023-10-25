@@ -18,7 +18,7 @@ taskkill /F /IM msedge.exe 2>nul
 
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdgeWithChromium" /t REG_DWORD /d 1 /f
 
-PowerRun.exe cmd.exe /c "rmdir /s / q "C:\Program Files \Microsoft\Edge""
+PowerRun.exe cmd.exe /c "rmdir /s / q "C:\Program Files\Microsoft\Edge""
 
 del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk"
 
