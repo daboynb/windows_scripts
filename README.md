@@ -97,7 +97,7 @@ This script creates a custom ISO's of Windows 10 and 11 with the following featu
 - All apps are removed, including the sponsored one on the start menu.
 - Telemetry is disabled.
 - Edge can be removed.
-- Defender can be removed.
+- Defender can be disabled.
 - Some other minor tweaks.
 
 How to use?

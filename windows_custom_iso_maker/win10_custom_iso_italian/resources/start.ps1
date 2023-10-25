@@ -31,7 +31,7 @@ while (-not $success) {
 Write-Host -fore Green 'A breve iniziera'' il processo di debloat, il mouse e la tastiera verranno disabilitati fino al completamento delle operazioni'
 
 while ($true) {
-    $process = Get-Process -Name OneDrive -ErrorAction SilentlyContinue
+    $process = Get-Process -Name SecurityHealthSystray -ErrorAction SilentlyContinue
 
     if ($process) {
         Write-Host "OneDrive is running."
