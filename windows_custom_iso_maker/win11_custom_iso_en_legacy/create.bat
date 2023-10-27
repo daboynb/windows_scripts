@@ -194,6 +194,18 @@ powerShell -Command "Write-Host 'Mounting image' -ForegroundColor Green; exit"
 dism /mount-image /imagefile:"C:\ISO\Win11\sources\install.wim" /index:1 /mountdir:"C:\mount\mount"
 cls
 
+rem disable defender
+:defender
+set /p answer="Do you want to disable Windows Defender (Antivirus)? (yes/no) : "
+if /i "%answer%"=="yes" (
+    echo > C:\mount\mount\Windows\nodefender.pref
+) else if /i "%answer%"=="no" (
+    echo "Saltiamo questo passaggio..."
+) ELSE (
+    echo Invalid input. Please answer with 'yes' or 'no'.
+    goto :defender
+)
+
 rem delete edge
 :edge
 set /p answer="Do you want to remove Edge? (yes/no): "
@@ -247,17 +259,7 @@ IF %errorlevel% equ 0 (
   color 4 && echo "Can't copy start.ps1!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
-rem disable defender
-:defender
-set /p answer="Do you want to disable Windows Defender (Antivirus)? (yes/no) : "
-if /i "%answer%"=="yes" (
-    echo > C:\mount\mount\Windows\nodefender.pref
-) else if /i "%answer%"=="no" (
-    echo "Saltiamo questo passaggio..."
-) ELSE (
-    echo Invalid input. Please answer with 'yes' or 'no'.
-    goto :defender
-)
+
 
 rem copy PowerRun.exe
 copy "resources\PowerRun.exe" "C:\mount\mount\Windows"
