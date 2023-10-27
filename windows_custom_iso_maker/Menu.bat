@@ -63,7 +63,7 @@ echo [2] WINDOWS 11 LEGACY ITALIANO (necessita di due iso stock di windows, 10 e
 echo    (Crea un'ISO di Windows 11 debloated in modalita' legacy.
 echo     Tutti i requisiti sono bypassati, compreso il bypass della RAM minima di 4 GB)
 echo.
-echo [3] WINDOWS 11 LEGACY ITALIANO (iso ibrida da scaricare obbligatoriamente)
+echo [3] WINDOWS 11 LEGACY ITALIANO (iso ibrida unica da scaricare obbligatoriamente)
 echo    (Crea un'ISO di Windows 11 debloated in modalita' legacy.
 echo     Tutti i requisiti sono bypassati, compreso il bypass della RAM minima di 4 GB)
 echo.
