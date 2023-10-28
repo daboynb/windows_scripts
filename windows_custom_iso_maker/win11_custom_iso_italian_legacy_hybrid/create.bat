@@ -27,7 +27,7 @@ rem Download iso
 :iso
 powerShell -Command "Write-Host 'Scarica la iso di windows ibrida' -ForegroundColor Green; exit"
 timeout /t 2 >nul
-start "" "https://shorturl.at/egCHL"
+start "" "https://shorturl.at/dwy45"
 
 :iso_scaricata
 powerShell -Command "Write-Host 'Digita terminato al termine del download per proseguire' -ForegroundColor Yellow; exit"
