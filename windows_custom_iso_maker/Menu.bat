@@ -42,7 +42,7 @@ echo.
 echo *******************************
 SET /P MENU=Type 1, 2 or 0 then press ENTER : 
 IF /I '%MENU%'=='1' GOTO :ITA_11
-IF /I '%MENU%'=='2' GOTO :win_10_ita
+IF /I '%MENU%'=='2' GOTO :win_10_it
 IF /I '%MENU%'=='0' GOTO :EXIT
 GOTO :ITA_MENU
 
