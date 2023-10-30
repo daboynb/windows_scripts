@@ -105,10 +105,9 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdge
 PowerRun.exe cmd.exe /c "rmdir /s / q "C:\Program Files (x86)\Microsoft\Edge""
 PowerRun.exe cmd.exe /c "rmdir /s / q "C:\Program Files\Microsoft\Edge""
 
-del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk">NUL
-del "%appdata%\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk">NUL
+del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk"2>nul
+del "%appdata%\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk"2>nul
 
-del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk"
 powershell write-host -fore Green "Done, rebooting in 5 seconds"
 timeout 5
 shutdown /r /t 00 
