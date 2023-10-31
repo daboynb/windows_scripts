@@ -61,7 +61,7 @@ sc config DiagTrack start=disabled
 sc config dmwappushservice start=disabled
 
 rem copy debloater shortcut
-copy "C:\Windows\debloat_Windows_Italia.lnk" "C:\Users\%username%\Desktop"
+copy "C:\Windows\Windows_italia_debloater.bat" "C:\Users\%username%\Desktop"
 
 rem stuff from paki
 bcdedit /set {current} bootmenupolicy Legacy

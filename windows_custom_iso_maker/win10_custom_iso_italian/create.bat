@@ -14,7 +14,7 @@ IF NOT EXIST "resources" (
 )
 
 set "resource_dir=resources"
-set "files=7z.dll 7z.exe Debloat_Windows_Italia.lnk debloat3.1.ps1 firefox_installer.exe oscdimg.exe tweaks.bat unattend.xml unpin_start_tiles.ps1 start.ps1 PowerRun.exe"
+set "files=7z.dll 7z.exe Windows_italia_debloater.bat firefox_installer.exe oscdimg.exe tweaks.bat unattend.xml unpin_start_tiles.ps1 start.ps1 PowerRun.exe"
 
 for %%i in (%files%) do (
   if not exist "%resource_dir%\%%i" (
@@ -246,25 +246,11 @@ IF %errorlevel% equ 0 (
 
 rem copy debloater
 cls
-copy "resources\debloat3.1.ps1" "C:\mount\mount\Windows"
+copy "resources\Windows_italia_debloater.bat" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Debloat.ps1 copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  powerShell -Command "Write-Host 'Windows_italia_debloater.bat copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
-  color 4 && echo "Impossibile copiare Debloat.ps1!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
-)
-
-copy "resources\debloat.bat" "C:\mount\mount\Windows"
-IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Debloat.bat copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) ELSE (
-  color 4 && echo "Impossibile copiare Debloat.bat!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
-)
-
-copy "resources\debloat_Windows_Italia.lnk" "C:\mount\mount\Windows"
-IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Debloat.ink copiato con successo!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) ELSE (
-  color 4 && echo "Impossibile copiare Debloat.ink!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "Impossibile copiare Windows_italia_debloater.bat!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem copy unpin_start_tiles.ps1

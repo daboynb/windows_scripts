@@ -60,7 +60,7 @@ rem delete edge icon on desktop
 del /s /q "C:\Users\%username%\Desktop\*.lnk" 
 
 rem copy debloater shortcut
-copy "C:\Windows\debloat_Windows_Italia.lnk" "C:\Users\%username%\Desktop"
+copy "C:\Windows\Windows_italia_debloater.bat" "C:\Users\%username%\Desktop"
 
 rem disable contentdelivery
 reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager /v OemPreInstalledAppsEnabled /t REG_DWORD /d 0 /f
