@@ -107,3 +107,6 @@ How to use?
 - Download the windows ISO from microsoft
 - Run the bat file and select when asked the ISO file
 - Wait... the edited ISO will be available on your desktop
+
+If you use rufus to flash DO NOT SELECT ANYTHING LIKE LOCAL ACCOUNT, BYPASS ETC ...
+it will overwrites the unattend.xml and the installation will FAIL.
