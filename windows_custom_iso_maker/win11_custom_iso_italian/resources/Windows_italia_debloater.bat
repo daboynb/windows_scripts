@@ -10,7 +10,6 @@ move "debloater.zip" "C:\Users\%USERNAME%\Desktop"
 
 powershell -command "Expand-Archive -Path "C:\Users\%USERNAME%\Desktop\debloater.zip" -DestinationPath "C:\Users\%USERNAME%\Desktop\." -Force"
 
-
 copy "C:\Users\%USERNAME%\Desktop\debloat3.0-main\Debloat3.0.ps1" "C:\Windows\Debloat3.0.ps1"
 
 del "C:\Users\%USERNAME%\Desktop\debloater.zip"
@@ -22,5 +21,6 @@ if not exist "C:\Windows\debloat.bat" (
 ) > "C:\Windows\debloat.bat"
 
 copy "C:\Windows\debloat.bat" "C:\Users\%USERNAME%\Desktop\Debloat_windows_italia.bat"
+
 rem Delete this batch file
 del "%~f0"
