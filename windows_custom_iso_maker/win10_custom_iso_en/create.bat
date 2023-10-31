@@ -167,7 +167,7 @@ set /p answer="Do you want to disable Windows Defender (Antivirus)? (yes/no) : "
 if /i "%answer%"=="yes" (
     echo > C:\mount\mount\Windows\nodefender.pref
 ) else if /i "%answer%"=="no" (
-    echo "Saltiamo questo passaggio..."
+    echo "Skipping..."
 ) ELSE (
     echo Invalid input. Please answer with 'yes' or 'no'.
     goto :defender
@@ -254,7 +254,7 @@ rem rebuild image
 powerShell -Command "Write-Host 'Building the ISO' -ForegroundColor Green; exit"  
 resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win10\boot\etfsboot.com#pEF,e,bC:\ISO\Win10\efi\microsoft\boot\efisys.bin C:\ISO\Win10 C:\ISO\Windows10_edited.iso
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'ISO builded successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  powerShell -Command "Write-Host 'ISO built successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
   color 4 && echo "ERROR: Can't build the ISO!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
