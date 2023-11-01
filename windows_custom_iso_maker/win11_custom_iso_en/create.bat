@@ -315,14 +315,11 @@ powerShell -Command "Write-Host 'Process completed! -ForegroundColor Green; exit
 
 rem flash iso
 :rufus
-set /p answer="Do you want to create a bootable USB with this ISO using a forked version of Rufus that works with custom ISOs? (yes/no): "
-if /i "%answer%"=="yes" (
+powerShell -Command "Write-Host 'Downloading a forked rufus that works with custom ISOs' -ForegroundColor Green; exit"  
 powershell -command "Invoke-WebRequest -Uri 'https://shorturl.at/fkpD8' -OutFile "C:\Users\%USERNAME%\Desktop\rufus.exe""
-start "" "C:\Users\%USERNAME%\Desktop\rufus.exe"
-) else if /i "%answer%"=="no" (
-    echo "Done... bye"
+IF EXIST "C:\Users\%USERNAME%\Desktop\rufus.exe" (
+    start "" "C:\Users\%USERNAME%\Desktop\rufus.exe"
 ) ELSE (
-    echo I valori accettati sono solamente si e no.
     goto :rufus
 )
 

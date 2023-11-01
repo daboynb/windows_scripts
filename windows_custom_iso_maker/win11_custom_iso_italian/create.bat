@@ -345,14 +345,11 @@ powerShell -Command "Write-Host 'Processo completato! -ForegroundColor Green; ex
 
 rem flash iso
 :rufus
-set /p answer="Vuoi creare il supporto avviabile tramite una versione custom di rufus che supporta le iso custom?  (si/no) : "
-if /i "%answer%"=="si" (
+powerShell -Command "Write-Host 'Scaricando una versione custom di rufus per le iso custom' -ForegroundColor Green; exit"  
 powershell -command "Invoke-WebRequest -Uri 'https://shorturl.at/fkpD8' -OutFile "C:\Users\%USERNAME%\Desktop\rufus.exe""
-start "" "C:\Users\%USERNAME%\Desktop\rufus.exe"
-) else if /i "%answer%"=="no" (
-    echo "Abiamo terminato... ciao"
+IF EXIST "C:\Users\%USERNAME%\Desktop\rufus.exe" (
+    start "" "C:\Users\%USERNAME%\Desktop\rufus.exe"
 ) ELSE (
-    echo I valori accettati sono solamente si e no.
     goto :rufus
 )
 
