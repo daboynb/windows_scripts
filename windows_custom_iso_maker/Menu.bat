@@ -2,6 +2,8 @@
 
 cd /d %~dp0
 
+powerShell -Command "Write-Host 'My github -> https://github.com/daboynb' -ForegroundColor Green; exit" && timeout 04>nul
+
 :LANGMENU
 CLS
 color 0A

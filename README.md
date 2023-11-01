@@ -78,9 +78,6 @@ It works with :
 
 </details>
 
-# windows_update_cli.bat
-Update the system using windows update from powershell. The script will reboot the system if needed.
-
 # section_manager.bat
 This script uses the ExplorerPatcher DLL to remove the recommended section in Windows 11 without installing the entire software.
 
