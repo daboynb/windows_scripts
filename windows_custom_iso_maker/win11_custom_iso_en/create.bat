@@ -311,5 +311,19 @@ IF %errorlevel% equ 0 (
 :: Enable QuickEdit Mode
 reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 
-powerShell -Command "Write-Host 'Process completed! Press any key to exit' -ForegroundColor Green; exit"  
+powerShell -Command "Write-Host 'Process completed! -ForegroundColor Green; exit"  
+
+rem flash iso
+:rufus
+set /p answer="Do you want to create a bootable USB with this ISO using a forked version of Rufus that works with custom ISOs? (yes/no): "
+if /i "%answer%"=="yes" (
+powershell -command "Invoke-WebRequest -Uri 'https://shorturl.at/fkpD8' -OutFile "C:\Users\%USERNAME%\Desktop\rufus.exe""
+start "" "C:\Users\%USERNAME%\Desktop\rufus.exe"
+) else if /i "%answer%"=="no" (
+    echo "Done... bye"
+) ELSE (
+    echo I valori accettati sono solamente si e no.
+    goto :rufus
+)
+
 pause
