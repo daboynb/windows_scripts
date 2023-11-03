@@ -45,19 +45,6 @@
         <ProtectYourPC>3</ProtectYourPC>
 				<HideOnlineAccountScreens>true</HideOnlineAccountScreens>
 			</OOBE>
-       <UserAccounts>
-        <LocalAccounts>
-          <LocalAccount wcm:action="add">
-            <Name>nomeutente</Name>
-            <DisplayName>nomeutente</DisplayName>
-            <Group>Administrators;Power Users</Group>
-            <Password>
-              <Value>UABhAHMAcwB3AG8AcgBkAA==</Value>
-              <PlainText>false</PlainText>
-            </Password>
-          </LocalAccount>
-        </LocalAccounts>
-      </UserAccounts>
     <FirstLogonCommands>
       <SynchronousCommand wcm:action="add">
         <Order>1</Order>
