@@ -85,17 +85,15 @@ IF NOT EXIST "C:\ISO\Win11\sources\$OEM$\$$\Panther" (
 )
 
 rem edit unattend.xml
-powershell -command "Write-Host 'Insert your username for windows' -ForegroundColor Green; $newName = Read-Host ':'; (Get-Content -path resources\unattend.xml -Raw) -replace 'nomeutente',$newName | Set-Content -Path resources\unattend_edited.xml"
-cls
 powershell -command "Write-Host 'Setting up locale...' -ForegroundColor Green; $output = dism /image:C:\mount\mount /get-intl | Select-String -Pattern 'Default system UI language : (\w{2}-\w{2})' | Foreach-Object { $_.Matches.Groups[1].Value }; (Get-Content -path resources\unattend_edited.xml -Raw) -replace 'locale_set',$output | Set-Content -Path resources\unattend_edited.xml"
 cls
 
 rem copy unattended.xml
-copy "resources\unattend_edited.xml" "C:\ISO\Win11\sources\$OEM$\$$\Panther\unattend.xml"
+copy "resources\unattend.xml" "C:\ISO\Win11\sources\$OEM$\$$\Panther\unattend.xml"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'unattend.xml successfully copied!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
-  color 4 && echo "ERROR: Can't copy unattend.xml!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "ERROR: Can't copy unattend.xml!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem check if wim or esd
@@ -131,7 +129,7 @@ dism /Export-Image /SourceImageFile:"C:\ISO\Win11\sources\install.wim" /SourceIn
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Image exported successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
-  color 4 && echo "ERROR: Can't export the image!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "ERROR: Can't export the image!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 :copy_wim
@@ -140,14 +138,14 @@ del "C:\ISO\Win11\sources\install.wim"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Old install.wim deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
-  color 4 && echo "ERROR: Can't delete the old install.wim!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "ERROR: Can't delete the old install.wim!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 move "C:\ISO\Win11\sources\install_pro.wim" "C:\ISO\Win11\sources\install.wim"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'The new install.wim is now inside the ISO!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
-  color 4 && echo "ERROR: Can't move the new install.wim!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "ERROR: Can't move the new install.wim!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 goto :mountstep
 
@@ -157,7 +155,7 @@ del "C:\ISO\Win11\sources\install.esd"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Old install.esd deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
-  color 4 && echo "ERRORE: Can''t delete old install.esd!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "ERRORE: Can''t delete old install.esd!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem ######################################################################################## 
@@ -199,7 +197,7 @@ copy "resources\firefox_installer.exe" "C:\mount\mount"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Firefox setup copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
-  color 4 && echo "ERROR: Can't copy Firefox setup!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "ERROR: Can't copy Firefox setup!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 :features
@@ -222,7 +220,7 @@ copy "resources\tweaks.bat" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'tweaks.bat copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
-  color 4 && echo "Can't copy tweaks.bat!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "Can't copy tweaks.bat!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem copy start.ps1
@@ -230,7 +228,7 @@ copy "resources\start.ps1" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'start.ps1 copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
-  color 4 && echo "Can't copy start.ps1!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "Can't copy start.ps1!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem copy PowerRun.exe
@@ -238,7 +236,7 @@ copy "resources\PowerRun.exe" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'PowerRun.exe copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
-  color 4 && echo "Can't copy PowerRun.exe!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "Can't copy PowerRun.exe!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 :unmount
@@ -276,7 +274,7 @@ resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win11\boot\etfsboot.com#pEF
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO builded successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
-  color 4 && echo "ERROR: Can't build the ISO!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "ERROR: Can't build the ISO!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rem copy the iso and clean
@@ -284,28 +282,21 @@ copy "C:\ISO\Windows11_edited.iso" "C:\Users\%USERNAME%\Desktop"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO copied on the desktop!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
-  color 4 && echo "ERROR: Can't copy the ISO to the desktop!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "ERROR: Can't copy the ISO to the desktop!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rmdir "C:\ISO" /s /q
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Working folder1 successfully deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
-  color 4 && echo "ERROR: Can't delete the working folder1!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "ERROR: Can't delete the working folder1!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rmdir "C:\mount" /s /q
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Working folder2 successfully deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
-  color 4 && echo "ERROR: Can't delete the working folder2!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
-)
-
-del "resources\unattend_edited.xml" /q
-IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Unattend successfully deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) ELSE (
-  color 4 && echo "ERROR: Can't delete unattend!" && pause && del "resources\unattend_edited.xml" /q && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "ERROR: Can't delete the working folder2!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 :: Enable QuickEdit Mode
