@@ -81,6 +81,8 @@ IF NOT EXIST "C:\ISO\Win10\sources\$OEM$\$$\Panther" (
 
 rem edit unattend.xml
 powershell -command "Write-Host 'Setting up locale...' -ForegroundColor Green; $output = dism /image:C:\mount\mount /get-intl | Select-String -Pattern 'Default system UI language : (\w{2}-\w{2})' | Foreach-Object { $_.Matches.Groups[1].Value }; (Get-Content -path resources\unattend_edited.xml -Raw) -replace 'locale_set',$output | Set-Content -Path resources\unattend_edited.xml"
+del resources\unattend.xml
+ren resources\unattend_edited.xml resources\unattend.xml
 cls
 
 rem copy unattended.xml
