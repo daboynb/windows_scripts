@@ -293,7 +293,7 @@ IF %errorlevel% equ 0 (
 :: Enable QuickEdit Mode
 reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 
-powerShell -Command "Write-Host 'Process completed! -ForegroundColor Green; exit"  
+powerShell -Command "Write-Host 'Process completed!' -ForegroundColor Green; exit"  
 
 rem flash iso
 :rufus
