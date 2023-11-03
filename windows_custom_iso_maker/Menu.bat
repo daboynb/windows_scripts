@@ -22,7 +22,7 @@ echo.
 echo [3] WINDOWS 10 ITALIANO
 echo    (Crea un'ISO di Windows 10 debloated)
 echo.
-echo [3] WINDOWS 11 ENGLISH
+echo [4] WINDOWS 11 ENGLISH
 echo    (Create a debloated Windows 10 ISO)
 echo.
 echo [0] EXIT
@@ -32,7 +32,7 @@ SET /P MENU=Type 1, 2 or 0 then press ENTER :
 IF /I '%MENU%'=='1' GOTO :win_11_ita
 IF /I '%MENU%'=='2' GOTO :win_11_en
 IF /I '%MENU%'=='3' GOTO :win_10_it
-IF /I '%MENU%'=='3' GOTO :win_10_en
+IF /I '%MENU%'=='4' GOTO :win_10_en
 IF /I '%MENU%'=='0' GOTO :EXIT
 GOTO :LANGMENU
 
