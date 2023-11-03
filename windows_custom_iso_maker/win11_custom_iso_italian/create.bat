@@ -336,7 +336,7 @@ powerShell -Command "Write-Host 'Processo completato!' -ForegroundColor Green; e
 rem flash iso
 :rufus
 powerShell -Command "Write-Host 'Scaricando una versione custom di rufus per le iso custom' -ForegroundColor Green; exit"  
-powershell -command "Invoke-WebRequest -Uri 'https://shorturl.at/fkpD8' -OutFile "C:\Users\%USERNAME%\Desktop\rufus.exe""
+powershell -command "Invoke-WebRequest -Uri 'https://shorturl.at/fkpD8' -OutFile "$env:USERPROFILE\Desktop\rufus.exe""
 IF EXIST "C:\Users\%USERNAME%\Desktop\rufus.exe" (
     start "" "C:\Users\%USERNAME%\Desktop\rufus.exe"
 ) ELSE (
