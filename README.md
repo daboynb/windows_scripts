@@ -105,5 +105,8 @@ How to use?
 - Run the bat file and select when asked the ISO file
 - Wait... the edited ISO will be available on your desktop
 
-If you use rufus to flash DO NOT SELECT ANYTHING LIKE LOCAL ACCOUNT, BYPASS ETC ...
-it will overwrites the unattend.xml and the installation will FAIL.
+Use only the rufus version provided by the script!
+
+# sfc_dism.bat
+
+Run dism and sfc to try to fix some problems.
