@@ -235,8 +235,6 @@ IF %errorlevel% equ 0 (
   color 4 && echo "Can't copy start.ps1!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
-
-
 rem copy PowerRun.exe
 copy "resources\PowerRun.exe" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
