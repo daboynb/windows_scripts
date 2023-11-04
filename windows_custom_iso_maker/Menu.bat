@@ -16,7 +16,7 @@ echo.
 echo [1] WINDOWS 11 ITALIANO 
 echo    (Crea un'ISO di Windows 11 debloated, i requisiti sono bypassati: CPU, TPM, RAM e SECUREBOOT)
 echo.
-echo [3] WINDOWS 11 ENGLISH
+echo [2] WINDOWS 11 ENGLISH
 echo    (Create a debloated Windows 11 ISO , all the requisites are bypassed: CPU, TPM, Ram and SECUREBOOT)
 echo.
 echo [3] WINDOWS 10 ITALIANO
