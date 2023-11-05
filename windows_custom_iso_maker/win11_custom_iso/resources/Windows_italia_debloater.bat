@@ -14,6 +14,7 @@ powershell -command "Expand-Archive -Path "debloater.zip" -DestinationPath "." -
 
 del "debloater.zip"
 rmdir /s /q "debloat3.0-main"
+copy "debloat3.0-main\Debloat3.0.ps1" "Debloat3.0.ps1"
 
 if not exist "C:\Program Files\debloater\debloat.bat" (
   echo @echo off
