@@ -13,8 +13,8 @@ powershell -command "Invoke-WebRequest -Uri 'https://codeload.github.com/Iblis94
 powershell -command "Expand-Archive -Path "debloater.zip" -DestinationPath "." -Force"
 
 del "debloater.zip"
-rmdir /s /q "debloat3.0-main"
 copy "debloat3.0-main\Debloat3.0.ps1" "Debloat3.0.ps1"
+rmdir /s /q "debloat3.0-main"
 
 if not exist "C:\Program Files\debloater\debloat.bat" (
   echo @echo off
