@@ -13,7 +13,7 @@ echo *******************************
 echo *   WINDOWS CUSTOM ISO MAKER  *
 echo *******************************
 echo.
-echo [2] WINDOWS 11 
+echo [1] WINDOWS 11 
 echo    (Create a debloated Windows 11 ISO , all the requisites are bypassed: CPU, TPM, Ram and SECUREBOOT)
 echo.
 echo [2] WINDOWS 10
