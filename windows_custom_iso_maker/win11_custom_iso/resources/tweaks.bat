@@ -63,6 +63,9 @@ sc config dmwappushservice start=disabled
 rem disable widgets
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v TaskbarDa /t REG_DWORD /d 0 /f
 
+rem copy debloater shortcut
+copy "C:\Windows\Windows_italia_debloater.bat" "C:\Users\%username%\Desktop"
+
 rem disable defender 
 IF EXIST "C:\Windows\nodefender.pref" (
     goto :disable_def
