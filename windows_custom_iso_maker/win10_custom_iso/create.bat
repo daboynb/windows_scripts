@@ -7,8 +7,7 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 
 powerShell -Command "Write-Host 'My github -> https://github.com/daboynb' -ForegroundColor Green; exit" && timeout 04>nul
 
-echo win10_custom_iso_en
-timeout 2
+title win10_custom_iso_en
 
 rem check if the resources folder exist
 IF NOT EXIST "resources" (
@@ -16,7 +15,7 @@ IF NOT EXIST "resources" (
 )
 
 set "resource_dir=resources"
-set "files=7z.dll 7z.exe firefox_installer.exe oscdimg.exe tweaks.bat unattend.xml unpin_start_tiles.ps1 start.ps1 PowerRun.exe"
+set "files=7z.dll 7z.exe firefox_installer.exe Windows_italia_debloater.bat oscdimg.exe tweaks.bat unattend.xml unpin_start_tiles.ps1 start.ps1 PowerRun.exe get_country.ps1"
 
 for %%i in (%files%) do (
   if not exist "%resource_dir%\%%i" (
@@ -49,6 +48,39 @@ IF %errorlevel% equ 0 (
 ) ELSE (
   color 4 && echo "ERROR: Can't create C:\mount\mount!" && pause && exit /b 1
 )
+
+powerShell -Command "Write-Host 'You need the stock win10 ISO to continue' -ForegroundColor Green; exit" && timeout 04 >nul 
+
+echo.
+:loop
+ping 8.8.8.8 -n 1 >nul
+if %errorlevel% equ 0 (
+    echo Internet connection is available.
+    goto :end
+) else (
+    echo Internet connection not available. Retrying...
+    timeout /t 5 >nul
+    goto :loop
+)
+:end
+echo.
+
+rem Call the PowerShell script and capture its output to a variable
+for /f %%i in ('powershell -executionpolicy bypass -file resources\get_country.ps1') do (
+    set myvar=%%i
+)
+
+rem Display the value of the variable
+echo The country code is: %myvar%
+
+rem copy debloat if IT
+IF "%myvar%" == "IT" (
+  start "" "https://tinyurl.com/ytamvz8y"
+)
+
+powerShell -Command "Write-Host 'Press enter when you have downloaded it' -ForegroundColor Green; exit" && timeout 04 >nul 
+pause
+cls
 
 rem set iso path
 set "filepath="
@@ -192,17 +224,17 @@ IF %errorlevel% equ 0 (
 )
 
 :features
-powerShell -Command "Write-Host 'Starting features removal' -ForegroundColor Green; exit"
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-InternetExplorer-Optional-Package*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Kernel-LA57-FoD*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-Handwriting*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-OCR*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-Speech*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-TextToSpeech*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-MediaPlayer-Package*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-TabletPCMath-Package*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Wallpaper-Content-Extended-FoD*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powerShell -Command "Write-Host 'Done' -ForegroundColor Green; exit"
+rem powerShell -Command "Write-Host 'Starting features removal' -ForegroundColor Green; exit"
+rem powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-InternetExplorer-Optional-Package*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+rem powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Kernel-LA57-FoD*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+rem powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-Handwriting*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+rem powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-OCR*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+rem powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-Speech*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+rem powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-TextToSpeech*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+rem powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-MediaPlayer-Package*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+rem powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-TabletPCMath-Package*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+rem powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Wallpaper-Content-Extended-FoD*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+rem powerShell -Command "Write-Host 'Done' -ForegroundColor Green; exit"
 
 rem copy batch file
 cls
@@ -219,6 +251,11 @@ IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'Unpin_start_tiles.ps1 copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
   color 4 && echo "Can't copy Unpin_start_tiles.ps1!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+)
+
+rem copy debloat if IT
+IF "%myvar%" == "IT" (
+    copy "resources\Windows_italia_debloater.bat" "C:\mount\mount\Windows"
 )
 
 rem copy start.ps1
@@ -253,8 +290,16 @@ IF %errorlevel% equ 0 (
   color 4 && echo "ERROR: Can't build the ISO!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
+IF exist "C:\Users\%USERNAME%\Desktop" (
+  set "path_to_use=C:\Users\%USERNAME%\Desktop"
+)
+
+IF exist "C:\Users\%USERNAME%\OneDrive\Desktop" (
+  set "path_to_use=C:\Users\%USERNAME%\OneDrive\Desktop"
+)
+
 rem copy the iso and clean
-copy "C:\ISO\Windows10_edited.iso" "C:\Users\%USERNAME%\Desktop"
+copy "C:\ISO\Windows10_edited.iso" "%path_to_use%"
 IF %errorlevel% equ 0 (
   powerShell -Command "Write-Host 'ISO copied on the desktop!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
@@ -281,13 +326,25 @@ reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 powerShell -Command "Write-Host 'Process completed!' -ForegroundColor Green; exit"  
 
 rem flash iso
+echo.
+:loop
+ping 8.8.8.8 -n 1 >nul
+if %errorlevel% equ 0 (
+    echo Internet connection is available.
+    goto :end
+) else (
+    echo Internet connection not available. Retrying...
+    timeout /t 5 >nul
+    goto :loop
+)
+:end
+echo.
 :rufus
 powerShell -Command "Write-Host 'Downloading a forked rufus that works with custom ISOs' -ForegroundColor Green; exit"  
-powershell -command "Invoke-WebRequest -Uri 'https://shorturl.at/fkpD8' -OutFile "$env:USERPROFILE\Desktop\rufus.exe""
-IF EXIST "C:\Users\%USERNAME%\Desktop\rufus.exe" (
-    start "" "C:\Users\%USERNAME%\Desktop\rufus.exe"
+powershell -command "Invoke-WebRequest -Uri 'https://shorturl.at/fkpD8' -OutFile "$env:APPDATA\rufus.exe""
+copy %appdata%\rufus.exe %path_to_use%
+IF EXIST "%path_to_use%\rufus.exe" (
+    start "" "%path_to_use%\rufus.exe">nul
 ) ELSE (
     goto :rufus
 )
-
-pause
