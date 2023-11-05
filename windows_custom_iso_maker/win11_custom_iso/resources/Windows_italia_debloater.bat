@@ -33,7 +33,5 @@ copy "C:\Program Files\debloater\debloat.bat" "%path_to_use%\Debloat_windows_ita
 
 setx PATH "%PATH%;C:\Program Files\debloater"
 
-"C:\Program Files\debloater\debloat.bat"
-
 rem Delete this batch file
 del "%~f0"
