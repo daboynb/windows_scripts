@@ -34,5 +34,5 @@ setx PATH "%PATH%;C:\Program Files\debloater"
 
 "C:\Program Files\debloater\debloat.bat"
 
-Delete this batch file
+rem Delete this batch file
 del "%~f0"
