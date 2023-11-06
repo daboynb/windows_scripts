@@ -73,9 +73,9 @@ for /f %%i in ('powershell -executionpolicy bypass -file resources\get_country.p
 rem Display the value of the variable
 echo The country code is: %myvar%
 
-rem copy debloat if IT
+rem ISO if IT
 IF "%myvar%" == "IT" (
-  start "" "https://tinyurl.com/ytamvz8y"
+  start "" "https://tinyurl.com/4ty38tpk"
 )
 
 powerShell -Command "Write-Host 'Press enter when you have downloaded it' -ForegroundColor Green; exit" && timeout 04 >nul 
