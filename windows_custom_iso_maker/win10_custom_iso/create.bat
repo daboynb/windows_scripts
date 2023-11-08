@@ -351,5 +351,9 @@ IF EXIST "%path_to_use%\rufus.exe" (
 )
 =======
 powerShell -Command "Write-Host 'Process completed! Press any key to exit' -ForegroundColor Green; exit"  
+<<<<<<< HEAD:windows_custom_iso_maker/win10_custom_iso/create.bat
+pause
+>>>>>>> parent of 1ca3632 (Update create.bat):windows_custom_iso_maker/win10_custom_iso_en/create.bat
+=======
 pause
 >>>>>>> parent of 1ca3632 (Update create.bat):windows_custom_iso_maker/win10_custom_iso_en/create.bat
