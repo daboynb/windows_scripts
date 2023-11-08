@@ -1,21 +1,10 @@
 # Change to the desktop directory
-$desktop_path = (Test-Path "$env:USERPROFILE\Desktop")
-if ($desktop_path -eq $true) {
-    $path_to_use = "$env:USERPROFILE\Desktop"
-}
-
-$desktop_path = (Test-Path "$env:USERPROFILE\OneDrive\Desktop")
-if ($desktop_path -eq $true) {
-    $path_to_use = "$env:USERPROFILE\OneDrive\Desktop"
-
-}
-
-cd $path_to_use
+cd "$env:USERPROFILE\Desktop"
 
 # Download the script from GitHub
 $wc = New-Object net.webclient
 $msu_url = 'https://github.com/daboynb/windows_scripts/archive/refs/heads/main.zip'
-$local_msu_url = "$path_to_use\windows_script_daboynb.zip"
+$local_msu_url = "$env:USERPROFILE\Desktop\windows_script_daboynb.zip"
 $wc.Downloadfile($msu_url, $local_msu_url)
 
 # Extract all from "windows_script_daboynb.zip"
