@@ -195,7 +195,7 @@ set /p answer="Do you want to disable Windows Defender (Antivirus)? (yes/no) : "
 if /i "%answer%"=="yes" (
     echo > C:\mount\mount\Windows\nodefender.pref
 ) else if /i "%answer%"=="no" (
-    echo "Skipping..."
+    echo "Saltiamo questo passaggio..."
 ) ELSE (
     echo Invalid input. Please answer with 'yes' or 'no'.
     goto :defender
@@ -285,7 +285,7 @@ rem rebuild image
 powerShell -Command "Write-Host 'Building the ISO' -ForegroundColor Green; exit"  
 resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win10\boot\etfsboot.com#pEF,e,bC:\ISO\Win10\efi\microsoft\boot\efisys.bin C:\ISO\Win10 C:\ISO\Windows10_edited.iso
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'ISO built successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  powerShell -Command "Write-Host 'ISO builded successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
   color 4 && echo "ERROR: Can't build the ISO!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
@@ -323,6 +323,7 @@ IF %errorlevel% equ 0 (
 :: Enable QuickEdit Mode
 reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 
+<<<<<<< HEAD:windows_custom_iso_maker/win10_custom_iso/create.bat
 powerShell -Command "Write-Host 'Process completed!' -ForegroundColor Green; exit"  
 
 rem flash iso
