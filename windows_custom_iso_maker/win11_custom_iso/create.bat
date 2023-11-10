@@ -357,7 +357,7 @@ echo.
 :rufus
 powerShell -Command "Write-Host 'Downloading a forked rufus that works with custom ISOs' -ForegroundColor Green; exit"  
 powershell -command "Invoke-WebRequest -Uri 'https://shorturl.at/fkpD8' -OutFile "$env:APPDATA\rufus.exe""
-copy %appdata%\rufus.exe %path_to_use%
+move %appdata%\rufus.exe %path_to_use%
 IF EXIST "%path_to_use%\rufus.exe" (
     start "" "%path_to_use%\rufus.exe">nul
 ) ELSE (
