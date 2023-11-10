@@ -15,6 +15,12 @@ IF exist files_detect.ps1 (
     echo files_detect.ps1 not present! && pause && exit /b 1
 )
 
+IF exist PowerRun.exe (
+    echo ok
+) ELSE (
+    echo powerrun not present! && pause && exit /b 1
+)
+
 ping 8.8.8.8 -n 1 -w 1000 > nul
 IF "%ERRORLEVEL%"=="1" color 0C && echo "Internet is not avibale, EXITING!" && pause && exit
 
@@ -67,7 +73,7 @@ timeout 03 >nul
 
 :mono
 rem disable one dll
-move "%SystemRoot%\dxgi.dll" "%SystemRoot%\adxgi.dll"
+PowerRun.exe cmd.exe /c "move "%SystemRoot%\dxgi.dll" "%SystemRoot%\adxgi.dll""
 
 rem restart processes
 taskkill /f /im StartMenuExperienceHost.exe & taskkill /f /im explorer.exe & start explorer.exe

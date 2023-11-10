@@ -23,7 +23,8 @@ do {
 
     if ($currentSize1 -eq $previousSize1 -and $currentSize2 -eq $previousSize2 -and $currentSize3 -eq $previousSize3) {
         Write-Host "All files are downloaded!" -ForegroundColor Green
-        break
+        Start-Sleep 05
+        exit
     }
 
     Start-Sleep -Seconds 3
