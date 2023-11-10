@@ -7,7 +7,7 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 
 powerShell -Command "Write-Host 'My github -> https://github.com/daboynb' -ForegroundColor Green; exit" && timeout 04>nul
 
-title win11_custom_iso_en
+title win11_custom_iso
 
 rem check if the resources folder exist
 IF NOT EXIST "resources" (
@@ -195,7 +195,7 @@ set /p answer="Do you want to disable Windows Defender (Antivirus)? (yes/no) : "
 if /i "%answer%"=="yes" (
     echo > C:\mount\mount\Windows\nodefender.pref
 ) else if /i "%answer%"=="no" (
-    echo "Saltiamo questo passaggio..."
+    powerShell -Command "Write-Host 'Not disabling defender' -ForegroundColor yellow; exit"
 ) ELSE (
     echo Invalid input. Please answer with 'yes' or 'no'.
     goto :defender
@@ -300,7 +300,7 @@ rem rebuild image
 powerShell -Command "Write-Host 'Building the ISO' -ForegroundColor Green; exit"  
 resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win11\boot\etfsboot.com#pEF,e,bC:\ISO\Win11\efi\microsoft\boot\efisys.bin C:\ISO\Win11 C:\ISO\Windows11_edited.iso
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'ISO builded successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  powerShell -Command "Write-Host 'ISO created successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
 ) ELSE (
   color 4 && echo "ERROR: Can't build the ISO!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
