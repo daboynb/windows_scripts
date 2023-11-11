@@ -55,7 +55,6 @@ echo.
 :loop
 ping 8.8.8.8 -n 1 >nul
 if %errorlevel% equ 0 (
-    echo Internet connection is available.
     goto :end
 ) else (
     echo Internet connection not available. Retrying...
@@ -67,14 +66,11 @@ echo.
 
 rem Call the PowerShell script and capture its output to a variable
 for /f %%i in ('powershell -executionpolicy bypass -file resources\get_country.ps1') do (
-    set myvar=%%i
+    set countryvar=%%i
 )
 
-rem Display the value of the variable
-echo The country code is: %myvar%
-
 rem ISO if IT
-IF "%myvar%" == "IT" (
+IF "%countryvar%" == "IT" (
   start "" "https://tinyurl.com/4ty38tpk"
 )
 
@@ -247,7 +243,7 @@ IF %errorlevel% equ 0 (
 )
 
 rem copy debloat if IT
-IF "%myvar%" == "IT" (
+IF "%countryvar%" == "IT" (
     copy "resources\Windows_italia_debloater.bat" "C:\mount\mount\Windows"
 )
 
@@ -345,7 +341,6 @@ echo.
 :loop
 ping 8.8.8.8 -n 1 >nul
 if %errorlevel% equ 0 (
-    echo Internet connection is available.
     goto :end
 ) else (
     echo Internet connection not available. Retrying...
