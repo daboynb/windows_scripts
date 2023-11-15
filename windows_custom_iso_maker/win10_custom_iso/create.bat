@@ -37,21 +37,20 @@ IF EXIST "C:\mount\mount" (
 rem create folder
 mkdir "C:\ISO\Win10" 2>nul
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'C:\ISO\Win10 created successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  cls
 ) ELSE (
   color 4 && echo "ERROR: Can't create C:\ISO\Win10!" && pause && exit /b 1
 )
 
 mkdir "C:\mount\mount" 2>nul
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'C:\mount\mount created successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  cls
 ) ELSE (
   color 4 && echo "ERROR: Can't create C:\mount\mount!" && pause && exit /b 1
 )
 
 powerShell -Command "Write-Host 'You need the stock win10 ISO to continue' -ForegroundColor Green; exit" && timeout 04 >nul 
 
-echo.
 :loop
 ping 8.8.8.8 -n 1 >nul
 if %errorlevel% equ 0 (
@@ -59,10 +58,10 @@ if %errorlevel% equ 0 (
 ) else (
     echo Internet connection not available. Retrying...
     timeout /t 5 >nul
+    cls
     goto :loop
 )
 :end
-echo.
 
 rem Call the PowerShell script and capture its output to a variable
 for /f %%i in ('powershell -executionpolicy bypass -file resources\get_country.ps1') do (
@@ -98,7 +97,7 @@ if defined filepath (
 powerShell -Command "Write-Host 'Extracting ISO to C:\ISO\Win10... Please wait!' -ForegroundColor Green; exit"  
 resources\7z.exe x -y -o"C:\ISO\Win10" "%filepath%" > nul
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'ISO extraction completed!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  cls
 ) ELSE (
   color 4 && echo "ERROR: Extraction failed!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
@@ -110,7 +109,7 @@ IF NOT EXIST "C:\ISO\Win10\sources\$OEM$\$$\Panther" (
 rem copy unattended.xml
 copy "resources\unattend.xml" "C:\ISO\Win10\sources\$OEM$\$$\Panther\unattend.xml"
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'unattend.xml successfully copied!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  cls
 ) ELSE (
   color 4 && echo "ERROR: Can't copy unattend.xml!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
@@ -146,7 +145,7 @@ cls
 powerShell -Command "Write-Host 'Exporting' -ForegroundColor Green; exit"  
 dism /Export-Image /SourceImageFile:"C:\ISO\Win10\sources\install.wim" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win10\sources\install_pro.wim" /compress:max
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Image exported successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  cls
 ) ELSE (
   color 4 && echo "ERROR: Can't export the image!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
@@ -155,14 +154,14 @@ IF %errorlevel% equ 0 (
 rem copy the new install.wim
 del "C:\ISO\Win10\sources\install.wim"
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Old install.wim deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  cls
 ) ELSE (
   color 4 && echo "ERROR: Can't delete the old install.wim!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 move "C:\ISO\Win10\sources\install_pro.wim" "C:\ISO\Win10\sources\install.wim"
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'The new install.wim is now inside the ISO!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  cls
 ) ELSE (
   color 4 && echo "ERROR: Can't move the new install.wim!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
@@ -172,7 +171,7 @@ goto :mountstep
 rem del esd
 del "C:\ISO\Win10\sources\install.esd"
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Old install.esd deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  cls
 ) ELSE (
   color 4 && echo "ERRORE: Can''t delete old install.esd!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
@@ -182,16 +181,26 @@ rem ############################################################################
 :mountstep
 rem mount the image with dism
 powerShell -Command "Write-Host 'Mounting image' -ForegroundColor Green; exit"  
+
 dism /mount-image /imagefile:"C:\ISO\Win10\sources\install.wim" /index:1 /mountdir:"C:\mount\mount"
 cls
+
+rem set arch
+IF NOT EXIST "C:\mount\mount\Program Files (x86)" (
+    set "architecture=32_bit"
+)
+IF EXIST "C:\mount\mount\Program Files (x86)" (
+    set "architecture=64_bit"
+)
 
 rem disable defender
 :defender
 set /p answer="Do you want to disable Windows Defender (Antivirus)? (yes/no) : "
 if /i "%answer%"=="yes" (
     echo > C:\mount\mount\Windows\nodefender.pref
+    set defender_status=defender_disabled
 ) else if /i "%answer%"=="no" (
-    powerShell -Command "Write-Host 'Not disabling defender' -ForegroundColor yellow; exit"
+    set defender_status=defender_enabled
 ) ELSE (
     echo Invalid input. Please answer with 'yes' or 'no'.
     goto :defender
@@ -202,9 +211,10 @@ rem delete edge
 set /p answer="Do you want to remove Edge? (yes/no): "
 if /i "%answer%"=="yes" (
     echo > C:\mount\mount\Windows\noedge.pref
+    set edge_status=edge_removed
     goto :edge_step
 ) else if /i "%answer%"=="no" (
-    echo Skipping...
+    set edge_status=edge_not_removed
     goto :features
 ) ELSE (
     echo Invalid input. Please answer with 'yes' or 'no'.
@@ -214,13 +224,13 @@ if /i "%answer%"=="yes" (
 :edge_step
 copy "resources\firefox_installer.exe" "C:\mount\mount"
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Firefox setup copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  cls
 ) ELSE (
   color 4 && echo "ERROR: Can't copy Firefox setup!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 :features
-powerShell -Command "Write-Host 'Starting features removal' -ForegroundColor Green; exit"
+powerShell -Command "Write-Host 'Removing useless features' -ForegroundColor Green; exit"
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-InternetExplorer-Optional-Package*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Kernel-LA57-FoD*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-Handwriting*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
@@ -236,7 +246,7 @@ rem copy batch file
 cls
 copy "resources\tweaks.bat" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'tweaks.bat copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  cls
 ) ELSE (
   color 4 && echo "Can't copy tweaks.bat!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
@@ -244,7 +254,7 @@ IF %errorlevel% equ 0 (
 rem copy unpin_start_tiles.ps1
 copy "resources\unpin_start_tiles.ps1" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Unpin_start_tiles.ps1 copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  cls
 ) ELSE (
   color 4 && echo "Can't copy Unpin_start_tiles.ps1!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
@@ -257,7 +267,7 @@ IF "%countryvar%" == "IT" (
 rem copy start.ps1
 copy "resources\start.ps1" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'start.ps1 copied successfull!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  cls
 ) ELSE (
   color 4 && echo "Can't copy start.ps1!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
@@ -265,7 +275,7 @@ IF %errorlevel% equ 0 (
 rem copy PowerRun.exe
 copy "resources\PowerRun.exe" "C:\mount\mount\Windows"
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'PowerRun.exe copied successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  cls
 ) ELSE (
   color 4 && echo "Can't copy PowerRun.exe!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
@@ -276,16 +286,6 @@ dism /unmount-image /mountdir:"C:\mount\mount" /commit
 cls
 
 rem ######################################################################################## 
-
-rem rebuild image 
-powerShell -Command "Write-Host 'Building the ISO' -ForegroundColor Green; exit"  
-resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win10\boot\etfsboot.com#pEF,e,bC:\ISO\Win10\efi\microsoft\boot\efisys.bin C:\ISO\Win10 C:\ISO\Windows10_edited.iso
-IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'ISO created successfully!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
-) ELSE (
-  color 4 && echo "ERROR: Can't build the ISO!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
-)
-
 IF exist "C:\Users\%USERNAME%\Desktop" (
   set "path_to_use=C:\Users\%USERNAME%\Desktop"
 )
@@ -294,24 +294,25 @@ IF exist "C:\Users\%USERNAME%\OneDrive\Desktop" (
   set "path_to_use=C:\Users\%USERNAME%\OneDrive\Desktop"
 )
 
-rem copy the iso and clean
-copy "C:\ISO\Windows10_edited.iso" "%path_to_use%"
+rem rebuild image 
+powerShell -Command "Write-Host 'Building the ISO' -ForegroundColor Green; exit"  
+resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win10\boot\etfsboot.com#pEF,e,bC:\ISO\Win10\efi\microsoft\boot\efisys.bin C:\ISO\Win10 "%path_to_use%\Windows10_%defender_status%_%edge_status%_!architecture!.iso"
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'ISO copied on the desktop!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  cls
 ) ELSE (
-  color 4 && echo "ERROR: Can't copy the ISO to the desktop!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+  color 4 && echo "ERROR: Can't build the ISO!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rmdir "C:\ISO" /s /q
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Working folder1 successfully deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  cls
 ) ELSE (
   color 4 && echo "ERROR: Can't delete the working folder1!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
 
 rmdir "C:\mount" /s /q
 IF %errorlevel% equ 0 (
-  powerShell -Command "Write-Host 'Working folder2 successfully deleted!' -ForegroundColor Green; exit" && timeout 04 >nul && cls
+  cls
 ) ELSE (
   color 4 && echo "ERROR: Can't delete the working folder2!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
 )
@@ -322,7 +323,6 @@ reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 powerShell -Command "Write-Host 'Process completed!' -ForegroundColor Green; exit"  
 
 rem flash iso
-echo.
 :loop
 ping 8.8.8.8 -n 1 >nul
 if %errorlevel% equ 0 (
@@ -330,10 +330,11 @@ if %errorlevel% equ 0 (
 ) else (
     echo Internet connection not available. Retrying...
     timeout /t 5 >nul
+    cls
     goto :loop
 )
 :end
-echo.
+
 :rufus
 powerShell -Command "Write-Host 'Downloading a forked rufus that works with custom ISOs' -ForegroundColor Green; exit"  
 powershell -command "Invoke-WebRequest -Uri 'https://shorturl.at/fkpD8' -OutFile "$env:APPDATA\rufus.exe""
@@ -343,3 +344,4 @@ IF EXIST "%path_to_use%\rufus.exe" (
 ) ELSE (
     goto :rufus
 )
+endlocal
