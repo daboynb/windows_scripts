@@ -34,7 +34,7 @@ while ($true) {
     $process = Get-Process -Name SecurityHealthSystray -ErrorAction SilentlyContinue
 
     if ($process) {
-        Write-Host "OneDrive is running."
+        Write-Host "SecurityHealthSystray is running."
         break  # Exit the loop
     }
     
