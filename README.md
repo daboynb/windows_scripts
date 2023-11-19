@@ -110,3 +110,11 @@ Use only the rufus version provided by the script!
 # sfc_dism.bat
 
 Run dism and sfc to try to fix some problems.
+
+# copilot_enabler
+
+Enable copilot on windows 23h2, tested on win 11 build n.231103
+
+1) Log in with your ms account from the settings
+2) launch the bat, it will reboot the system
+3) to open it click on the icon on the desktop
