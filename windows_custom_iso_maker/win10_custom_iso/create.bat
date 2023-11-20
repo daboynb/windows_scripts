@@ -323,14 +323,9 @@ reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 powerShell -Command "Write-Host 'Process completed!' -ForegroundColor Green; exit"  
 
 rem flash iso
-:rufus
-powerShell -Command "Write-Host 'This is a forked rufus that works with custom ISOs' -ForegroundColor Green; exit"  
+rem flash iso
 powerShell -Command "Write-Host 'Use the rufus.exe on your desktop' -ForegroundColor Green; exit"  
+powerShell -Command "Write-Host 'This is a forked rufus that works with custom ISOs' -ForegroundColor Green; exit"  
 copy "resources\rufus.exe" %path_to_use%
 timeout 04>nul
-IF EXIST "%path_to_use%\rufus.exe" (
-    start "" "%path_to_use%\rufus.exe">nul
-) ELSE (
-    goto :rufus
-)
 endlocal
