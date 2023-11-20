@@ -332,6 +332,6 @@ powerShell -Command "Write-Host 'Process completed!' -ForegroundColor Green; exi
 rem flash iso
 powerShell -Command "Write-Host 'Use the rufus.exe on your desktop' -ForegroundColor Green; exit"  
 powerShell -Command "Write-Host 'This is a forked rufus that works with custom ISOs' -ForegroundColor Green; exit"  
-copy "resources\rufus.exe" %path_to_use%
+copy "resources\rufus_forked_for_custom.exe" %path_to_use%
 timeout 04>nul
 endlocal
