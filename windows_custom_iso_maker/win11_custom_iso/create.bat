@@ -330,23 +330,11 @@ reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 powerShell -Command "Write-Host 'Process completed!' -ForegroundColor Green; exit"  
 
 rem flash iso
-echo.
-:loop
-ping 8.8.8.8 -n 1 >nul
-if %errorlevel% equ 0 (
-    goto :end
-) else (
-    echo Internet connection not available. Retrying...
-    timeout /t 5 >nul
-    cls
-    goto :loop
-)
-:end
-
 :rufus
-powerShell -Command "Write-Host 'Downloading a forked rufus that works with custom ISOs' -ForegroundColor Green; exit"  
-powershell -command "Invoke-WebRequest -Uri 'https://shorturl.at/fkpD8' -OutFile "$env:APPDATA\rufus.exe""
-move %appdata%\rufus.exe %path_to_use%
+powerShell -Command "Write-Host 'This is a forked rufus that works with custom ISOs' -ForegroundColor Green; exit"  
+powerShell -Command "Write-Host 'Use the rufus.exe on your desktop' -ForegroundColor Green; exit"  
+copy "resources\rufus.exe" %path_to_use%
+pause
 IF EXIST "%path_to_use%\rufus.exe" (
     start "" "%path_to_use%\rufus.exe">nul
 ) ELSE (
