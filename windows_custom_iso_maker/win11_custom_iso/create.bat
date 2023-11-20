@@ -334,7 +334,7 @@ rem flash iso
 powerShell -Command "Write-Host 'This is a forked rufus that works with custom ISOs' -ForegroundColor Green; exit"  
 powerShell -Command "Write-Host 'Use the rufus.exe on your desktop' -ForegroundColor Green; exit"  
 copy "resources\rufus.exe" %path_to_use%
-pause
+timeout 04>nul
 IF EXIST "%path_to_use%\rufus.exe" (
     start "" "%path_to_use%\rufus.exe">nul
 ) ELSE (
