@@ -6,7 +6,6 @@ powerShell -Command "Write-Host 'My github -> https://github.com/daboynb' -Foreg
 
 :LANGMENU
 CLS
-color 0A
 SET MENU=
 cls
 echo *******************************
