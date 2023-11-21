@@ -294,13 +294,7 @@ cls
 rem ######## boot.wim edits #################
 
 rem rebuild image 
-IF exist "C:\Users\%USERNAME%\Desktop" (
-  set "path_to_use=C:\Users\%USERNAME%\Desktop"
-)
-
-IF exist "C:\Users\%USERNAME%\OneDrive\Desktop" (
-  set "path_to_use=C:\Users\%USERNAME%\OneDrive\Desktop"
-)
+set "path_to_use=C:\Windows_iso_maker"
 
 powerShell -Command "Write-Host 'Building the ISO' -ForegroundColor Green; exit"  
 resources\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win11\boot\etfsboot.com#pEF,e,bC:\ISO\Win11\efi\microsoft\boot\efisys.bin C:\ISO\Win11 "%path_to_use%\Windows11_%defender_status%_%edge_status%.iso"
@@ -330,8 +324,9 @@ reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 powerShell -Command "Write-Host 'Process completed!' -ForegroundColor Green; exit"  
 
 rem flash iso
-powerShell -Command "Write-Host 'Use the rufus.exe on your desktop' -ForegroundColor Green; exit"  
+powerShell -Command "Write-Host 'Use the rufus.exe on the C:\Windows_iso_maker folder' -ForegroundColor Green; exit"  
 powerShell -Command "Write-Host 'This is a forked rufus that works with custom ISOs' -ForegroundColor Green; exit"  
 copy "resources\rufus_forked_for_custom.exe" %path_to_use%
-timeout 04>nul
+powerShell -Command "Write-Host 'Completed, press enter to close the script!' -ForegroundColor Green; exit"  
+pause
 endlocal

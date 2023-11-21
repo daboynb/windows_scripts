@@ -1,14 +1,8 @@
 # Change to the desktop directory
-$desktop_path = (Test-Path "$env:USERPROFILE\Desktop")
-if ($desktop_path -eq $true) {
-    $path_to_use = "$env:USERPROFILE\Desktop"
-}
 
-$desktop_path = (Test-Path "$env:USERPROFILE\OneDrive\Desktop")
-if ($desktop_path -eq $true) {
-    $path_to_use = "$env:USERPROFILE\OneDrive\Desktop"
+mkdir "C:\Windows_iso_maker"
 
-}
+$path_to_use = "C:\Windows_iso_maker"
 
 cd $path_to_use
 
