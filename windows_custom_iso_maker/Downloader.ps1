@@ -3,8 +3,11 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     break
 }
 
-# Change to the desktop directory
-Remove-Item -Path "C:\Windows_iso_maker" -Recurse -Force | out-null
+$folderPath = "C:\Windows_iso_maker"
+
+if (Test-Path -Path $folderPath -PathType Container) {
+    Remove-Item -Path "C:\Windows_iso_maker" -Recurse -Force
+} 
 
 mkdir "C:\Windows_iso_maker"
 
