@@ -10,7 +10,7 @@ mkdir "C:\Windows_iso_maker"
 
 $path_to_use = "C:\Windows_iso_maker"
 
-cd $path_to_use
+Set-Location $path_to_use
 
 # Download the script from GitHub
 $wc = New-Object net.webclient
