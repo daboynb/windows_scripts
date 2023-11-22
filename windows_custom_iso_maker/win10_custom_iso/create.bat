@@ -286,7 +286,19 @@ dism /unmount-image /mountdir:"C:\mount\mount" /commit
 cls
 
 rem ######################################################################################## 
-set "path_to_use=C:\Windows_iso_maker"
+
+rem Open folder dialog to select folder
+:select_folder
+powerShell -Command "Write-Host 'Select the folder where the iso will be saved' -ForegroundColor Green; exit"  
+for /f "usebackq delims=" %%f in (`powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; $folderBrowserDialog = New-Object System.Windows.Forms.FolderBrowserDialog; $folderBrowserDialog.RootFolder = 'Desktop'; $folderBrowserDialog.Description = '%dialogTitle%'; $folderBrowserDialog.ShowNewFolderButton = $false; $result = $folderBrowserDialog.ShowDialog(); if ($result -eq 'OK') { Write-Output $folderBrowserDialog.SelectedPath; } else { Write-Output ''; } }"`) do set "path_to_use=%%f"
+
+if defined path_to_use (
+  powerShell -Command "Write-Host 'You selected %path_to_use%' -ForegroundColor Green; exit"  
+  cls
+) ELSE (
+  echo No folder selected
+  goto :select_folder
+)
 
 rem rebuild image 
 powerShell -Command "Write-Host 'Building the ISO' -ForegroundColor Green; exit"  
@@ -317,8 +329,7 @@ reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 powerShell -Command "Write-Host 'Process completed!' -ForegroundColor Green; exit"  
 
 rem flash iso
-powerShell -Command "Write-Host 'Use the rufus.exe on the C:\Windows_iso_maker folder' -ForegroundColor Green; exit"  
-powerShell -Command "Write-Host 'This is a forked rufus that works with custom ISOs' -ForegroundColor Green; exit"  
+powerShell -Command "Write-Host 'On the ISO's path you will find a forked rufus too that works with custom ISOs' -ForegroundColor Green; exit"  
 copy "resources\rufus_forked_for_custom.exe" %path_to_use%
 powerShell -Command "Write-Host 'Completed, press enter to close the script!' -ForegroundColor Green; exit"  
 pause
