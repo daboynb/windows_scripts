@@ -337,7 +337,7 @@ reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 powerShell -Command "Write-Host 'Process completed!' -ForegroundColor Green; exit"  
 
 rem flash iso
-powerShell -Command "Write-Host 'On the ISO's path you will find a forked rufus too that works with custom ISOs' -ForegroundColor Green; exit"  
+powerShell -Command "Write-Host 'On the ISO''s path you will find a forked rufus too that works with custom ISOs' -ForegroundColor Green; exit"  
 copy "resources\rufus_forked_for_custom.exe" %path_to_use%
 powerShell -Command "Write-Host 'Completed, press enter to close the script!' -ForegroundColor Green; exit"  
 pause
