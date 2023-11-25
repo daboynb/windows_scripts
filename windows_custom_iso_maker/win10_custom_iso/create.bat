@@ -108,6 +108,19 @@ IF NOT EXIST "C:\ISO\Win10\sources\$OEM$\$$\Panther" (
     mkdir "C:\ISO\Win10\sources\$OEM$\$$\Panther"
 )
 
+rem Open folder dialog to select the folder where the ISO will be saved
+:select_folder
+powerShell -Command "Write-Host 'Select the folder where the iso will be saved' -ForegroundColor Green; exit"  
+for /f "usebackq delims=" %%f in (`powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; $folderBrowserDialog = New-Object System.Windows.Forms.FolderBrowserDialog; $folderBrowserDialog.RootFolder = 'Desktop'; $folderBrowserDialog.Description = '%dialogTitle%'; $folderBrowserDialog.ShowNewFolderButton = $false; $result = $folderBrowserDialog.ShowDialog(); if ($result -eq 'OK') { Write-Output $folderBrowserDialog.SelectedPath; } else { Write-Output ''; } }"`) do set "path_to_use=%%f"
+
+if defined path_to_use (
+  powerShell -Command "Write-Host 'You selected %path_to_use%' -ForegroundColor Green; exit"  
+  cls
+) ELSE (
+  echo No folder selected
+  goto :select_folder
+)
+
 rem copy unattended.xml
 copy "resources\unattend.xml" "C:\ISO\Win10\sources\$OEM$\$$\Panther\unattend.xml"
 IF %errorlevel% equ 0 (
@@ -288,19 +301,6 @@ dism /unmount-image /mountdir:"C:\mount\mount" /commit
 cls
 
 rem ######################################################################################## 
-
-rem Open folder dialog to select folder
-:select_folder
-powerShell -Command "Write-Host 'Select the folder where the iso will be saved' -ForegroundColor Green; exit"  
-for /f "usebackq delims=" %%f in (`powershell -Command "& {Add-Type -AssemblyName System.Windows.Forms; $folderBrowserDialog = New-Object System.Windows.Forms.FolderBrowserDialog; $folderBrowserDialog.RootFolder = 'Desktop'; $folderBrowserDialog.Description = '%dialogTitle%'; $folderBrowserDialog.ShowNewFolderButton = $false; $result = $folderBrowserDialog.ShowDialog(); if ($result -eq 'OK') { Write-Output $folderBrowserDialog.SelectedPath; } else { Write-Output ''; } }"`) do set "path_to_use=%%f"
-
-if defined path_to_use (
-  powerShell -Command "Write-Host 'You selected %path_to_use%' -ForegroundColor Green; exit"  
-  cls
-) ELSE (
-  echo No folder selected
-  goto :select_folder
-)
 
 rem rebuild image 
 powerShell -Command "Write-Host 'Building the ISO' -ForegroundColor Green; exit"  
