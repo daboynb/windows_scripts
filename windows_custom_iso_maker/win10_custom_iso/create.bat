@@ -7,6 +7,20 @@ rem Ask for admin privileges
 set "params=%*"
 cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 
+rem ##########################
+rem reload cmd for quickeditmode , thanks to https://stackoverflow.com/a/21805713
+if exist "%TEMP%\consoleSettingsBackup.reg" regedit /S "%TEMP%\consoleSettingsBackup.reg"&DEL /F /Q "%TEMP%\consoleSettingsBackup.reg"&goto :mainstart
+regedit /S /e "%TEMP%\consoleSettingsBackup.reg" "HKEY_CURRENT_USER\Console"
+echo REGEDIT4>"%TEMP%\disablequickedit.reg"
+echo [HKEY_CURRENT_USER\Console]>>"%TEMP%\disablequickedit.reg"
+(echo "QuickEdit"=dword:00000000)>>"%TEMP%\disablequickedit.reg"
+regedit /S "%TEMP%\disablequickedit.reg"
+DEL /F /Q "%TEMP%\disablequickedit.reg"
+start "" "cmd" /c "%~dpnx0"&exit
+
+:mainstart
+rem ##########################
+
 powerShell -Command "Write-Host 'My github -> https://github.com/daboynb' -ForegroundColor Green; exit" && timeout 04>nul
 
 title win10_custom_iso

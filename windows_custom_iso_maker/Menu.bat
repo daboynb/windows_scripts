@@ -28,7 +28,7 @@ IF /I '%MENU%'=='0' GOTO :EXIT
 GOTO :LANGMENU
 
 :win_11
-win11_custom_iso\Runme.bat
+win11_custom_iso\create.bat
 
 :win_10
-win10_custom_iso\Runme.bat
+win10_custom_iso\create.bat
