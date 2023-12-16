@@ -165,28 +165,14 @@ goto :copy_esd
 
 :wim
 rem export windows edition
-
+dism /Get-WimInfo /WimFile:C:\ISO\Win11\sources\install.wim
 echo.
 powerShell -Command "Write-Host 'Select the windows version you want to use' -ForegroundColor Green; exit"
 echo.
-echo.===============================================================================
-echo.^| Index ^| Arch ^| Name
-echo.===============================================================================
-for /f "tokens=2 delims=: " %%a in ('dism /Get-WimInfo /WimFile:"C:\ISO\Win11\sources\install.wim" ^| findstr Index') do (
-    for /f "tokens=2 delims=: " %%b in ('dism /Get-WimInfo /WimFile:"C:\ISO\Win11\sources\install.wim" /Index:%%a ^| findstr /i Architecture') do (
-        for /f "tokens=* delims=:" %%c in ('dism /Get-WimInfo /WimFile:"C:\ISO\Win11\sources\install.wim" /Index:%%a ^| findstr /i Name') do (
-            set "Name=%%c"
-            if %%a equ 1 echo.^|  %%a  ^| %%b ^| !Name!
-            if %%a gtr 1 if %%a leq 9 echo.^|  %%a  ^| %%b ^| !Name!
-            if %%a gtr 9 echo.^|  %%a ^| %%b ^| !Name!
-        )
-    )
-)
-
-set /p index="Enter an index number: "
-
+set /p index="Please enter the number of the index: "
+cls
+powerShell -Command "Write-Host 'Exporting' -ForegroundColor Green; exit"  
 dism /Export-Image /SourceImageFile:"C:\ISO\Win11\sources\install.wim" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win11\sources\install_pro.wim" /compress:max
-
 IF %errorlevel% equ 0 (
   cls
 ) ELSE (
