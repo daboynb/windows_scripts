@@ -153,26 +153,40 @@ IF EXIST "C:\ISO\Win10\sources\install.esd" (
 )
 
 :esd
-dism /Get-WimInfo /WimFile:"C:\ISO\Win10\sources\install.esd"
+dism /English /Get-WimInfo /WimFile:"C:\ISO\Win10\sources\install.esd"
 echo.
 powerShell -Command "Write-Host 'Select the windows version you want to use' -ForegroundColor Green; exit"
 echo.
 set /p index="Please enter the number of the index: "
 cls
 powerShell -Command "Write-Host 'Exporting' -ForegroundColor Green; exit"
-dism /export-image /SourceImageFile:"C:\ISO\Win10\sources\install.esd" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win10\sources\install.wim" /Compress:max /CheckIntegrity
+dism /English /export-image /SourceImageFile:"C:\ISO\Win10\sources\install.esd" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win10\sources\install.wim" /Compress:max /CheckIntegrity
 goto :copy_esd
 
 :wim
 rem export windows edition
-dism /Get-WimInfo /WimFile:C:\ISO\Win10\sources\install.wim
+
 echo.
 powerShell -Command "Write-Host 'Select the windows version you want to use' -ForegroundColor Green; exit"
 echo.
-set /p index="Please enter the number of the index: "
-cls
-powerShell -Command "Write-Host 'Exporting' -ForegroundColor Green; exit"  
-dism /Export-Image /SourceImageFile:"C:\ISO\Win10\sources\install.wim" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win10\sources\install_pro.wim" /compress:max
+echo.===============================================================================
+echo.^| Index ^| Arch ^| Name
+echo.===============================================================================
+for /f "tokens=2 delims=: " %%a in ('dism /English /Get-WimInfo /WimFile:"C:\ISO\Win10\sources\install.wim" ^| findstr Index') do (
+    for /f "tokens=2 delims=: " %%b in ('dism /English /Get-WimInfo /WimFile:"C:\ISO\Win10\sources\install.wim" /Index:%%a ^| findstr /i Architecture') do (
+        for /f "tokens=* delims=:" %%c in ('dism /English /Get-WimInfo /WimFile:"C:\ISO\Win10\sources\install.wim" /Index:%%a ^| findstr /i Name') do (
+            set "Name=%%c"
+            if %%a equ 1 echo.^|  %%a  ^| %%b ^| !Name!
+            if %%a gtr 1 if %%a leq 9 echo.^|  %%a  ^| %%b ^| !Name!
+            if %%a gtr 9 echo.^|  %%a ^| %%b ^| !Name!
+        )
+    )
+)
+
+set /p index="Enter an index number: "
+
+dism /English /Export-Image /SourceImageFile:"C:\ISO\Win10\sources\install.wim" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win10\sources\install_pro.wim" /compress:max
+
 IF %errorlevel% equ 0 (
   cls
 ) ELSE (
@@ -208,10 +222,10 @@ IF %errorlevel% equ 0 (
 rem ######################################################################################## 
 
 :mountstep
-rem mount the image with dism
+rem mount the image with dism /English
 powerShell -Command "Write-Host 'Mounting image' -ForegroundColor Green; exit"  
 
-dism /mount-image /imagefile:"C:\ISO\Win10\sources\install.wim" /index:1 /mountdir:"C:\mount\mount"
+dism /English /mount-image /imagefile:"C:\ISO\Win10\sources\install.wim" /index:1 /mountdir:"C:\mount\mount"
 cls
 
 rem set arch
@@ -260,15 +274,15 @@ IF %errorlevel% equ 0 (
 
 :features
 powerShell -Command "Write-Host 'Removing useless features' -ForegroundColor Green; exit"
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-InternetExplorer-Optional-Package*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Kernel-LA57-FoD*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-Handwriting*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-OCR*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-Speech*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-TextToSpeech*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-MediaPlayer-Package*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-TabletPCMath-Package*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Wallpaper-Content-Extended-FoD*'} | ForEach-Object {dism /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-InternetExplorer-Optional-Package*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Kernel-LA57-FoD*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-Handwriting*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-OCR*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-Speech*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-LanguageFeatures-TextToSpeech*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-MediaPlayer-Package*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-TabletPCMath-Package*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
+powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Wallpaper-Content-Extended-FoD*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
 powerShell -Command "Write-Host 'Done' -ForegroundColor Green; exit"
 
 rem copy batch file
@@ -311,7 +325,7 @@ IF %errorlevel% equ 0 (
 
 rem unmount the image
 powerShell -Command "Write-Host 'Unmounting image' -ForegroundColor Green; exit"  
-dism /unmount-image /mountdir:"C:\mount\mount" /commit
+dism /English /unmount-image /mountdir:"C:\mount\mount" /commit
 cls
 
 rem ######################################################################################## 
