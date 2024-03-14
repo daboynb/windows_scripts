@@ -31,7 +31,7 @@ IF NOT EXIST "resources" (
 )
 
 set "resource_dir=resources"
-set "files=7z.dll 7z.exe firefox_installer.exe Windows_italia_debloater.bat oscdimg.exe tweaks.bat unattend.xml start.ps1 PowerRun.exe get_country.ps1"
+set "files=7z.dll 7z.exe firefox_installer.exe oscdimg.exe tweaks.bat unattend.xml start.ps1 PowerRun.exe get_country.ps1"
 
 for %%i in (%files%) do (
   if not exist "%resource_dir%\%%i" (
@@ -288,7 +288,12 @@ IF %errorlevel% equ 0 (
 
 rem copy debloat if IT
 IF "%countryvar%" == "IT" (
-    copy "resources\Windows_italia_debloater.bat" "C:\mount\mount\Windows"
+  mkdir "C:\mount\mount\Program Files\debloater"
+  
+  echo @echo off > "C:\mount\mount\Program Files\debloater\debloat.bat"
+  echo powerShell -ExecutionPolicy Bypass -File "C:\Program Files\debloater\Debloat3.0.ps1" >> "C:\mount\mount\Program Files\debloater\debloat.bat"
+  
+  powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Iblis94/debloat3.0/main/Debloat3.0.ps1' -OutFile 'C:\mount\mount\Program Files\debloater\Debloat3.0.ps1'"
 )
 
 rem copy start.ps1

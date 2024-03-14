@@ -75,8 +75,10 @@ sc config dmwappushservice start=disabled
 rem unpin from start the tiles
 powerShell -ExecutionPolicy Bypass -File "C:\Windows\unpin_start_tiles.ps1"
 
-rem copy debloater shortcut
-copy "C:\Windows\Windows_italia_debloater.bat" "C:\Users\%username%\Desktop"
+rem seth debloat
+IF EXIST "C:\Program Files\debloater" (
+    setx PATH "%PATH%;C:\Program Files\debloater"
+)
 
 rem disable defender 
 IF EXIST "C:\Windows\nodefender.pref" (
