@@ -3,7 +3,7 @@ If you wanna help me
 <a href="https://www.buymeacoffee.com/daboynb" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 # Repo_downloader.bat
-Download all the stuff from this repo!
+Download all the stuff from this repo, with a single click!
 
 # remove_windows_apps.bat
 Remove all apps except calculator, photo and store.
