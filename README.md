@@ -102,7 +102,7 @@ This script creates a custom ISO's of Windows 10 and 11 with the following featu
 
 How to use?
 
-       irm -Uri "https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_custom_iso_maker/Downloader.ps1" | iex
+       irm -Uri "https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_custom_iso_maker/downloader.ps1" | iex
 
 - Download the windows ISO from microsoft
 - Run the bat file and select when asked the ISO file
