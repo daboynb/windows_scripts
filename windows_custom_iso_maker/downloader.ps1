@@ -132,7 +132,7 @@ How to use:
 
 1. Select a stock ISO file.
 
-2. Choose if the provided ISO is Windows 10 or Windows 11.
+2. Select if the provided ISO is Windows 10 or Windows 11.
 
 3. Indicate if you want to remove Microsoft Edge.
 
