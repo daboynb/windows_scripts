@@ -134,9 +134,9 @@ How to use:
 
 2. Select if the provided ISO is Windows 10 or Windows 11.
 
-3. Indicate if you want to remove Microsoft Edge.
+3. Select if you want to remove Microsoft Edge.
 
-4. Specify if you want to disable Windows Defender.
+4. Select if you want to disable Windows Defender.
 
 5. Select the edition of Windows you want to install.
 
