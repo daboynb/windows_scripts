@@ -138,7 +138,7 @@ How to use:
 
 4. Select if you want to disable Windows Defender.
 
-5. Select the edition of Windows you want to install.
+5. Select the edition of Windows you want to build.
 
 6. Press the Build button.
 "@
