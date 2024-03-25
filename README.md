@@ -2,6 +2,22 @@ If you wanna help me
 
 <a href="https://www.buymeacoffee.com/daboynb" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
+# windows_custom_iso_maker
+This script creates a custom ISO's of Windows 10 and 11 with the following features:
+
+- The hardware requirements are bypassed.
+- All apps are removed, including the sponsored one on the start menu.
+- Telemetry is disabled.
+- Edge can be removed.
+- Defender can be disabled.
+- Some other minor tweaks.
+
+How to use?
+
+       irm -Uri "https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_custom_iso_maker/downloader.ps1" | iex
+
+![Capture](https://github.com/daboynb/windows_scripts/assets/106079917/1e076c94-147c-4d6a-a42b-bba53937ab38)
+
 # Repo_downloader.bat
 Download all the stuff from this repo, with a single click!
 
@@ -89,26 +105,6 @@ This script allows you to enable or disable Windows Defender using PowerRun, a t
 
 # adb_fastboot.bat
 This script installs adb and fastboot on your pc.
-
-# windows_custom_iso_maker
-This script creates a custom ISO's of Windows 10 and 11 with the following features:
-
-- The hardware requirements are bypassed.
-- All apps are removed, including the sponsored one on the start menu.
-- Telemetry is disabled.
-- Edge can be removed.
-- Defender can be disabled.
-- Some other minor tweaks.
-
-How to use?
-
-       irm -Uri "https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_custom_iso_maker/downloader.ps1" | iex
-
-- Download the windows ISO from microsoft
-- Run the bat file and select when asked the ISO file
-- Wait... the edited ISO will be available on your desktop
-
-Use only the rufus version provided by the script!
 
 # sfc_dism.bat
 
