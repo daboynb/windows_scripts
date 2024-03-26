@@ -4,7 +4,9 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     break
 }
 ####################################
-
+[console]::WindowWidth=80; 
+[console]::WindowHeight=50; 
+[console]::BufferWidth=[console]::WindowWidth
 #################################### download script
 Write-Output "Downloading, please be patient"
 Write-Output  ""
