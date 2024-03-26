@@ -122,3 +122,7 @@ Enable copilot on windows 23h2, tested on win 11 build n.231103
 # add_user.bat
 
 Add offline users since ms removed this option.
+
+# download_iso.bat
+
+Use the linux user agent to download iso from MS.
