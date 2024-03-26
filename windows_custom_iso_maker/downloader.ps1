@@ -105,7 +105,7 @@ $form.Controls.Add($groupBoxSystemInfo)
 
 # Get Windows version, architecture
 $winVersion = Get-ComputerInfo | Select-Object -ExpandProperty OSName
-$arch = (Get-WmiObject Win32_OperatingSystem).OSArchitecture
+$arch = Get-ComputerInfo | Select-Object -ExpandProperty OsArchitecture
 
 # Create label text with the gathered information
 $labelText = "Windows Version: $winVersion`n`nArchitecture: $arch`n`n"
