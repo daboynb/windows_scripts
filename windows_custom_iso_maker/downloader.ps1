@@ -6,6 +6,8 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 ####################################
 
 #################################### download script
+Write-Output "Downloading, please be patient"
+Write-Output  ""
 $path_to_use = "C:\"
 
 # Set location without displaying it
@@ -13,7 +15,6 @@ Set-Location $path_to_use | Out-Null
 
 # Check if the directory exists
 if (Test-Path "$path_to_use\windows_custom_iso_maker") {
-    # Remove the directory
     Remove-Item -Path "$path_to_use\windows_custom_iso_maker" -Recurse -Force
 }
 
@@ -34,6 +35,11 @@ Remove-Item -Path "windows_scripts-main" -Recurse -Force
 
 # Remove the "windows_script_daboynb.zip" file 
 Remove-Item -Path "windows_script_daboynb.zip" -Force
+
+Set-Location "$path_to_use\windows_custom_iso_maker" | Out-Null
+
+Write-Output "Extracting Firefox"
+C:\windows_custom_iso_maker\win10_custom_iso\resources\7z.exe x *.zip* -oPortable
 ####################################
 
 #################################### edit quickedit
@@ -55,7 +61,7 @@ Add-Type -AssemblyName System.Drawing
 # Create form
 $form = New-Object System.Windows.Forms.Form
 $form.Text = "Windows Custom ISO Maker"
-$form.Size = New-Object System.Drawing.Size(500,450) 
+$form.Size = New-Object System.Drawing.Size(500, 450) 
 $form.StartPosition = "CenterScreen"
 $form.FormBorderStyle = 'FixedDialog'
 
@@ -64,6 +70,31 @@ $form.BackColor = [System.Drawing.Color]::FromArgb(40, 40, 40)
 
 # Set text color to white
 $form.ForeColor = [System.Drawing.Color]::White
+
+# Define the event handler for downloading Windows 10 ISO
+$downloadWin10_Click = {
+    Start-Process -FilePath "C:\windows_custom_iso_maker\Portable\FirefoxPortable.exe" -ArgumentList "https://www.microsoft.com/en-us/software-download/windows10ISO"
+}
+
+# Define the event handler for downloading Windows 11 ISO
+$downloadWin11_Click = {
+    Start-Process -FilePath "C:\windows_custom_iso_maker\Portable\FirefoxPortable.exe" -ArgumentList "https://www.microsoft.com/en-us/software-download/windows11"
+}
+
+# Create download buttons for Windows 10 and Windows 11
+$downloadButtonWin10 = New-Object System.Windows.Forms.Button
+$downloadButtonWin10.Location = New-Object System.Drawing.Point(120, 10)
+$downloadButtonWin10.Size = New-Object System.Drawing.Size(140, 23)
+$downloadButtonWin10.Text = "Download Windows 10"
+$downloadButtonWin10.Add_Click($downloadWin10_Click)
+$form.Controls.Add($downloadButtonWin10)
+
+$downloadButtonWin11 = New-Object System.Windows.Forms.Button
+$downloadButtonWin11.Location = New-Object System.Drawing.Point(280, 10)
+$downloadButtonWin11.Size = New-Object System.Drawing.Size(140, 23)
+$downloadButtonWin11.Text = "Download Windows 11"
+$downloadButtonWin11.Add_Click($downloadWin11_Click)
+$form.Controls.Add($downloadButtonWin11)
 
 # Create label for ISO file
 $labelISOFile = New-Object System.Windows.Forms.Label
