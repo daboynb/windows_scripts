@@ -4,9 +4,24 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     break
 }
 ####################################
+
+#################################### Set cli
 [console]::WindowWidth=80; 
-[console]::WindowHeight=50; 
+[console]::WindowHeight=40; 
 [console]::BufferWidth=[console]::WindowWidth
+# Create a function to change colors in PowerShell by https://www.reddit.com/r/PowerShell/comments/14z7f97/comment/jrwh5rw/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+function Color-Console {
+	$Host.ui.rawui.backgroundcolor = "Black"
+	$Host.ui.rawui.foregroundcolor = "Green"
+	$hosttime = (Get-ChildItem -Path  $PSHOME\\PowerShell.exe).CreationTime
+	$Host.UI.RawUI.WindowTitle  =  "PowerShell ($hosttime)"
+	Clear-Host
+}
+ 
+# Calls the Color-Console function
+Color-Console
+####################################
+
 #################################### download script
 Write-Output "Downloading, please be patient"
 Write-Output  ""
