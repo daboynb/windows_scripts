@@ -103,15 +103,12 @@ $groupBoxSystemInfo.Size = New-Object System.Drawing.Size(230, 90)
 $groupBoxSystemInfo.Text = "System Info"
 $form.Controls.Add($groupBoxSystemInfo)
 
-# Get Windows version and edition
-$osInfo = Get-CimInstance Win32_OperatingSystem
-$winVersion = $osInfo.Version
-$editionRegex = [regex]::Match($osInfo.Caption, 'Windows \d+ (.+)')
-$edition = $editionRegex.Groups[1].Value.Trim()
+# Get Windows version, architecture
+$winVersion = Get-ComputerInfo | Select-Object -ExpandProperty OSName
 $arch = (Get-WmiObject Win32_OperatingSystem).OSArchitecture
 
 # Create label text with the gathered information
-$labelText = "Windows Version: $winVersion`n`nEdition: $edition`n`nArchitecture: $arch`n`n"
+$labelText = "Windows Version: $winVersion`n`nArchitecture: $arch`n`n"
 
 # Create label to display system info
 $labelSystemInfo = New-Object System.Windows.Forms.Label
