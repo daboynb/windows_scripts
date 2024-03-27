@@ -75,7 +75,7 @@ Add-Type -AssemblyName System.Drawing
 # Create form
 $form = New-Object System.Windows.Forms.Form
 $form.Text = "Windows Custom ISO Maker"
-$form.Size = New-Object System.Drawing.Size(500, 450) 
+$form.Size = New-Object System.Drawing.Size(480, 460) 
 $form.StartPosition = "CenterScreen"
 $form.FormBorderStyle = 'FixedDialog'
 
@@ -327,13 +327,6 @@ $buildButton.Add_Click({
     $defenderPreference = if ($radioButtonDisableDefender.Checked) { "Disable Windows Defender" } else { "Do Not Disable Windows Defender" }
     $windowsEdition = if ($radioButtonHome.Checked) { "Home" } else { "Pro" }
 
-    cls
-    Write-Host "Selected File: $selectedFile"
-    Write-Host "Selected Windows Version: $windowsVersion"
-    Write-Host "Edge Removal Preference: $edgeRemovalPreference"
-    Write-Host "Windows Defender Preference: $defenderPreference"
-    Write-Host "Windows Edition: $windowsEdition"
-
         $arguments = @(
         """$selectedFile""",
         """$windowsVersion""",
@@ -355,6 +348,21 @@ $buildButton.Add_Click({
     $form.Close()
 })
 $form.Controls.Add($buildButton)
+
+# Create link label for displaying information
+$infoLinkLabel = New-Object System.Windows.Forms.LinkLabel
+$infoLinkLabel.Location = New-Object System.Drawing.Point(20, 400)  
+$infoLinkLabel.Size = New-Object System.Drawing.Size(440, 40)       
+$infoLinkLabel.Text = @"
+This tool will debloat your Windows ISO. The full list of applied tweaks HERE
+"@
+$infoLinkLabel.LinkArea = New-Object System.Windows.Forms.LinkArea($infoLinkLabel.Text.IndexOf("HERE"), 7)
+$infoLinkLabel.LinkBehavior = "HoverUnderline"
+$infoLinkLabel.LinkColor = [System.Drawing.Color]::Yellow
+$infoLinkLabel.Add_LinkClicked({
+    [System.Diagnostics.Process]::Start("https://pastebin.com/raw/k0bdihNw")
+})
+$form.Controls.Add($infoLinkLabel)
 
 # Add event handler for OK button click
 $form.Add_Shown({$form.Activate()})
