@@ -40,40 +40,24 @@ for %%i in (%files%) do (
   )
 )
 
-:winfolder
+rem clean old folders if exist
 IF EXIST "C:\ISO\Win10" (
     rmdir "C:\ISO\Win10" /s /q 
 )
 
-:mountfolder
 IF EXIST "C:\mount\mount" (
     rmdir "C:\mount\mount" /s /q 
 )
 
-rem create folder
-mkdir "C:\ISO\Win10" 2>nul
-IF %errorlevel% equ 0 (
-  cls
-) ELSE (
-  color 4 && echo "ERROR: Can't create C:\ISO\Win10!" && pause && exit /b 1
-)
+rem create folders
+mkdir "C:\ISO\Win10"
+mkdir "C:\mount\mount"
 
-mkdir "C:\mount\mount" 2>nul
-IF %errorlevel% equ 0 (
-  cls
-) ELSE (
-  color 4 && echo "ERROR: Can't create C:\mount\mount!" && pause && exit /b 1
-)
 rem ##############################################################################
 rem ############################################################################## export wim and set unattend
 rem set iso path
 powerShell -Command "Write-Host 'Extracting ISO to C:\ISO\Win10... Please wait!' -ForegroundColor Green; exit"  
 %resource_dir%\7z.exe x -y -o"C:\ISO\Win10" "%selectedFile%" > nul
-IF %errorlevel% equ 0 (
-  cls
-) ELSE (
-  color 4 && echo "ERROR: Extraction failed!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
-)
 
 IF NOT EXIST "C:\ISO\Win10\sources\$OEM$\$$\Panther" (
     mkdir "C:\ISO\Win10\sources\$OEM$\$$\Panther"
@@ -81,62 +65,23 @@ IF NOT EXIST "C:\ISO\Win10\sources\$OEM$\$$\Panther" (
 
 rem copy unattended.xml
 copy "%resource_dir%\unattend.xml" "C:\ISO\Win10\sources\$OEM$\$$\Panther\unattend.xml"
-IF %errorlevel% equ 0 (
-  cls
-) ELSE (
-  color 4 && echo "ERROR: Can't copy unattend.xml!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
-)
 
 rem check if wim or esd
 IF EXIST "C:\ISO\Win10\sources\install.wim" (
-    goto :wim
+    dism /English /Export-Image /SourceImageFile:"C:\ISO\Win10\sources\install.wim" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win10\sources\install_pro.wim" /compress:max
+    del "C:\ISO\Win10\sources\install.wim"
+    move "C:\ISO\Win10\sources\install_pro.wim" "C:\ISO\Win10\sources\install.wim"
+
 )
 
 IF EXIST "C:\ISO\Win10\sources\install.esd" (
-    goto :esd
+    powerShell -Command "Write-Host 'Exporting' -ForegroundColor Green; exit"
+    dism /English /export-image /SourceImageFile:"C:\ISO\Win10\sources\install.esd" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win10\sources\install.wim" /Compress:max /CheckIntegrity
+    del "C:\ISO\Win10\sources\install.esd"
 )
 
-:esd
-powerShell -Command "Write-Host 'Exporting' -ForegroundColor Green; exit"
-dism /English /export-image /SourceImageFile:"C:\ISO\Win10\sources\install.esd" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win10\sources\install.wim" /Compress:max /CheckIntegrity
-goto :copy_esd
-
-:wim
-dism /English /Export-Image /SourceImageFile:"C:\ISO\Win10\sources\install.wim" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win10\sources\install_pro.wim" /compress:max
-IF %errorlevel% equ 0 (
-  cls
-) ELSE (
-  color 4 && echo "ERROR: Can't export the image!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
-)
-
-:copy_wim
-rem copy the new install.wim
-del "C:\ISO\Win10\sources\install.wim"
-IF %errorlevel% equ 0 (
-  cls
-) ELSE (
-  color 4 && echo "ERROR: Can't delete the old install.wim!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
-)
-
-move "C:\ISO\Win10\sources\install_pro.wim" "C:\ISO\Win10\sources\install.wim"
-IF %errorlevel% equ 0 (
-  cls
-) ELSE (
-  color 4 && echo "ERROR: Can't move the new install.wim!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
-)
-goto :mountstep
-
-:copy_esd
-rem del esd
-del "C:\ISO\Win10\sources\install.esd"
-IF %errorlevel% equ 0 (
-  cls
-) ELSE (
-  color 4 && echo "ERRORE: Can''t delete old install.esd!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
-)
 rem ##############################################################################
 rem ############################################################################## mount the image and customize
-:mountstep
 rem mount the image with dism /English
 powerShell -Command "Write-Host 'Mounting image' -ForegroundColor Green; exit"  
 dism /English /mount-image /imagefile:"C:\ISO\Win10\sources\install.wim" /index:1 /mountdir:"C:\mount\mount"
@@ -163,7 +108,6 @@ if "%edgeRemovalPreference%"=="Remove Edge" (
     copy "%resource_dir%\firefox_installer.exe" "C:\mount\mount"
 )
 
-:features
 powerShell -Command "Write-Host 'Removing useless features' -ForegroundColor Green; exit"
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-InternetExplorer-Optional-Package*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Kernel-LA57-FoD*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
@@ -179,19 +123,9 @@ powerShell -Command "Write-Host 'Done' -ForegroundColor Green; exit"
 rem copy batch file
 cls
 copy "%resource_dir%\tweaks.bat" "C:\mount\mount\Windows"
-IF %errorlevel% equ 0 (
-  cls
-) ELSE (
-  color 4 && echo "Can't copy tweaks.bat!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
-)
 
 rem copy unpin_start_tiles.ps1
 copy "%resource_dir%\unpin_start_tiles.ps1" "C:\mount\mount\Windows"
-IF %errorlevel% equ 0 (
-  cls
-) ELSE (
-  color 4 && echo "Can't copy Unpin_start_tiles.ps1!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
-)
 
 reg query "HKLM\system\controlset001\control\nls\language" /v Installlanguage | findstr /C:"0410"
 IF %errorlevel% equ 0 (
@@ -205,52 +139,31 @@ IF %errorlevel% equ 0 (
 
 rem copy start.ps1
 copy "%resource_dir%\start.ps1" "C:\mount\mount\Windows"
-IF %errorlevel% equ 0 (
-  cls
-) ELSE (
-  color 4 && echo "Can't copy start.ps1!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
-)
 
 rem copy PowerRun.exe
 copy "%resource_dir%\PowerRun.exe" "C:\mount\mount\Windows"
-IF %errorlevel% equ 0 (
-  cls
-) ELSE (
-  color 4 && echo "Can't copy PowerRun.exe!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
-)
 
 rem unmount the image
 powerShell -Command "Write-Host 'Unmounting image' -ForegroundColor Green; exit"  
 dism /English /unmount-image /mountdir:"C:\mount\mount" /commit
 cls
+
 rem ##############################################################################
 rem ############################################################################## Build the iso
 rem rebuild image 
 powerShell -Command "Write-Host 'Building the ISO' -ForegroundColor Green; exit"  
 %resource_dir%\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win10\boot\etfsboot.com#pEF,e,bC:\ISO\Win10\efi\microsoft\boot\efisys.bin C:\ISO\Win10 "%dest_path%\Windows10_%defender_status%_%edge_status%_!architecture!.iso"
-IF %errorlevel% equ 0 (
-  cls
-) ELSE (
-  color 4 && echo "ERROR: Can't build the ISO!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
-)
 
+rem clean
 rmdir "C:\ISO" /s /q
-IF %errorlevel% equ 0 (
-  cls
-) ELSE (
-  color 4 && echo "ERROR: Can't delete the working folder1!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
-)
-
 rmdir "C:\mount" /s /q
-IF %errorlevel% equ 0 (
-  cls
-) ELSE (
-  color 4 && echo "ERROR: Can't delete the working folder2!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
-)
+
 rem ##############################################################################
 rem ############################################################################## Clean 
 rem  Enable QuickEdit Mode
 reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
+
+rem greetings
 echo. 
 powerShell -Command "Write-Host 'Process completed!' -ForegroundColor Green; exit"  
 echo "The edited iso is here %dest_path%"
