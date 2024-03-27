@@ -103,7 +103,6 @@ goto :copy_esd
 
 :wim
 dism /English /Export-Image /SourceImageFile:"C:\ISO\Win10\sources\install.wim" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win10\sources\install_pro.wim" /compress:max
-
 IF %errorlevel% equ 0 (
   cls
 ) ELSE (
@@ -140,7 +139,6 @@ rem ############################################################################
 :mountstep
 rem mount the image with dism /English
 powerShell -Command "Write-Host 'Mounting image' -ForegroundColor Green; exit"  
-
 dism /English /mount-image /imagefile:"C:\ISO\Win10\sources\install.wim" /index:1 /mountdir:"C:\mount\mount"
 cls
 
@@ -153,12 +151,9 @@ IF EXIST "C:\mount\mount\Program Files (x86)" (
 )
 
 rem disable defender
-:edge
 if "%defenderPreference%"=="Disable Windows Defender" (
     echo > C:\mount\mount\Windows\nodefender.pref
     set defender_status=whithout_defender
-) else (
-    set defender_status=with_defender
 )
 
 rem delete edge
@@ -166,18 +161,7 @@ rem delete edge
 if "%edgeRemovalPreference%"=="Remove Edge" (
     echo > C:\mount\mount\Windows\noedge.pref
     set edge_status=without_edge
-    goto :edge_step
-) else (
-    set edge_status=with_edge
-    goto :features
-)
-
-:edge_step
-copy "%resource_dir%\firefox_installer.exe" "C:\mount\mount"
-IF %errorlevel% equ 0 (
-  cls
-) ELSE (
-  color 4 && echo "ERROR: Can't copy Firefox setup!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+    copy "%resource_dir%\firefox_installer.exe" "C:\mount\mount"
 )
 
 :features

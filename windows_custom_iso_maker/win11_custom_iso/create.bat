@@ -103,7 +103,6 @@ goto :copy_esd
 
 :wim
 dism /English /Export-Image /SourceImageFile:"C:\ISO\Win11\sources\install.wim" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win11\sources\install_pro.wim" /compress:max
-
 IF %errorlevel% equ 0 (
   cls
 ) ELSE (
@@ -144,12 +143,9 @@ dism /English /mount-image /imagefile:"C:\ISO\Win11\sources\install.wim" /index:
 cls
 
 rem disable defender
-:edge
 if "%defenderPreference%"=="Disable Windows Defender" (
     echo > C:\mount\mount\Windows\nodefender.pref
     set defender_status=whithout_defender
-) else (
-    set defender_status=with_defender
 )
 
 rem delete edge
@@ -157,18 +153,7 @@ rem delete edge
 if "%edgeRemovalPreference%"=="Remove Edge" (
     echo > C:\mount\mount\Windows\noedge.pref
     set edge_status=without_edge
-    goto :edge_step
-) else (
-    set edge_status=with_edge
-    goto :features
-)
-
-:edge_step
-copy "%resource_dir%\firefox_installer.exe" "C:\mount\mount"
-IF %errorlevel% equ 0 (
-  cls
-) ELSE (
-  color 4 && echo "ERROR: Can't copy Firefox setup!" && pause && rmdir "C:\mount" /s /q && rmdir "C:\ISO" /s /q && exit /b 1
+    copy "%resource_dir%\firefox_installer.exe" "C:\mount\mount"
 )
 
 :features
