@@ -82,6 +82,7 @@ IF EXIST "C:\ISO\Win11\sources\install.esd" (
 rem ##############################################################################
 rem ############################################################################## mount the image and customize
 rem mount the image with dism /English
+cls
 powerShell -Command "Write-Host 'Mounting image' -ForegroundColor Green; exit"  
 dism /English /mount-image /imagefile:"C:\ISO\Win11\sources\install.wim" /index:1 /mountdir:"C:\mount\mount"
 
@@ -138,6 +139,7 @@ dism /English /unmount-image /mountdir:"C:\mount\mount" /commit
 rem ##############################################################################
 rem ############################################################################## boot.wim edits 
 rem mount the image with dism /English
+cls
 powerShell -Command "Write-Host 'Mounting the image' -ForegroundColor Green; exit"  
 dism /English /mount-image /imagefile:"C:\ISO\Win11\sources\boot.wim" /index:2 /mountdir:"C:\mount\mount"
 
@@ -159,6 +161,7 @@ dism /English /unmount-image /mountdir:"C:\mount\mount" /commit
 rem ##############################################################################
 rem ############################################################################## Build the iso
 rem rebuild image 
+cls
 powerShell -Command "Write-Host 'Building the ISO' -ForegroundColor Green; exit"  
 %resource_dir%\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win11\boot\etfsboot.com#pEF,e,bC:\ISO\Win11\efi\microsoft\boot\efisys.bin C:\ISO\Win11 "%dest_path%\Windows11_%defender_status%_%edge_status%.iso"
 
@@ -172,6 +175,7 @@ rem  Enable QuickEdit Mode
 reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 
 rem greetings
+cls
 echo. 
 powerShell -Command "Write-Host 'Process completed!' -ForegroundColor Green; exit"  
 echo "The edited iso is here %dest_path%"
