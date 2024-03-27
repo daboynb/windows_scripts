@@ -17,7 +17,6 @@ if "%windowsEdition%"=="Home" (
 ) else (
     set "index=5"
 )
-echo %index%
 
 set "path_to_use=C:\"
 rem ##############################################################################
@@ -85,7 +84,6 @@ rem ############################################################################
 rem mount the image with dism /English
 powerShell -Command "Write-Host 'Mounting image' -ForegroundColor Green; exit"  
 dism /English /mount-image /imagefile:"C:\ISO\Win10\sources\install.wim" /index:1 /mountdir:"C:\mount\mount"
-cls
 
 rem set arch
 IF NOT EXIST "C:\mount\mount\Program Files (x86)" (
@@ -121,7 +119,6 @@ powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$
 powerShell -Command "Write-Host 'Done' -ForegroundColor Green; exit"
 
 rem copy batch file
-cls
 copy "%resource_dir%\tweaks.bat" "C:\mount\mount\Windows"
 
 rem copy unpin_start_tiles.ps1
@@ -146,7 +143,6 @@ copy "%resource_dir%\PowerRun.exe" "C:\mount\mount\Windows"
 rem unmount the image
 powerShell -Command "Write-Host 'Unmounting image' -ForegroundColor Green; exit"  
 dism /English /unmount-image /mountdir:"C:\mount\mount" /commit
-cls
 
 rem ##############################################################################
 rem ############################################################################## Build the iso

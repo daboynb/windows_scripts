@@ -17,7 +17,6 @@ if "%windowsEdition%"=="Home" (
 ) else (
     set "index=5"
 )
-echo %index%
 
 set "path_to_use=C:\"
 rem ##############################################################################
@@ -85,7 +84,6 @@ rem ############################################################################
 rem mount the image with dism /English
 powerShell -Command "Write-Host 'Mounting image' -ForegroundColor Green; exit"  
 dism /English /mount-image /imagefile:"C:\ISO\Win11\sources\install.wim" /index:1 /mountdir:"C:\mount\mount"
-cls
 
 rem disable defender
 if "%defenderPreference%"=="Disable Windows Defender" (
@@ -113,7 +111,6 @@ powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$
 powerShell -Command "Write-Host 'Done' -ForegroundColor Green; exit"
 
 rem copy batch file
-cls
 powerShell -Command "Write-Host 'Copying bat' -ForegroundColor Green; exit"
 copy "%resource_dir%\tweaks.bat" "C:\mount\mount\Windows"
 
@@ -137,14 +134,12 @@ copy "%resource_dir%\PowerRun.exe" "C:\mount\mount\Windows"
 rem unmount the image
 powerShell -Command "Write-Host 'Unmounting image' -ForegroundColor Green; exit"  
 dism /English /unmount-image /mountdir:"C:\mount\mount" /commit
-cls
 
 rem ##############################################################################
 rem ############################################################################## boot.wim edits 
 rem mount the image with dism /English
 powerShell -Command "Write-Host 'Mounting the image' -ForegroundColor Green; exit"  
 dism /English /mount-image /imagefile:"C:\ISO\Win11\sources\boot.wim" /index:2 /mountdir:"C:\mount\mount"
-cls
 
   echo "Bypass reg"
   Reg load "HKLM\TK_BOOT_SYSTEM" "C:\mount\mount\Windows\System32\Config\SYSTEM" 
@@ -160,7 +155,6 @@ timeout 04
 rem unmount the image
 powerShell -Command "Write-Host 'Unmounting the image' -ForegroundColor Green; exit"  
 dism /English /unmount-image /mountdir:"C:\mount\mount" /commit
-cls
 
 rem ##############################################################################
 rem ############################################################################## Build the iso
