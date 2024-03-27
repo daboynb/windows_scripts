@@ -149,7 +149,6 @@ if "%defenderPreference%"=="Disable Windows Defender" (
 )
 
 rem delete edge
-:edge
 if "%edgeRemovalPreference%"=="Remove Edge" (
     echo > C:\mount\mount\Windows\noedge.pref
     set edge_status=without_edge
