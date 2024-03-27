@@ -107,6 +107,7 @@ if "%edgeRemovalPreference%"=="Remove Edge" (
     copy "%resource_dir%\firefox_installer.exe" "C:\mount\mount"
 )
 
+cls
 powerShell -Command "Write-Host 'Removing useless features' -ForegroundColor Green; exit"
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-InternetExplorer-Optional-Package*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Kernel-LA57-FoD*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
@@ -117,7 +118,6 @@ powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-MediaPlayer-Package*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-TabletPCMath-Package*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Wallpaper-Content-Extended-FoD*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
-powerShell -Command "Write-Host 'Done' -ForegroundColor Green; exit"
 
 rem copy batch file
 copy "%resource_dir%\tweaks.bat" "C:\mount\mount\Windows"
@@ -142,6 +142,7 @@ rem copy PowerRun.exe
 copy "%resource_dir%\PowerRun.exe" "C:\mount\mount\Windows"
 
 rem unmount the image
+cls
 powerShell -Command "Write-Host 'Unmounting image' -ForegroundColor Green; exit"  
 dism /English /unmount-image /mountdir:"C:\mount\mount" /commit
 
