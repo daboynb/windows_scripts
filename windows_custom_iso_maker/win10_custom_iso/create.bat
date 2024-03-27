@@ -211,9 +211,7 @@ IF %errorlevel% equ 0 (
 )
 
 reg query "HKLM\system\controlset001\control\nls\language" /v Installlanguage | findstr /C:"0410"
-IF ERRORLEVEL 1 (
-    echo.
-) ELSE (
+IF %errorlevel% equ 0 (
     mkdir "C:\mount\mount\Program Files\debloater"
   
     echo @echo off > "C:\mount\mount\Program Files\debloater\debloat.bat"
