@@ -6,6 +6,7 @@ if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 ####################################
 
 #################################### Set cli
+Set-ExecutionPolicy Unrestricted -Force
 [console]::WindowWidth=80; 
 [console]::WindowHeight=40; 
 [console]::BufferWidth=[console]::WindowWidth
