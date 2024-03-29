@@ -64,7 +64,6 @@ New-ItemProperty -Path $regKeyPath -Name $valueName -Value $valueData -PropertyT
 
 #################################### start the gui
 Clear-Host
-Write-Output "Loading PC infos..."
 
 Start-Process -FilePath "powershell.exe" -ArgumentList "-WindowStyle Hidden", "-File", "C:\windows_custom_iso_maker\gui.ps1"
 
