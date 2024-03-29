@@ -30,7 +30,7 @@ IF NOT EXIST "%path_to_use%\windows_custom_iso_maker\win10_custom_iso\resources"
 )
 
 set "resource_dir=%path_to_use%\windows_custom_iso_maker\win10_custom_iso\resources"
-set "files=7z.dll 7z.exe firefox_installer.exe oscdimg.exe tweaks.bat unattend.xml unpin_start_tiles.ps1 start.ps1 PowerRun.exe"
+set "files=7z.dll 7z.exe oscdimg.exe tweaks.bat unattend.xml unpin_start_tiles.ps1 start.ps1 PowerRun.exe"
 
 for %%i in (%files%) do (
   if not exist "%resource_dir%\%%i" (
@@ -104,7 +104,7 @@ rem delete edge
 if "%edgeRemovalPreference%"=="Remove Edge" (
     echo > C:\mount\mount\Windows\noedge.pref
     set edge_status=without_edge
-    copy "%resource_dir%\firefox_installer.exe" "C:\mount\mount"
+    xcopy /s "C:\windows_custom_iso_maker\Portable" "C:\mount\mount"
 )
 
 cls

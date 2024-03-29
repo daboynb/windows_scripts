@@ -87,7 +87,7 @@ PowerRun.exe cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Se
 :skip_disable_def
 rem copy firefox installer to the desktop and remove edge
 IF EXIST "C:\Windows\noedge.pref" (
-move "C:\firefox_installer.exe" "C:\Users\%username%\Desktop"
+move /s "C:\Portable" "C:\Users\%username%\Desktop"
 goto :edge
 ) ELSE (
     goto :skip_edge
