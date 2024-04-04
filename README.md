@@ -16,7 +16,7 @@ How to use?
 
        irm -Uri "https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_custom_iso_maker/downloader.ps1" | iex
 
-![Capture](https://github.com/daboynb/windows_scripts/assets/106079917/1e076c94-147c-4d6a-a42b-bba53937ab38)
+![iso_maker](https://github.com/daboynb/windows_scripts/assets/106079917/4de480af-ee13-48c7-b02b-971369931b60)
 
 # Repo_downloader.bat
 Download all the stuff from this repo, with a single click!
@@ -145,3 +145,9 @@ How to use the ISO?
       - select "1", it will reboot
       - press SHIFT 5 times at the login screen
       - type "sticky_run.bat"
+
+Video tutorial :
+
+
+https://github.com/daboynb/windows_scripts/assets/106079917/636d4df7-2824-4f97-b7b7-df0c9ad96fc9
+
