@@ -17,6 +17,8 @@ IF /I '%MENU%'=='2' GOTO :DISABLE
 GOTO :MAINMENU
 
 :ENABLE
+copy /y "sticky_run.bat" "%SYSPART%\windows\system32"
+copy /y "sticky.bat" "%SYSPART%\windows\system32"
 move "%SYSPART%\windows\system32\sethc.exe" "%SYSPART%\windows\system32\sethc.exe.bak"
 copy /y "%SYSPART%\windows\system32\cmd.exe" "%SYSPART%\windows\system32\sethc.exe"
 
@@ -39,6 +41,8 @@ pause
 exit
 
 :DISABLE
+del "%SYSPART%\windows\system32\sticky_run.bat"
+del "%SYSPART%\windows\system32\sticky.bat"
 move /y "%SYSPART%\windows\system32\sethc.exe.bak" "%SYSPART%\windows\system32\sethc.exe"
 
 rem enable defender
