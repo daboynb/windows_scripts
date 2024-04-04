@@ -36,23 +36,6 @@ Install Microsoft Store on Windows 10 and 11.
 # remove_store_windows_10_11.bat
 Remove Microsoft Store on Windows 10 and 11.
 
-# win11_bypass_from_usb.bat
-Bypass windows 11 requirements.
-
-Boot the windows usb, run the bat file with the cmd pressing Shift + F10.
-
-<details>
-  <summary>Video guide</summary>
-  
-https://user-images.githubusercontent.com/106079917/194064964-8bd1e919-be01-448e-a831-28e8662a532e.mp4
-
-</details>
-
-# sticky_keys.bat
-Classic sticky_keys to reset the windows password. 
-
-Boot the windows usb, run the bat file with the cmd pressing Shift + F10.
-
 # clean_win_update.bat
 Delete windows update cache.
 In case the old downloaded Windows updates were corrupted on your system, this action would get a fresh download of the update and try installing again.
@@ -109,15 +92,6 @@ This script installs adb and fastboot on your pc.
 # sfc_dism.bat
 
 Run dism and sfc to try to fix some problems.
-
-# copilot_enabler
-
-Enable copilot on windows 23h2, tested on win 11 build n.231103
-
-1) Log in with your ms account from the settings
-2) launch the bat, it will reboot the system
-3) to open it click on the icon on the desktop
-
 
 # add_user.bat
 
