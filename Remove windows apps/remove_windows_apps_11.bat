@@ -8,7 +8,7 @@ powerShell -Command "Write-Host 'My github -> https://github.com/daboynb' -Foreg
 
 whoami /groups | findstr /C:"S-1-5-32-544" >nul
 if %errorlevel% equ 1 (
-    echo "The current user is not a member of the Administrators group. exiting..."
+    echo "The current user is not a member of the Administrators group, exiting..."
     pause
     exit
 ) 
