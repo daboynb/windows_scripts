@@ -48,8 +48,8 @@ In case the old downloaded Windows updates were corrupted on your system, this a
 # remove_onedrive.bat
 Remove onedrive from system.
 
-# remove_edge.bat
-Remove edge from system.
+# remove_edge.bat 
+Old deprecated method use allow_edge_uninstall.bat instead.
 
 # delete_defender_history.bat
 Delete the windows defender protection history.
