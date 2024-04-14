@@ -15,8 +15,8 @@ This script creates a custom ISO's of Windows 10 and 11 with the following featu
 How to use?
 
        irm -Uri "https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_custom_iso_maker/downloader.ps1" | iex
-
-![iso_maker](https://github.com/daboynb/windows_scripts/assets/106079917/4de480af-ee13-48c7-b02b-971369931b60)
+       
+![Capture](https://github.com/daboynb/windows_scripts/assets/106079917/e1721f80-c4c4-4e8f-80a2-1e1fc04ccfaf)
 
 # Repo_downloader.bat
 Download all the stuff from this repo, with a single click!
