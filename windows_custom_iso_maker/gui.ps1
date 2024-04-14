@@ -96,7 +96,7 @@ $groupBoxSystemInfo.Controls.Add($labelSystemInfo)
 # Create group box for Details
 $groupBoxAdditionalInfo = New-Object System.Windows.Forms.GroupBox
 $groupBoxAdditionalInfo.Location = New-Object System.Drawing.Point(10, 250) 
-$groupBoxAdditionalInfo.Size = New-Object System.Drawing.Size(440, 175)   
+$groupBoxAdditionalInfo.Size = New-Object System.Drawing.Size(440, 165)   
 $groupBoxAdditionalInfo.Text = "Details"
 $form.Controls.Add($groupBoxAdditionalInfo)
 
