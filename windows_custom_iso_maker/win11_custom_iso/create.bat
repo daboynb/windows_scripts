@@ -5,9 +5,7 @@ rem ############################################################################
 rem Extracting arguments
 set "selectedFile=%~1"
 set "windowsVersion=%~2"
-set "edgeRemovalPreference=%~3"
-set "defenderPreference=%~4"
-set "windowsEdition=%~5"
+set "windowsEdition=%~3"
 
 for %%I in ("%selectedFile%") do set "dest_path=%%~dpI"
 
@@ -86,18 +84,8 @@ cls
 powerShell -Command "Write-Host 'Mounting image' -ForegroundColor Green; exit"  
 dism /English /mount-image /imagefile:"C:\ISO\Win11\sources\install.wim" /index:1 /mountdir:"C:\mount\mount"
 
-rem disable defender
-if "%defenderPreference%"=="Disable Windows Defender" (
-    echo > C:\mount\mount\Windows\nodefender.pref
-    set defender_status=whithout_defender
-)
-
-rem delete edge
-if "%edgeRemovalPreference%"=="Remove Edge" (
-    echo > C:\mount\mount\Windows\noedge.pref
-    set edge_status=without_edge
-    xcopy /s "C:\windows_custom_iso_maker\Portable" "C:\mount\mount"
-)
+rem Defender manager
+powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Windows_defender_manager/defender.bat' -OutFile 'C:\mount\mount\Windows/defender.bat'"
 
 cls
 powerShell -Command "Write-Host 'Removing useless features' -ForegroundColor Green; exit"
@@ -163,7 +151,7 @@ rem ############################################################################
 rem rebuild image 
 cls
 powerShell -Command "Write-Host 'Building the ISO' -ForegroundColor Green; exit"  
-%resource_dir%\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win11\boot\etfsboot.com#pEF,e,bC:\ISO\Win11\efi\microsoft\boot\efisys.bin C:\ISO\Win11 "%dest_path%\Windows11_%defender_status%_%edge_status%.iso"
+%resource_dir%\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win11\boot\etfsboot.com#pEF,e,bC:\ISO\Win11\efi\microsoft\boot\efisys.bin C:\ISO\Win11 "%dest_path%\Windows11_custom.iso"
 
 rem clean
 rmdir "C:\ISO" /s /q

@@ -68,50 +68,9 @@ IF EXIST "C:\Program Files\debloater" (
     setx PATH "%PATH%;C:\Program Files\debloater"
 )
 
-rem disable defender 
-IF EXIST "C:\Windows\nodefender.pref" (
-    goto :disable_def
-) ELSE (
-    goto :skip_disable_def
-)
+rem set powerrun
+setx PATH "%PATH%;C:\Windows\PowerRun.exe"
 
-:disable_def
-PowerRun.exe cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d 1 /f"
-PowerRun.exe cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableBehaviorMonitoring" /t REG_DWORD /d 1 /f"
-PowerRun.exe cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableIOAVProtection" /t REG_DWORD /d 1 /f"
-PowerRun.exe cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableOnAccessProtection" /t REG_DWORD /d 1 /f"
-PowerRun.exe cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableRealtimeMonitoring" /t REG_DWORD /d 1 /f"
-PowerRun.exe cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /v "Start" /t REG_DWORD /d 4 /f"
-PowerRun.exe cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d 4 /f"
-
-:skip_disable_def
-rem copy firefox installer to the desktop and remove edge
-IF EXIST "C:\Windows\noedge.pref" (
-move /s "C:\Portable" "C:\Users\%username%\Desktop"
-goto :edge
-) ELSE (
-    goto :skip_edge
-)
-
-:edge
-echo.
-echo Killing Microsoft Edge...
-echo.
-taskkill /F /IM msedge.exe 2>nul
-
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdgeWithChromium" /t REG_DWORD /d 1 /f
-
-PowerRun.exe cmd.exe /c "rmdir /s /q "C:\Program Files (x86)\Microsoft\Edge""
-PowerRun.exe cmd.exe /c "rmdir /s /q "C:\Program Files\Microsoft\Edge""
-
-del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk"2>nul
-del "%appdata%\Microsoft\Windows\Start Menu\Programs\Microsoft Edge.lnk"2>nul
-
-powershell write-host -fore Green "Done, rebooting in 5 seconds"
-timeout 5
-shutdown /r /t 00 
-
-:skip_edge
 powershell write-host -fore Green "Done, rebooting in 5 seconds"
 timeout 5
 shutdown /r /t 00 
