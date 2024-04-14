@@ -1,11 +1,10 @@
-# Check if the current PowerShell session has administrative privileges
+# Run as admin
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-    # If not, relaunch the script with elevated permissions
     Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
     exit
 }
 
-# Define the path to the file
+# That's the JSON where the configs are stored
 $integratedServicesPath = "C:\Windows\System32\IntegratedServicesRegionPolicySet.json"
 
 # Get the permissions (ACL) of the original file
@@ -14,7 +13,7 @@ $acl = Get-Acl -Path $integratedServicesPath
 # Take ownership of the file
 takeown /f $integratedServicesPath /a 
 
-# Grant full control to Administrators
+# Grant the full control to be able to edit it
 icacls $integratedServicesPath /grant Administrators:F
 
 # Read the JSON
@@ -30,13 +29,13 @@ foreach ($policy in $jsonContent.policies) {
     }
 }
 
-# Write the json file
+# Write the JSON file to another location to avoid the 'permission denied' error
 $jsonContent | ConvertTo-Json -Depth 100 | Set-Content -Path "C:\BK_IntegratedServicesRegionPolicySet.json"
 
-# Move the new file
+# Move the new JSON file to C:\Windows\System32\IntegratedServicesRegionPolicySet.json
 copy C:\BK_IntegratedServicesRegionPolicySet.json C:\Windows\System32\IntegratedServicesRegionPolicySet.json
 
-# Set perms back
+# Set the original permissions to the new file
 Set-Acl -Path $integratedServicesPath -AclObject $acl
 
 # Reboot
