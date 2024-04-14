@@ -5,12 +5,17 @@ If you wanna help me
 # windows_custom_iso_maker
 This script creates a custom ISO's of Windows 10 and 11 with the following features:
 
-- The hardware requirements are bypassed.
-- All apps are removed, including the sponsored one on the start menu.
-- Telemetry is disabled.
-- Edge can be removed.
-- Defender can be disabled.
-- Some other minor tweaks.
+    1. Hardware requirements are bypassed.
+       
+    2. All preinstalled apps are removed.
+       
+    3. Edge can be removed from the Control Panel !
+    (It requires an additional reboot after the initial setup.)
+       
+    4. Defender can be toggled on and off !
+    (Simply type 'defender' in a cmd window, and a menu will appear.)
+       
+    All the applied tweaks -> https://pastebin.com/raw/k0bdihNw
 
 How to use?
 
