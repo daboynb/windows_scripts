@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend">
-  <settings pass="disabled">
-    <component name="Microsoft-Windows-Setup" processorArchitecture="neutral" language="neutral" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" publicKeyToken="31bf3856ad364e35" versionScope="nonSxS">
-      <UserData>
-        <ProductKey>
-          <Key />
-        </ProductKey>
-      </UserData>
-    </component>
-  </settings>
   <settings pass="specialize">
-    <component name="Microsoft-Windows-Deployment" processorArchitecture="neutral" language="neutral" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" publicKeyToken="31bf3856ad364e35" versionScope="nonSxS">
+    <component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" language="neutral" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" publicKeyToken="31bf3856ad364e35" versionScope="nonSxS">
       <RunSynchronous>
         <RunSynchronousCommand wcm:action="add">
           <Order>1</Order>
@@ -24,7 +15,7 @@
           <Order>3</Order>
           <Path>reg add HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System /v EnableFirstLogonAnimation /t REG_DWORD /d 0 /f</Path>
         </RunSynchronousCommand>                                      
-      </RunSynchronous>      
+      </RunSynchronous>    
     </component>
   </settings>
   <settings pass="oobeSystem">
