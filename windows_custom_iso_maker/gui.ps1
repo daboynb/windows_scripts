@@ -1,5 +1,9 @@
+#################################### start the gui
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
+
+# Declare $windowsVersion globally
+$windowsVersion = ""
 
 # Create form
 $form = New-Object System.Windows.Forms.Form
@@ -24,9 +28,16 @@ $downloadWin11_Click = {
     Start-Process -FilePath "C:\windows_custom_iso_maker\Portable\FirefoxPortable.exe" -ArgumentList "https://www.microsoft.com/en-us/software-download/windows11"
 }
 
+# Create label for download file
+$labelISOFile = New-Object System.Windows.Forms.Label
+$labelISOFile.Location = New-Object System.Drawing.Point(10,20)
+$labelISOFile.Size = New-Object System.Drawing.Size(110,20)
+$labelISOFile.Text = "Download :"
+$form.Controls.Add($labelISOFile)
+
 # Create download buttons for Windows 10 and Windows 11
 $downloadButtonWin10 = New-Object System.Windows.Forms.Button
-$downloadButtonWin10.Location = New-Object System.Drawing.Point(120, 10)
+$downloadButtonWin10.Location = New-Object System.Drawing.Point(130, 10)
 $downloadButtonWin10.Size = New-Object System.Drawing.Size(140, 23)
 $downloadButtonWin10.Text = "Download Windows 10"
 $downloadButtonWin10.Add_Click($downloadWin10_Click)
@@ -41,20 +52,20 @@ $form.Controls.Add($downloadButtonWin11)
 
 # Create label for ISO file
 $labelISOFile = New-Object System.Windows.Forms.Label
-$labelISOFile.Location = New-Object System.Drawing.Point(10,20)
-$labelISOFile.Size = New-Object System.Drawing.Size(260,20)
+$labelISOFile.Location = New-Object System.Drawing.Point(10,55)
+$labelISOFile.Size = New-Object System.Drawing.Size(120,20)
 $labelISOFile.Text = "Select an ISO file:"
 $form.Controls.Add($labelISOFile)
 
 # Create textbox for ISO file
 $textBoxISOFile = New-Object System.Windows.Forms.TextBox
-$textBoxISOFile.Location = New-Object System.Drawing.Point(10,40)
+$textBoxISOFile.Location = New-Object System.Drawing.Point(10,55)
 $textBoxISOFile.Size = New-Object System.Drawing.Size(350,20) 
 $form.Controls.Add($textBoxISOFile)
 
 # Create browse button
 $browseButton = New-Object System.Windows.Forms.Button
-$browseButton.Location = New-Object System.Drawing.Point(370,38) 
+$browseButton.Location = New-Object System.Drawing.Point(370,55) 
 $browseButton.Size = New-Object System.Drawing.Size(80,20)
 $browseButton.Text = "Browse"
 $browseButton.Add_Click({
@@ -65,14 +76,14 @@ $browseButton.Add_Click({
     $result = $openFileDialog.ShowDialog()
     if ($result -eq 'OK') {
         $selectedFile = $openFileDialog.FileName
-        $textBoxISOFile.Text = $selectedFile
+        $textBoxISOFile.Text = $selectedFile    
     }
 })
 $form.Controls.Add($browseButton)
 
 # Create group box for System Info
 $groupBoxSystemInfo = New-Object System.Windows.Forms.GroupBox
-$groupBoxSystemInfo.Location = New-Object System.Drawing.Point(240, 70)
+$groupBoxSystemInfo.Location = New-Object System.Drawing.Point(240, 100)
 $groupBoxSystemInfo.Size = New-Object System.Drawing.Size(210, 90) 
 $groupBoxSystemInfo.Text = "System Info"
 $form.Controls.Add($groupBoxSystemInfo)
@@ -138,30 +149,10 @@ $donateButton.Add_Click({
 })
 $form.Controls.Add($donateButton)
 
-# Create group box for Windows version
-$groupBoxWindowsVersion = New-Object System.Windows.Forms.GroupBox
-$groupBoxWindowsVersion.Location = New-Object System.Drawing.Point(10, 70)
-$groupBoxWindowsVersion.Size = New-Object System.Drawing.Size(220,90)
-$groupBoxWindowsVersion.Text = "Select Windows version"
-$form.Controls.Add($groupBoxWindowsVersion)
-
-# Create radio buttons for Windows version
-$radioButtonWindows10 = New-Object System.Windows.Forms.RadioButton
-$radioButtonWindows10.Location = New-Object System.Drawing.Point(10,20)
-$radioButtonWindows10.Size = New-Object System.Drawing.Size(120,20)
-$radioButtonWindows10.Text = "Windows 10"
-$groupBoxWindowsVersion.Controls.Add($radioButtonWindows10)
-
-$radioButtonWindows11 = New-Object System.Windows.Forms.RadioButton
-$radioButtonWindows11.Location = New-Object System.Drawing.Point(10,45)
-$radioButtonWindows11.Size = New-Object System.Drawing.Size(120,20)
-$radioButtonWindows11.Text = "Windows 11"
-$groupBoxWindowsVersion.Controls.Add($radioButtonWindows11)
-
 # Create group box for Windows Edition
 $groupBoxWindowsEdition = New-Object System.Windows.Forms.GroupBox
-$groupBoxWindowsEdition.Location = New-Object System.Drawing.Point(10, 170)
-$groupBoxWindowsEdition.Size = New-Object System.Drawing.Size(220,70)
+$groupBoxWindowsEdition.Location = New-Object System.Drawing.Point(10, 100)
+$groupBoxWindowsEdition.Size = New-Object System.Drawing.Size(220,90)
 $groupBoxWindowsEdition.Text = "Select Windows Edition"
 $form.Controls.Add($groupBoxWindowsEdition)
 
@@ -178,7 +169,7 @@ $radioButtonPro.Size = New-Object System.Drawing.Size(120,20)
 $radioButtonPro.Text = "Pro"
 $groupBoxWindowsEdition.Controls.Add($radioButtonPro)
 
-# Create OK button
+# Create build button
 $buildButton = New-Object System.Windows.Forms.Button
 $buildButton.Location = New-Object System.Drawing.Point(360,210) 
 $buildButton.Size = New-Object System.Drawing.Size(100,23) 
@@ -189,33 +180,89 @@ $buildButton.Add_Click({
         return
     }
 
-    if (-not ($radioButtonWindows10.Checked -or $radioButtonWindows11.Checked)) {
-        [System.Windows.Forms.MessageBox]
-        ::Show("Please select a Windows version.", "Error", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
-        return
-    }
-
     if (-not ($radioButtonHome.Checked -or $radioButtonPro.Checked)) {
         [System.Windows.Forms.MessageBox]::Show("Please select a Windows edition.", "Error", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
         return
     }
 
     $selectedFile = $textBoxISOFile.Text
-    $windowsVersion = if ($radioButtonWindows10.Checked) { "Windows 10" } else { "Windows 11" }
-    $windowsEdition = if ($radioButtonHome.Checked) { "Home" } else { "Pro" }
+    
+    Write-Host "Wait while the programs detects your windows version"
+    Mount-DiskImage -ImagePath $selectedFile | Out-Null
+    $mountedDrive = (Get-DiskImage -ImagePath $selectedFile | Get-Volume).DriveLetter + ":"
 
-        $arguments = @(
+    $is_wim = Join-Path -Path $mountedDrive -ChildPath "\sources\install.wim"
+    if (-not (Test-Path -Path $is_wim)) {
+        $is_esd = Join-Path -Path $mountedDrive -ChildPath "\sources\install.esd"
+        $dism_pro_or_home = dism /Get-WimInfo /WimFile:$is_esd
+    } else {
+        $dism_pro_or_home = dism /Get-WimInfo /WimFile:$is_wim
+    }   
+
+    if ($radioButtonHome.Checked) {
+        Write-Host "The RadioButton Home is checked, the Windows edition selected is: Home"
+        $windowsEdition = "Home"
+        if ($dism_pro_or_home -like "*Windows ** Home*") {
+            $outLines = $dism_pro_or_home -split "`n"
+            
+            for ($i = 1; $i -lt $outLines.Length; $i++) {
+                if ($outLines[$i] -like "*Windows ** Home*") {
+                    $indexLine = $outLines[$i - 1]
+                    $index = ($indexLine -split ":")[1].Trim()
+                    break
+                }
+            }
+        } else {
+            Write-Host "This Windows image does not contain Home."
+            Start-Sleep 15
+            exit
+        }
+    } else {
+        Write-Host "The RadioButton Pro is checked, the Windows edition selected is: Pro"
+        if ($dism_pro_or_home -like "*Windows ** Pro*") {
+            $outLines = $dism_pro_or_home -split "`n"
+            
+            for ($i = 1; $i -lt $outLines.Length; $i++) {
+                if ($outLines[$i] -like "*Windows ** Pro*") {
+                    $indexLine = $outLines[$i - 1]
+                    $index = ($indexLine -split ":")[1].Trim()
+                    break
+                }
+            }
+        } else {
+            Write-Host "This Windows image does not contain Pro."
+            Start-Sleep 15
+            exit
+        }
+    }    
+
+    $arguments = @(
         """$selectedFile""",
-        """$windowsVersion""",
-        """$windowsEdition"""
+        """$index"""
     )
 
     $argumentString = $arguments -join ' '
+    
+    $dism_10_or_11 = dism /Get-WimInfo /WimFile:$mountedDrive\sources\install.wim 
+    Start-Sleep 1
+    Dismount-DiskImage -ImagePath $selectedFile
+    
+    if ($dism_10_or_11 -like "*Windows 11*") {
+        Write-Host "This is a Windows 11 image."
+        $windowsVersion = "Windows 11"
+        Write-Host $windowsVersion
+    } elseif ($dism_10_or_11 -like "*Windows 10*") {
+        Write-Host "This is a Windows 10 image."
+        $windowsVersion = "Windows 10"
+        Write-Host $windowsVersion
+    } else {
+        Write-Host "The image does not seem to contain Windows 10 or Windows 11 information."
+    }    
 
     if ($windowsVersion -eq "Windows 10") {
         Start-Process -FilePath "C:\windows_custom_iso_maker\win10_custom_iso\create.bat" -ArgumentList "$argumentString"  
     }
-    else {
+    if ($windowsVersion -eq "Windows 11") {
         Start-Process -FilePath "C:\windows_custom_iso_maker\win11_custom_iso\create.bat" -ArgumentList "$argumentString" 
     }
 

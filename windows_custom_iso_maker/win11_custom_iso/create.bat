@@ -4,8 +4,7 @@ setlocal EnableDelayedExpansion
 rem ############################################################################## arguments and vars
 rem Extracting arguments
 set "selectedFile=%~1"
-set "windowsVersion=%~2"
-set "windowsEdition=%~3"
+set "windowsEdition=%~2"
 
 for %%I in ("%selectedFile%") do set "dest_path=%%~dpI"
 
