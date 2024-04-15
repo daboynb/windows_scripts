@@ -25,10 +25,10 @@
         <HideOnlineAccountScreens>true</HideOnlineAccountScreens>
       </OOBE>
       <FirstLogonCommands>
-        <RunSynchronousCommand wcm:action="add">
+        <SynchronousCommand wcm:action="add">
           <Order>1</Order>
           <CommandLine>powerShell -ExecutionPolicy Bypass -File C:\Windows\start.ps1</CommandLine>
-        </RunSynchronousCommand>
+        </SynchronousCommand>
       </FirstLogonCommands> 
     </component>
   </settings>
