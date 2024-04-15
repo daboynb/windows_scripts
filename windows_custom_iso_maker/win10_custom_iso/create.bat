@@ -143,7 +143,7 @@ rem ############################################################################
 rem rebuild image 
 cls
 powerShell -Command "Write-Host 'Building the ISO' -ForegroundColor Green; exit"  
-%resource_dir%\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win10\boot\etfsboot.com#pEF,e,bC:\ISO\Win10\efi\microsoft\boot\efisys.bin C:\ISO\Win10 "%dest_path%\Windows10_customs_!architecture!.iso"
+%resource_dir%\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win10\boot\etfsboot.com#pEF,e,bC:\ISO\Win10\efi\microsoft\boot\efisys.bin C:\ISO\Win10 "%dest_path%\Windows10_custom_!architecture!.iso"
 
 rem clean
 rmdir "C:\ISO" /s /q
