@@ -2,7 +2,7 @@ If you wanna help me
 
 <a href="https://www.buymeacoffee.com/daboynb" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
-# windows_custom_iso_maker
+# windows_custom_iso_maker working for 11, trying to fix the 10 version
 This script creates a custom ISO's of Windows 10 and 11 with the following features:
 
     1. Hardware requirements are bypassed.
