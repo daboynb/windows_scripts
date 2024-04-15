@@ -61,13 +61,6 @@ Disable-UserInput
 Start-Sleep -Seconds 30 | Out-Null
 
 ######################################################################### Allow edge unistall
-# Check if the current PowerShell session has administrative privileges
-if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-    # If not, relaunch the script with elevated permissions
-    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
-    exit
-}
-
 # That's the JSON where the configs are stored
 $integratedServicesPath = "C:\Windows\System32\IntegratedServicesRegionPolicySet.json"
 
