@@ -16,6 +16,7 @@ if "%windowsEdition%"=="Home" (
 )
 
 set "path_to_use=C:\"
+
 rem ##############################################################################
 
 title win10_custom_iso
@@ -55,13 +56,6 @@ rem set iso path
 powerShell -Command "Write-Host 'Extracting ISO to C:\ISO\Win10... Please wait!' -ForegroundColor Green; exit"  
 %resource_dir%\7z.exe x -y -o"C:\ISO\Win10" "%selectedFile%" > nul
 
-IF NOT EXIST "C:\ISO\Win10\sources\$OEM$\$$\Panther" (
-    mkdir "C:\ISO\Win10\sources\$OEM$\$$\Panther"
-)
-
-rem copy unattended.xml
-copy "%resource_dir%\unattend.xml" "C:\ISO\Win10\sources\$OEM$\$$\Panther\unattend.xml"
-
 rem check if wim or esd
 IF EXIST "C:\ISO\Win10\sources\install.wim" (
     dism /English /Export-Image /SourceImageFile:"C:\ISO\Win10\sources\install.wim" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win10\sources\install_pro.wim" /compress:max
@@ -82,14 +76,6 @@ rem mount the image with dism /English
 cls
 powerShell -Command "Write-Host 'Mounting image' -ForegroundColor Green; exit"  
 dism /English /mount-image /imagefile:"C:\ISO\Win10\sources\install.wim" /index:1 /mountdir:"C:\mount\mount"
-
-rem set arch
-IF NOT EXIST "C:\mount\mount\Program Files (x86)" (
-    set "architecture=32_bit"
-)
-IF EXIST "C:\mount\mount\Program Files (x86)" (
-    set "architecture=64_bit"
-)
 
 rem Defender manager
 powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Windows_defender_manager/defender.bat' -OutFile 'C:\mount\mount\Windows/defender.bat'"
@@ -127,6 +113,25 @@ copy "%resource_dir%\start.ps1" "C:\mount\mount\Windows"
 
 rem copy PowerRun.exe
 copy "%resource_dir%\PowerRun.exe" "C:\mount\mount\Windows"
+
+rem set arch
+IF NOT EXIST "C:\mount\mount\Program Files (x86)" (
+    set "architecture=32_bit"
+)
+IF EXIST "C:\mount\mount\Program Files (x86)" (
+    set "architecture=64_bit"
+)
+
+rem Unattend.xml
+IF NOT EXIST "C:\ISO\Win10\sources\$OEM$\$$\Panther" (
+    mkdir "C:\ISO\Win10\sources\$OEM$\$$\Panther"
+)
+
+if "%architecture%"=="32_bit" (
+    copy "%resource_dir%\unattend_32.xml" "C:\ISO\Win10\sources\$OEM$\$$\Panther\unattend.xml"
+) else (
+    copy "%resource_dir%\unattend_64.xml" "C:\ISO\Win10\sources\$OEM$\$$\Panther\unattend.xml"
+)
 
 rem unmount the image
 cls
