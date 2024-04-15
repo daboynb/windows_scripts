@@ -67,18 +67,19 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
     exit
 }
-# Define the path to the file
+
+# That's the JSON where the configs are stored
 $integratedServicesPath = "C:\Windows\System32\IntegratedServicesRegionPolicySet.json"
 
-# Check if the file exists
 if (Test-Path $integratedServicesPath) {
+
     # Get the permissions (ACL) of the original file
     $acl = Get-Acl -Path $integratedServicesPath
 
     # Take ownership of the file
     takeown /f $integratedServicesPath /a 
 
-    # Grant full control to Administrators
+    # Grant the full control to be able to edit it
     icacls $integratedServicesPath /grant Administrators:F
 
     # Read the JSON
@@ -94,16 +95,18 @@ if (Test-Path $integratedServicesPath) {
         }
     }
 
-    # Write the json file
+    # Write the JSON file to another location to avoid the 'permission denied' error
     $jsonContent | ConvertTo-Json -Depth 100 | Set-Content -Path "C:\BK_IntegratedServicesRegionPolicySet.json"
 
-    # Move the new file
-    copy "C:\BK_IntegratedServicesRegionPolicySet.json" $integratedServicesPath
+    # Move the new JSON file to C:\Windows\System32\IntegratedServicesRegionPolicySet.json
+    copy C:\BK_IntegratedServicesRegionPolicySet.json C:\Windows\System32\IntegratedServicesRegionPolicySet.json
 
-    # Set perms back
+    # Set the original permissions to the new file
     Set-Acl -Path $integratedServicesPath -AclObject $acl
-} else {
-    Write-Host "The file $integratedServicesPath does not exist, you need to update windows first!"
+}
+else {
+    # File does not exist
+    Write-Host "The file $integratedServicesPath does not exist."
 }
 #########################################################################
 
