@@ -27,14 +27,6 @@ IF NOT EXIST "%path_to_use%\windows_custom_iso_maker\win11_custom_iso\resources"
 )
 
 set "resource_dir=%path_to_use%\windows_custom_iso_maker\win11_custom_iso\resources"
-set "files=7z.dll 7z.exe oscdimg.exe tweaks.bat unattend.xml start.ps1 PowerRun.exe"
-
-for %%i in (%files%) do (
-  if not exist "%resource_dir%\%%i" (
-    color 4 && echo "ERROR: You are missing something inside the resources folder" && pause && exit /b 1
-    goto :EOF
-  )
-)
 
 rem clean old folders if exist
 IF EXIST "C:\ISO\Win11" (
