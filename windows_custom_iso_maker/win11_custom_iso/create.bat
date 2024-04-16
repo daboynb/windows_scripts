@@ -75,9 +75,6 @@ cls
 powerShell -Command "Write-Host 'Mounting image' -ForegroundColor Green; exit"  
 dism /English /mount-image /imagefile:"C:\ISO\Win11\sources\install.wim" /index:1 /mountdir:"C:\mount\mount"
 
-rem Defender manager
-powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Windows_defender_manager/defender.bat' -OutFile 'C:\mount\mount\Windows/defender.bat'"
-
 cls
 powerShell -Command "Write-Host 'Removing useless features' -ForegroundColor Green; exit"
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-InternetExplorer-Optional-Package*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
@@ -103,10 +100,17 @@ IF %errorlevel% equ 0 (
     powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Iblis94/debloat3.0/main/Debloat3.0.ps1' -OutFile 'C:\mount\mount\Program Files\debloater\Debloat3.0.ps1'"
 )
 
-rem copy start.ps1
+rem Defender manager
+powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Windows_defender_manager/defender.bat' -OutFile 'C:\mount\mount\Windows/defender.bat'"
+
+rem Allow edge uninstall
+powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Remove%20edge%20eu/change.ps1' -OutFile 'C:\mount\mount\Windows/change.ps1'"
+powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Remove%20edge%20eu/allow_edge_uninstall.bat' -OutFile 'C:\mount\mount\Windows/remove_edge.bat'"
+
+rem Copy start.ps1
 copy "%resource_dir%\start.ps1" "C:\mount\mount\Windows"
 
-rem copy PowerRun.exe
+rem Copy PowerRun.exe
 copy "%resource_dir%\PowerRun.exe" "C:\mount\mount\Windows"
 
 :unmount
