@@ -3,6 +3,9 @@ If you wanna help me
 <a href="https://www.buymeacoffee.com/daboynb" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 # windows_custom_iso_maker 
+
+NOTICE, the new edge removing method works starting in Windows 10 Build 19045.3757 and Windows 11 Build 22621.2787. On earlier version you won't be able to uninstall edge .
+
 This script creates a custom ISO's of Windows 10 and 11 with the following features:
 
     1. Hardware requirements are bypassed.
