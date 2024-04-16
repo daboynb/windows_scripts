@@ -47,13 +47,6 @@ rem set iso path
 powerShell -Command "Write-Host 'Extracting ISO to C:\ISO\Win11... Please wait!' -ForegroundColor Green; exit"  
 %resource_dir%\7z.exe x -y -o"C:\ISO\Win11" "%selectedFile%" > nul
 
-IF NOT EXIST "C:\ISO\Win11\sources\$OEM$\$$\Panther" (
-    mkdir "C:\ISO\Win11\sources\$OEM$\$$\Panther"
-)
-
-rem copy unattended.xml
-copy "%resource_dir%\unattend.xml" "C:\ISO\Win11\sources\$OEM$\$$\Panther\unattend.xml"
-
 rem check if wim or esd
 IF EXIST "C:\ISO\Win11\sources\install.wim" (
     dism /English /Export-Image /SourceImageFile:"C:\ISO\Win11\sources\install.wim" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win11\sources\install_pro.wim" /compress:max
@@ -112,6 +105,13 @@ copy "%resource_dir%\start.ps1" "C:\mount\mount\Windows"
 
 rem Copy PowerRun.exe
 copy "%resource_dir%\PowerRun.exe" "C:\mount\mount\Windows"
+
+rem copy unattended.xml
+IF NOT EXIST "C:\ISO\Win11\sources\$OEM$\$$\Panther" (
+    mkdir "C:\ISO\Win11\sources\$OEM$\$$\Panther"
+)
+
+copy "%resource_dir%\unattend.xml" "C:\ISO\Win11\sources\$OEM$\$$\Panther\unattend.xml"
 
 :unmount
 rem unmount the image
