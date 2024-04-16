@@ -106,7 +106,7 @@ copy "%resource_dir%\start.ps1" "C:\mount\mount\Windows"
 rem Copy PowerRun.exe
 copy "%resource_dir%\PowerRun.exe" "C:\mount\mount\Windows"
 
-rem copy unattended.xml
+rem Copy unattended.xml
 IF NOT EXIST "C:\ISO\Win11\sources\$OEM$\$$\Panther" (
     mkdir "C:\ISO\Win11\sources\$OEM$\$$\Panther"
 )

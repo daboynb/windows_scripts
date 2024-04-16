@@ -118,7 +118,7 @@ IF EXIST "C:\mount\mount\Program Files (x86)" (
     set "architecture=64_bit"
 )
 
-rem Unattend.xml
+rem Copy unattended.xml
 IF NOT EXIST "C:\ISO\Win10\sources\$OEM$\$$\Panther" (
     mkdir "C:\ISO\Win10\sources\$OEM$\$$\Panther"
 )
