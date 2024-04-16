@@ -118,11 +118,9 @@ $additionalInfoText = @"
 
 2. All preinstalled apps are removed.
 
-3. Edge can be removed from the Control Panel !
-(It requires an additional reboot after the initial setup.)
+3. Edge can be removed, the script is on the desktop!
 
-4. Defender can be toggled on and off !
-(Simply type 'defender' in a cmd window, and a menu will appear.)
+4. Defender can be toggled on and off, the script is on the desktop!
 
 All the applied tweaks -> https://pastebin.com/raw/k0bdihNw
 "@

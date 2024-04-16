@@ -80,8 +80,8 @@ IF EXIST "C:\Program Files\debloater" (
     setx PATH "%PATH%;C:\Program Files\debloater"
 )
 
-rem set powerrun
-setx PATH "%PATH%;C:\Windows\PowerRun.exe"
+rem copy script dir
+xcopy "C:\Windows\scripts" "C:\Users\%username%\Desktop"
 
 powershell write-host -fore Green "Done, rebooting in 5 seconds"
 timeout 5
