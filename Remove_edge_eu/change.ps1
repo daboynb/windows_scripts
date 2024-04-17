@@ -1,8 +1,28 @@
+
 # Run as admin
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
     exit
 }
+
+function Install-WinGet() {
+$progressPreference = 'silentlyContinue'
+Write-Information "Downloading WinGet and its dependencies..."
+Invoke-WebRequest -Uri https://aka.ms/getwinget -OutFile Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
+Invoke-WebRequest -Uri https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx -OutFile Microsoft.VCLibs.x64.14.00.Desktop.appx
+Invoke-WebRequest -Uri https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x64.appx -OutFile Microsoft.UI.Xaml.2.8.x64.appx
+Add-AppxPackage Microsoft.VCLibs.x64.14.00.Desktop.appx
+Add-AppxPackage Microsoft.UI.Xaml.2.8.x64.appx
+Add-AppxPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
+}
+
+if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
+    'Winget Already Installed'
+    }  
+    else{
+    Install-WinGet
+}
+
 
 # That's the JSON where the configs are stored
 $integratedServicesPath = "C:\Windows\System32\IntegratedServicesRegionPolicySet.json"
@@ -35,15 +55,17 @@ if (Test-Path $integratedServicesPath) {
     $jsonContent | ConvertTo-Json -Depth 100 | Set-Content -Path "C:\BK_IntegratedServicesRegionPolicySet.json"
 
     # Move the new JSON file to C:\Windows\System32\IntegratedServicesRegionPolicySet.json
-    copy C:\BK_IntegratedServicesRegionPolicySet.json C:\Windows\System32\IntegratedServicesRegionPolicySet.json
+    Copy-Item C:\BK_IntegratedServicesRegionPolicySet.json C:\Windows\System32\IntegratedServicesRegionPolicySet.json
 
     # Set the original permissions to the new file
     Set-Acl -Path $integratedServicesPath -AclObject $acl
 
-    # Reboot
-    shutdown /r /t 00
+    Stop-Process -Name MsEdge -Force | out-null
+
+    winget uninstall edge --accept-source-agreements --silent | out-null
+
 }
 else {
     # File does not exist
-    Write-Host "The file $integratedServicesPath does not exist."
+    Write-Host "The file $integratedServicesPath does not exist.Install the latest updates and retry!"
 }
