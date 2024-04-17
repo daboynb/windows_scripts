@@ -61,10 +61,12 @@ if (Test-Path $integratedServicesPath) {
     Set-Acl -Path $integratedServicesPath -AclObject $acl
 
     # Kill edge processes
-    Stop-Process -Name MsEdge -Force | out-null
+    Stop-Process -Name MsEdge -Force -ErrorAction SilentlyContinue | Out-Null
 
     # Uninstall with winget
     winget uninstall edge --accept-source-agreements --silent | out-null
+
+    Write-Host "Done"
 
     Start-Sleep 05
 
@@ -73,4 +75,5 @@ else {
     # File does not exist
     Write-Host "The file $integratedServicesPath does not exist. Install the latest updates from windows update and retry!"
     Start-Sleep 05
+    exit
 }

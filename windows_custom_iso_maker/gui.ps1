@@ -2,9 +2,6 @@
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-# Declare $windowsVersion globally
-$windowsVersion = ""
-
 # Create form
 $form = New-Object System.Windows.Forms.Form
 $form.Text = "Windows Custom ISO Maker"
@@ -88,7 +85,7 @@ $groupBoxSystemInfo.Size = New-Object System.Drawing.Size(210, 90)
 $groupBoxSystemInfo.Text = "System Info"
 $form.Controls.Add($groupBoxSystemInfo)
 
-# Get Windows version, architecture
+# Get Windows version and architecture
 $winVersion = (Get-WmiObject -Class Win32_OperatingSystem).Caption
 $arch = (Get-WmiObject -Class Win32_OperatingSystem).OSArchitecture
 
@@ -188,9 +185,14 @@ $buildButton.Add_Click({
     $selectedFile = $textBoxISOFile.Text
     
     Write-Host "Wait while the programs detects your windows version"
+
+    # Mount ISO image
     Mount-DiskImage -ImagePath $selectedFile | Out-Null
+
+    # Detect letter 
     $mountedDrive = (Get-DiskImage -ImagePath $selectedFile | Get-Volume).DriveLetter + ":"
 
+    # Detect if wim or esd
     $is_wim = Join-Path -Path $mountedDrive -ChildPath "\sources\install.wim"
     if (-not (Test-Path -Path $is_wim)) {
         $is_esd = Join-Path -Path $mountedDrive -ChildPath "\sources\install.esd"
@@ -199,6 +201,7 @@ $buildButton.Add_Click({
         $dism_pro_or_home = dism /Get-WimInfo /WimFile:$is_wim
     }   
 
+    # Extract the index of the selected windows version
     if ($radioButtonHome.Checked) {
         Write-Host "The RadioButton Home is checked, the Windows edition selected is: Home"
         $windowsEdition = "Home"
@@ -236,6 +239,7 @@ $buildButton.Add_Click({
         }
     }    
 
+    # Arguments to pass to the bat file
     $arguments = @(
         """$selectedFile""",
         """$index"""
@@ -243,6 +247,7 @@ $buildButton.Add_Click({
 
     $argumentString = $arguments -join ' '
     
+    # Detect if win 10 or 11
     $dism_10_or_11 = dism /Get-WimInfo /WimFile:$mountedDrive\sources\install.wim 
     Start-Sleep 1
     Dismount-DiskImage -ImagePath $selectedFile
@@ -259,6 +264,7 @@ $buildButton.Add_Click({
         Write-Host "The image does not seem to contain Windows 10 or Windows 11 information."
     }    
 
+    # Launch bat with args
     if ($windowsVersion -eq "Windows 10") {
         Start-Process -FilePath "C:\windows_custom_iso_maker\win10_custom_iso\create.bat" -ArgumentList "$argumentString"  
     }
