@@ -1,6 +1,6 @@
 #################################### run as admin
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "irm -Uri https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_custom_iso_maker/downloader.ps1 | iex"
+    Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "irm -Uri https://raw.githubusercontent.com/daboynb/windows_scripts/testing/windows_custom_iso_maker/downloader.ps1 | iex"
     break
 }
 ####################################
@@ -28,7 +28,7 @@ if (Test-Path "C:\windows_custom_iso_maker") {
 
 # Download the script from GitHub
 $wc = New-Object net.webclient
-$msu_url = 'https://codeload.github.com/daboynb/windows_scripts/zip/refs/heads/main'
+$msu_url = 'https://codeload.github.com/daboynb/windows_scripts/zip/refs/heads/testing'
 $local_msu_url = "C:\windows_script_daboynb.zip"
 $wc.Downloadfile($msu_url, $local_msu_url)
 
@@ -36,10 +36,10 @@ $wc.Downloadfile($msu_url, $local_msu_url)
 Expand-Archive -Path "windows_script_daboynb.zip" -DestinationPath "." -Force
 
 # Move the "windows_custom_iso_maker" folder to the current directory
-Move-Item -Path "windows_scripts-main\windows_custom_iso_maker" -Destination "windows_custom_iso_maker" -Force
+Move-Item -Path "windows_scripts-testing\windows_custom_iso_maker" -Destination "windows_custom_iso_maker" -Force
 
-# Remove the "windows_scripts-main" directory 
-Remove-Item -Path "windows_scripts-main" -Recurse -Force
+# Remove the "windows_scripts-testing" directory 
+Remove-Item -Path "windows_scripts-testing" -Recurse -Force
 
 # Remove the "windows_script_daboynb.zip" file 
 Remove-Item -Path "windows_script_daboynb.zip" -Force

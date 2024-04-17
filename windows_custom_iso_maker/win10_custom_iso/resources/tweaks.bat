@@ -73,15 +73,10 @@ sc config DiagTrack start=disabled
 sc config dmwappushservice start=disabled
 
 rem unpin from start the tiles
-powerShell -ExecutionPolicy Bypass -File "C:\Windows\unpin_start_tiles.ps1"
-
-rem seth debloat
-IF EXIST "C:\Program Files\debloater" (
-    setx PATH "%PATH%;C:\Program Files\debloater"
-)
+powerShell -ExecutionPolicy Bypass -File "C:\Windows\scripts\unpin_start_tiles.ps1"
 
 rem set powerrun
-setx PATH "%PATH%;C:\Windows\PowerRun.exe"
+setx PATH "%PATH%;C:\Windows\scripts"
 
 powershell write-host -fore Green "Done, rebooting in 5 seconds"
 timeout 5

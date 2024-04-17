@@ -30,6 +30,8 @@ while (-not $success) {
 # check for process
 Write-Host -fore Green 'The debloat process will start shortly, the mouse and keyboard will be disabled until the operations are completed'
 
+taskkill /f /im explorer.exe
+
 while ($true) {
     $process = Get-Process -Name SecurityHealthSystray -ErrorAction SilentlyContinue
 
@@ -63,4 +65,4 @@ Start-Sleep -Seconds 30 | Out-Null
 #########################################################################
 
 # Start bat
-Start-Process -FilePath "C:\Windows\tweaks.bat" -Wait
+Start-Process -FilePath "C:\Windows\scripts\tweaks.bat" -Wait

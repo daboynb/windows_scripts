@@ -4,29 +4,21 @@ setlocal EnableDelayedExpansion
 rem ############################################################################## arguments and vars
 rem Extracting arguments
 set "selectedFile=%~1"
-set "windowsEdition=%~2"
+set "index=%~2"
 
 for %%I in ("%selectedFile%") do set "dest_path=%%~dpI"
 
-rem export windows edition
-if "%windowsEdition%"=="Home" (
-    set "index=1"
-) else (
-    set "index=5"
-)
-
-set "path_to_use=C:\"
 rem ##############################################################################
 
 title win11_custom_iso
 
 rem ############################################################################## check files and create folders
 rem check if the resources folder exist
-IF NOT EXIST "%path_to_use%\windows_custom_iso_maker\win11_custom_iso\resources" (
+IF NOT EXIST "C:\windows_custom_iso_maker\win11_custom_iso\resources" (
     color 4 && echo "ERROR: Can't find the resources folder" && pause && exit /b 1
 )
 
-set "resource_dir=%path_to_use%\windows_custom_iso_maker\win11_custom_iso\resources"
+set "resource_dir=C:\windows_custom_iso_maker\win11_custom_iso\resources"
 
 rem clean old folders if exist
 IF EXIST "C:\ISO\Win11" (
@@ -80,32 +72,35 @@ powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-TabletPCMath-Package*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Wallpaper-Content-Extended-FoD*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
 
-rem copy batch file
-copy "%resource_dir%\tweaks.bat" "C:\mount\mount\Windows"
+rem Create scripts dir
+mkdir "C:\mount\mount\Windows\scripts"
 
-reg query "HKLM\system\controlset001\control\nls\language" /v Installlanguage | findstr /C:"0410"
-IF %errorlevel% equ 0 (
-    mkdir "C:\mount\mount\Program Files\debloater"
-  
-    echo @echo off > "C:\mount\mount\Program Files\debloater\debloat.bat"
-    echo powerShell -ExecutionPolicy Bypass -File "C:\Program Files\debloater\Debloat3.0.ps1" >> "C:\mount\mount\Program Files\debloater\debloat.bat"
+rem copy batch file
+copy "%resource_dir%\tweaks.bat" "C:\mount\mount\Windows\scripts"
+
+rem paki tool (disabled until fixed)
+rem reg query "HKLM\system\controlset001\control\nls\language" /v Installlanguage | findstr /C:"0410"
+rem IF %errorlevel% equ 0 (
+
+rem     echo @echo off > "C:\mount\mount\Windows\scripts\debloater\debloat.bat"
+rem echo powerShell -ExecutionPolicy Bypass -File "C:\Windows\scripts\debloater\Debloat3.0.ps1" >> "C:\mount\mount\Windows\scripts\debloater\debloat.bat"
     
-    powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Iblis94/debloat3.0/main/Debloat3.0.ps1' -OutFile 'C:\mount\mount\Program Files\debloater\Debloat3.0.ps1'"
-)
+rem     powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Iblis94/debloat3.0/main/Debloat3.0.ps1' -OutFile 'C:\mount\mount\Windows\scripts\debloater\scripts\Debloat3.0.ps1'"
+rem )
 
 rem Defender manager
-powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Windows_defender_manager/defender.bat' -OutFile 'C:\mount\mount\Windows\defender.bat'"
+powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Windows_defender_manager/defender.bat' -OutFile 'C:\mount\mount\Windows\scripts\defender.bat'"
 
 rem Allow edge uninstall
-powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Remove_edge_eu/change.ps1' -OutFile 'C:\mount\mount\Windows\change.ps1'"
+powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Remove_edge_eu/change.ps1' -OutFile 'C:\mount\mount\Windows\scripts\change.ps1'"
 
-powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Remove_edge_eu/allow_edge_uninstall.bat' -OutFile 'C:\mount\mount\Windows\remove_edge.bat'"
+powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Remove_edge_eu/allow_edge_uninstall.bat' -OutFile 'C:\mount\mount\Windows\scripts\remove_edge.bat'"
 
 rem Copy start.ps1
-copy "%resource_dir%\start.ps1" "C:\mount\mount\Windows"
+copy "%resource_dir%\start.ps1" "C:\mount\mount\Windows\scripts"
 
 rem Copy PowerRun.exe
-copy "%resource_dir%\PowerRun.exe" "C:\mount\mount\Windows"
+copy "%resource_dir%\PowerRun.exe" "C:\mount\mount\Windows\scripts"
 
 rem Copy unattended.xml
 IF NOT EXIST "C:\ISO\Win11\sources\$OEM$\$$\Panther" (

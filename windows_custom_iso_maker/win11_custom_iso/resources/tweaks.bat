@@ -63,13 +63,8 @@ sc config dmwappushservice start=disabled
 rem disable widgets
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v TaskbarDa /t REG_DWORD /d 0 /f
 
-rem seth debloat
-IF EXIST "C:\Program Files\debloater" (
-    setx PATH "%PATH%;C:\Program Files\debloater"
-)
-
 rem set powerrun
-setx PATH "%PATH%;C:\Windows\PowerRun.exe"
+setx PATH "%PATH%;C:\Windows\scripts"
 
 powershell write-host -fore Green "Done, rebooting in 5 seconds"
 timeout 5
