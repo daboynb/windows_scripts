@@ -80,11 +80,8 @@ powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-TabletPCMath-Package*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
 powershell -Command "Get-WindowsPackage -Path 'C:\mount\mount' | Where-Object {$_.PackageName -like 'Microsoft-Windows-Wallpaper-Content-Extended-FoD*'} | ForEach-Object {dism /English /image:C:\mount\mount /Remove-Package /PackageName:$($_.PackageName) /NoRestart | Out-Null}"
 
-rem Create folder for the scripts
-mkdir "C:\mount\mount\Windows\scripts"
-
 rem copy batch file
-copy "%resource_dir%\tweaks.bat" "C:\mount\mount\Windows\scripts"
+copy "%resource_dir%\tweaks.bat" "C:\mount\mount\Windows"
 
 reg query "HKLM\system\controlset001\control\nls\language" /v Installlanguage | findstr /C:"0410"
 IF %errorlevel% equ 0 (
@@ -97,17 +94,17 @@ IF %errorlevel% equ 0 (
 )
 
 rem Defender manager
-powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Windows_defender_manager/defender.bat' -OutFile 'C:\mount\mount\Windows\scripts\defender.bat'"
+powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Windows_defender_manager/defender.bat' -OutFile 'C:\mount\mount\Windows/defender.bat'"
 
 rem Allow edge uninstall
-powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Remove_edge_eu/change.ps1' -OutFile 'C:\mount\mount\Windows\change.ps1'"
-powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Remove_edge_eu/allow_edge_uninstall.bat' -OutFile 'C:\mount\mount\Windows\scripts\remove_edge.bat'"
+powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Remove_edge_eu/change.ps1' -OutFile 'C:\mount\mount\Windows/change.ps1'"
+powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Remove_edge_eu/allow_edge_uninstall.bat' -OutFile 'C:\mount\mount\Windows/remove_edge.bat'"
 
 rem Copy start.ps1
-copy "%resource_dir%\start.ps1" "C:\mount\mount\Windows\scripts"
+copy "%resource_dir%\start.ps1" "C:\mount\mount\Windows"
 
 rem Copy PowerRun.exe
-copy "%resource_dir%\PowerRun.exe" "C:\mount\mount\Windows\scripts"
+copy "%resource_dir%\PowerRun.exe" "C:\mount\mount\Windows"
 
 rem Copy unattended.xml
 IF NOT EXIST "C:\ISO\Win11\sources\$OEM$\$$\Panther" (
