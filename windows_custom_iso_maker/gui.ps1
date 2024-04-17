@@ -118,11 +118,9 @@ $additionalInfoText = @"
 
 2. All preinstalled apps are removed.
 
-3. Edge can be removed from the Control Panel !
-(It requires an additional reboot after the initial setup.)
+3. Edge can be removed natively, just press 'Win+r' and type remove_edge.
 
-4. Defender can be toggled on and off !
-(Simply type 'defender' in a cmd window, and a menu will appear.)
+4. Defender can be toggled on and off, just press 'Win+r' and type defender.
 
 All the applied tweaks -> https://pastebin.com/raw/k0bdihNw
 "@
