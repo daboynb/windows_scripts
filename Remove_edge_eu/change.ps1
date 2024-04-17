@@ -61,10 +61,10 @@ if (Test-Path $integratedServicesPath) {
     Set-Acl -Path $integratedServicesPath -AclObject $acl
 
     # Kill edge processes
-    Stop-Process -Name MsEdge -Force -ErrorAction SilentlyContinue | Out-Null
+    Stop-Process -Name Microsoft Edge -Force -ErrorAction SilentlyContinue | Out-Null
 
     # Uninstall with winget
-    winget uninstall edge --accept-source-agreements --silent | out-null
+    winget uninstall "Microsoft Edge" --accept-source-agreements --silent | out-null
 
     Write-Host "Done, file edited."
     Write-Host "If Edge is still present, that means you have not installed the KB that enables that feature."
