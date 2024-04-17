@@ -66,8 +66,10 @@ if (Test-Path $integratedServicesPath) {
     # Uninstall with winget
     winget uninstall edge --accept-source-agreements --silent | out-null
 
-    Write-Host "Done"
-
+    Write-Host "Done, file edited."
+    Write-Host "If Edge is still present, that means you have not installed the KB that enables that feature."
+    Write-Host "Please install the latest updates from Windows Update and retry."
+    
     Start-Sleep 05
 
 }
