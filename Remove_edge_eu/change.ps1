@@ -64,8 +64,11 @@ if (Test-Path $integratedServicesPath) {
 
     winget uninstall edge --accept-source-agreements --silent | out-null
 
+    Start-Sleep 05
+
 }
 else {
     # File does not exist
-    Write-Host "The file $integratedServicesPath does not exist.Install the latest updates and retry!"
+    Write-Host "The file $integratedServicesPath does not exist. Install the latest updates from windows update and retry!"
+    Start-Sleep 05
 }
