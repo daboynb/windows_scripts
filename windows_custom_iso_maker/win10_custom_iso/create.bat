@@ -101,7 +101,8 @@ rem Defender manager
 powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Windows_defender_manager/defender.bat' -OutFile 'C:\mount\mount\Windows\defender.bat'"
 
 rem Allow edge uninstall
-powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Remove_edge_eu/change.ps1' -OutFile 'C:\mount\mount\Windows/change.ps1'"
+powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Remove_edge_eu/change.ps1' -OutFile 'C:\mount\mount\Windows\change.ps1'"
+
 powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Remove_edge_eu/allow_edge_uninstall.bat' -OutFile 'C:\mount\mount\Windows\remove_edge.bat'"
 
 rem Copy start.ps1
