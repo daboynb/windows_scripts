@@ -24,7 +24,6 @@ if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
     Install-WinGet
 }
 
-
 # That's the JSON where the configs are stored
 $integratedServicesPath = "C:\Windows\System32\IntegratedServicesRegionPolicySet.json"
 
@@ -61,8 +60,10 @@ if (Test-Path $integratedServicesPath) {
     # Set the original permissions to the new file
     Set-Acl -Path $integratedServicesPath -AclObject $acl
 
+    # Kill edge processes
     Stop-Process -Name MsEdge -Force | out-null
 
+    # Uninstall with winget
     winget uninstall edge --accept-source-agreements --silent | out-null
 
     Start-Sleep 05
