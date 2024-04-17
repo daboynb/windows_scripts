@@ -17,9 +17,10 @@ Add-AppxPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
 }
 
 if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
-    'Winget Already Installed'
+    Write-Host 'Winget Already Installed'
     }  
     else{
+    Write-Host 'Installing Winget'
     Install-WinGet
 }
 
