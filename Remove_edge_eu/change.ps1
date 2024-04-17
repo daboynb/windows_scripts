@@ -61,7 +61,7 @@ if (Test-Path $integratedServicesPath) {
     Set-Acl -Path $integratedServicesPath -AclObject $acl
 
     # Kill edge processes
-    Stop-Process -Name Microsoft Edge -Force -ErrorAction SilentlyContinue | Out-Null
+    Stop-Process -Name "MsEdge" -Force -ErrorAction SilentlyContinue | Out-Null
 
     # Uninstall with winget
     winget uninstall "Microsoft Edge" --accept-source-agreements --silent | out-null
