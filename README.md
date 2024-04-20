@@ -9,14 +9,14 @@ NOTICE, the new edge removing method works starting in Windows 10 Build 19045.37
 This script creates a custom ISO's of Windows 10 and 11 with the following features:
 
     1. Hardware requirements are bypassed.
+
+    2. Offline account creation.
        
-    2. All preinstalled apps are removed.
+    3. All preinstalled apps are removed.
        
-    3. Edge can be removed from the Control Panel !
-    (It requires an additional reboot after the initial setup.)
+    4. Edge can be removed natively, just press 'Win+r' and type remove_edge.
        
-    4. Defender can be toggled on and off !
-    (Simply type 'defender' in a cmd window, and a menu will appear.)
+    5. Defender can be toggled on and off, just press 'Win+r' and type defender.
        
     All the applied tweaks -> https://pastebin.com/raw/k0bdihNw
 
@@ -134,4 +134,4 @@ Video tutorial :
 https://github.com/daboynb/windows_scripts/assets/106079917/636d4df7-2824-4f97-b7b7-df0c9ad96fc9
 
 # allow_edge_uninstall.bat
-Run the bat file, after the reboot you should be able to remove edge from the control panel. If not reboot again an dretry.
+Run the bat file, you should be able to remove edge, if not, install the latest updates and retry.
