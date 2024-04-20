@@ -24,7 +24,7 @@ How to use?
 
        irm -Uri "https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_custom_iso_maker/downloader.ps1" | iex
        
-![Capture](https://github.com/daboynb/windows_scripts/assets/106079917/e1721f80-c4c4-4e8f-80a2-1e1fc04ccfaf)
+![Capture](https://github.com/daboynb/windows_scripts/assets/106079917/6ecd99db-ffbc-4fa3-8792-5f413dc7807b)
 
 # Repo_downloader.bat
 Download all the stuff from this repo, with a single click!
