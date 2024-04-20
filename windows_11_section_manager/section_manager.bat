@@ -71,7 +71,6 @@ powerShell -Command "Write-Host 'Wait until all files are downloaded!' -Foregrou
 powershell.exe -ExecutionPolicy Bypass -File "files_detect.ps1"
 timeout 03 >nul
 
-:mono
 rem disable one dll
 PowerRun.exe cmd.exe /c "move "%SystemRoot%\dxgi.dll" "%SystemRoot%\adxgi.dll""
 
@@ -80,7 +79,8 @@ taskkill /f /im StartMenuExperienceHost.exe & taskkill /f /im explorer.exe & sta
 
 rem delete one dll
 del C:\Windows\adxgi.dll
-goto :MAINMENU
+timeout 03 >nul
+shutdown /r /t 00
 
 rem ####################################################################################### UNINSTALL SECTION
 
@@ -97,4 +97,5 @@ del "%SystemRoot%\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2tx
 
 rem restart explorer
 start explorer.exe
-goto :MAINMENU
+timeout 03 >nul
+shutdown /r /t 00
