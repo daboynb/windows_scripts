@@ -130,5 +130,5 @@ Video tutorial :
 
 https://github.com/daboynb/windows_scripts/assets/106079917/636d4df7-2824-4f97-b7b7-df0c9ad96fc9
 
-# allow_edge_uninstall.bat
+# remove_edge.bat
 Run the bat file, you should be able to remove edge, if not, install the latest updates and retry.
