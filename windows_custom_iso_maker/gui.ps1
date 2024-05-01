@@ -117,9 +117,9 @@ $additionalInfoText = @"
 
 3. All preinstalled apps are removed.
 
-4. Edge can be removed natively, just press 'Win+r' and type remove_edge.
+4. Edge can be removed natively, just press 'Win+r' and type aio.
 
-5. Defender can be toggled on and off, just press 'Win+r' and type defender.
+5. Defender can be toggled on and off, just press 'Win+r' and type aio.
 
 All the applied tweaks -> https://pastebin.com/raw/k0bdihNw
 "@

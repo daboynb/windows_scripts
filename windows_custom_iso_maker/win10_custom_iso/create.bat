@@ -91,13 +91,8 @@ rem echo powerShell -ExecutionPolicy Bypass -File "C:\Windows\scripts\debloater\
 rem     powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Iblis94/debloat3.0/main/Debloat3.0.ps1' -OutFile 'C:\mount\mount\Windows\scripts\debloater\scripts\Debloat3.0.ps1'"
 rem )
 
-rem Defender manager
-powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Windows_defender_manager/defender.bat' -OutFile 'C:\mount\mount\Windows\scripts\defender.bat'"
-
-rem Allow edge uninstall
-powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Remove_edge_eu/change.ps1' -OutFile 'C:\mount\mount\Windows\scripts\remove_edge.ps1'"
-
-powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Remove_edge_eu/allow_edge_uninstall.bat' -OutFile 'C:\mount\mount\Windows\scripts\remove_edge.bat'"
+rem Aio toggler
+powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Windows_defender_manager/defender.bat' -OutFile 'C:\mount\mount\Windows\scripts\aio.bat'"
 
 rem Copy start.ps1
 copy "%resource_dir%\start.ps1" "C:\mount\mount\Windows\scripts"

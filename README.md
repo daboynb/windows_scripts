@@ -14,9 +14,9 @@ This script creates a custom ISO's of Windows 10 and 11 with the following featu
        
     3. All preinstalled apps are removed.
        
-    4. Edge can be removed natively, just press 'Win+r' and type remove_edge.
+    4. Edge can be removed natively, just press 'Win+r' and type aio.
        
-    5. Defender can be toggled on and off, just press 'Win+r' and type defender.
+    5. Defender can be toggled on and off, just press 'Win+r' and type aio.
        
     All the applied tweaks -> https://pastebin.com/raw/k0bdihNw
 
