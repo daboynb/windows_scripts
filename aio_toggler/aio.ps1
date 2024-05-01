@@ -10,6 +10,21 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 # Ping Google to check internet connection
 $pingResult = Test-Connection -ComputerName google.com -Count 1 -Quiet
 
+# Delete old files
+if ($pingResult) {
+
+    $filePaths = @(
+        "C:\Windows\PowerRun.exe",
+        "C:\Windows\disable_defender.bat",
+        "C:\Windows\enable_defender.bat",
+        "C:\Windows\remove_edge.bat",
+        "C:\Windows\remove_edge.ps1",
+        "C:\Windows\reinstall_edge.bat",
+        "C:\Windows\reinstall_edge.ps1"
+    )
+    Remove-Item $filePaths -Force -ErrorAction SilentlyContinue
+
+}
 # Check if ping was successful
 if ($pingResult) {
     Write-Host "Internet connection is active."
