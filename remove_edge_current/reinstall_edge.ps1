@@ -50,4 +50,5 @@ else {
     Install-WinGet
 }
 
+Write-Output "Installing edge"
 winget install "Microsoft.Edge" --accept-source-agreements --silent 
