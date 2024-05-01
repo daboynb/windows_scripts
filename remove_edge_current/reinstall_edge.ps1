@@ -50,4 +50,4 @@ else {
     Install-WinGet
 }
 
-winget install "Microsoft.Edge" --accept-source-agreements --silent | out-null
+winget install "Microsoft.Edge" --accept-source-agreements --silent 
