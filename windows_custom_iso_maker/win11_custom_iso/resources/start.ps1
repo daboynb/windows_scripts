@@ -30,8 +30,6 @@ while (-not $success) {
 # check for process
 Write-Host -fore Green 'The debloat process will start shortly, the mouse and keyboard will be disabled until the operations are completed'
 
-taskkill /f /im explorer.exe
-
 while ($true) {
     $process = Get-Process -Name SecurityHealthSystray -ErrorAction SilentlyContinue
 
