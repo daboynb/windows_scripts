@@ -85,7 +85,7 @@ if ($pingResult) {
         @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_defender_manager/enable_defender.bat'; 'destinationPath' = 'C:\Windows\enable_defender.bat'; 'message' = "Downloading enable_defender.bat..." },
         # Microsoft Edge
         @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/remove_edge.bat'; 'destinationPath' = 'C:\Windows\remove_edge.bat'; 'message' = "Downloading remove_edge.bat..." },
-        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/remove_edge.ps1'; 'destinationPath' = 'C:\Windows\change.ps1'; 'message' = "Downloading change.ps1..." },
+        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/remove_edge.ps1'; 'destinationPath' = 'C:\Windows\remove_edge.ps1'; 'message' = "Downloading remove_edge.ps1..." },
         @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/reinstall_edge.bat'; 'destinationPath' = 'C:\Windows\reinstall_edge.bat'; 'message' = "Downloading reinstall_edge.bat..." },
         @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/reinstall_edge.ps1'; 'destinationPath' = 'C:\Windows\reinstall_edge.ps1'; 'message' = "Downloading reinstall_edge.ps1..." }
     )
@@ -111,7 +111,7 @@ if ($pingResult) {
         "C:\Windows\disable_defender.bat",
         "C:\Windows\enable_defender.bat",
         "C:\Windows\remove_edge.bat",
-        "C:\Windows\change.ps1",
+        "C:\Windows\remove_edge.ps1",
         "C:\Windows\reinstall_edge.bat",
         "C:\Windows\reinstall_edge.ps1"
     )
