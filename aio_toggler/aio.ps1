@@ -79,10 +79,10 @@ if ($pingResult) {
     # Define files to download
     $filesToDownload = @(
         # Powerrun
-        @{ 'sourceUrl' = 'https://github.com/daboynb/windows_scripts/raw/main/Windows_defender_manager/PowerRun.exe'; 'destinationPath' = 'C:\Windows\PowerRun.exe'; 'message' = "Downloading PowerRun..." },
+        @{ 'sourceUrl' = 'https://github.com/daboynb/windows_scripts/raw/main/windows_defender_manager/PowerRun.exe'; 'destinationPath' = 'C:\Windows\PowerRun.exe'; 'message' = "Downloading PowerRun..." },
         # Windows defender
-        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Windows_defender_manager/disable_defender.bat'; 'destinationPath' = 'C:\Windows\disable_defender.bat'; 'message' = "Downloading disable_defender.bat..." },
-        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Windows_defender_manager/enable_defender.bat'; 'destinationPath' = 'C:\Windows\enable_defender.bat'; 'message' = "Downloading enable_defender.bat..." },
+        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_defender_manager/disable_defender.bat'; 'destinationPath' = 'C:\Windows\disable_defender.bat'; 'message' = "Downloading disable_defender.bat..." },
+        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_defender_manager/enable_defender.bat'; 'destinationPath' = 'C:\Windows\enable_defender.bat'; 'message' = "Downloading enable_defender.bat..." },
         # Microsoft Edge
         @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/remove_edge.bat'; 'destinationPath' = 'C:\Windows\remove_edge.bat'; 'message' = "Downloading remove_edge.bat..." },
         @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/remove_edge.ps1'; 'destinationPath' = 'C:\Windows\change.ps1'; 'message' = "Downloading change.ps1..." },
