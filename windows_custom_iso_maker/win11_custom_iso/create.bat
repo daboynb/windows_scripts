@@ -89,7 +89,8 @@ rem     powershell -command "Invoke-WebRequest -Uri 'https://raw.githubuserconte
 rem )
 
 rem Aio toggler
-powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/Windows_defender_manager/defender.bat' -OutFile 'C:\mount\mount\Windows\scripts\aio.bat'"
+powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/aio_toggler/aio.bat' -OutFile 'C:\mount\mount\Windows\scripts\aio.bat'"
+powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/aio_toggler/aio.ps1' -OutFile 'C:\mount\mount\Windows\scripts\aio.ps1'"
 
 rem Copy start.ps1
 copy "%resource_dir%\start.ps1" "C:\mount\mount\Windows\scripts"
