@@ -78,16 +78,6 @@ mkdir "C:\mount\mount\Windows\scripts"
 rem copy batch file
 copy "%resource_dir%\tweaks.bat" "C:\mount\mount\Windows\scripts"
 
-rem paki tool (disabled until fixed)
-rem reg query "HKLM\system\controlset001\control\nls\language" /v Installlanguage | findstr /C:"0410"
-rem IF %errorlevel% equ 0 (
-
-rem     echo @echo off > "C:\mount\mount\Windows\scripts\debloater\debloat.bat"
-rem echo powerShell -ExecutionPolicy Bypass -File "C:\Windows\scripts\debloater\Debloat3.0.ps1" >> "C:\mount\mount\Windows\scripts\debloater\debloat.bat"
-    
-rem     powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/Iblis94/debloat3.0/main/Debloat3.0.ps1' -OutFile 'C:\mount\mount\Windows\scripts\debloater\scripts\Debloat3.0.ps1'"
-rem )
-
 rem Aio toggler
 powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/aio_toggler/aio.bat' -OutFile 'C:\mount\mount\Windows\scripts\aio.bat'"
 powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/aio_toggler/aio.ps1' -OutFile 'C:\mount\mount\Windows\scripts\aio.ps1'"
