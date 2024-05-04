@@ -1,28 +1,14 @@
 @echo off
 setlocal EnableDelayedExpansion
 
+rem ###################################################################################################################################
+rem Stock config for 10 and 11 (tweaks.bat)
+
 rem set password never expire
 wmic UserAccount set PasswordExpires=False
 
 rem uninstall all useless apps
 powershell -command "$ErrorActionPreference = 'SilentlyContinue'; Get-AppxPackage -AllUsers | Where-Object {$_.name -notmatch 'Microsoft.VP9VideoExtensions|Notepad|Microsoft.WebMediaExtensions|Microsoft.WebpImageExtension|Microsoft.Windows.ShellExperienceHost|Microsoft.VCLibs*|Microsoft.DesktopAppInstaller|Microsoft.StorePurchaseApp|Microsoft.Windows.Photos|Microsoft.WindowsStore|Microsoft.XboxIdentityProvider|Microsoft.WindowsCamera|Microsoft.WindowsCalculator|Microsoft.HEIFImageExtension|Microsoft.UI.Xaml*'} | Remove-AppxPackage"
-
-rem Hide Meet Now icon in the taskbar
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "HideSCAMeetNow" /t "REG_DWORD" /d 1 /f
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "HideSCAMeetNow" /t "REG_DWORD" /d 1 /f
-
-rem Remove Search Icon from Windows 10 Taskbar
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d 0 /f
-
-rem Remove Task View from Windows 10 Taskbar
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d 0 /f
-
-rem disable interest and news
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" /v "EnableFeeds" /t "REG_DWORD" /d 0 /f
-reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds" /v "ShellFeedsTaskbarViewMode" /t "REG_DWORD" /d 2 /f
-
-rem show file extensions
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t REG_DWORD /d 0 /f
 
 rem Check the system architecture
 wmic os get osarchitecture 2>NUL | find "64-bit">NUL
@@ -45,6 +31,9 @@ powershell -command "C:\Windows\System32\OneDriveSetup.exe /uninstall"
 :bing
 rem disable bing search on start
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
+
+rem show file extensions
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t REG_DWORD /d 0 /f
 
 rem enable dark theme
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "AppsUseLightTheme" /t REG_DWORD /d 0 /f
@@ -70,11 +59,34 @@ rem disable telemetry
 sc config DiagTrack start=disabled
 sc config dmwappushservice start=disabled
 
-rem unpin from start the tiles
-powerShell -ExecutionPolicy Bypass -File "C:\Windows\scripts\unpin_start_tiles.ps1"
-
 rem set powerrun
 setx PATH "%PATH%;C:\Windows\scripts"
+
+rem End of stock config for 10 and 11 (tweaks.bat)
+rem ###################################################################################################################################
+
+rem ###################################################################################################################################
+rem Clean the ui
+
+rem Hide Meet Now icon in the taskbar
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "HideSCAMeetNow" /t "REG_DWORD" /d 1 /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "HideSCAMeetNow" /t "REG_DWORD" /d 1 /f
+
+rem Remove Search Icon from Windows 10 Taskbar
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d 0 /f
+
+rem Remove Task View from Windows 10 Taskbar
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d 0 /f
+
+rem disable interest and news
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" /v "EnableFeeds" /t "REG_DWORD" /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds" /v "ShellFeedsTaskbarViewMode" /t "REG_DWORD" /d 2 /f
+
+rem End of clean the ui
+rem ###################################################################################################################################
+
+rem unpin from start the tiles
+powerShell -ExecutionPolicy Bypass -File "C:\Windows\scripts\unpin_start_tiles.ps1"
 
 powershell write-host -fore Green "Done, rebooting in 5 seconds"
 timeout 5
