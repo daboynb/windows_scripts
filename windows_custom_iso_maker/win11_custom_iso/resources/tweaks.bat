@@ -94,22 +94,22 @@ rem ############################################################################
 rem Regs from tiny11 
 
 rem 'Deleting Application Compatibility Appraiser'
-C:\Windows\scripts\PowerRun.exe cmd.exe /c "reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{0600DD45-FAF2-4131-A006-0B17509B9F78} /f""
+C:\Windows\scripts\PowerRun.exe cmd.exe /c "reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{0600DD45-FAF2-4131-A006-0B17509B9F78}" /f"
 
 rem 'Deleting Customer Experience Improvement Program'
-C:\Windows\scripts\PowerRun.exe cmd.exe /c "reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{4738DE7A-BCC1-4E2D-B1B0-CADB044BFA81} /f""
-C:\Windows\scripts\PowerRun.exe cmd.exe /c "reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{6FAC31FA-4A85-4E64-BFD5-2154FF4594B3} /f""
-C:\Windows\scripts\PowerRun.exe cmd.exe /c "reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{FC931F16-B50A-472E-B061-B6F79A71EF59} /f""
+C:\Windows\scripts\PowerRun.exe cmd.exe /c "reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{4738DE7A-BCC1-4E2D-B1B0-CADB044BFA81}" /f"
+C:\Windows\scripts\PowerRun.exe cmd.exe /c "reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{6FAC31FA-4A85-4E64-BFD5-2154FF4594B3}" /f"
+C:\Windows\scripts\PowerRun.exe cmd.exe /c "reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{FC931F16-B50A-472E-B061-B6F79A71EF59}" /f"
 
 rem 'Deleting Program Data Updater' 
-C:\Windows\scripts\PowerRun.exe cmd.exe /c "reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{0671EB05-7D95-4153-A32B-1426B9FE61DB} /f""
+C:\Windows\scripts\PowerRun.exe cmd.exe /c "reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{0671EB05-7D95-4153-A32B-1426B9FE61DB}" /f"
 
 rem 'Deleting autochk proxy'
-C:\Windows\scripts\PowerRun.exe cmd.exe /c "reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{87BF85F4-2CE1-4160-96EA-52F554AA28A2} /f""
-C:\Windows\scripts\PowerRun.exe cmd.exe /c "reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{8A9C643C-3D74-4099-B6BD-9C6D170898B1} /f""
+C:\Windows\scripts\PowerRun.exe cmd.exe /c "reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{87BF85F4-2CE1-4160-96EA-52F554AA28A2}" /f"
+C:\Windows\scripts\PowerRun.exe cmd.exe /c "reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{8A9C643C-3D74-4099-B6BD-9C6D170898B1}" /f"
 
 rem 'Deleting QueueReporting'
-C:\Windows\scripts\PowerRun.exe cmd.exe /c "reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{E3176A65-4E44-4ED3-AA73-3283660ACB9C} /f""
+C:\Windows\scripts\PowerRun.exe cmd.exe /c "reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{E3176A65-4E44-4ED3-AA73-3283660ACB9C}" /f"
 
 rem End of regs from tiny11 
 rem ####################################################################################################################################
