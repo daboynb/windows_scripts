@@ -6,6 +6,24 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 }
 
 # Checks 
+$folderPath = "C:\Windows\scripts"
+
+# Check if folder exists
+if (-not (Test-Path $folderPath -PathType Container)) {
+    New-Item -ItemType Directory -Path $folderPath | Out-Null
+}
+
+# Get the PATH variable
+$path = [System.Environment]::GetEnvironmentVariable("PATH", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("PATH", "User")
+
+# Check if the directory is in the PATH
+if ($path -match [regex]::Escape($folderPath)) {
+    Write-Host "$folderPath is already in the PATH."
+} else {
+    Write-Host "$folderPath is not in the PATH. Adding..."
+    [System.Environment]::SetEnvironmentVariable("PATH", "$path;$folderPath", "Machine")
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+}
 
 # Ping Google to check internet connection
 $pingResult = Test-Connection -ComputerName google.com -Count 1 -Quiet
@@ -14,13 +32,13 @@ $pingResult = Test-Connection -ComputerName google.com -Count 1 -Quiet
 if ($pingResult) {
 
     $filePaths = @(
-        "C:\Windows\PowerRun.exe",
-        "C:\Windows\disable_defender.bat",
-        "C:\Windows\enable_defender.bat",
-        "C:\Windows\remove_edge.bat",
-        "C:\Windows\remove_edge.ps1",
-        "C:\Windows\reinstall_edge.bat",
-        "C:\Windows\reinstall_edge.ps1"
+        "C:\Windows\scripts\PowerRun.exe",
+        "C:\Windows\scripts\disable_defender.bat",
+        "C:\Windows\scripts\enable_defender.bat",
+        "C:\Windows\scripts\remove_edge.bat",
+        "C:\Windows\scripts\remove_edge.ps1",
+        "C:\Windows\scripts\reinstall_edge.bat",
+        "C:\Windows\scripts\reinstall_edge.ps1"
     )
     Remove-Item $filePaths -Force -ErrorAction SilentlyContinue
 
@@ -94,15 +112,15 @@ if ($pingResult) {
     # Define files to download
     $filesToDownload = @(
         # Powerrun
-        @{ 'sourceUrl' = 'https://github.com/daboynb/windows_scripts/raw/main/windows_defender_manager/PowerRun.exe'; 'destinationPath' = 'C:\Windows\PowerRun.exe'; 'message' = "Downloading PowerRun..." },
+        @{ 'sourceUrl' = 'https://github.com/daboynb/windows_scripts/raw/main/windows_defender_manager/PowerRun.exe'; 'destinationPath' = 'C:\Windows\scripts\PowerRun.exe'; 'message' = "Downloading PowerRun..." },
         # Windows defender
-        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_defender_manager/disable_defender.bat'; 'destinationPath' = 'C:\Windows\disable_defender.bat'; 'message' = "Downloading disable_defender.bat..." },
-        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_defender_manager/enable_defender.bat'; 'destinationPath' = 'C:\Windows\enable_defender.bat'; 'message' = "Downloading enable_defender.bat..." },
+        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_defender_manager/disable_defender.bat'; 'destinationPath' = 'C:\Windows\scripts\disable_defender.bat'; 'message' = "Downloading disable_defender.bat..." },
+        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_defender_manager/enable_defender.bat'; 'destinationPath' = 'C:\Windows\scripts\enable_defender.bat'; 'message' = "Downloading enable_defender.bat..." },
         # Microsoft Edge
-        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/remove_edge.bat'; 'destinationPath' = 'C:\Windows\remove_edge.bat'; 'message' = "Downloading remove_edge.bat..." },
-        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/remove_edge.ps1'; 'destinationPath' = 'C:\Windows\remove_edge.ps1'; 'message' = "Downloading remove_edge.ps1..." },
-        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/reinstall_edge.bat'; 'destinationPath' = 'C:\Windows\reinstall_edge.bat'; 'message' = "Downloading reinstall_edge.bat..." },
-        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/reinstall_edge.ps1'; 'destinationPath' = 'C:\Windows\reinstall_edge.ps1'; 'message' = "Downloading reinstall_edge.ps1..." }
+        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/remove_edge.bat'; 'destinationPath' = 'C:\Windows\scripts\remove_edge.bat'; 'message' = "Downloading remove_edge.bat..." },
+        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/remove_edge.ps1'; 'destinationPath' = 'C:\Windows\scripts\remove_edge.ps1'; 'message' = "Downloading remove_edge.ps1..." },
+        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/reinstall_edge.bat'; 'destinationPath' = 'C:\Windows\scripts\reinstall_edge.bat'; 'message' = "Downloading reinstall_edge.bat..." },
+        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/reinstall_edge.ps1'; 'destinationPath' = 'C:\Windows\scripts\reinstall_edge.ps1'; 'message' = "Downloading reinstall_edge.ps1..." }
     )
 
     # Download files
@@ -122,13 +140,13 @@ if ($pingResult) {
     
     # Define file paths
     $filePaths = @(
-        "C:\Windows\PowerRun.exe",
-        "C:\Windows\disable_defender.bat",
-        "C:\Windows\enable_defender.bat",
-        "C:\Windows\remove_edge.bat",
-        "C:\Windows\remove_edge.ps1",
-        "C:\Windows\reinstall_edge.bat",
-        "C:\Windows\reinstall_edge.ps1"
+        "C:\Windows\scripts\PowerRun.exe",
+        "C:\Windows\scripts\disable_defender.bat",
+        "C:\Windows\scripts\enable_defender.bat",
+        "C:\Windows\scripts\remove_edge.bat",
+        "C:\Windows\scripts\remove_edge.ps1",
+        "C:\Windows\scripts\reinstall_edge.bat",
+        "C:\Windows\scripts\reinstall_edge.ps1"
     )
 
     # Iterate through each file path and check existence
@@ -161,21 +179,21 @@ $form.ForeColor = [System.Drawing.Color]::White
 
 # Define the event handler to enable defender
 $enable_defender_Click = {
-    Start-Process -FilePath "C:\Windows\enable_defender.bat"
+    Start-Process -FilePath "C:\Windows\scripts\enable_defender.bat"
 }
 
 # Define the event handler to disable defender
 $disable_defender_Click = {
-    Start-Process -FilePath "C:\Windows\disable_defender.bat"
+    Start-Process -FilePath "C:\Windows\scripts\disable_defender.bat"
 }
 
 # Define the event handler to reinstall edge
 $install_edge_Click = {
-    Start-Process -FilePath "C:\Windows\reinstall_edge.bat"}
+    Start-Process -FilePath "C:\Windows\scripts\reinstall_edge.bat"}
 
 # Define the event handler to remove edge
 $remove_edge_Click = {
-    Start-Process -FilePath "C:\Windows\remove_edge.bat"
+    Start-Process -FilePath "C:\Windows\scripts\remove_edge.bat"
 }
 
 # Create download buttons for enable defender
