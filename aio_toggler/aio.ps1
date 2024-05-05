@@ -90,7 +90,7 @@ if ($pingResult) {
         Install-WinGet
     }
 
-    function Download-File {
+    function Download_Required_Files {
         param(
             [string]$sourceUrl,
             [string]$destinationPath,
@@ -125,7 +125,7 @@ if ($pingResult) {
 
     # Download files
     foreach ($file in $filesToDownload) {
-        Download-File -sourceUrl $file['sourceUrl'] -destinationPath $file['destinationPath'] -message $file['message']
+        Download_Required_Files -sourceUrl $file['sourceUrl'] -destinationPath $file['destinationPath'] -message $file['message']
     }
 
     Write-Output "Download and setup completed."
