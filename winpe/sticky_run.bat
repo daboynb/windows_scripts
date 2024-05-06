@@ -1,3 +1,3 @@
 @echo off
 
-powershell -command "sticky.bat"
+cmd.exe /c "sticky.bat"
