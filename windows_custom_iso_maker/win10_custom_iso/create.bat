@@ -44,7 +44,6 @@ IF EXIST "C:\ISO\Win10\sources\install.wim" (
     dism /English /Export-Image /SourceImageFile:"C:\ISO\Win10\sources\install.wim" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win10\sources\install_pro.wim" /compress:max
     del "C:\ISO\Win10\sources\install.wim"
     move "C:\ISO\Win10\sources\install_pro.wim" "C:\ISO\Win10\sources\install.wim"
-
 )
 
 IF EXIST "C:\ISO\Win10\sources\install.esd" (
@@ -137,8 +136,7 @@ echo.
 powerShell -Command "Write-Host 'Process completed!' -ForegroundColor Green; exit"  
 echo "The edited iso is here %dest_path%"
 echo. 
-copy "%resource_dir%\rufus_forked_for_custom.exe" "%dest_path%" > NUL
-echo "The normal rufus is not compatible with this ISO, use the rufus_forked_for_custom.exe in %dest_path%"
+copy "%resource_dir%\rufus.exe" "%dest_path%" > NUL
 pause
 endlocal
 rem ##############################################################################

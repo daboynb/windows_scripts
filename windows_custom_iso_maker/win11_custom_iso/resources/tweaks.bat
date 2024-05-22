@@ -27,11 +27,14 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "
 reg add "HKCU\Control Panel\Colors" /v "ImmersiveApplicationForeground" /t REG_SZ /d "255 255 255" /f
 
 rem delete pinned on taskbar
-del /f /s /q /a "%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*"
+del /f /s /q /a "%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*" > nul 2>&1
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband" /f
 
 rem delete edge icon on desktop
-del /s /q "C:\Users\%username%\Desktop\*.lnk" 
+del /s /q "C:\Users\%username%\Desktop\*.lnk" > nul 2>&1
+
+rem Disable Edge Bar
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "WebWidgetAllowed" /t REG_DWORD /d 0 /f
 
 rem disable contentdelivery
 powershell -command "$regKeyPath='HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager';$exportedRegFile='exportedRegFile.reg';reg export $regKeyPath $exportedRegFile;((Get-Content $exportedRegFile) -replace '=dword:00000001','=dword:00000000') | Set-Content $exportedRegFile;reg import $exportedRegFile;Remove-Item $exportedRegFile"
@@ -44,7 +47,7 @@ rem disable telemetry
 sc config DiagTrack start=disabled
 sc config dmwappushservice start=disabled
 
-rem set powerrun
+rem add the script folder to the path
 setx PATH "%PATH%;C:\Windows\scripts"
 
 rem End of stock config for 10 and 11 (tweaks.bat)
@@ -87,7 +90,6 @@ reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Privacy" /v
 
 rem Disable "Show recommendations for tips, shortcuts, new apps, and more" on Start
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_IrisRecommendations" /t REG_DWORD /d 0 /f
-
 rem ####################################################################################################################################
 
 rem ####################################################################################################################################
