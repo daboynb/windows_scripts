@@ -204,7 +204,6 @@ $buildButton.Add_Click({
     # Extract the index of the selected windows version
     if ($radioButtonHome.Checked) {
         Write-Host "The RadioButton Home is checked, the Windows edition selected is: Home"
-        $windowsEdition = "Home"
         if ($dism_pro_or_home -like "*Windows ** Home*") {
             $outLines = $dism_pro_or_home -split "`n"
             
