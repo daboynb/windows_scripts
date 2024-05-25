@@ -11,28 +11,45 @@ function Install-WinGet() {
     $progressPreference = 'silentlyContinue'
 
     $wc = New-Object net.webclient
+    $maxRetries = 3
 
-    try {
-        # Download winget
-        $msu_url = 'https://aka.ms/getwinget'
-        $local_msu_url = "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
-        $wc.Downloadfile($msu_url, $local_msu_url)
-        Write-Output "Download of $local_msu_url successful."
+    function DownloadFileWithRetries($url, $localPath) {
+        $attempts = 0
+        while ($attempts -lt $maxRetries) {
+            try {
+                $wc.Downloadfile($url, $localPath)
+                Write-Output "Download of $localPath successful."
+                return $true
+            } catch {
+                $attempts++
+                Write-Output "Download failed (attempt $attempts): $($_.Exception.Message)"
+                Start-Sleep -Seconds 2  # Wait for 2 seconds before retrying
+            }
+        }
+        return $false
+    }
 
-        # Download VCLibs
-        $msu_url = 'https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx'
-        $local_msu_url = "Microsoft.VCLibs.x64.14.00.Desktop.appx"
-        $wc.Downloadfile($msu_url, $local_msu_url)
-        Write-Output "Download of $local_msu_url successful."
+    # Download winget
+    $msu_url = 'https://aka.ms/getwinget'
+    $local_msu_url = "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+    if (-not (DownloadFileWithRetries $msu_url $local_msu_url)) {
+        Write-Output "Unable to download $local_msu_url after $maxRetries attempts."
+        return
+    }
 
-        # Download Microsoft.UI.Xaml
-        $msu_url = 'https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x64.appx'
-        $local_msu_url = "Microsoft.UI.Xaml.2.8.x64.appx"
-        $wc.Downloadfile($msu_url, $local_msu_url)
-        Write-Output "Download of $local_msu_url successful."
+    # Download VCLibs
+    $msu_url = 'https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx'
+    $local_msu_url = "Microsoft.VCLibs.x64.14.00.Desktop.appx"
+    if (-not (DownloadFileWithRetries $msu_url $local_msu_url)) {
+        Write-Output "Unable to download $local_msu_url after $maxRetries attempts."
+        return
+    }
 
-    } catch {
-        Write-Output "Download failed: $($_.Exception.Message)"
+    # Download Microsoft.UI.Xaml
+    $msu_url = 'https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x64.appx'
+    $local_msu_url = "Microsoft.UI.Xaml.2.8.x64.appx"
+    if (-not (DownloadFileWithRetries $msu_url $local_msu_url)) {
+        Write-Output "Unable to download $local_msu_url after $maxRetries attempts."
         return
     }
 

@@ -49,38 +49,57 @@ if ($pingResult) {
     
     # Check if winget is installed
     function Install-WinGet() {
+
         $progressPreference = 'silentlyContinue'
+    
         $wc = New-Object net.webclient
-
-        try {
-            # Download winget
-            $msu_url = 'https://aka.ms/getwinget'
-            $local_msu_url = "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
-            $wc.Downloadfile($msu_url, $local_msu_url)
-            Write-Output "Download of $local_msu_url successful."
-
-            # Download VCLibs
-            $msu_url = 'https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx'
-            $local_msu_url = "Microsoft.VCLibs.x64.14.00.Desktop.appx"
-            $wc.Downloadfile($msu_url, $local_msu_url)
-            Write-Output "Download of $local_msu_url successful."
-
-            # Download Microsoft.UI.Xaml
-            $msu_url = 'https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x64.appx'
-            $local_msu_url = "Microsoft.UI.Xaml.2.8.x64.appx"
-            $wc.Downloadfile($msu_url, $local_msu_url)
-            Write-Output "Download of $local_msu_url successful."
-
-        } catch {
-            Write-Output "Download failed: $($_.Exception.Message)"
+        $maxRetries = 3
+    
+        function DownloadFileWithRetries($url, $localPath) {
+            $attempts = 0
+            while ($attempts -lt $maxRetries) {
+                try {
+                    $wc.Downloadfile($url, $localPath)
+                    Write-Output "Download of $localPath successful."
+                    return $true
+                } catch {
+                    $attempts++
+                    Write-Output "Download failed (attempt $attempts): $($_.Exception.Message)"
+                    Start-Sleep -Seconds 2 
+                }
+            }
+            return $false
+        }
+    
+        # Download winget
+        $msu_url = 'https://aka.ms/getwinget'
+        $local_msu_url = "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+        if (-not (DownloadFileWithRetries $msu_url $local_msu_url)) {
+            Write-Output "Unable to download $local_msu_url after $maxRetries attempts."
             return
         }
-
+    
+        # Download VCLibs
+        $msu_url = 'https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx'
+        $local_msu_url = "Microsoft.VCLibs.x64.14.00.Desktop.appx"
+        if (-not (DownloadFileWithRetries $msu_url $local_msu_url)) {
+            Write-Output "Unable to download $local_msu_url after $maxRetries attempts."
+            return
+        }
+    
+        # Download Microsoft.UI.Xaml
+        $msu_url = 'https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x64.appx'
+        $local_msu_url = "Microsoft.UI.Xaml.2.8.x64.appx"
+        if (-not (DownloadFileWithRetries $msu_url $local_msu_url)) {
+            Write-Output "Unable to download $local_msu_url after $maxRetries attempts."
+            return
+        }
+    
         # Install downloaded packages
         Add-AppxPackage Microsoft.VCLibs.x64.14.00.Desktop.appx
         Add-AppxPackage Microsoft.UI.Xaml.2.8.x64.appx
         Add-AppxPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
-    }
+    }  
 
     if (Test-Path "$env:LOCALAPPDATA\Microsoft\WindowsApps\winget.exe") {
         Write-Output "Winget Already Installed"
