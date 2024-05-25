@@ -247,20 +247,27 @@ $buildButton.Add_Click({
     $argumentString = $arguments -join ' '
     
     # Detect if win 10 or 11
-    $dism_10_or_11 = dism /Get-WimInfo /WimFile:$mountedDrive\sources\install.wim 
+    if ($is_esd -eq "$mountedDrive\sources\install.wim") {
+        $dism_10_or_11 = dism /Get-WimInfo /WimFile:$mountedDrive\sources\install.wim
+    }
+    if ($is_esd -eq "$mountedDrive\sources\install.esd") {
+        $dism_10_or_11 = dism /Get-WimInfo /WimFile:$mountedDrive\sources\install.esd
+    }
     Start-Sleep 1
     Dismount-DiskImage -ImagePath $selectedFile
     
-    if ($dism_10_or_11 -like "*Windows 11*") {
+    if ($dism_10_or_11 -match "Windows 11") {
         Write-Host "This is a Windows 11 image."
         $windowsVersion = "Windows 11"
         Write-Host $windowsVersion
-    } elseif ($dism_10_or_11 -like "*Windows 10*") {
+    } elseif ($dism_10_or_11 -match "Windows 10") {
         Write-Host "This is a Windows 10 image."
         $windowsVersion = "Windows 10"
         Write-Host $windowsVersion
     } else {
+        Write-Host $windowsVersion
         Write-Host "The image does not seem to contain Windows 10 or Windows 11 information."
+        Start-Sleep 16
     }    
 
     # Launch bat with args
