@@ -6,7 +6,7 @@ echo "%SYSPART%"
 :MAINMENU
 CLS
 SET MENU=
-ECHO WINDOWS DEFENDER MANAGER
+ECHO WINDOWS LOGIN MANAGER
 echo.
 ECHO [1] Enable admin on login page
 ECHO [2] Disabling admin on login page
