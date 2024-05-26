@@ -35,6 +35,7 @@ mkdir "C:\mount\mount"
 rem ##############################################################################
 rem ############################################################################## export wim and set unattend
 rem set iso path
+cls
 powerShell -Command "Write-Host 'Extracting ISO to C:\ISO\Win11... Please wait!' -ForegroundColor Green; exit"  
 %resource_dir%\7z.exe x -y -o"C:\ISO\Win11" "%selectedFile%" > nul
 
@@ -48,7 +49,7 @@ rem ############################################################################
 
 rem ############################################################################## boot.wim edits 
 rem mount the boot image with dism /English
-
+cls
 powerShell -Command "Write-Host 'Mounting the image' -ForegroundColor Green; exit"  
 dism /English /mount-image /imagefile:"C:\ISO\Win11\sources\boot.wim" /index:2 /mountdir:"C:\mount\mount"
 
@@ -64,13 +65,14 @@ dism /English /mount-image /imagefile:"C:\ISO\Win11\sources\boot.wim" /index:2 /
 timeout 04
 
 rem unmount the image
+cls
 powerShell -Command "Write-Host 'Unmounting the image' -ForegroundColor Green; exit"  
 dism /English /unmount-image /mountdir:"C:\mount\mount" /commit
 
 rem ##############################################################################
 rem ############################################################################## Build the iso
 rem rebuild image 
-
+cls
 powerShell -Command "Write-Host 'Building the ISO' -ForegroundColor Green; exit"  
 %resource_dir%\oscdimg -m -o -u2 -bootdata:2#p0,e,bC:\ISO\Win11\boot\etfsboot.com#pEF,e,bC:\ISO\Win11\efi\microsoft\boot\efisys.bin C:\ISO\Win11 "%dest_path%\Windows11_bypass.iso"
 
@@ -84,12 +86,13 @@ rem  Enable QuickEdit Mode
 reg add HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f
 
 rem greetings
-
+cls
 echo. 
 powerShell -Command "Write-Host 'Process completed!' -ForegroundColor Green; exit"  
 echo "The edited iso is here %dest_path%"
 echo. 
 copy "%resource_dir%\rufus.exe" "%dest_path%" > NUL
 pause
+explorer.exe "%dest_path%
 endlocal
 rem ##############################################################################

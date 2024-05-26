@@ -36,6 +36,7 @@ mkdir "C:\mount\mount"
 rem ##############################################################################
 rem ############################################################################## export wim and set unattend
 rem set iso path
+cls
 powerShell -Command "Write-Host 'Extracting ISO to C:\ISO\Win10... Please wait!' -ForegroundColor Green; exit"  
 %resource_dir%\7z.exe x -y -o"C:\ISO\Win10" "%selectedFile%" > nul
 
@@ -47,10 +48,12 @@ IF EXIST "C:\ISO\Win10\sources\install.wim" (
 )
 
 IF EXIST "C:\ISO\Win10\sources\install.esd" (
-    powerShell -Command "Write-Host 'Exporting' -ForegroundColor Green; exit"
     dism /English /export-image /SourceImageFile:"C:\ISO\Win10\sources\install.esd" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win10\sources\install.wim" /Compress:max /CheckIntegrity
     del "C:\ISO\Win10\sources\install.esd"
 )
+
+cls
+powerShell -Command "Write-Host 'Exporting' -ForegroundColor Green; exit"
 
 rem ##############################################################################
 rem ############################################################################## mount the image and customize

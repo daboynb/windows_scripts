@@ -36,6 +36,7 @@ mkdir "C:\mount\mount"
 rem ##############################################################################
 rem ############################################################################## export wim and set unattend
 rem set iso path
+cls
 powerShell -Command "Write-Host 'Extracting ISO to C:\ISO\Win11... Please wait!' -ForegroundColor Green; exit"  
 %resource_dir%\7z.exe x -y -o"C:\ISO\Win11" "%selectedFile%" > nul
 
@@ -47,10 +48,12 @@ IF EXIST "C:\ISO\Win11\sources\install.wim" (
 )
 
 IF EXIST "C:\ISO\Win11\sources\install.esd" (
-    powerShell -Command "Write-Host 'Exporting' -ForegroundColor Green; exit"
     dism /English /export-image /SourceImageFile:"C:\ISO\Win11\sources\install.esd" /SourceIndex:%index% /DestinationImageFile:"C:\ISO\Win11\sources\install.wim" /Compress:max /CheckIntegrity
     del "C:\ISO\Win11\sources\install.esd"
 )
+
+cls
+powerShell -Command "Write-Host 'Exporting' -ForegroundColor Green; exit"
 
 rem ##############################################################################
 rem ############################################################################## mount the image and customize
@@ -119,6 +122,7 @@ dism /English /mount-image /imagefile:"C:\ISO\Win11\sources\boot.wim" /index:2 /
 timeout 04
 
 rem unmount the image
+cls
 powerShell -Command "Write-Host 'Unmounting the image' -ForegroundColor Green; exit"  
 dism /English /unmount-image /mountdir:"C:\mount\mount" /commit
 
@@ -146,5 +150,6 @@ echo "The edited iso is here %dest_path%"
 echo. 
 copy "%resource_dir%\rufus.exe" "%dest_path%" > NUL
 pause
+explorer.exe "%dest_path%"
 endlocal
 rem ##############################################################################
