@@ -5,7 +5,7 @@ echo "%SYSPART%"
 
 if "%SYSPART%"=="" (
     echo "No Windows installations detected!"
-    echo "Maybe you windows is encrypted?"
+    echo "Maybe you rwindows is encrypted?"
     pause
     exit
 ) else (
@@ -51,6 +51,7 @@ exit
 :DISABLE
 del "%SYSPART%\windows\system32\sticky_run.bat"
 del "%SYSPART%\windows\system32\sticky.bat"
+del "%SYSPART%\windows\system32\sethc.exe"
 move /y "%SYSPART%\windows\system32\sethc.exe.bak" "%SYSPART%\windows\system32\sethc.exe"
 
 rem enable defender
