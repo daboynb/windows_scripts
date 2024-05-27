@@ -107,19 +107,15 @@ if (Test-Path $integratedServicesPath) {
     Stop-Process -Name "MsEdge" -Force -ErrorAction SilentlyContinue | Out-Null
 
     # Uninstall with winget
-    $winget_id = winget uninstall "Microsoft.Edge" --accept-source-agreements --silent | Out-Null
-    $winget_name = winget uninstall --name "Microsoft Edge" --accept-source-agreements --silent | Out-Null
+    winget uninstall "Microsoft.Edge" --accept-source-agreements --silent 
+    winget uninstall --name "Microsoft Edge" --accept-source-agreements --silent 
 
-    # Check if the output contains the error message
-    if ($winget_id -match "Uninstall failed with exit code: 19" -or $winget_name -match "Uninstall failed with exit code: 19") {
-        Write-Host "Edge is now gone!"
-        Start-Sleep 5
-    }
-    else {
-        Write-Host "You have not installed the KB that enables this feature."
-        Write-Host "Please install the latest updates from Windows Update and retry."
-        Start-Sleep 5
-    } 
+    Write-Host "Done."
+    Write-Host "If Edge is still present, that means you have not installed the KB that enables that feature."
+    Write-Host "Please install the latest updates from Windows Update and retry."
+    
+    Start-Sleep 05
+
 }
 else {
     # File does not exist
