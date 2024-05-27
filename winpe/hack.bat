@@ -3,6 +3,15 @@
 FOR %%w IN (C D E F G H I J K L N M O P Q R S T U V W X Y Z) DO IF EXIST %%w:\PerfLogs set SYSPART=%%w:
 echo "%SYSPART%"
 
+if "%SYSPART%"=="" (
+    echo "No Windows installations detected!"
+    echo "Maybe you windows is encrypted?"
+    pause
+    exit
+) else (
+    echo %SYSPART%
+)
+
 :MAINMENU
 SET MENU=
 ECHO WINDOWS LOGIN MANAGER
