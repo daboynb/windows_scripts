@@ -5,7 +5,7 @@ echo "%SYSPART%"
 
 if "%SYSPART%"=="" (
     echo "No Windows installations detected!"
-    echo "Maybe you rwindows is encrypted?"
+    echo "Maybe your windows is encrypted?"
     pause
     exit
 ) else (
