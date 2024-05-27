@@ -246,32 +246,28 @@ $buildButton.Add_Click({
 
     $argumentString = $arguments -join ' '
     
-    # Detect if win 10 or 11
-    if ($is_esd -eq "$mountedDrive\sources\install.wim") {
-        $dism_10_or_11 = dism /Get-WimInfo /WimFile:$mountedDrive\sources\install.wim
+    # Detect if Windows 10 or 11
+    if (Test-Path "$mountedDrive\sources\install.wim") {
+        $dism_10_or_11 = dism /Get-WimInfo /WimFile:"$mountedDrive\sources\install.wim"
+    } else {
+        $dism_10_or_11 = dism /Get-WimInfo /WimFile:"$mountedDrive\sources\install.esd"
     }
-    if ($is_esd -eq "$mountedDrive\sources\install.esd") {
-        $dism_10_or_11 = dism /Get-WimInfo /WimFile:$mountedDrive\sources\install.esd
-    }
-    Start-Sleep 1
+
     Dismount-DiskImage -ImagePath $selectedFile
     
-    if ($dism_10_or_11 -match "Windows 11") {
+    if ($dism_10_or_11 -like "*Windows 11*") {
         Write-Host "This is a Windows 11 image."
         $windowsVersion = "Windows 11"
         Write-Host $windowsVersion
-
         Start-Process -FilePath "powershell.exe" -ArgumentList "-WindowStyle Hidden", "-File", "C:\windows_custom_iso_maker\xml.ps1" -Wait
-    } elseif ($dism_10_or_11 -match "Windows 10") {
+    } elseif ($dism_10_or_11 -like "*Windows 10*") {
         Write-Host "This is a Windows 10 image."
         $windowsVersion = "Windows 10"
         Write-Host $windowsVersion
     } else {
-        Write-Host $windowsVersion
         Write-Host "The image does not seem to contain Windows 10 or Windows 11 information."
-        Start-Sleep 16
     }    
-
+    
     # Launch bat with args
     if ($windowsVersion -eq "Windows 10") {
         Start-Process -FilePath "C:\windows_custom_iso_maker\win10_custom_iso\create.bat" -ArgumentList "$argumentString"  
