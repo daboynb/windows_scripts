@@ -107,8 +107,8 @@ if (Test-Path $integratedServicesPath) {
     Stop-Process -Name "MsEdge" -Force -ErrorAction SilentlyContinue | Out-Null
 
     # Uninstall with winget
-    winget uninstall "Microsoft.Edge" --accept-source-agreements --silent 
-    winget uninstall --name "Microsoft Edge" --accept-source-agreements --silent 
+    winget uninstall "Microsoft.Edge" --accept-source-agreements --silent | Out-Null
+    winget uninstall --name "Microsoft Edge" --accept-source-agreements --silent | Out-Null
 
     Write-Host "Done."
     Write-Host "If Edge is still present, that means you have not installed the KB that enables that feature."
