@@ -113,11 +113,11 @@ if (Test-Path $integratedServicesPath) {
     winget uninstall --name "Microsoft Edge" --accept-source-agreements --silent | Out-Null
 
     # Start the Microsoft Edge process
-    Start-Process "msedge.exe"
+    Start-Process "MsEdge"
     Start-Sleep 03
 
     # Check if Microsoft Edge is running
-    if (Get-Process -Name "msedge") {
+    if (Get-Process -Name "MsEdge") {
         Write-Host "You have not installed the KB that enables that feature."
         Write-Host "Please install the latest updates from Windows Update and retry."
         Start-Sleep 10
