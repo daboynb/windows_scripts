@@ -36,9 +36,9 @@ del /s /q "C:\Users\%username%\Desktop\*.lnk" > nul 2>&1
 rem Disable Edge Bar
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "WebWidgetAllowed" /t REG_DWORD /d 0 /f
 
-rem disable contentdelivery
-powershell -command "$regKeyPath='HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager';$exportedRegFile='exportedRegFile.reg';reg export $regKeyPath $exportedRegFile;((Get-Content $exportedRegFile) -replace '=dword:00000001','=dword:00000000') | Set-Content $exportedRegFile;reg import $exportedRegFile;Remove-Item $exportedRegFile"
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 1 /f
+rem disable contentdelivery and cloudcontent
+powershell -command "$regKeyPath='HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager';$exportedRegFile='ContentDeliveryManager.reg';reg export $regKeyPath $exportedRegFile;((Get-Content $exportedRegFile) -replace '=dword:00000001','=dword:00000000') | Set-Content $exportedRegFile;reg import $exportedRegFile;Remove-Item $exportedRegFile"
+powershell -command "$regKeyPath='HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent';$exportedRegFile='CloudContent.reg';reg export $regKeyPath $exportedRegFile;((Get-Content $exportedRegFile) -replace '=dword:00000001','=dword:00000000') | Set-Content $exportedRegFile;reg import $exportedRegFile;Remove-Item $exportedRegFile"
 
 rem fix indexing was turned off
 sc config wsearch start=auto
