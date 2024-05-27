@@ -5,6 +5,8 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     exit
 }
 
+$ErrorActionPreference = "SilentlyContinue"
+
 # Check if winget is installed
 function Install-WinGet() {
 
@@ -23,7 +25,7 @@ function Install-WinGet() {
             } catch {
                 $attempts++
                 Write-Output "Download failed (attempt $attempts): $($_.Exception.Message)"
-                Start-Sleep -Seconds 2  # Wait for 2 seconds before retrying
+                Start-Sleep -Seconds 2  
             }
         }
         return $false
@@ -104,17 +106,25 @@ if (Test-Path $integratedServicesPath) {
     Set-Acl -Path $integratedServicesPath -AclObject $acl
 
     # Kill edge processes
-    Stop-Process -Name "MsEdge" -Force -ErrorAction SilentlyContinue | Out-Null
+    Stop-Process -Name "MsEdge" -Force | Out-Null
 
     # Uninstall with winget
     winget uninstall "Microsoft.Edge" --accept-source-agreements --silent | Out-Null
     winget uninstall --name "Microsoft Edge" --accept-source-agreements --silent | Out-Null
 
-    Write-Host "Done."
-    Write-Host "If Edge is still present, that means you have not installed the KB that enables that feature."
-    Write-Host "Please install the latest updates from Windows Update and retry."
-    
-    Start-Sleep 05
+    # Start the Microsoft Edge process
+    Start-Process "msedge.exe"
+    Start-Sleep 03
+
+    # Check if Microsoft Edge is running
+    if (Get-Process -Name "msedge") {
+        Write-Host "You have not installed the KB that enables that feature."
+        Write-Host "Please install the latest updates from Windows Update and retry."
+        Start-Sleep 10
+    } else {
+        Write-Host "Microsoft Edge was removed succesfully!"
+        Start-Sleep 10
+    }
 
 }
 else {
