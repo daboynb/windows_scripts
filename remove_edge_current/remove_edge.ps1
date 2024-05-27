@@ -113,7 +113,7 @@ if (Test-Path $integratedServicesPath) {
     winget uninstall --name "Microsoft Edge" --accept-source-agreements --silent | Out-Null
 
     # Start the Microsoft Edge process
-    Start-Process "MsEdge"
+    Start-Process -Name "MsEdge"
     Start-Sleep 03
 
     # Check if Microsoft Edge is running
