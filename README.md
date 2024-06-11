@@ -142,3 +142,6 @@ https://github.com/daboynb/windows_scripts/assets/106079917/636d4df7-2824-4f97-b
 
 # remove_edge.bat
 Run the bat file, you should be able to remove edge, if not, install the latest updates and retry.
+
+# aio_debloater.bat
+Very light debloater to remove windows crap.
