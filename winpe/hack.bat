@@ -3,16 +3,8 @@
 FOR %%w IN (C D E F G H I J K L N M O P Q R S T U V W X Y Z) DO IF EXIST %%w:\PerfLogs set SYSPART=%%w:
 echo "%SYSPART%"
 
-if "%SYSPART%"=="" (
-    echo "No Windows installations detected!"
-    echo "Maybe your windows is encrypted?"
-    pause
-    exit
-) else (
-    echo %SYSPART%
-)
-
 :MAINMENU
+CLS
 SET MENU=
 ECHO WINDOWS LOGIN MANAGER
 echo.
@@ -51,7 +43,6 @@ exit
 :DISABLE
 del "%SYSPART%\windows\system32\sticky_run.bat"
 del "%SYSPART%\windows\system32\sticky.bat"
-del "%SYSPART%\windows\system32\sethc.exe"
 move /y "%SYSPART%\windows\system32\sethc.exe.bak" "%SYSPART%\windows\system32\sethc.exe"
 
 rem enable defender
