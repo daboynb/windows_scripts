@@ -33,6 +33,146 @@ for /f "tokens=2" %%a in ('findstr /C:"NTFS" diskpart_output.txt') do (
     diskpart /s diskpart_assign.txt
 )
 
+rem Run diskpart to get volume information
+echo sel disk 1 > diskpart_commands.txt
+echo list volume >> diskpart_commands.txt
+
+diskpart /s diskpart_commands.txt > diskpart_output.txt
+
+rem Array of allowed drive letters
+set "allowedDriveLetters=P Q R S T U V W"
+
+rem Parse diskpart output to find NTFS volumes and assign random drive letters
+for /f "tokens=2" %%a in ('findstr /C:"NTFS" diskpart_output.txt') do (
+    rem Generate random index
+    set /a "index=!random! %% 8"
+
+    rem Get the drive letter from the array
+    for /f "tokens=1,2* delims= " %%b in ('echo !allowedDriveLetters!') do (
+        set "driveLetter=%%b"
+        set "allowedDriveLetters=%%c %%d %%e %%f %%g %%h %%i"
+    )
+
+    echo Assigning drive letter !driveLetter! to volume %%a
+
+    rem Assign drive letter using diskpart
+    echo select volume %%a > diskpart_assign.txt
+    echo assign letter=!driveLetter! >> diskpart_assign.txt
+    diskpart /s diskpart_assign.txt
+)
+
+rem Run diskpart to get volume information
+echo sel disk 2 > diskpart_commands.txt
+echo list volume >> diskpart_commands.txt
+
+diskpart /s diskpart_commands.txt > diskpart_output.txt
+
+rem Array of allowed drive letters
+set "allowedDriveLetters=P Q R S T U V W"
+
+rem Parse diskpart output to find NTFS volumes and assign random drive letters
+for /f "tokens=2" %%a in ('findstr /C:"NTFS" diskpart_output.txt') do (
+    rem Generate random index
+    set /a "index=!random! %% 8"
+
+    rem Get the drive letter from the array
+    for /f "tokens=1,2* delims= " %%b in ('echo !allowedDriveLetters!') do (
+        set "driveLetter=%%b"
+        set "allowedDriveLetters=%%c %%d %%e %%f %%g %%h %%i"
+    )
+
+    echo Assigning drive letter !driveLetter! to volume %%a
+
+    rem Assign drive letter using diskpart
+    echo select volume %%a > diskpart_assign.txt
+    echo assign letter=!driveLetter! >> diskpart_assign.txt
+    diskpart /s diskpart_assign.txt
+)
+
+rem Run diskpart to get volume information
+echo sel disk 3 > diskpart_commands.txt
+echo list volume >> diskpart_commands.txt
+
+diskpart /s diskpart_commands.txt > diskpart_output.txt
+
+rem Array of allowed drive letters
+set "allowedDriveLetters=P Q R S T U V W"
+
+rem Parse diskpart output to find NTFS volumes and assign random drive letters
+for /f "tokens=2" %%a in ('findstr /C:"NTFS" diskpart_output.txt') do (
+    rem Generate random index
+    set /a "index=!random! %% 8"
+
+    rem Get the drive letter from the array
+    for /f "tokens=1,2* delims= " %%b in ('echo !allowedDriveLetters!') do (
+        set "driveLetter=%%b"
+        set "allowedDriveLetters=%%c %%d %%e %%f %%g %%h %%i"
+    )
+
+    echo Assigning drive letter !driveLetter! to volume %%a
+
+    rem Assign drive letter using diskpart
+    echo select volume %%a > diskpart_assign.txt
+    echo assign letter=!driveLetter! >> diskpart_assign.txt
+    diskpart /s diskpart_assign.txt
+)
+
+rem Run diskpart to get volume information
+echo sel disk 4 > diskpart_commands.txt
+echo list volume >> diskpart_commands.txt
+
+diskpart /s diskpart_commands.txt > diskpart_output.txt
+
+rem Array of allowed drive letters
+set "allowedDriveLetters=P Q R S T U V W"
+
+rem Parse diskpart output to find NTFS volumes and assign random drive letters
+for /f "tokens=2" %%a in ('findstr /C:"NTFS" diskpart_output.txt') do (
+    rem Generate random index
+    set /a "index=!random! %% 8"
+
+    rem Get the drive letter from the array
+    for /f "tokens=1,2* delims= " %%b in ('echo !allowedDriveLetters!') do (
+        set "driveLetter=%%b"
+        set "allowedDriveLetters=%%c %%d %%e %%f %%g %%h %%i"
+    )
+
+    echo Assigning drive letter !driveLetter! to volume %%a
+
+    rem Assign drive letter using diskpart
+    echo select volume %%a > diskpart_assign.txt
+    echo assign letter=!driveLetter! >> diskpart_assign.txt
+    diskpart /s diskpart_assign.txt
+)
+
+rem Run diskpart to get volume information
+echo sel disk 5 > diskpart_commands.txt
+echo list volume >> diskpart_commands.txt
+
+diskpart /s diskpart_commands.txt > diskpart_output.txt
+
+rem Array of allowed drive letters
+set "allowedDriveLetters=P Q R S T U V W"
+
+rem Parse diskpart output to find NTFS volumes and assign random drive letters
+for /f "tokens=2" %%a in ('findstr /C:"NTFS" diskpart_output.txt') do (
+    rem Generate random index
+    set /a "index=!random! %% 8"
+
+    rem Get the drive letter from the array
+    for /f "tokens=1,2* delims= " %%b in ('echo !allowedDriveLetters!') do (
+        set "driveLetter=%%b"
+        set "allowedDriveLetters=%%c %%d %%e %%f %%g %%h %%i"
+    )
+
+    echo Assigning drive letter !driveLetter! to volume %%a
+
+    rem Assign drive letter using diskpart
+    echo select volume %%a > diskpart_assign.txt
+    echo assign letter=!driveLetter! >> diskpart_assign.txt
+    diskpart /s diskpart_assign.txt
+)
+
 FOR %%w IN (P Q R S T U V W ) DO IF EXIST %%w:\PerfLogs set SYSPART=%%w:
 echo "%SYSPART%"
 

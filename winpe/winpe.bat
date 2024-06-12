@@ -14,7 +14,6 @@ rem Set the path of *.bat
 set "HACK_BAT=%~dp0hack.bat"
 set "sticky_BAT=%~dp0sticky.bat"
 set "sticky_run_BAT=%~dp0sticky_run.bat"
-set "detect_bat=%~dp0detect.bat"
 set "findstr=%~dp0findstr.exe"
 
 rem set adk path
@@ -39,7 +38,6 @@ rem copy files
 copy "%HACK_BAT%" "C:\mount\Windows\System32"
 copy "%sticky_BAT%" "C:\mount\Windows\System32"
 copy "%sticky_run_BAT%" "C:\mount\Windows\System32"
-copy "%detect_bat%" "C:\mount\Windows\System32"
 copy "%findstr%" "C:\mount\Windows\System32"
 
 rem unmount the image
