@@ -113,7 +113,7 @@ Add offline users since ms removed this option.
 
 Use the linux user agent to download iso from MS.
 
-# winpe.bat
+# winpe.bat (currenlty not working, I'm investigating)
 
 Create a winpe iso that bypass the user account password.
 

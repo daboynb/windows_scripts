@@ -1,10 +1,51 @@
-@ echo off
+@echo off
+setlocal EnableDelayedExpansion
 
-FOR %%w IN (C D E F G H I J K L N M O P Q R S T U V W X Y Z) DO IF EXIST %%w:\PerfLogs set SYSPART=%%w:
+rem Ask for admin privileges
+set "params=%*"
+cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive%  1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
+
+rem Run diskpart to get volume information
+echo sel disk 0 > diskpart_commands.txt
+echo list volume >> diskpart_commands.txt
+
+diskpart /s diskpart_commands.txt > diskpart_output.txt
+
+rem Array of allowed drive letters
+set "allowedDriveLetters=P Q R S T U V W"
+
+rem Parse diskpart output to find NTFS volumes and assign random drive letters
+for /f "tokens=2" %%a in ('findstr /C:"NTFS" diskpart_output.txt') do (
+    rem Generate random index
+    set /a "index=!random! %% 8"
+
+    rem Get the drive letter from the array
+    for /f "tokens=1,2* delims= " %%b in ('echo !allowedDriveLetters!') do (
+        set "driveLetter=%%b"
+        set "allowedDriveLetters=%%c %%d %%e %%f %%g %%h %%i"
+    )
+
+    echo Assigning drive letter !driveLetter! to volume %%a
+
+    rem Assign drive letter using diskpart
+    echo select volume %%a > diskpart_assign.txt
+    echo assign letter=!driveLetter! >> diskpart_assign.txt
+    diskpart /s diskpart_assign.txt
+)
+
+FOR %%w IN (P Q R S T U V W ) DO IF EXIST %%w:\PerfLogs set SYSPART=%%w:
 echo "%SYSPART%"
 
+if "%SYSPART%"=="" (
+    echo "No Windows installations detected!"
+    echo "Maybe your windows is encrypted?"
+    pause
+    exit
+) else (
+    echo %SYSPART%
+)
+
 :MAINMENU
-CLS
 SET MENU=
 ECHO WINDOWS LOGIN MANAGER
 echo.
@@ -43,6 +84,7 @@ exit
 :DISABLE
 del "%SYSPART%\windows\system32\sticky_run.bat"
 del "%SYSPART%\windows\system32\sticky.bat"
+del "%SYSPART%\windows\system32\sethc.exe"
 move /y "%SYSPART%\windows\system32\sethc.exe.bak" "%SYSPART%\windows\system32\sethc.exe"
 
 rem enable defender
@@ -62,3 +104,5 @@ reg unload "HKLM\temp-hive"
 echo "Completed"
 pause
 exit
+
+endlocal
