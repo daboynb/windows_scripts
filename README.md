@@ -113,8 +113,7 @@ Add offline users since ms removed this option.
 
 Use the linux user agent to download iso from MS.
 
-# winpe.bat (currenlty not working, I'm investigating)
-
+# winpe.bat 
 Create a winpe iso that bypass the user account password.
 
 How to build the ISO?
@@ -131,10 +130,6 @@ How to use the ISO?
       - select "1", it will reboot
       - press SHIFT 5 times at the login screen
       - type "sticky_run.bat"
-
-Iso download :
-
-      - https://t.me/WindowsItalyISO/146
       
 Video tutorial :
 

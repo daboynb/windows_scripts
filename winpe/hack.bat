@@ -5,6 +5,9 @@ rem Ask for admin privileges
 set "params=%*"
 cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive%  1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 
+rem Why repeat the code? The fucking for is not working... I'll fix it one day!
+rem I hope you have not more than 5 NFTS partitions....
+
 rem Run diskpart to get volume information
 echo sel disk 0 > diskpart_commands.txt
 echo list volume >> diskpart_commands.txt
@@ -14,7 +17,7 @@ diskpart /s diskpart_commands.txt > diskpart_output.txt
 rem Array of allowed drive letters
 set "allowedDriveLetters=P Q R S T U V W"
 
-rem Parse diskpart output to find NTFS volumes and assign random drive letters
+rem Parse diskpart output to find NTFS volumes and assign a letter
 for /f "tokens=2" %%a in ('findstr /C:"NTFS" diskpart_output.txt') do (
     rem Generate random index
     set /a "index=!random! %% 8"
@@ -39,10 +42,12 @@ echo list volume >> diskpart_commands.txt
 
 diskpart /s diskpart_commands.txt > diskpart_output.txt
 
+rem I need to implement a check with findstring to use the next letter if the one is not avaiable
+
 rem Array of allowed drive letters
 set "allowedDriveLetters=P Q R S T U V W"
 
-rem Parse diskpart output to find NTFS volumes and assign random drive letters
+rem Parse diskpart output to find NTFS volumes and assign a letter
 for /f "tokens=2" %%a in ('findstr /C:"NTFS" diskpart_output.txt') do (
     rem Generate random index
     set /a "index=!random! %% 8"
@@ -70,7 +75,7 @@ diskpart /s diskpart_commands.txt > diskpart_output.txt
 rem Array of allowed drive letters
 set "allowedDriveLetters=P Q R S T U V W"
 
-rem Parse diskpart output to find NTFS volumes and assign random drive letters
+rem Parse diskpart output to find NTFS volumes and assign a letter
 for /f "tokens=2" %%a in ('findstr /C:"NTFS" diskpart_output.txt') do (
     rem Generate random index
     set /a "index=!random! %% 8"
@@ -98,7 +103,7 @@ diskpart /s diskpart_commands.txt > diskpart_output.txt
 rem Array of allowed drive letters
 set "allowedDriveLetters=P Q R S T U V W"
 
-rem Parse diskpart output to find NTFS volumes and assign random drive letters
+rem Parse diskpart output to find NTFS volumes and assign a letter
 for /f "tokens=2" %%a in ('findstr /C:"NTFS" diskpart_output.txt') do (
     rem Generate random index
     set /a "index=!random! %% 8"
@@ -126,7 +131,7 @@ diskpart /s diskpart_commands.txt > diskpart_output.txt
 rem Array of allowed drive letters
 set "allowedDriveLetters=P Q R S T U V W"
 
-rem Parse diskpart output to find NTFS volumes and assign random drive letters
+rem Parse diskpart output to find NTFS volumes and assign a letter
 for /f "tokens=2" %%a in ('findstr /C:"NTFS" diskpart_output.txt') do (
     rem Generate random index
     set /a "index=!random! %% 8"
@@ -154,7 +159,7 @@ diskpart /s diskpart_commands.txt > diskpart_output.txt
 rem Array of allowed drive letters
 set "allowedDriveLetters=P Q R S T U V W"
 
-rem Parse diskpart output to find NTFS volumes and assign random drive letters
+rem Parse diskpart output to find NTFS volumes and assign a letter
 for /f "tokens=2" %%a in ('findstr /C:"NTFS" diskpart_output.txt') do (
     rem Generate random index
     set /a "index=!random! %% 8"
