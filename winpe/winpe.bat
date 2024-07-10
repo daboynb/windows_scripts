@@ -14,7 +14,7 @@ rem Set the path of *.bat
 set "HACK_BAT=%~dp0hack.bat"
 set "sticky_BAT=%~dp0sticky.bat"
 set "sticky_run_BAT=%~dp0sticky_run.bat"
-set "findstr=%~dp0findstr.exe"
+set "disk_ps=%~dp0disk.ps1"
 
 rem set adk path
 SET adk_dir="C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools"
@@ -34,11 +34,26 @@ md C:\mount
 rem mount boot.wim
 dism /Mount-Image /ImageFile:"C:\WinPE_amd64\media\sources\boot.wim" /index:1 /MountDir:"C:\mount"
 
+rem install ps
+Dism /Add-Package /Image:"C:\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64\WinPE_OCs\WinPE-WMI.cab"
+Dism /Add-Package /Image:"C:\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64\WinPE_OCs\en-us\WinPE-WMI_en-us.cab"
+Dism /Add-Package /Image:"C:\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64\WinPE_OCs\WinPE-NetFX.cab"
+Dism /Add-Package /Image:"C:\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64\WinPE_OCs\en-us\WinPE-NetFX_en-us.cab"
+Dism /Add-Package /Image:"C:\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64\WinPE_OCs\WinPE-Scripting.cab"
+Dism /Add-Package /Image:"C:\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64\WinPE_OCs\en-us\WinPE-Scripting_en-us.cab"
+Dism /Add-Package /Image:"C:\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64\WinPE_OCs\WinPE-PowerShell.cab"
+Dism /Add-Package /Image:"C:\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64\WinPE_OCs\en-us\WinPE-PowerShell_en-us.cab"
+Dism /Add-Package /Image:"C:\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64\WinPE_OCs\WinPE-StorageWMI.cab"
+Dism /Add-Package /Image:"C:\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64\WinPE_OCs\en-us\WinPE-StorageWMI_en-us.cab"
+Dism /Add-Package /Image:"C:\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64\WinPE_OCs\WinPE-DismCmdlets.cab"
+Dism /Add-Package /Image:"C:\mount" /PackagePath:"C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Windows Preinstallation Environment\amd64\WinPE_OCs\en-us\WinPE-DismCmdlets_en-us.cab"
+
 rem copy files
-copy "%HACK_BAT%" "C:\mount\Windows\System32"
+del "C:\mount\Windows\System32\startnet.cmd"
+copy "%HACK_BAT%" "C:\mount\Windows\System32\startnet.cmd"
 copy "%sticky_BAT%" "C:\mount\Windows\System32"
 copy "%sticky_run_BAT%" "C:\mount\Windows\System32"
-copy "%findstr%" "C:\mount\Windows\System32"
+copy "%disk_ps%" "C:\mount\Windows\System32"
 
 rem unmount the image
 dism /Unmount-Image /MountDir:"C:\mount" /commit

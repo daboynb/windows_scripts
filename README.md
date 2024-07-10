@@ -125,16 +125,17 @@ How to build the ISO?
 
 How to use the ISO?
 
-      - boot the ISO
-      - type "hack"
-      - select "1", it will reboot
-      - press SHIFT 5 times at the login screen
-      - type "sticky_run.bat"
+      - Boot the ISO from USB
+      - Follow the guided procedure
+      - The PC will restart upon completion
+      - At login, press the "SHIFT" key 5 times
+      - A CMD window will open
+      - Type "sticky_run.bat"
+      - Follow the guided procedure to change the password or create a new user
+
+Pre-built ISO :
+      https://t.me/WindowsItalyISO/151
       
-Video tutorial :
-
-https://github.com/daboynb/windows_scripts/assets/106079917/636d4df7-2824-4f97-b7b7-df0c9ad96fc9
-
 # remove_edge.bat
 Run the bat file, you should be able to remove edge, if not, install the latest updates and retry.
 
