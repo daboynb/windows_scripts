@@ -2,6 +2,9 @@ If you wanna help me
 
 <a href="https://www.buymeacoffee.com/daboynb" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
+# UPDATES :
+On august 2025 the kaspersky trial reset stopped working sadly, I’ll try to find a new way and will update you if I succeed.
+
 # windows_custom_iso_maker 
 
 NOTICE, the new edge removing method works starting in Windows 10 Build 19045.3757 and Windows 11 Build 22621.2787. On earlier version you won't be able to uninstall edge .
