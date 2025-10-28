@@ -1,4 +1,10 @@
-If you wanna help me
+<div style="border: 5px solid #f39c12; background-color: #f9e79f; color: #c0392b; padding: 40px; text-align: center;">
+  <h3 style="color: #d35400; font-size: 72px;">⚠️ Kaspersky trial reset ⚠️</h3>
+  <h3 style="font-size: 64px;">After some research, I found that the reset works correctly, it provides the option to activate a trial. However, it always uses the same key (even if it was deleted beforehand), and the key immediately shows as expired.
+It seems Kaspersky has changed its activation and sales model from “try for 30 days, then buy” to “buy first, then try for 30 days.”</h3>
+</div>
+
+# If you wanna help me
 
 <a href="https://www.buymeacoffee.com/daboynb" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
