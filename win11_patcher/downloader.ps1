@@ -1,6 +1,6 @@
 #################################### run as admin
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "irm -Uri https://raw.githubusercontent.com/daboynb/windows_scripts/main/win11_patcher/downloader.ps1 | iex"
+    Start-Process -Verb runas -FilePath powershell.exe -ArgumentList "irm -Uri https://raw.githubusercontent.com/daboynb/windows_scripts/old_branch/win11_patcher/downloader.ps1 | iex"
     break
 }
 ####################################
@@ -28,7 +28,7 @@ if (Test-Path "C:\win11_patcher") {
 
 # Download the script from GitHub
 $wc = New-Object net.webclient
-$msu_url = 'https://codeload.github.com/daboynb/windows_scripts/zip/refs/heads/main'
+$msu_url = 'https://codeload.github.com/daboynb/windows_scripts/zip/refs/heads/old_branch'
 $local_msu_url = "C:\windows_script_daboynb.zip"
 $wc.Downloadfile($msu_url, $local_msu_url)
 
@@ -36,10 +36,10 @@ $wc.Downloadfile($msu_url, $local_msu_url)
 Expand-Archive -Path "windows_script_daboynb.zip" -DestinationPath "." -Force
 
 # Move the "win11_patcher" folder to the current directory
-Move-Item -Path "windows_scripts-main\win11_patcher" -Destination "win11_patcher" -Force
+Move-Item -Path "windows_scripts-old_branch\win11_patcher" -Destination "win11_patcher" -Force
 
 # Remove the "windows_scripts-main" directory 
-Remove-Item -Path "windows_scripts-main" -Recurse -Force
+Remove-Item -Path "windows_scripts-old_branch" -Recurse -Force
 
 # Remove the "windows_script_daboynb.zip" file 
 Remove-Item -Path "windows_script_daboynb.zip" -Force

@@ -131,15 +131,15 @@ if ($pingResult) {
     # Define files to download
     $filesToDownload = @(
         # Powerrun
-        @{ 'sourceUrl' = 'https://github.com/daboynb/windows_scripts/raw/main/windows_defender_manager/PowerRun.exe'; 'destinationPath' = 'C:\Windows\scripts\PowerRun.exe'; 'message' = "Downloading PowerRun..." },
+        @{ 'sourceUrl' = 'https://github.com/daboynb/windows_scripts/raw/old_branch/windows_defender_manager/PowerRun.exe'; 'destinationPath' = 'C:\Windows\scripts\PowerRun.exe'; 'message' = "Downloading PowerRun..." },
         # Windows defender
-        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_defender_manager/disable_defender.bat'; 'destinationPath' = 'C:\Windows\scripts\disable_defender.bat'; 'message' = "Downloading disable_defender.bat..." },
-        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_defender_manager/enable_defender.bat'; 'destinationPath' = 'C:\Windows\scripts\enable_defender.bat'; 'message' = "Downloading enable_defender.bat..." },
+        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/old_branch/windows_defender_manager/disable_defender.bat'; 'destinationPath' = 'C:\Windows\scripts\disable_defender.bat'; 'message' = "Downloading disable_defender.bat..." },
+        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/old_branch/windows_defender_manager/enable_defender.bat'; 'destinationPath' = 'C:\Windows\scripts\enable_defender.bat'; 'message' = "Downloading enable_defender.bat..." },
         # Microsoft Edge
-        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/remove_edge.bat'; 'destinationPath' = 'C:\Windows\scripts\remove_edge.bat'; 'message' = "Downloading remove_edge.bat..." },
-        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/remove_edge.ps1'; 'destinationPath' = 'C:\Windows\scripts\remove_edge.ps1'; 'message' = "Downloading remove_edge.ps1..." },
-        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/reinstall_edge.bat'; 'destinationPath' = 'C:\Windows\scripts\reinstall_edge.bat'; 'message' = "Downloading reinstall_edge.bat..." },
-        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/remove_edge_current/reinstall_edge.ps1'; 'destinationPath' = 'C:\Windows\scripts\reinstall_edge.ps1'; 'message' = "Downloading reinstall_edge.ps1..." }
+        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/old_branch/remove_edge_current/remove_edge.bat'; 'destinationPath' = 'C:\Windows\scripts\remove_edge.bat'; 'message' = "Downloading remove_edge.bat..." },
+        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/old_branch/remove_edge_current/remove_edge.ps1'; 'destinationPath' = 'C:\Windows\scripts\remove_edge.ps1'; 'message' = "Downloading remove_edge.ps1..." },
+        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/old_branch/remove_edge_current/reinstall_edge.bat'; 'destinationPath' = 'C:\Windows\scripts\reinstall_edge.bat'; 'message' = "Downloading reinstall_edge.bat..." },
+        @{ 'sourceUrl' = 'https://raw.githubusercontent.com/daboynb/windows_scripts/old_branch/remove_edge_current/reinstall_edge.ps1'; 'destinationPath' = 'C:\Windows\scripts\reinstall_edge.ps1'; 'message' = "Downloading reinstall_edge.ps1..." }
     )
 
     # Download files

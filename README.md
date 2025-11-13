@@ -31,7 +31,7 @@ This script creates a custom ISO's of Windows 10 and 11 with the following featu
 
 How to use?
 
-       irm -Uri "https://raw.githubusercontent.com/daboynb/windows_scripts/main/windows_custom_iso_maker/downloader.ps1" | iex
+       irm -Uri "https://raw.githubusercontent.com/daboynb/windows_scripts/old_branch/windows_custom_iso_maker/downloader.ps1" | iex
        
 ![Capture](https://github.com/daboynb/windows_scripts/assets/106079917/6ecd99db-ffbc-4fa3-8792-5f413dc7807b)
 
@@ -40,7 +40,7 @@ Patch the win 11 image to bypass requirements and oobe leaving the system image 
 
 How to use?
 
-       irm -Uri "https://raw.githubusercontent.com/daboynb/windows_scripts/main/win11_patcher/downloader.ps1" | iex
+       irm -Uri "https://raw.githubusercontent.com/daboynb/windows_scripts/old_branch/win11_patcher/downloader.ps1" | iex
 
 # Repo_downloader.bat
 Download all the stuff from this repo, with a single click!

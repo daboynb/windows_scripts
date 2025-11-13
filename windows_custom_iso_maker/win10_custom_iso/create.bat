@@ -84,8 +84,8 @@ rem copy unpin_start_tiles.ps1
 copy "%resource_dir%\unpin_start_tiles.ps1" "C:\mount\mount\Windows\scripts"
 
 rem Aio toggler
-powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/aio_toggler/aio.bat' -OutFile 'C:\mount\mount\Windows\scripts\aio.bat'"
-powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/main/aio_toggler/aio.ps1' -OutFile 'C:\mount\mount\Windows\scripts\aio.ps1'"
+powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/old_branch/aio_toggler/aio.bat' -OutFile 'C:\mount\mount\Windows\scripts\aio.bat'"
+powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/old_branch/aio_toggler/aio.ps1' -OutFile 'C:\mount\mount\Windows\scripts\aio.ps1'"
 
 rem Copy start.ps1
 copy "%resource_dir%\start.ps1" "C:\mount\mount\Windows\scripts"
