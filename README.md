@@ -1,8 +1,8 @@
-<div style="border: 5px solid #f39c12; background-color: #f9e79f; color: #c0392b; padding: 40px; text-align: center;">
-  <h3 style="color: #d35400; font-size: 72px;">⚠️ Kaspersky trial reset ⚠️</h3>
+<h3>⚠️ Kaspersky trial reset ⚠️</h3>
 After some research, I found that the reset works correctly, it provides the option to activate a trial. However, it always uses the same key (even if it was deleted beforehand), and the key immediately shows as expired.
-It seems Kaspersky has changed its activation and sales model from “try for 30 days, then buy” to “buy first, then try for 30 days.”</h3>
-</div>
+It seems Kaspersky has changed its activation and sales model from “try for 30 days, then buy” to “buy first, then try for 30 days.
+So I removed the trial reset from the repository since it doesn’t work anymore.
+
 
 # If you wanna help me
 
