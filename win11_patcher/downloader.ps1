@@ -38,7 +38,7 @@ Expand-Archive -Path "windows_script_daboynb.zip" -DestinationPath "." -Force
 # Move the "win11_patcher" folder to the current directory
 Move-Item -Path "windows_scripts-old_branch\win11_patcher" -Destination "win11_patcher" -Force
 
-# Remove the "windows_scripts-main" directory 
+# Remove the "windows_scripts-old_branch" directory 
 Remove-Item -Path "windows_scripts-old_branch" -Recurse -Force
 
 # Remove the "windows_script_daboynb.zip" file 

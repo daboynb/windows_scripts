@@ -38,7 +38,7 @@ Expand-Archive -Path "windows_script_daboynb.zip" -DestinationPath "." -Force
 # Move the "windows_custom_iso_maker" folder to the current directory
 Move-Item -Path "windows_scripts-old_branch\windows_custom_iso_maker" -Destination "windows_custom_iso_maker" -Force
 
-# Remove the "windows_scripts-main" directory 
+# Remove the "windows_scripts-old_branch" directory 
 Remove-Item -Path "windows_scripts-old_branch" -Recurse -Force
 
 # Remove the "windows_script_daboynb.zip" file 
