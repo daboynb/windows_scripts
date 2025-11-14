@@ -1,0 +1,59 @@
+Windows Registry Editor Version 5.00
+
+; Disable Bing web results in Start/Search UI
+[HKCU\Software\Microsoft\Windows\CurrentVersion\Search]
+"BingSearchEnabled"=dword:00000000
+
+; Windows 11 taskbar and Explorer UI tweaks
+; HideFileExt=0 -> shows file extensions in File Explorer
+; SearchboxTaskbarMode=0 -> hides taskbar search UI (0 hidden, 1 icon, 2 box)
+; TaskbarDa=0 -> disables Widgets (taskbar Dashboard)
+; ShowSyncProviderNotifications=0 -> suppresses OneDrive/Sync provider ads and tips in Explorer
+; Start_IrisRecommendations=0 -> disables Start menu recommended/suggested content
+[HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"HideFileExt"=dword:00000000
+"SearchboxTaskbarMode"=dword:00000000
+"TaskbarDa"=dword:00000000
+"ShowSyncProviderNotifications"=dword:00000000
+"Start_IrisRecommendations"=dword:00000000
+
+; Disable Microsoft Edge Web Widget on the desktop
+; WebWidgetAllowed=0 -> prevents the Edge Web Widget from running/appearing
+[HKLM\SOFTWARE\Policies\Microsoft\Edge]
+"WebWidgetAllowed"=dword:00000000
+
+; Disable online tips/suggestions across the UI
+; AllowOnlineTips=0 -> turns off Microsoft online help/tips delivery
+[HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+"AllowOnlineTips"=dword:00000000
+
+; Hide Teams Chat icon on the taskbar
+; ChatIcon=3 -> disables/hides the Chat icon
+[HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Chat]
+"ChatIcon"=dword:00000003
+
+; Suppress unsupported hardware warning notifications
+; SV1=0, SV2=0 -> hides CPU/TPM unsupported messages in UI
+[HKCU\Control Panel\UnsupportedHardwareNotificationCache]
+"SV1"=dword:00000000
+"SV2"=dword:00000000
+
+; Allow Windows 11 upgrade/install on unsupported TPM/CPU
+; AllowUpgradesWithUnsupportedTPMOrCPU=1 -> bypass hardware checks
+[HKLM\SYSTEM\Setup\MoSetup]
+"AllowUpgradesWithUnsupportedTPMOrCPU"=dword:00000001
+
+; Restore classic context menu (Windows 11)
+; @="" -> forces Win10-style classic context menu by blanking InprocServer32
+[HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32]
+@=""
+
+; Disable Connected User Experiences and Telemetry service
+; Start=4 -> service disabled (DiagTrack)
+[HKLM\SYSTEM\CurrentControlSet\Services\DiagTrack]
+"Start"=dword:00000004
+
+; Disable WAP Push/Device Management service used by telemetry/push
+; Start=4 -> service disabled (dmwappushservice)
+[HKLM\SYSTEM\CurrentControlSet\Services\dmwappushservice]
+"Start"=dword:00000004

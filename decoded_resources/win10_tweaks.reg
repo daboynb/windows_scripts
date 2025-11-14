@@ -1,0 +1,50 @@
+Windows Registry Editor Version 5.00
+
+; Disable Bing web results and taskbar search UI
+; BingSearchEnabled=0 -> disables online Bing integration in Start/Search
+; SearchboxTaskbarMode=0 -> hides taskbar search (0 hidden, 1 icon, 2 box)
+[HKCU\Software\Microsoft\Windows\CurrentVersion\Search]
+"BingSearchEnabled"=dword:00000000
+"SearchboxTaskbarMode"=dword:00000000
+
+; Show file extensions and hide Task View button on taskbar
+; HideFileExt=0 -> shows file extensions in File Explorer
+; ShowTaskViewButton=0 -> removes the Task View button from taskbar
+[HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"HideFileExt"=dword:00000000
+"ShowTaskViewButton"=dword:00000000
+
+; Disable Microsoft Edge Web Widget on the desktop
+; WebWidgetAllowed=0 -> prevents the Edge Web Widget from running/appearing
+[HKLM\SOFTWARE\Policies\Microsoft\Edge]
+"WebWidgetAllowed"=dword:00000000
+
+; Hide Meet Now icon for the current user
+; HideSCAMeetNow=1 -> hides the Meet Now (Skype) taskbar icon
+[HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+"HideSCAMeetNow"=dword:00000001
+
+; Hide Meet Now icon system-wide
+; HideSCAMeetNow=1 -> hides the Meet Now (Skype) taskbar icon for all users
+[HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+"HideSCAMeetNow"=dword:00000001
+
+; Turn off News and Interests (Windows Feeds)
+; EnableFeeds=0 -> disables the Feeds feature and removes associated UI
+[HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds]
+"EnableFeeds"=dword:00000000
+
+; Hide News and Interests taskbar entry for current user
+; ShellFeedsTaskbarViewMode=2 -> disabled (0 icon+text, 1 icon only, 2 off)
+[HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Feeds]
+"ShellFeedsTaskbarViewMode"=dword:00000002
+
+; Disable Connected User Experiences and Telemetry service
+; Start=4 -> service disabled (DiagTrack)
+[HKLM\SYSTEM\CurrentControlSet\Services\DiagTrack]
+"Start"=dword:00000004
+
+; Disable WAP Push/Device Management service used by telemetry/push
+; Start=4 -> service disabled (dmwappushservice)
+[HKLM\SYSTEM\CurrentControlSet\Services\dmwappushservice]
+"Start"=dword:00000004

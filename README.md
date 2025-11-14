@@ -12,6 +12,9 @@ So I removed the trial reset from the repository since it doesn’t work anymore
 On august 2025 the kaspersky trial reset stopped working sadly, I’ll try to find a new way and will update you if I succeed.
 
 # utilities_gui.ps1
+How to use?
+            powershell -NoProfile -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/refs/heads/main/utilities/utilities_gui.ps1' -OutFile $env:TEMP\utilities_gui.ps1; Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile','-ExecutionPolicy Bypass','-File','$env:TEMP\utilities_gui.ps1'"
+
 <img width="707" height="532" alt="gui" src="https://github.com/user-attachments/assets/b2ca9f1d-3088-4de9-b7a0-1b6e5d521484" />
 
 # winpe.bat 
@@ -36,3 +39,10 @@ How to use the ISO?
 
 Pre-built ISO :
       https://t.me/WindowsItalyISO/151
+
+External tools:
+Note: The following third‑party tools are bundled in this repository only for convenience. They remain owned and maintained by their respective authors and are distributed under their own licenses.
+- PS2EXE — License: Microsoft Public License (Ms‑PL) — Developer: Markus Scholtes (original by Ingo Karstein) — converts PowerShell `.ps1` scripts to `.exe`
+- 7‑Zip — License: GNU LGPL (with unRAR restriction for parts) — Developer: Igor Pavlov — extracts archives/ISOs
+- PowerRun — License: Freeware (Sordum EULA) — Developer: Sordum — edits protected registry keys with elevated privileges
+- oscdimg — License: Microsoft Software License Terms (Windows ADK) — Developer: Microsoft — creates ISO images
