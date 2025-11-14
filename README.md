@@ -13,7 +13,9 @@ On august 2025 the kaspersky trial reset stopped working sadly, I’ll try to fi
 
 # utilities_gui.ps1
 How to use?
-            powershell -NoProfile -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/refs/heads/main/utilities/utilities_gui.ps1' -OutFile $env:TEMP\utilities_gui.ps1; Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile','-ExecutionPolicy Bypass','-File','$env:TEMP\utilities_gui.ps1'"
+```powershell
+powershell -NoProfile -Command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/daboynb/windows_scripts/refs/heads/main/utilities/utilities_gui.ps1' -OutFile $env:TEMP\utilities_gui.ps1; Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile','-ExecutionPolicy','Bypass','-File','$env:TEMP\utilities_gui.ps1'"
+```
 
 <img width="707" height="532" alt="gui" src="https://github.com/user-attachments/assets/b2ca9f1d-3088-4de9-b7a0-1b6e5d521484" />
 
