@@ -91,16 +91,25 @@ $btnAdb.BackColor = [System.Drawing.Color]::FromArgb(0,120,212)
 $btnAdb.ForeColor = [System.Drawing.Color]::White
 $btnAdb.Add_Click({
     $content = @'
-try {
-    $ProgressPreference = 'SilentlyContinue'
-    Invoke-WebRequest "https://dl.google.com/android/repository/platform-tools-latest-windows.zip" -OutFile "C:\Program Files\platform-tools.zip" | Out-Null
-    Expand-Archive -Path "C:\Program Files\platform-tools.zip" -DestinationPath "C:\Program Files" -Force | Out-Null
-    Remove-Item -Path "C:\Program Files\platform-tools.zip" -Force
-    & cmd.exe /c setx PATH "$env:PATH;C:\Program Files\platform-tools"
-    Write-Host "ADB and Fastboot installed"
-} catch {
-    Write-Host "ADB/Fastboot installation failed"
-}
+ # begin error-handled block
+ try {
+ # suppress progress output for cleaner logs
+     $ProgressPreference = 'SilentlyContinue'
+ # download platform-tools ZIP
+     Invoke-WebRequest "https://dl.google.com/android/repository/platform-tools-latest-windows.zip" -OutFile "C:\Program Files\platform-tools.zip" | Out-Null
+ # extract ZIP to Program Files
+     Expand-Archive -Path "C:\Program Files\platform-tools.zip" -DestinationPath "C:\Program Files" -Force | Out-Null
+ # delete ZIP after extraction
+     Remove-Item -Path "C:\Program Files\platform-tools.zip" -Force
+ # append platform-tools to PATH
+     & cmd.exe /c setx PATH "$env:PATH;C:\Program Files\platform-tools"
+ # success message
+     Write-Host "ADB and Fastboot installed"
+ # handle any exception
+ } catch {
+ # failure message
+     Write-Host "ADB/Fastboot installation failed"
+ }
 '@
     Invoke-Expression $content
 })
@@ -122,18 +131,29 @@ $btnStore.BackColor = [System.Drawing.Color]::FromArgb(0,120,212)
 $btnStore.ForeColor = [System.Drawing.Color]::White
 $btnStore.Add_Click({
     $content = @'
-try {
-    $ProgressPreference = 'SilentlyContinue'
-    Write-Host "Starting Microsoft Store repair/reset..."
-    Write-Host "Note: It may take up to 5 minutes before Store appears."
-    & WSReset.exe -i
-    Start-Sleep -Seconds 20
-    & WSReset.exe -i
-    Start-Sleep -Seconds 4
-    Write-Host "Repair started. Store may take up to 5 minutes to appear"
-} catch {
-    Write-Host "Microsoft Store repair failed"
-}
+ # begin error-handled block
+ try {
+ # suppress progress output
+     $ProgressPreference = 'SilentlyContinue'
+ # log start
+     Write-Host "Starting Microsoft Store repair/reset..."
+ # user notice
+     Write-Host "Note: It may take up to 5 minutes before Store appears."
+ # reset Microsoft Store cache
+     & WSReset.exe -i
+ # wait to allow operation to progress
+     Start-Sleep -Seconds 20
+ # run reset a second time
+     & WSReset.exe -i
+ # short delay
+     Start-Sleep -Seconds 4
+ # final message
+     Write-Host "Repair started. Store may take up to 5 minutes to appear"
+ # handle any exception
+ } catch {
+ # failure message
+     Write-Host "Microsoft Store repair failed"
+ }
 '@
     RunInSeparatePSWindow $content
 })
@@ -159,31 +179,55 @@ $btnEdgeRemove.ForeColor = [System.Drawing.Color]::White
 $btnEdgeRemove.Add_Click({
     $content = @'
 # Thanks to ave9858
-try {
-    $ErrorActionPreference = "Stop"
-    $regView = [Microsoft.Win32.RegistryView]::Registry32
-    $microsoft = [Microsoft.Win32.RegistryKey]::OpenBaseKey([Microsoft.Win32.RegistryHive]::LocalMachine, $regView).OpenSubKey('SOFTWARE\Microsoft', $true)
-    $edgeUWP = "$env:SystemRoot\SystemApps\Microsoft.MicrosoftEdge_8wekyb3d8bbwe"
-    $uninstallRegKey = $microsoft.OpenSubKey('Windows\CurrentVersion\Uninstall\Microsoft Edge')
-    if ($null -eq $uninstallRegKey) { Write-Error "Edge is not installed!" }
-    $uninstallString = $uninstallRegKey.GetValue('UninstallString') + ' --force-uninstall'
-    $tempPath = "$env:SystemRoot\SystemTemp"
-    if (-not (Test-Path -Path $tempPath) ) { $tempPath = New-Item "$env:SystemRoot\Temp\$([Guid]::NewGuid().Guid)" -ItemType Directory }
-    $fakeDllhostPath = "$tempPath\dllhost.exe"
-    $edgeClient = $microsoft.OpenSubKey('EdgeUpdate\ClientState\{56EB18F8-B008-4CBD-B6D2-8C97FE7E9062}', $true)
-    if ($null -ne $edgeClient.GetValue('experiment_control_labels')) { $edgeClient.DeleteValue('experiment_control_labels') }
-    $microsoft.CreateSubKey('EdgeUpdateDev').SetValue('AllowUninstall', '')
-    Copy-Item "$env:SystemRoot\System32\cmd.exe" -Destination $fakeDllhostPath
-    [void](New-Item $edgeUWP -ItemType Directory -ErrorVariable fail -ErrorAction SilentlyContinue)
-    [void](New-Item "$edgeUWP\MicrosoftEdge.exe" -ErrorAction Continue)
-    Start-Process $fakeDllhostPath "/c $uninstallString" -WindowStyle Hidden -Wait
-    [void](Remove-Item "$edgeUWP\MicrosoftEdge.exe" -ErrorAction Continue)
-    [void](Remove-Item $fakeDllhostPath -ErrorAction Continue)
-    if (-not $fail) { [void](Remove-Item "$edgeUWP") }
-    Write-Output "Microsoft Edge removed"
-} catch {
-    Write-Output "Microsoft Edge removal failed"
-}
+ # begin error-handled block
+ try {
+ # stop on errors to catch in try/catch
+     $ErrorActionPreference = "Stop"
+ # use 32-bit registry view
+     $regView = [Microsoft.Win32.RegistryView]::Registry32
+ # open HKLM\SOFTWARE\Microsoft writable
+     $microsoft = [Microsoft.Win32.RegistryKey]::OpenBaseKey([Microsoft.Win32.RegistryHive]::LocalMachine, $regView).OpenSubKey('SOFTWARE\Microsoft', $true)
+ # UWP Edge stub path
+     $edgeUWP = "$env:SystemRoot\SystemApps\Microsoft.MicrosoftEdge_8wekyb3d8bbwe"
+ # Edge uninstall key
+     $uninstallRegKey = $microsoft.OpenSubKey('Windows\CurrentVersion\Uninstall\Microsoft Edge')
+ # abort if missing
+     if ($null -eq $uninstallRegKey) { Write-Error "Edge is not installed!" }
+ # add force flag
+     $uninstallString = $uninstallRegKey.GetValue('UninstallString') + ' --force-uninstall'
+ # choose system temp
+     $tempPath = "$env:SystemRoot\SystemTemp"
+ # fallback temp dir
+     if (-not (Test-Path -Path $tempPath) ) { $tempPath = New-Item "$env:SystemRoot\Temp\$([Guid]::NewGuid().Guid)" -ItemType Directory }
+ # path to fake process host
+     $fakeDllhostPath = "$tempPath\dllhost.exe"
+ # Edge client state key
+     $edgeClient = $microsoft.OpenSubKey('EdgeUpdate\ClientState\{56EB18F8-B008-4CBD-B6D2-8C97FE7E9062}', $true)
+ # clear experiment labels
+     if ($null -ne $edgeClient.GetValue('experiment_control_labels')) { $edgeClient.DeleteValue('experiment_control_labels') }
+ # allow uninstall via dev key
+     $microsoft.CreateSubKey('EdgeUpdateDev').SetValue('AllowUninstall', '')
+ # create fake dllhost executable
+     Copy-Item "$env:SystemRoot\System32\cmd.exe" -Destination $fakeDllhostPath
+ # ensure UWP folder exists
+     [void](New-Item $edgeUWP -ItemType Directory -ErrorVariable fail -ErrorAction SilentlyContinue)
+ # create stub exe
+     [void](New-Item "$edgeUWP\MicrosoftEdge.exe" -ErrorAction Continue)
+ # run uninstall via stub
+     Start-Process $fakeDllhostPath "/c $uninstallString" -WindowStyle Hidden -Wait
+ # cleanup stub exe
+     [void](Remove-Item "$edgeUWP\MicrosoftEdge.exe" -ErrorAction Continue)
+ # remove fake dllhost
+     [void](Remove-Item $fakeDllhostPath -ErrorAction Continue)
+ # remove UWP folder if created here
+     if (-not $fail) { [void](Remove-Item "$edgeUWP") }
+ # success message
+     Write-Output "Microsoft Edge removed"
+ # handle any exception
+ } catch {
+ # failure message
+     Write-Output "Microsoft Edge removal failed"
+ }
 '@
     RunInSeparatePSWindow $content
 })
@@ -211,15 +255,23 @@ $btnAddUser.Add_Click({
     if (-not $name) { return }
     $pr = EnsurePowerRun
     $content = @'
-try {
-  $pr = "__PR__"
-  $usr = "__USR__"
-  if (Test-Path $pr) { & $pr cmd.exe /c "net user `"$usr`" /add" } else { & net.exe user "$usr" /add }
-  if (Test-Path $pr) { & $pr cmd.exe /c "net localgroup administrators `"$usr`" /add" } else { & net.exe localgroup administrators "$usr" /add }
-  Write-Host "Admin user created"
-} catch {
-  Write-Host ("User creation failed: " + $_.Exception.Message)
-}
+ # begin error-handled block
+ try {
+ # resolved path to PowerRun helper
+   $pr = "__PR__"
+ # username from dialog
+   $usr = "__USR__"
+ # create local user (elevated if PowerRun)
+   if (Test-Path $pr) { & $pr cmd.exe /c "net user `"$usr`" /add" } else { & net.exe user "$usr" /add }
+ # add user to Administrators group
+   if (Test-Path $pr) { & $pr cmd.exe /c "net localgroup administrators `"$usr`" /add" } else { & net.exe localgroup administrators "$usr" /add }
+ # success message
+   Write-Host "Admin user created"
+ # handle any exception
+ } catch {
+ # failure message with error
+   Write-Host ("User creation failed: " + $_.Exception.Message)
+ }
 '@
     $content = $content.Replace('__PR__', $pr).Replace('__USR__', $name)
     RunInSeparatePSWindow $content
@@ -244,31 +296,54 @@ $btnEdgeInstall.ForeColor = [System.Drawing.Color]::White
 $btnEdgeInstall.Add_Click({
     try {
         $content = @'
-try {
-    function InstallWinGet2 {
-        $ProgressPreference = 'SilentlyContinue'
-        $wc = New-Object Net.WebClient
-        $max = 3
-        function DownloadWithRetries2($u,$p){$a=0;while($a -lt $max){try{$wc.DownloadFile($u,$p);return $true}catch{$a++;Start-Sleep -Seconds 2}};return $false}
-        $u1 = 'https://aka.ms/getwinget'
-        $p1 = "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
-        if (-not (DownloadWithRetries2 $u1 $p1)) { return }
-        $u2 = 'https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx'
-        $p2 = "Microsoft.VCLibs.x64.14.00.Desktop.appx"
-        if (-not (DownloadWithRetries2 $u2 $p2)) { return }
-        $u3 = 'https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x64.appx'
-        $p3 = "Microsoft.UI.Xaml.2.8.x64.appx"
-        if (-not (DownloadWithRetries2 $u3 $p3)) { return }
-        Add-AppxPackage $p2
-        Add-AppxPackage $p3
-        Add-AppxPackage $p1
-    }
-    if (-not (Test-Path "$env:LOCALAPPDATA\Microsoft\WindowsApps\winget.exe")) { InstallWinGet2 }
-    & "$env:LOCALAPPDATA\Microsoft\WindowsApps\winget.exe" install Microsoft.Edge --accept-source-agreements --silent
-    Write-Host "Microsoft Edge installed"
-} catch {
-    Write-Host "Microsoft Edge installation failed"
-}
+ # begin error-handled block
+ try {
+ # installs App Installer + deps if winget missing
+     function InstallWinGet2 {
+ # suppress progress output
+         $ProgressPreference = 'SilentlyContinue'
+ # simple web client for downloads
+         $wc = New-Object Net.WebClient
+ # max retry attempts
+         $max = 3
+ # retry wrapper
+         function DownloadWithRetries2($u,$p){$a=0;while($a -lt $max){try{$wc.DownloadFile($u,$p);return $true}catch{$a++;Start-Sleep -Seconds 2}};return $false}
+ # App Installer bundle URL
+         $u1 = 'https://aka.ms/getwinget'
+ # local filename
+         $p1 = "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+ # abort if failed
+         if (-not (DownloadWithRetries2 $u1 $p1)) { return }
+ # VCLibs URL
+         $u2 = 'https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx'
+ # local filename
+         $p2 = "Microsoft.VCLibs.x64.14.00.Desktop.appx"
+ # abort if failed
+         if (-not (DownloadWithRetries2 $u2 $p2)) { return }
+ # WinUI URL
+         $u3 = 'https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x64.appx'
+ # local filename
+         $p3 = "Microsoft.UI.Xaml.2.8.x64.appx"
+ # abort if failed
+         if (-not (DownloadWithRetries2 $u3 $p3)) { return }
+ # install VCLibs
+         Add-AppxPackage $p2
+ # install WinUI
+         Add-AppxPackage $p3
+ # install App Installer
+         Add-AppxPackage $p1
+     }
+ # ensure winget present
+     if (-not (Test-Path "$env:LOCALAPPDATA\Microsoft\WindowsApps\winget.exe")) { InstallWinGet2 }
+ # install Edge silently
+     & "$env:LOCALAPPDATA\Microsoft\WindowsApps\winget.exe" install Microsoft.Edge --accept-source-agreements --silent
+ # success message
+     Write-Host "Microsoft Edge installed"
+ # handle any exception
+ } catch {
+ # failure message
+     Write-Host "Microsoft Edge installation failed"
+ }
 '@
         RunInSeparatePSWindow $content
     } catch {
@@ -294,16 +369,25 @@ $btnCleanWU.BackColor = [System.Drawing.Color]::FromArgb(0,120,212)
 $btnCleanWU.ForeColor = [System.Drawing.Color]::White
 $btnCleanWU.Add_Click({
     $content = @'
-try {
-    & cmd.exe /c net stop wuauserv
-    $p = "C:\Windows\SoftwareDistribution\Download"
-    if (Test-Path $p) { Remove-Item -Path $p -Recurse -Force }
-    New-Item -ItemType Directory -Path $p -Force | Out-Null
-    & cmd.exe /c net start wuauserv
-    Write-Host "Windows Update cache cleaned"
-} catch {
-    Write-Host "Windows Update cleaning failed"
-}
+ # begin error-handled block
+ try {
+ # stop Windows Update service
+     & cmd.exe /c net stop wuauserv
+ # cache download folder path
+     $p = "C:\Windows\SoftwareDistribution\Download"
+ # delete cache contents
+     if (Test-Path $p) { Remove-Item -Path $p -Recurse -Force }
+ # recreate folder
+     New-Item -ItemType Directory -Path $p -Force | Out-Null
+ # start Windows Update service
+     & cmd.exe /c net start wuauserv
+ # success message
+     Write-Host "Windows Update cache cleaned"
+ # handle any exception
+ } catch {
+ # failure message
+     Write-Host "Windows Update cleaning failed"
+ }
 '@
     RunInSeparatePSWindow $content
 })
@@ -325,13 +409,19 @@ $btnDefender.BackColor = [System.Drawing.Color]::FromArgb(0,120,212)
 $btnDefender.ForeColor = [System.Drawing.Color]::White
 $btnDefender.Add_Click({
     $content = @'
-try {
-    $root = "C:\ProgramData\Microsoft\Windows Defender\Scans\History\Service"
-    if (Test-Path $root) { Get-ChildItem -Path $root -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Force -Recurse -ErrorAction SilentlyContinue }
-    Write-Host "Defender history cleared"
-} catch {
-    Write-Host "Operation failed"
-}
+ # begin error-handled block
+ try {
+ # Defender scan history directory
+     $root = "C:\ProgramData\Microsoft\Windows Defender\Scans\History\Service"
+ # remove history
+     if (Test-Path $root) { Get-ChildItem -Path $root -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Force -Recurse -ErrorAction SilentlyContinue }
+ # success message
+     Write-Host "Defender history cleared"
+ # handle any exception
+ } catch {
+ # failure message
+     Write-Host "Operation failed"
+ }
 '@
     RunInSeparatePSWindow $content
 })
@@ -354,33 +444,58 @@ $btnOneDrive.BackColor = [System.Drawing.Color]::FromArgb(0,120,212)
 $btnOneDrive.ForeColor = [System.Drawing.Color]::White
 $btnOneDrive.Add_Click({
     $content = @'
-try {
-    $ProgressPreference = 'SilentlyContinue'
-    function InstallWinGet3 {
-        $wc = New-Object Net.WebClient
-        $max = 3
-        function DownloadWithRetries3($u,$p){$a=0;while($a -lt $max){try{$wc.DownloadFile($u,$p);return $true}catch{$a++;Start-Sleep -Seconds 2}};return $false}
-        $u1 = 'https://aka.ms/getwinget'
-        $p1 = "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
-        if (-not (DownloadWithRetries3 $u1 $p1)) { throw "Failed to download App Installer" }
-        $u2 = 'https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx'
-        $p2 = "Microsoft.VCLibs.x64.14.00.Desktop.appx"
-        if (-not (DownloadWithRetries3 $u2 $p2)) { throw "Failed to download VCLibs" }
-        $u3 = 'https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x64.appx'
-        $p3 = "Microsoft.UI.Xaml.2.8.x64.appx"
-        if (-not (DownloadWithRetries3 $u3 $p3)) { throw "Failed to download WinUI" }
-        Add-AppxPackage $p2
-        Add-AppxPackage $p3
-        Add-AppxPackage $p1
-    }
-    if (-not (Test-Path "$env:LOCALAPPDATA\Microsoft\WindowsApps\winget.exe")) { InstallWinGet3 }
-    Get-Process -Name OneDrive -ErrorAction SilentlyContinue | Stop-Process -Force
-    & "$env:LOCALAPPDATA\Microsoft\WindowsApps\winget.exe" uninstall Microsoft.OneDrive --accept-source-agreements --silent
-    & "$env:LOCALAPPDATA\Microsoft\WindowsApps\winget.exe" uninstall --name OneDrive --accept-source-agreements --silent
-    Write-Host "OneDrive removed"
-} catch {
-    Write-Host "OneDrive removal failed"
-}
+ # begin error-handled block
+ try {
+ # suppress progress output
+     $ProgressPreference = 'SilentlyContinue'
+ # installs winget dependencies if missing
+     function InstallWinGet3 {
+ # web client for downloads
+         $wc = New-Object Net.WebClient
+ # max retry attempts
+         $max = 3
+ # retry wrapper
+         function DownloadWithRetries3($u,$p){$a=0;while($a -lt $max){try{$wc.DownloadFile($u,$p);return $true}catch{$a++;Start-Sleep -Seconds 2}};return $false}
+ # App Installer URL
+         $u1 = 'https://aka.ms/getwinget'
+ # local filename
+         $p1 = "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+ # abort on failure
+         if (-not (DownloadWithRetries3 $u1 $p1)) { throw "Failed to download App Installer" }
+ # VCLibs URL
+         $u2 = 'https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx'
+ # local filename
+         $p2 = "Microsoft.VCLibs.x64.14.00.Desktop.appx"
+ # abort on failure
+         if (-not (DownloadWithRetries3 $u2 $p2)) { throw "Failed to download VCLibs" }
+ # WinUI URL
+         $u3 = 'https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x64.appx'
+ # local filename
+         $p3 = "Microsoft.UI.Xaml.2.8.x64.appx"
+ # abort on failure
+         if (-not (DownloadWithRetries3 $u3 $p3)) { throw "Failed to download WinUI" }
+ # install VCLibs
+         Add-AppxPackage $p2
+ # install WinUI
+         Add-AppxPackage $p3
+ # install App Installer
+         Add-AppxPackage $p1
+     }
+ # ensure winget present
+     if (-not (Test-Path "$env:LOCALAPPDATA\Microsoft\WindowsApps\winget.exe")) { InstallWinGet3 }
+ # stop running OneDrive processes
+     Get-Process -Name OneDrive -ErrorAction SilentlyContinue | Stop-Process -Force
+ # uninstall OneDrive (package id)
+     & "$env:LOCALAPPDATA\Microsoft\WindowsApps\winget.exe" uninstall Microsoft.OneDrive --accept-source-agreements --silent
+ # uninstall OneDrive (by name)
+     & "$env:LOCALAPPDATA\Microsoft\WindowsApps\winget.exe" uninstall --name OneDrive --accept-source-agreements --silent
+ # success message
+     Write-Host "OneDrive removed"
+ # handle any exception
+ } catch {
+ # failure message
+     Write-Host "OneDrive removal failed"
+ }
 '@
     RunInSeparatePSWindow $content
 })
@@ -402,12 +517,17 @@ $btnRemoveStore.BackColor = [System.Drawing.Color]::FromArgb(0,120,212)
 $btnRemoveStore.ForeColor = [System.Drawing.Color]::White
 $btnRemoveStore.Add_Click({
     $content = @'
-try {
-    Get-AppxPackage *windowsstore* | Remove-AppxPackage
-    Write-Host "Microsoft Store removed"
-} catch {
-    Write-Host "Removal failed"
-}
+ # begin error-handled block
+ try {
+ # uninstall Microsoft Store app
+     Get-AppxPackage *windowsstore* | Remove-AppxPackage
+ # success message
+     Write-Host "Microsoft Store removed"
+ # handle any exception
+ } catch {
+ # failure message
+     Write-Host "Removal failed"
+ }
 '@
     RunInSeparatePSWindow $content
 })
@@ -429,21 +549,34 @@ $btnRemoveApps.BackColor = [System.Drawing.Color]::FromArgb(0,120,212)
 $btnRemoveApps.ForeColor = [System.Drawing.Color]::White
 $btnRemoveApps.Add_Click({
     $content = @'
-try {
-    $ErrorActionPreference = 'SilentlyContinue'
-    $os = Get-WmiObject Win32_OperatingSystem
-    if ($os.Caption -like "*11*") {
-        Write-Output "Windows 11"
-        Get-AppxPackage -AllUsers | Where-Object { $_.Name -notmatch 'Microsoft\.VP9VideoExtensions|Notepad|Microsoft\.WebMediaExtensions|Microsoft\.WebpImageExtension|Microsoft\.Windows\.ShellExperienceHost|Microsoft\.VCLibs.*|Microsoft\.DesktopAppInstaller|Microsoft\.StorePurchaseApp|Microsoft\.Windows\.Photos|Microsoft\.WindowsStore|Microsoft\.XboxIdentityProvider|Microsoft\.WindowsCalculator|Microsoft\.HEIFImageExtension|Microsoft\.UI\.Xaml.*|Microsoft\.WindowsAppRuntime.*' } | Remove-AppxPackage
-        Write-Host "System apps removed (Windows 11)"
-    } else {
-        Write-Output "Windows 10"
-        Get-AppxPackage -AllUsers | Where-Object { $_.Name -notmatch 'Microsoft\.VP9VideoExtensions|Microsoft\.WebMediaExtensions|Microsoft\.WebpImageExtension|Microsoft\.Windows\.ShellExperienceHost|Microsoft\.VCLibs.*|Microsoft\.DesktopAppInstaller|Microsoft\.StorePurchaseApp|Microsoft\.Windows\.Photos|Microsoft\.WindowsStore|Microsoft\.XboxIdentityProvider|Microsoft\.WindowsCalculator|Microsoft\.HEIFImageExtension|Microsoft\.UI\.Xaml.*|Microsoft\.WindowsAppRuntime.*' } | Remove-AppxPackage
-        Write-Host "System apps removed (Windows 10)"
-    }
-} catch {
-    Write-Host "Removal failed"
-}
+ # begin error-handled block
+ try {
+ # ignore non-critical errors
+     $ErrorActionPreference = 'SilentlyContinue'
+ # detect OS version
+     $os = Get-WmiObject Win32_OperatingSystem
+ # Windows 11 branch
+     if ($os.Caption -like "*11*") {
+ # log branch
+         Write-Output "Windows 11"
+ # remove non-whitelisted apps
+         Get-AppxPackage -AllUsers | Where-Object { $_.Name -notmatch 'Microsoft\.VP9VideoExtensions|Notepad|Microsoft\.WebMediaExtensions|Microsoft\.WebpImageExtension|Microsoft\.Windows\.ShellExperienceHost|Microsoft\.VCLibs.*|Microsoft\.DesktopAppInstaller|Microsoft\.StorePurchaseApp|Microsoft\.Windows\.Photos|Microsoft\.WindowsStore|Microsoft\.XboxIdentityProvider|Microsoft\.WindowsCalculator|Microsoft\.HEIFImageExtension|Microsoft\.UI\.Xaml.*|Microsoft\.WindowsAppRuntime.*' } | Remove-AppxPackage
+ # success log
+         Write-Host "System apps removed (Windows 11)"
+ # Windows 10 branch
+     } else {
+ # log branch
+         Write-Output "Windows 10"
+ # remove non-whitelisted apps
+         Get-AppxPackage -AllUsers | Where-Object { $_.Name -notmatch 'Microsoft\.VP9VideoExtensions|Microsoft\.WebMediaExtensions|Microsoft\.WebpImageExtension|Microsoft\.Windows\.ShellExperienceHost|Microsoft\.VCLibs.*|Microsoft\.DesktopAppInstaller|Microsoft\.StorePurchaseApp|Microsoft\.Windows\.Photos|Microsoft\.WindowsStore|Microsoft\.XboxIdentityProvider|Microsoft\.WindowsCalculator|Microsoft\.HEIFImageExtension|Microsoft\.UI\.Xaml.*|Microsoft\.WindowsAppRuntime.*' } | Remove-AppxPackage
+ # success log
+         Write-Host "System apps removed (Windows 10)"
+     }
+ # handle any exception
+ } catch {
+ # failure message
+     Write-Host "Removal failed"
+ }
 '@
     RunInSeparatePSWindow $content
 })
@@ -461,23 +594,39 @@ $btnTweaks.Add_Click({
     $pr = EnsurePowerRun
     $src = $PSCommandPath
     $content = @'
-try {
-  $pr = "__PR__"
-  $src = "__SRC__"
-  $os = Get-WmiObject Win32_OperatingSystem
-  $scriptText = Get-Content -LiteralPath $src -Raw
-  $block = [regex]::Match($scriptText, '<#([\s\S]*?)#>').Groups[1].Value
-  function GetVal($name){ [regex]::Match($block, '(?m)^\s*'+[regex]::Escape($name)+'\s*=\s*"([^"]+)"').Groups[1].Value }
-  $b = if ($os.Caption -like "*11*") { GetVal('reg_win_11') } else { GetVal('reg_win_10') }
-  if (-not $b) { Write-Host "Reg base64 not found"; return }
-  $bytes = [Convert]::FromBase64String($b)
-  $tmp = Join-Path $env:TEMP ('tweaks_'+[guid]::NewGuid().ToString('N')+'.reg')
-  [IO.File]::WriteAllBytes($tmp, $bytes)
-  if (Test-Path $pr) { & $pr cmd.exe /c "reg import \"$tmp\"" } else { & reg.exe import "$tmp" }
-  Write-Host "Tweaks imported"
-} catch {
-  Write-Host ("Tweaks failed: " + $_.Exception.Message)
-}
+ # begin error-handled block
+ try {
+ # resolved path to PowerRun helper (if available)
+   $pr = "__PR__"
+ # path to this script file
+   $src = "__SRC__"
+ # detect OS version (10/11)
+   $os = Get-WmiObject Win32_OperatingSystem
+ # read entire script as text
+   $scriptText = Get-Content -LiteralPath $src -Raw
+ # extract embedded resource block
+   $block = [regex]::Match($scriptText, '<#([\s\S]*?)#>').Groups[1].Value
+ # read Base64 by name
+   function GetVal($name){ [regex]::Match($block, '(?m)^\s*'+[regex]::Escape($name)+'\s*=\s*"([^"]+)"').Groups[1].Value }
+ # select OS-specific Base64
+   $b = if ($os.Caption -like "*11*") { GetVal('reg_win_11') } else { GetVal('reg_win_10') }
+ # abort if missing
+   if (-not $b) { Write-Host "Reg base64 not found"; return }
+ # decode Base64 to bytes
+   $bytes = [Convert]::FromBase64String($b)
+ # temp .reg file path
+   $tmp = Join-Path $env:TEMP ('tweaks_'+[guid]::NewGuid().ToString('N')+'.reg')
+ # write .reg file
+   [IO.File]::WriteAllBytes($tmp, $bytes)
+ # import via PowerRun or reg.exe
+   if (Test-Path $pr) { & $pr cmd.exe /c "reg import \"$tmp\"" } else { & reg.exe import "$tmp" }
+ # success message
+   Write-Host "Tweaks imported"
+ # handle any exception
+ } catch {
+ # failure message with error
+   Write-Host ("Tweaks failed: " + $_.Exception.Message)
+ }
 '@
     $content = $content.Replace('__PR__', $pr).Replace('__SRC__', $src)
     RunInSeparatePSWindow $content
@@ -506,16 +655,24 @@ $btnHyperV.BackColor = [System.Drawing.Color]::FromArgb(0,120,212)
 $btnHyperV.ForeColor = [System.Drawing.Color]::White
 $btnHyperV.Add_Click({
     $content = @'
-try {
-    $pkgs = Get-ChildItem -Path "$env:SystemRoot\servicing\Packages" -Filter "*Hyper-V*.mum" -ErrorAction SilentlyContinue
-    foreach ($f in $pkgs) {
-        & dism.exe /online /norestart /add-package:$($f.FullName)
-    }
-    & dism.exe /online /enable-feature /featurename:Microsoft-Hyper-V -All /LimitAccess /ALL
-    Write-Host "Hyper-V enabled"
-} catch {
-    Write-Host "Enablement failed"
-}
+ # begin error-handled block
+ try {
+ # enumerate Hyper-V packages
+     $pkgs = Get-ChildItem -Path "$env:SystemRoot\servicing\Packages" -Filter "*Hyper-V*.mum" -ErrorAction SilentlyContinue
+ # add each package
+     foreach ($f in $pkgs) {
+ # add package to image
+         & dism.exe /online /norestart /add-package:$($f.FullName)
+     }
+ # enable Hyper-V feature
+     & dism.exe /online /enable-feature /featurename:Microsoft-Hyper-V -All /LimitAccess /ALL
+ # success message
+     Write-Host "Hyper-V enabled"
+ # handle any exception
+ } catch {
+ # failure message
+     Write-Host "Enablement failed"
+ }
 '@
     RunInSeparatePSWindow $content
 })
@@ -538,13 +695,19 @@ $btnSfcDism.BackColor = [System.Drawing.Color]::FromArgb(0,120,212)
 $btnSfcDism.ForeColor = [System.Drawing.Color]::White
 $btnSfcDism.Add_Click({
     $content = @'
-try {
-    & sfc.exe /scannow
-    & dism.exe /Online /Cleanup-Image /RestoreHealth
-    Write-Host "System repair completed"
-} catch {
-    Write-Host "Repair failed"
-}
+ # begin error-handled block
+ try {
+ # run System File Checker
+     & sfc.exe /scannow
+ # repair Windows image
+     & dism.exe /Online /Cleanup-Image /RestoreHealth
+ # success message
+     Write-Host "System repair completed"
+ # handle any exception
+ } catch {
+ # failure message
+     Write-Host "Repair failed"
+ }
 '@
     RunInSeparatePSWindow $content
 })
@@ -569,22 +732,37 @@ $btnDisableDef.Add_Click({
     $pr = EnsurePowerRun
     if (-not $pr -or -not (Test-Path $pr)) { [System.Windows.Forms.MessageBox]::Show("PowerRun missing","Error",[System.Windows.Forms.MessageBoxButtons]::OK,[System.Windows.Forms.MessageBoxIcon]::Error); return }
     $content = @'
-try {
-    $pr = "__PR__"
-    if (-not (Test-Path $pr)) { Write-Host "PowerRun missing"; return }
-    & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d 1 /f
-    & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableBehaviorMonitoring" /t REG_DWORD /d 1 /f
-    & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableIOAVProtection" /t REG_DWORD /d 1 /f
-    & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableOnAccessProtection" /t REG_DWORD /d 1 /f
-    & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableRealtimeMonitoring" /t REG_DWORD /d 1 /f
-    & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /v "Start" /t REG_DWORD /d 4 /f
-    & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d 4 /f
-    Write-Host "Defender disabled. Restarting in 5 seconds"
-    Start-Sleep -Seconds 5
-    & shutdown.exe /r /t 00
-} catch {
-    Write-Host "Operation failed: $($_.Exception.Message)"
-}
+ # begin error-handled block
+ try {
+ # resolved path to PowerRun helper
+     $pr = "__PR__"
+ # abort if not available
+     if (-not (Test-Path $pr)) { Write-Host "PowerRun missing"; return }
+ # disable AntiSpyware policy
+     & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d 1 /f
+ # disable behavior monitoring
+     & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableBehaviorMonitoring" /t REG_DWORD /d 1 /f
+ # disable IOAV protection
+     & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableIOAVProtection" /t REG_DWORD /d 1 /f
+ # disable on-access protection
+     & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableOnAccessProtection" /t REG_DWORD /d 1 /f
+ # disable realtime monitoring
+     & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableRealtimeMonitoring" /t REG_DWORD /d 1 /f
+ # disable SecurityHealthService
+     & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /v "Start" /t REG_DWORD /d 4 /f
+ # disable WinDefend service
+     & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d 4 /f
+ # notify restart
+     Write-Host "Defender disabled. Restarting in 5 seconds"
+ # wait before restart
+     Start-Sleep -Seconds 5
+ # reboot immediately
+     & shutdown.exe /r /t 00
+ # handle any exception
+ } catch {
+ # failure message with error
+     Write-Host "Operation failed: $($_.Exception.Message)"
+ }
 '@
     $content = $content.Replace('__PR__', $pr)
     RunInSeparatePSWindow $content
@@ -609,22 +787,37 @@ $btnEnableDef.Add_Click({
     $pr = EnsurePowerRun
     if (-not $pr -or -not (Test-Path $pr)) { [System.Windows.Forms.MessageBox]::Show("PowerRun missing","Error",[System.Windows.Forms.MessageBoxButtons]::OK,[System.Windows.Forms.MessageBoxIcon]::Error); return }
     $content = @'
-try {
-    $pr = "__PR__"
-    if (-not (Test-Path $pr)) { Write-Host "PowerRun missing"; return }
-    & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d 0 /f
-    & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableBehaviorMonitoring" /t REG_DWORD /d 0 /f
-    & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableIOAVProtection" /t REG_DWORD /d 0 /f
-    & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableOnAccessProtection" /t REG_DWORD /d 0 /f
-    & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableRealtimeMonitoring" /t REG_DWORD /d 0 /f
-    & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /v "Start" /t REG_DWORD /d 2 /f
-    & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d 2 /f
-    Write-Host "Defender enabled. Restarting in 5 seconds"
-    Start-Sleep -Seconds 5
-    & shutdown.exe /r /t 00
-} catch {
-    Write-Host "Operation failed: $($_.Exception.Message)"
-}
+ # begin error-handled block
+ try {
+ # resolved path to PowerRun helper
+     $pr = "__PR__"
+ # abort if not available
+     if (-not (Test-Path $pr)) { Write-Host "PowerRun missing"; return }
+ # enable AntiSpyware policy
+     & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d 0 /f
+ # enable behavior monitoring
+     & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableBehaviorMonitoring" /t REG_DWORD /d 0 /f
+ # enable IOAV protection
+     & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableIOAVProtection" /t REG_DWORD /d 0 /f
+ # enable on-access protection
+     & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableOnAccessProtection" /t REG_DWORD /d 0 /f
+ # enable realtime monitoring
+     & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableRealtimeMonitoring" /t REG_DWORD /d 0 /f
+ # set SecurityHealthService to auto
+     & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /v "Start" /t REG_DWORD /d 2 /f
+ # set WinDefend to auto
+     & $pr cmd.exe /c reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d 2 /f
+ # notify restart
+     Write-Host "Defender enabled. Restarting in 5 seconds"
+ # wait before restart
+     Start-Sleep -Seconds 5
+ # reboot immediately
+     & shutdown.exe /r /t 00
+ # handle any exception
+ } catch {
+ # failure message with error
+     Write-Host "Operation failed: $($_.Exception.Message)"
+ }
 '@
     $content = $content.Replace('__PR__', $pr)
     RunInSeparatePSWindow $content
@@ -642,192 +835,319 @@ $btnWin11.ForeColor = [System.Drawing.Color]::White
 $btnWin11.Add_Click({
     $src = $PSCommandPath
     $content = @'
+# begin error-handled block
 try {
+# path to this script file
   $src = "__SRC__"
+# read entire script text
   $scriptText = Get-Content -LiteralPath $src -Raw
+# extract embedded resource block
   $block = [regex]::Match($scriptText, '<#([\s\S]*?)#>').Groups[1].Value
-#################################### start the gui
-Add-Type -AssemblyName System.Windows.Forms
-Add-Type -AssemblyName System.Drawing
-
-function GetVal($name){ [regex]::Match($block, '(?m)^\s*'+[regex]::Escape($name)+'\s*=\s*"([^"]+)"').Groups[1].Value }
-$unattend = GetVal('unattend')
-$7zipdll = GetVal('7zipdll')
-$7zipexe = GetVal('7zipexe')
-$oscdimg = GetVal('oscdimg')
-
-# Create form
-$form = New-Object System.Windows.Forms.Form
-$form.Text = "Windows 11 image patcher"
-$form.Size = New-Object System.Drawing.Size(600, 200) 
-$form.StartPosition = "CenterScreen"
-$form.FormBorderStyle = 'FixedDialog'
-
-# Set form background color to dark
-$form.BackColor = [System.Drawing.Color]::FromArgb(40, 40, 40)
-
-# Set text color to white
-$form.ForeColor = [System.Drawing.Color]::White
-
-# Set font to Arial 12
-$font = New-Object System.Drawing.Font("Arial", 12)
-
-# Create label for ISO file
-$labelISOFile = New-Object System.Windows.Forms.Label
-$labelISOFile.Location = New-Object System.Drawing.Point(10,20)
-$labelISOFile.Size = New-Object System.Drawing.Size(240,20)
-$labelISOFile.Text = "Select an ISO file:"
-$labelISOFile.Font = $font
-$form.Controls.Add($labelISOFile)
-
-# Create textbox for ISO file
-$textBoxISOFile = New-Object System.Windows.Forms.TextBox
-$textBoxISOFile.Location = New-Object System.Drawing.Point(10,40)
-$textBoxISOFile.Size = New-Object System.Drawing.Size(350,20) 
-$textBoxISOFile.Font = $font
-$form.Controls.Add($textBoxISOFile)
-
-# Create browse button
-$browseButton = New-Object System.Windows.Forms.Button
-$browseButton.Location = New-Object System.Drawing.Point(370,40) 
-$browseButton.Size = New-Object System.Drawing.Size(100,23)
-$browseButton.Text = "Browse"
-$browseButton.Font = $font
-$browseButton.Add_Click({
+# load WinForms
+  Add-Type -AssemblyName System.Windows.Forms
+# load Drawing
+  Add-Type -AssemblyName System.Drawing
+# helper to get Base64 value by name
+  function GetVal($name){ [regex]::Match($block, '(?m)^\s*'+[regex]::Escape($name)+'\s*=\s*"([^"]+)"').Groups[1].Value }
+# read unattend.xml Base64
+  $unattend = GetVal('unattend')
+# read 7z.dll Base64
+  $7zipdll = GetVal('7zipdll')
+# read 7z.exe Base64
+  $7zipexe = GetVal('7zipexe')
+# read oscdimg.exe Base64
+  $oscdimg = GetVal('oscdimg')
+# create main form
+  $form = New-Object System.Windows.Forms.Form
+# set form title
+  $form.Text = "Windows 11 image patcher"
+# set form size
+  $form.Size = New-Object System.Drawing.Size(600, 200) 
+# center on screen
+  $form.StartPosition = "CenterScreen"
+# fixed dialog border
+  $form.FormBorderStyle = 'FixedDialog'
+# dark background
+  $form.BackColor = [System.Drawing.Color]::FromArgb(40, 40, 40)
+# white foreground text
+  $form.ForeColor = [System.Drawing.Color]::White
+# default font
+  $font = New-Object System.Drawing.Font("Arial", 12)
+# ISO label control
+  $labelISOFile = New-Object System.Windows.Forms.Label
+# ISO label position
+  $labelISOFile.Location = New-Object System.Drawing.Point(10,20)
+# ISO label size
+  $labelISOFile.Size = New-Object System.Drawing.Size(240,20)
+# ISO label text
+  $labelISOFile.Text = "Select an ISO file:"
+# ISO label font
+  $labelISOFile.Font = $font
+# add ISO label to form
+  $form.Controls.Add($labelISOFile)
+# ISO textbox control
+  $textBoxISOFile = New-Object System.Windows.Forms.TextBox
+# ISO textbox position
+  $textBoxISOFile.Location = New-Object System.Drawing.Point(10,40)
+# ISO textbox size
+  $textBoxISOFile.Size = New-Object System.Drawing.Size(350,20) 
+# ISO textbox font
+  $textBoxISOFile.Font = $font
+# add ISO textbox
+  $form.Controls.Add($textBoxISOFile)
+# Browse button control
+  $browseButton = New-Object System.Windows.Forms.Button
+# Browse button position
+  $browseButton.Location = New-Object System.Drawing.Point(370,40) 
+# Browse button size
+  $browseButton.Size = New-Object System.Drawing.Size(100,23)
+# Browse button text
+  $browseButton.Text = "Browse"
+# Browse button font
+  $browseButton.Font = $font
+# Browse button click handler
+  $browseButton.Add_Click({
+# create OpenFileDialog
     $openFileDialog = New-Object System.Windows.Forms.OpenFileDialog
+# filter to ISO files
     $openFileDialog.Filter = "ISO Files (*.iso)|*.iso|All files (*.*)|*.*"
+# dialog title
     $openFileDialog.Title = "Select an ISO File"
+# single selection only
     $openFileDialog.Multiselect = $false
+# show dialog
     $result = $openFileDialog.ShowDialog()
+# if user selected a file
     if ($result -eq 'OK') {
+# get selected file path
         $selectedFile = $openFileDialog.FileName
+# put path into textbox
         $textBoxISOFile.Text = $selectedFile    
     }
-})
-$form.Controls.Add($browseButton)
-
-# Create label for custom word
-$labelCustomWord = New-Object System.Windows.Forms.Label
-$labelCustomWord.Location = New-Object System.Drawing.Point(10,80)
-$labelCustomWord.Size = New-Object System.Drawing.Size(240,30)
-$labelCustomWord.Text = "Enter the username for win 11:"
-$labelCustomWord.Font = $font
-$form.Controls.Add($labelCustomWord)
-
-# Create textbox for custom word
-$textBoxCustomWord = New-Object System.Windows.Forms.TextBox
-$textBoxCustomWord.Location = New-Object System.Drawing.Point(10,110)
-$textBoxCustomWord.Size = New-Object System.Drawing.Size(120,20) 
-$textBoxCustomWord.Font = $font
-$form.Controls.Add($textBoxCustomWord)
-
-# Create build button
-$buildButton = New-Object System.Windows.Forms.Button
-$buildButton.Location = New-Object System.Drawing.Point(160,110) 
-$buildButton.Size = New-Object System.Drawing.Size(100,23) 
-$buildButton.Text = "Build!"
-$buildButton.Font = $font
-$buildButton.Add_Click({
+  })
+# add Browse button
+  $form.Controls.Add($browseButton)
+# Username label control
+  $labelCustomWord = New-Object System.Windows.Forms.Label
+# Username label position
+  $labelCustomWord.Location = New-Object System.Drawing.Point(10,80)
+# Username label size
+  $labelCustomWord.Size = New-Object System.Drawing.Size(240,30)
+# Username label text
+  $labelCustomWord.Text = "Enter the username for win 11:"
+# Username label font
+  $labelCustomWord.Font = $font
+# add Username label
+  $form.Controls.Add($labelCustomWord)
+# Username textbox control
+  $textBoxCustomWord = New-Object System.Windows.Forms.TextBox
+# Username textbox position
+  $textBoxCustomWord.Location = New-Object System.Drawing.Point(10,110)
+# Username textbox size
+  $textBoxCustomWord.Size = New-Object System.Drawing.Size(120,20) 
+# Username textbox font
+  $textBoxCustomWord.Font = $font
+# add Username textbox
+  $form.Controls.Add($textBoxCustomWord)
+# Build button control
+  $buildButton = New-Object System.Windows.Forms.Button
+# Build button position
+  $buildButton.Location = New-Object System.Drawing.Point(160,110) 
+# Build button size
+  $buildButton.Size = New-Object System.Drawing.Size(100,23) 
+# Build button text
+  $buildButton.Text = "Build!"
+# Build button font
+  $buildButton.Font = $font
+# Build button click handler
+  $buildButton.Add_Click({
+# read ISO path from textbox
     $selectedFile = $textBoxISOFile.Text
+# read username from textbox
     $customWord = $textBoxCustomWord.Text
-
+# validate inputs
     if (-not [string]::IsNullOrWhiteSpace($selectedFile) -and -not [string]::IsNullOrWhiteSpace($customWord)) {
+# show progress bar
         $progressBar.Visible = $true
+# show wait cursor
         $form.UseWaitCursor = $true
+# disable Browse button
         $browseButton.Enabled = $false
+# disable Build button
         $buildButton.Enabled = $false
+# process pending UI events
         [System.Windows.Forms.Application]::DoEvents()
+# helper to set progress value
         function SetProgress([int]$v){ if($v -lt 0){$v=0}; if($v -gt $progressBar.Maximum){$v=$progressBar.Maximum}; $progressBar.Value=$v; $labelProgress.Text=("{0}%" -f $v); [System.Windows.Forms.Application]::DoEvents() }
+# helper to animate progress until process exits
         function PulseToTarget([int]$target,[System.Diagnostics.Process]$p){ $current=$progressBar.Value; while(-not $p.HasExited){ $current=[Math]::Min($target,$current+1); SetProgress $current; Start-Sleep -Milliseconds 200 }; SetProgress $target }
+# reset progress
         SetProgress 0
+# create working root directory
         $workRoot = Join-Path $env:TEMP ("win11_patcher_" + [guid]::NewGuid().ToString("N"))
+# create resources directory
         $resDir = Join-Path $workRoot "resources"
+# create ISO extraction directory
         $isoDir = Join-Path $workRoot "ISO\Win11"
+# create mount directory
         $mountDir = Join-Path $workRoot "mount\mount"
+# create resources directory on disk
         New-Item -ItemType Directory -Path $resDir -Force | Out-Null
+# create ISO dir on disk
         New-Item -ItemType Directory -Path $isoDir -Force | Out-Null
+# create mount dir on disk
         New-Item -ItemType Directory -Path $mountDir -Force | Out-Null
+# write 7z.dll from Base64
         [IO.File]::WriteAllBytes((Join-Path $resDir "7z.dll"), [Convert]::FromBase64String($7zipdll))
+# write 7z.exe from Base64
         [IO.File]::WriteAllBytes((Join-Path $resDir "7z.exe"), [Convert]::FromBase64String($7zipexe))
+# write oscdimg.exe from Base64
         [IO.File]::WriteAllBytes((Join-Path $resDir "oscdimg.exe"), [Convert]::FromBase64String($oscdimg))
+# set progress to 10%
         SetProgress 10
+# decode unattend.xml text
         $xmlText = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($unattend))
+# inject username into unattend.xml
         $xmlText = $xmlText -replace '24h4', $customWord
+# path to unattend.xml
         $unattendPath = Join-Path $resDir "unattend.xml"
+# write unattend.xml file
         [IO.File]::WriteAllText($unattendPath, $xmlText, [System.Text.Encoding]::UTF8)
+# output directory for ISO
         $destPath = Split-Path -Path $selectedFile -Parent
+# extract ISO using 7-Zip
         $p7z = Start-Process -FilePath (Join-Path $resDir "7z.exe") -ArgumentList @("x","-y","-o$isoDir",$selectedFile) -WorkingDirectory $resDir -NoNewWindow -PassThru
+# progress to 40%
         PulseToTarget 40 $p7z
+# wait for 7-Zip to finish
         $p7z.WaitForExit()
+# Panther dir inside ISO
         $pantherDir = Join-Path (Join-Path $isoDir "sources") '$OEM$\$$\Panther'
+# create Panther dir
         New-Item -ItemType Directory -Path $pantherDir -Force | Out-Null
+# copy unattend.xml into Panther
         Copy-Item -Path $unattendPath -Destination (Join-Path $pantherDir "unattend.xml") -Force
+# mount boot.wim index 2
         $pdism1 = Start-Process -FilePath "dism.exe" -ArgumentList "/English","/mount-image","/imagefile:$isoDir\sources\boot.wim","/index:2","/mountdir:$mountDir" -NoNewWindow -PassThru
+# progress to 60%
         PulseToTarget 60 $pdism1
+# wait for mount to complete
         $pdism1.WaitForExit()
+# load offline SYSTEM hive
         & reg.exe load "HKLM\TK_BOOT_SYSTEM" "$mountDir\Windows\System32\Config\SYSTEM"
+# set LabConfig bypass CPU
         & reg.exe add "HKLM\TK_BOOT_SYSTEM\Setup\LabConfig" /v "BypassCPUCheck" /t REG_DWORD /d 1 /f
+# set LabConfig bypass RAM
         & reg.exe add "HKLM\TK_BOOT_SYSTEM\Setup\LabConfig" /v "BypassRAMCheck" /t REG_DWORD /d 1 /f
+# set LabConfig bypass SecureBoot
         & reg.exe add "HKLM\TK_BOOT_SYSTEM\Setup\LabConfig" /v "BypassSecureBootCheck" /t REG_DWORD /d 1 /f
+# set LabConfig bypass Storage
         & reg.exe add "HKLM\TK_BOOT_SYSTEM\Setup\LabConfig" /v "BypassStorageCheck" /t REG_DWORD /d 1 /f
+# set LabConfig bypass TPM
         & reg.exe add "HKLM\TK_BOOT_SYSTEM\Setup\LabConfig" /v "BypassTPMCheck" /t REG_DWORD /d 1 /f
+# unload offline hive
         & reg.exe unload "HKLM\TK_BOOT_SYSTEM"
+# progress to 70%
         SetProgress 70
+# backup appraiserres.dll if present
         if (Test-Path "$isoDir\sources\appraiserres.dll") { Move-Item "$isoDir\sources\appraiserres.dll" "$isoDir\sources\appraiserres.dll.bak" -Force }
+# unmount boot.wim commit changes
         $pdism2 = Start-Process -FilePath "dism.exe" -ArgumentList "/English","/unmount-image","/mountdir:$mountDir","/commit" -NoNewWindow -PassThru
+# progress to 75%
         PulseToTarget 75 $pdism2
+# wait for unmount
         $pdism2.WaitForExit()
+# default output ISO path
         $outIso = Join-Path $destPath "Windows11_bypass.iso"
+# avoid overwrite: append suffix if exists
         if (Test-Path $outIso) { $s = [guid]::NewGuid().ToString("N").Substring(0,4); $outIso = Join-Path $destPath ("Windows11_bypass_" + $s + ".iso") }
+# build ISO with oscdimg
         $posc = Start-Process -FilePath (Join-Path $resDir "oscdimg.exe") -ArgumentList @("-m","-o","-u2","-bootdata:2#p0,e,b$isoDir\boot\etfsboot.com#pEF,e,b$isoDir\efi\microsoft\boot\efisys.bin",$isoDir,$outIso) -WorkingDirectory $resDir -NoNewWindow -PassThru
+# progress to 95%
         PulseToTarget 95 $posc
+# wait for oscdimg
         $posc.WaitForExit()
+# if ISO created successfully
         if (Test-Path $outIso) {
+# cleanup working directory
             Remove-Item -Path $workRoot -Recurse -Force
+# set progress to 100%
             SetProgress 100
+# hide progress bar
             $progressBar.Visible = $false
+# restore cursor
             $form.UseWaitCursor = $false
+# re-enable Browse
             $browseButton.Enabled = $true
+# re-enable Build
             $buildButton.Enabled = $true
+# show success message
             [System.Windows.Forms.MessageBox]::Show("Process completed. Output: $outIso", "Done", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
+# close dialog with OK
             $form.DialogResult = [System.Windows.Forms.DialogResult]::OK
+# close form
             $form.Close()
+# stop handler
             return
         }
+# read oscdimg exit code
         $code = $null
+# attempt to get exit code
         try { $code = $posc.ExitCode } catch {}
+# default unknown code
         if ($code -eq $null) { $code = 'unknown' }
+# hide progress on failure
         $progressBar.Visible = $false
+# restore cursor
         $form.UseWaitCursor = $false
+# re-enable Browse
         $browseButton.Enabled = $true
+# re-enable Build
         $buildButton.Enabled = $true
+# show error message
         [System.Windows.Forms.MessageBox]::Show("ISO creation error (code " + $code + ").", "Error", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
+# stop handler
         return
     } else {
+# validation error message
         [System.Windows.Forms.MessageBox]::Show("Please fill in both the ISO file and the username.", "Error", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
     }
-})
-$form.Controls.Add($buildButton)
-
-$progressBar = New-Object System.Windows.Forms.ProgressBar
-$progressBar.Location = New-Object System.Drawing.Point(10,140)
-$progressBar.Size = New-Object System.Drawing.Size(560,20)
-$progressBar.Style = 'Continuous'
-$progressBar.Maximum = 100
-$progressBar.Value = 0
-$progressBar.Visible = $false
-$form.Controls.Add($progressBar)
-$labelProgress = New-Object System.Windows.Forms.Label
-$labelProgress.Location = New-Object System.Drawing.Point(520,165)
-$labelProgress.Size = New-Object System.Drawing.Size(50,20)
-$labelProgress.Text = "0%"
-$form.Controls.Add($labelProgress)
-
-# Add event handler for OK button click
-$form.Add_Shown({$form.Activate()})
-$form.ShowDialog() | Out-Null
-####################################
+  })
+# add Build button to form
+  $form.Controls.Add($buildButton)
+# progress bar control
+  $progressBar = New-Object System.Windows.Forms.ProgressBar
+# progress bar position
+  $progressBar.Location = New-Object System.Drawing.Point(10,140)
+# progress bar size
+  $progressBar.Size = New-Object System.Drawing.Size(560,20)
+# progress bar style
+  $progressBar.Style = 'Continuous'
+# progress bar max value
+  $progressBar.Maximum = 100
+# progress bar initial value
+  $progressBar.Value = 0
+# progress bar hidden by default
+  $progressBar.Visible = $false
+# add progress bar to form
+  $form.Controls.Add($progressBar)
+# percent label control
+  $labelProgress = New-Object System.Windows.Forms.Label
+# percent label position
+  $labelProgress.Location = New-Object System.Drawing.Point(520,165)
+# percent label size
+  $labelProgress.Size = New-Object System.Drawing.Size(50,20)
+# percent label text
+  $labelProgress.Text = "0%"
+# add percent label
+  $form.Controls.Add($labelProgress)
+# activate form on shown
+  $form.Add_Shown({$form.Activate()})
+# show dialog
+  $form.ShowDialog() | Out-Null
+# handle any exception
 } catch {
+# failure message with error
   Write-Host "Operation failed: $($_.Exception.Message)"
 }
 '@
@@ -848,96 +1168,150 @@ $btnDecodeB64.ForeColor = [System.Drawing.Color]::White
 $btnDecodeB64.Add_Click({
     $src = $PSCommandPath
     $content = @'
-try {
-  $src = "__SRC__"
-  if ([string]::IsNullOrWhiteSpace($src)) { $src = $MyInvocation.MyCommand.Path }
-  if ([string]::IsNullOrWhiteSpace($src) -or -not (Test-Path $src)) { Write-Host "Script path not found"; return }
-  $t = Get-Content -LiteralPath $src -Raw
-  $outDir = Join-Path $env:TEMP ('utilities_decoded_' + [guid]::NewGuid().ToString('N'))
-  New-Item -ItemType Directory -Path $outDir -Force | Out-Null
-  $m1 = [regex]::Match($t, 'powerrun="([A-Za-z0-9+/=]+)"')
-  if ($m1.Success) { $b1 = [Convert]::FromBase64String($m1.Groups[1].Value); [IO.File]::WriteAllBytes((Join-Path $outDir 'PowerRun.exe'), $b1) }
-  $block = [regex]::Match($t, '<#([\s\S]*?)#>').Groups[1].Value
-  $matches = [regex]::Matches($block, '(?m)^\s*([A-Za-z0-9_]+)\s*=\s*"([A-Za-z0-9+/=]+)"')
-  foreach ($m in $matches) {
-    $name = $m.Groups[1].Value
-    $b64 = $m.Groups[2].Value
-    try {
-      $bytes = [Convert]::FromBase64String($b64)
-      function GuessExt([byte[]]$by,[string]$nm){
-        $len = $by.Length
-        $hex = [BitConverter]::ToString($by,0,[Math]::Min(8,[Math]::Max(0,$len)))
-        $txt = ''
-        try { $txt = [Text.Encoding]::UTF8.GetString($by,0,[Math]::Min(1024,[Math]::Max(0,$len))) } catch {}
-        if ([string]::IsNullOrWhiteSpace($txt)) {
-          try { $txt = [Text.Encoding]::ASCII.GetString($by,0,[Math]::Min(1024,[Math]::Max(0,$len))) } catch {}
-        }
-        $trim = ($txt -replace "\u0000","" ).TrimStart()
-        if ($trim -like 'Windows Registry Editor Version*') { return 'reg' }
-        if ($trim.StartsWith('<?xml')) { return 'xml' }
-        if ($hex.StartsWith('50-4B')) { if ($nm -match '(?i)msixbundle') { return 'msixbundle' } elseif ($nm -match '(?i)appx') { return 'appx' } elseif ($nm -match '(?i)msix') { return 'msix' } else { return 'zip' } }
-        if ($hex.StartsWith('4D-5A')) {
-          if ($len -ge 64) {
-            $e = [BitConverter]::ToInt32($by,0x3C)
-            if ($e -ge 0 -and ($e + 24) -le $len) {
-              $p0 = $by[$e]; $p1 = $by[$e+1]; $p2 = $by[$e+2]; $p3 = $by[$e+3]
-              if ($p0 -eq 0x50 -and $p1 -eq 0x45 -and $p2 -eq 0x00 -and $p3 -eq 0x00) {
-                $coff = $e + 22
-                if (($coff + 2) -le $len) {
-                  $chars = [BitConverter]::ToUInt16($by,$coff)
-                  if (($chars -band 0x2000) -ne 0) { return 'dll' } else { return 'exe' }
-                }
-              }
-            }
-          }
-          return 'exe'
-        }
-        if ($hex.StartsWith('89-50-4E-47-0D-0A-1A-0A')) { return 'png' }
-        if ($hex.StartsWith('42-4D')) { return 'bmp' }
-        if ($hex.StartsWith('47-49-46-38')) { return 'gif' }
-        if ($hex.StartsWith('25-50-44-46')) { return 'pdf' }
-        if ($hex.StartsWith('37-7A-BC-AF-27-1C')) { return '7z' }
-        if ($hex.StartsWith('52-61-72-21')) { return 'rar' }
-        if ($hex.StartsWith('4D-53-43-46')) { return 'cab' }
-        return 'bin'
-      }
-      $ext = switch ($name) {
-        'reg_win_10' { 'reg' }
-        'reg_win_11' { 'reg' }
-        default { GuessExt $bytes $name }
-      }
-      $base = switch ($name) {
-        'reg_win_10' { 'win10_tweaks' }
-        'reg_win_11' { 'win11_tweaks' }
-        default { $name }
-      }
-      switch ($ext) {
-        'exe' { $base = ($base -replace '(?i)\.exe$','' -replace '(?i)exe$','') }
-        'dll' { $base = ($base -replace '(?i)\.dll$','' -replace '(?i)dll$','') }
-        'zip' { $base = ($base -replace '(?i)\.zip$','' -replace '(?i)zip$','') }
-        'msixbundle' { $base = ($base -replace '(?i)\.msixbundle$','' -replace '(?i)msixbundle$','') }
-        'appx' { $base = ($base -replace '(?i)\.appx$','' -replace '(?i)appx$','') }
-        'msix' { $base = ($base -replace '(?i)\.msix$','' -replace '(?i)msix$','') }
-        'reg' { $base = ($base -replace '(?i)\.reg$','' -replace '(?i)reg$','') }
-        'xml' { $base = ($base -replace '(?i)\.xml$','' -replace '(?i)xml$','') }
-        'png' { $base = ($base -replace '(?i)\.png$','' -replace '(?i)png$','') }
-        'bmp' { $base = ($base -replace '(?i)\.bmp$','' -replace '(?i)bmp$','') }
-        'gif' { $base = ($base -replace '(?i)\.gif$','' -replace '(?i)gif$','') }
-        'pdf' { $base = ($base -replace '(?i)\.pdf$','' -replace '(?i)pdf$','') }
-        '7z' { $base = ($base -replace '(?i)\.7z$','' -replace '(?i)7z$','') }
-        'rar' { $base = ($base -replace '(?i)\.rar$','' -replace '(?i)rar$','') }
-        'cab' { $base = ($base -replace '(?i)\.cab$','' -replace '(?i)cab$','') }
-      }
-      if ([string]::IsNullOrWhiteSpace($base)) { $base = 'file' }
-      $fn = "$base.$ext"
-      [IO.File]::WriteAllBytes((Join-Path $outDir $fn), $bytes)
-    } catch {}
-  }
-  Start-Process 'explorer.exe' $outDir
-  Write-Host ("Decoded files at: " + $outDir)
-} catch {
-  Write-Host ("Decode failed: " + $_.Exception.Message)
-}
+ # begin error-handled block
+ try {
+ # path to this script file
+   $src = "__SRC__"
+ # fallback to current command path
+   if ([string]::IsNullOrWhiteSpace($src)) { $src = $MyInvocation.MyCommand.Path }
+ # abort if missing
+   if ([string]::IsNullOrWhiteSpace($src) -or -not (Test-Path $src)) { Write-Host "Script path not found"; return }
+ # read entire script as text
+   $t = Get-Content -LiteralPath $src -Raw
+ # output directory path
+   $outDir = Join-Path $env:TEMP ('utilities_decoded_' + [guid]::NewGuid().ToString('N'))
+ # create output directory
+   New-Item -ItemType Directory -Path $outDir -Force | Out-Null
+ # find PowerRun Base64
+   $m1 = [regex]::Match($t, 'powerrun="([A-Za-z0-9+/=]+)"')
+ # write PowerRun.exe if present
+   if ($m1.Success) { $b1 = [Convert]::FromBase64String($m1.Groups[1].Value); [IO.File]::WriteAllBytes((Join-Path $outDir 'PowerRun.exe'), $b1) }
+ # extract embedded resource block
+   $block = [regex]::Match($t, '<#([\s\S]*?)#>').Groups[1].Value
+ # find all name=Base64 pairs
+   $matches = [regex]::Matches($block, '(?m)^\s*([A-Za-z0-9_]+)\s*=\s*"([A-Za-z0-9+/=]+)"')
+ # loop over resources
+   foreach ($m in $matches) {
+ # resource name
+     $name = $m.Groups[1].Value
+ # resource Base64
+     $b64 = $m.Groups[2].Value
+ # decode one resource
+     try {
+ # decode Base64 to bytes
+       $bytes = [Convert]::FromBase64String($b64)
+ # guess output file extension
+       function GuessExt([byte[]]$by,[string]$nm){
+ # byte length
+         $len = $by.Length
+ # first 8 bytes hex signature
+         $hex = [BitConverter]::ToString($by,0,[Math]::Min(8,[Math]::Max(0,$len)))
+ # decoded text preview
+         $txt = ''
+ # try UTF-8
+         try { $txt = [Text.Encoding]::UTF8.GetString($by,0,[Math]::Min(1024,[Math]::Max(0,$len))) } catch {}
+ # fallback ASCII
+         if ([string]::IsNullOrWhiteSpace($txt)) {
+           try { $txt = [Text.Encoding]::ASCII.GetString($by,0,[Math]::Min(1024,[Math]::Max(0,$len))) } catch {}
+         }
+ # remove NULs and leading whitespace
+         $trim = ($txt -replace "\u0000","" ).TrimStart()
+ # registry file
+         if ($trim -like 'Windows Registry Editor Version*') { return 'reg' }
+ # XML file
+         if ($trim.StartsWith('<?xml')) { return 'xml' }
+ # ZIP family
+         if ($hex.StartsWith('50-4B')) { if ($nm -match '(?i)msixbundle') { return 'msixbundle' } elseif ($nm -match '(?i)appx') { return 'appx' } elseif ($nm -match '(?i)msix') { return 'msix' } else { return 'zip' } }
+ # PE header
+         if ($hex.StartsWith('4D-5A')) {
+ # enough bytes to inspect COFF
+           if ($len -ge 64) {
+ # PE header offset
+             $e = [BitConverter]::ToInt32($by,0x3C)
+ # bounds check
+             if ($e -ge 0 -and ($e + 24) -le $len) {
+ # 'PE\0\0'
+               $p0 = $by[$e]; $p1 = $by[$e+1]; $p2 = $by[$e+2]; $p3 = $by[$e+3]
+ # valid PE signature
+               if ($p0 -eq 0x50 -and $p1 -eq 0x45 -and $p2 -eq 0x00 -and $p3 -eq 0x00) {
+ # characteristics offset
+                 $coff = $e + 22
+ # bounds check
+                 if (($coff + 2) -le $len) {
+ # characteristics flags
+                   $chars = [BitConverter]::ToUInt16($by,$coff)
+ # DLL vs EXE
+                   if (($chars -band 0x2000) -ne 0) { return 'dll' } else { return 'exe' }
+                 }
+               }
+             }
+           }
+ # default to EXE
+           return 'exe'
+         }
+ # PNG
+         if ($hex.StartsWith('89-50-4E-47-0D-0A-1A-0A')) { return 'png' }
+ # BMP
+         if ($hex.StartsWith('42-4D')) { return 'bmp' }
+ # GIF
+         if ($hex.StartsWith('47-49-46-38')) { return 'gif' }
+ # PDF
+         if ($hex.StartsWith('25-50-44-46')) { return 'pdf' }
+ # 7-Zip
+         if ($hex.StartsWith('37-7A-BC-AF-27-1C')) { return '7z' }
+ # RAR
+         if ($hex.StartsWith('52-61-72-21')) { return 'rar' }
+ # CAB
+         if ($hex.StartsWith('4D-53-43-46')) { return 'cab' }
+ # unknown binary
+         return 'bin'
+       }
+ # override known names
+       $ext = switch ($name) {
+         'reg_win_10' { 'reg' }
+         'reg_win_11' { 'reg' }
+         default { GuessExt $bytes $name }
+       }
+ # friendly output base name
+       $base = switch ($name) {
+         'reg_win_10' { 'win10_tweaks' }
+         'reg_win_11' { 'win11_tweaks' }
+         default { $name }
+       }
+ # strip duplicate extensions
+       switch ($ext) {
+         'exe' { $base = ($base -replace '(?i)\.exe$','' -replace '(?i)exe$','') }
+         'dll' { $base = ($base -replace '(?i)\.dll$','' -replace '(?i)dll$','') }
+         'zip' { $base = ($base -replace '(?i)\.zip$','' -replace '(?i)zip$','') }
+         'msixbundle' { $base = ($base -replace '(?i)\.msixbundle$','' -replace '(?i)msixbundle$','') }
+         'appx' { $base = ($base -replace '(?i)\.appx$','' -replace '(?i)appx$','') }
+         'msix' { $base = ($base -replace '(?i)\.msix$','' -replace '(?i)msix$','') }
+         'reg' { $base = ($base -replace '(?i)\.reg$','' -replace '(?i)reg$','') }
+         'xml' { $base = ($base -replace '(?i)\.xml$','' -replace '(?i)xml$','') }
+         'png' { $base = ($base -replace '(?i)\.png$','' -replace '(?i)png$','') }
+         'bmp' { $base = ($base -replace '(?i)\.bmp$','' -replace '(?i)bmp$','') }
+         'gif' { $base = ($base -replace '(?i)\.gif$','' -replace '(?i)gif$','') }
+         'pdf' { $base = ($base -replace '(?i)\.pdf$','' -replace '(?i)pdf$','') }
+         '7z' { $base = ($base -replace '(?i)\.7z$','' -replace '(?i)7z$','') }
+         'rar' { $base = ($base -replace '(?i)\.rar$','' -replace '(?i)rar$','') }
+         'cab' { $base = ($base -replace '(?i)\.cab$','' -replace '(?i)cab$','') }
+       }
+ # fallback base name
+       if ([string]::IsNullOrWhiteSpace($base)) { $base = 'file' }
+ # final output filename
+       $fn = "$base.$ext"
+ # write decoded file
+       [IO.File]::WriteAllBytes((Join-Path $outDir $fn), $bytes)
+     } catch {}
+   }
+ # open output directory in Explorer
+   Start-Process 'explorer.exe' $outDir
+ # log output path
+   Write-Host ("Decoded files at: " + $outDir)
+ } catch {
+ # failure message with error
+   Write-Host ("Decode failed: " + $_.Exception.Message)
+ }
 '@
     $content = $content.Replace('__SRC__', $src)
     RunInSeparatePSWindow $content
