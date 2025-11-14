@@ -8,9 +8,6 @@ So I removed the trial reset from the repository since it doesn’t work anymore
 
 <a href="https://www.buymeacoffee.com/daboynb" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
-# UPDATES :
-On august 2025 the kaspersky trial reset stopped working sadly, I’ll try to find a new way and will update you if I succeed.
-
 # utilities_gui.ps1
 How to use?
 ```powershell
