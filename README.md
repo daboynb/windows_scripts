@@ -16,6 +16,25 @@ powershell -NoProfile -Command "Invoke-WebRequest -Uri 'https://raw.githubuserco
 
 <img width="707" height="532" alt="gui" src="https://github.com/user-attachments/assets/b2ca9f1d-3088-4de9-b7a0-1b6e5d521484" />
 
+## Buttons overview
+- `Install ADB/Fastboot`: Installs Android platform‑tools.
+- `Install Microsoft Store`: Installs the Microsoft Store; may take up to 5 minutes.
+- `Remove Edge`: Force‑uninstalls Microsoft Edge.
+- `Create admin user`: Creates a local admin user.
+- `Reinstall Edge`: Reinstalls Edge.
+- `Clean Windows Update`: Clears the Windows Update cache.
+- `Clear Defender history`: Deletes Windows Defender scan history files.
+- `Remove OneDrive`: Uninstalls OneDrive.
+- `Remove Microsoft Store`: Uninstalls the Microsoft Store.
+- `Remove Windows apps`: Debloats preinstalled UWP apps, keeping a safe whitelist.
+- `Tweaks`: Imports registry tweaks for privacy and a cleaner UI.
+- `Enable Hyper‑V`: Enables Hyper‑V on Windows editions that don't support it, like Home versions.
+- `Repair SFC/DISM`: Runs `sfc /scannow` and `dism /Online /Cleanup-Image /RestoreHealth`.
+- `Disable Defender`: Applies policies to disable real‑time protection and related services, then restarts after 5 seconds.
+- `Enable Defender`: Restores Defender policies and services to the enabled state, then restarts after 5 seconds.
+- `Windows 11 Patcher`: Builds an ISO with all Windows 11 requirements bypassed.
+- `Convert from Base64`: Decodes all embedded Base64 resources to the TEMP folder and opens it so the user can see what the script does.
+
 # winpe.bat 
 Create a winpe iso that bypass the user account password.
 
