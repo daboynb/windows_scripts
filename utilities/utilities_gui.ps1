@@ -111,7 +111,7 @@ $btnAdb.Add_Click({
      Write-Host "ADB/Fastboot installation failed"
  }
 '@
-    Invoke-Expression $content
+    RunInSeparatePSWindow $content
 })
 AddButtonWithInfo $grid 1 4 $btnAdb "Downloads latest Android platform-tools to C:\Program Files`nExtracts to C:\Program Files\platform-tools and updates PATH via setx`nRequires admin and internet; runs in separate PowerShell window"
 # Button: Install Microsoft Store
